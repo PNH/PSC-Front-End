@@ -1,0 +1,48 @@
+<!-- Media Popup -->
+<div id="mediaModal-custompage" class="modal fade login-popup search-popup" tabindex="100" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" on-close="$ctrl.stopPopup()">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">{{$ctrl.selectedMedia.name}}</h4>
+      </div>
+      <div class="modal-body" ng-if="$ctrl.selectedMedia">
+        <prl-player data-video="$ctrl.selectedMedia"></prl-player>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Document Popup -->
+<div id="documentModal-custompage" class="modal fade login-popup search-popup pdfviewer-popup document-modal" tabindex="100" role="dialog" aria-hidden="true" on-close="$ctrl.stopPopup()">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">{{$ctrl.selectedDocument.name}}</h4>
+      </div>
+      <div class="modal-body" ng-if="$ctrl.selectedDocument">
+        <!-- <iframe ng-src="{{$ctrl.selectedDocument.fullPath}}"></iframe> -->
+        <prl-pdf src="$ctrl.selectedDocument.fullPath"></prl-pdf>
+        <!-- <pdf-viewer url="{{$ctrl.selectedDocument.fullPath}}"></pdf-viewer> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Image Popup -->
+<div id="imageModal-custompage" class="modal fade login-popup search-popup" tabindex="100" role="dialog" aria-hidden="true" on-close="$ctrl.stopPopup()">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">{{$ctrl.selectedImage.name}}</h4>
+      </div>
+      <div class="modal-body savvy-essentials-imgpopup" ng-if="$ctrl.selectedImage">
+        <div>
+          <a ng-href="{{$ctrl.selectedImage.fullPath}}" target="_blank"><img src="{{$ctrl.selectedImage.path}}" alt=""></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

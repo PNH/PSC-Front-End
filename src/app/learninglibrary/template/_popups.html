@@ -1,0 +1,87 @@
+<!-- Video Popup -->
+<div id="videoModal" class="modal fade login-popup search-popup" tabindex="100" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" on-close="$ctrl.stopPlayer()">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">{{$ctrl.selectedVideo.name}}</h4>
+      </div>
+      <div class="modal-body" ng-if="$ctrl.selectedVideo">
+        <prl-player data-video="$ctrl.selectedVideo"></prl-player>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Audio Popup -->
+<div id="audioModal" class="modal fade login-popup search-popup" tabindex="100" role="dialog" aria-hidden="true" on-close="$ctrl.stopPlayer()">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">{{$ctrl.selectedAudio.name}}</h4>
+      </div>
+      <div class="modal-body" ng-if="$ctrl.selectedAudio">
+        <prl-player data-video="$ctrl.selectedAudio"></prl-player>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Document Popup -->
+<div id="documentModal" class="modal fade login-popup search-popup pdfviewer-popup document-modal" tabindex="100" role="dialog" aria-hidden="true" on-close="$ctrl.stopPlayer()">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">{{$ctrl.selectedDocument.name}}</h4>
+      </div>
+      <div class="modal-body" ng-if="$ctrl.selectedDocument">
+        <!-- <iframe ng-src="{{$ctrl.selectedDocument.fullPath}}"></iframe> -->
+        <prl-pdf src="$ctrl.selectedDocument.fullPath"></prl-pdf>
+        <!-- <pdf-viewer url="{{$ctrl.selectedDocument.fullPath}}"></pdf-viewer> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="createPlaylist" class="modal fade login-popup" tabindex="100" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Create Playlist</h4>
+      </div>
+      <div class="modal-body">
+        <div class="login-error" ng-if="error">
+          <div class="row">
+            <div class="col-xs-12 login-error__container">
+              <div class="login-error__message">
+                {{error.message}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <form name="createPlaylist">
+          <div class="row">
+            <div class="col-xs-12 form-field-group" ng-class="{ 'has-error' : createPlaylist.playlistName.$invalid && !createPlaylist.playlistName.$pristine }">
+              <input type="text" name="playlistName" ng-model="$ctrl.playlistName" placeholder="Playlist name" class="form-control" ng-minlength="3" ng-maxlength="100" required>
+              <!-- <p ng-show="createPlaylist.email.$empty && !createPlaylist.email.$pristine" class="help-block">Please enter a valid email.</p> -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 form-field-group">
+              <button ng-disabled="createPlaylist.$invalid || $ctrl.isProcessing" type="button" class="btn btn-yellow btn-submit" ng-click="$ctrl.onNewPlaylistClicked()" ng-class="{'processing': $ctrl.isProcessing}">
+                <div class="bs-process-bar uil-ring-css yellow">
+                  <div></div>
+                </div>
+                <span class="bs-login-text">CREATE</span>
+              </button>
+              <!-- <input type="button" class="btn btn-yellow" ng-disabled="createPlaylist.$invalid || $ctrl.isProcessing" value="CREATE" ng-click="$ctrl.onNewPlaylistClicked()"> -->
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

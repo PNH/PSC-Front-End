@@ -1,0 +1,137 @@
+<form name="regForm" id="signup-form" novalidate>
+<div id="step3" class="tab-pane">
+	<!-- po-heading block -->
+	<div class="row po-heading bottom-buffer-60">
+		<div class="col-md-12">
+			<h1>Tell us about your goals and challenges with this horse.</h1>
+			<h4>(Please select at least one)</h4>
+			<div class="tiny-border"></div>
+		</div>
+	</div>
+	<!-- /po-heading -->
+
+	<!-- po__s3__commonIssues -->
+	<div class="row bottom-buffer-40">
+		<div class="col-md-12">
+			<div class="po__s3__commonIssues">
+				<h3>Some Common Issues</h3>
+
+				<ul ng-if="$ctrl.commonissues" class="po__s3__commonIssues__container" multiple="">
+					<li ng-repeat="(issue_index, issue) in $ctrl.commonissues track by $index">
+						<div>
+							<input type="checkbox" name="comissues" id="ci-{{issue.id}}" ng-change="$ctrl.onIssueItemChecked();" ng-model="formData.commonissues[issue_index]" required/>
+							<label for="ci-{{issue.id}}">{{issue.title}}</label>
+						</div>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+	</div><!-- /po__s3__commonIssues -->
+
+	<!-- po__s3__moreIssues -->
+	<div class="po__s3__moreIssues">
+		<div class="arrow-down po-s3-arrow"></div>
+		<div class="po__s3__moreIssues__container">
+			<div class="row">
+				<div class="col-md-12">
+					<h3>Read more issues that apply to: "{{$ctrl.goal.title}}"</h3>
+				</div>
+			</div>
+
+			<div class="row">
+
+				<div ng-if="$ctrl.otherissues" class="col-sm-4 col-md-4">
+					<ul id="myTabs" class="nav nav-tabs" role="tablist" multiple="">
+						<li ng-repeat="(category_index, category) in $ctrl.otherissues" role="presentation" ng-class="{'active': category_index == 0}">
+							<a data-target="#tab{{category_index}}" aria-controls="tab{{category_index}}" role="tab" data-toggle="tab">{{category.title}}</a>
+						</li>
+						<!-- <li role="presentation">
+							<a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">Advance My Skills</a>
+						</li>
+						<li role="presentation">
+							<a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">See How Parelli Can Help In My Vocation With Horses</a>
+						</li> -->
+					</ul>
+				</div>
+
+				<div ng-if="$ctrl.otherissues" class="col-sm-8 col-md-8">
+					<div class="tab-content">
+						<div ng-repeat="(category_index, category) in $ctrl.otherissues" id="tab{{category_index}}" role="tabpanel" class="tab-pane" ng-class="{'fade in active': category_index == 0}">
+							<ul ng-if="category.issues" class="po__s3__moreIssues__list">
+								<li ng-repeat="(issue_index, issue) in category.issues">
+									<div>
+										<input type="checkbox" name="" id="mi-{{category.id}}-{{issue.id}}" ng-change="$ctrl.onIssueItemChecked();" ng-model="formData.otherissues[category_index][issue_index]"/>
+										<label for="mi-{{category.id}}-{{issue.id}}">{{issue.title}}</label>
+									</div>
+								</li>
+								<!-- <li>
+									<div>
+										<input type="checkbox" name="" id="mi-2" />
+										<label for="mi-2">Breeding</label>
+									</div>
+								</li>
+								<li>
+									<div>
+										<input type="checkbox" name="" id="mi-3" />
+										<label for="mi-3">Bridling difficulties</label>
+									</div>
+								</li>
+								<li>
+									<div>
+										<input type="checkbox" name="" id="mi-4" />
+										<label for="mi-4">Bucking</label>
+									</div>
+								</li>
+								<li>
+									<div>
+										<input type="checkbox" name="" id="mi-5" />
+										<label for="mi-5">Cold-backed</label>
+									</div>
+								</li>
+								<li>
+									<div>
+										<input type="checkbox" name="" id="mi-6" />
+										<label for="mi-6">Laying down when you want it</label>
+									</div>
+								</li>
+								<li>
+									<div>
+										<input type="checkbox" name="" id="mi-7" />
+										<label for="mi-7">Ground manners</label>
+									</div>
+								</li>
+								<li>
+									<div>
+										<input type="checkbox" name="" id="mi-8" />
+										<label for="mi-8">Hobbling</label>
+									</div>
+								</li> -->
+							</ul>
+						</div>
+						<!-- <div role="tabpanel" class="tab-pane fade" id="tab2">tab2</div>
+						<div role="tabpanel" class="tab-pane fade" id="tab3">tab3</div> -->
+					</div>
+				</div>
+			</div>
+
+			<!-- po-footer -->
+			<div class="row po-footer">
+				<div class="col-md-6">
+					<div class="po-navigations">
+						<input ui-sref="onboard.horseinfo" type="button" id="po-back" class="btn btn-black pull-left" value="BACK">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="po-navigations clearfix">
+						<input ui-sref="onboard.pathway" ng-disabled="!($ctrl.allissues.length > 0)" ng-click="$ctrl.onComIssuesNextClicked()" type="button" id="po-next" class="btn btn-yellow pull-right" value="NEXT">
+					</div>
+					<button ng-if="!$ctrl.loggedIn" class="po-submitlinks pull-right underline-text" ng-click="$ctrl.onSubmitFormClicked($event)" ng-disabled="$ctrl.isProcessing">I like what I see, sign me up!</button>
+					<button ng-if="$ctrl.loggedIn" class="po-submitlinks pull-right underline-text" ng-click="$ctrl.onSubmitFormClicked($event)" ng-disabled="$ctrl.isProcessing">I like what I see, take me to dashboard!</button>
+				</div>
+			</div><!-- /po-footer -->
+		</div>
+	</div><!-- /po__s3__moreIssues -->
+</div>
+</div>
+</form>

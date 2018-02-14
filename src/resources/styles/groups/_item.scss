@@ -1,0 +1,122 @@
+.groups {
+  margin: -12px;
+}
+
+.group-post {
+  textarea {
+    background-color: $grey1;
+  }
+}
+
+.groups-item {
+  float: left;
+  padding: 12px;
+  position: relative;
+  width: 50%;
+  @include bp(xxs) {
+    float: none;
+    width: 100%;
+  }
+  &__container {
+    height: 230px;
+    padding: 30px;
+    position: relative;
+    @include bp(xs) {
+      height: 300px;
+    }
+  }
+  &__actions {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+    li {
+      float: left;
+      padding-left: 1px;
+    }
+  }
+  &__remove {
+    background-color: transparentize($black, 0.4);
+    border: none;
+    color: $white;
+    font-size: 0.750em;
+    font-weight: 600;
+    height: 25px;
+    outline: none;
+    width: 25px;
+  }
+  &__background {
+    background-color: $grey53;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    bottom: 0;
+    filter: grayscale(100%) brightness(65%);
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    &:after {
+      background-color: transparentize($grey1, 0.8);
+      content: '';
+      height: 100%;
+      position: absolute;
+      width: 100%;
+    }
+  }
+  &__content,
+  &__footer {
+    position: relative;
+    z-index: 1;
+  }
+  &__content {
+    padding-bottom: 60px;
+  }
+  &__title,
+  &__description {
+    color: $white;
+  }
+  &__title {
+    font-weight: 500;
+    margin-top: 0;
+  }
+  &__description {
+    font-size: 0.938em;
+    line-height: 1.3em;
+  }
+  &__footer {
+    bottom: 0;
+    left: 0;
+    padding: 30px;
+    position: absolute;
+    right: 0;
+    .btn {
+      bottom: 30px;
+      left: 50%;
+      margin: 0;
+      position: absolute;
+      transform: translateX(-50%);
+      @include bp(md) {
+        min-width: 110px;
+      }
+    }
+  }
+  &__membercount {
+    color: $yellow;
+    position: absolute;
+    top: 0;
+    @include bp(xs) {
+      margin-bottom: 10px !important;
+    }
+  }
+  &__footer .btn,
+  &__membercount {
+    @include bp(xs) {
+      display: block;
+      margin: 0 auto;
+      position: static;
+      text-align: center;
+      transform: none;
+    }
+  }
+}

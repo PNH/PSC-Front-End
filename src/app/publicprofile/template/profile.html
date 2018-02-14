@@ -1,0 +1,15 @@
+<div id="main">
+  <dashboard-header title="Public Profile"></dashboard-header>
+  <div class="holder  ">
+    <div class="hold-program blog">
+      <ul class="nav nav-tabs profile-tabs" role="tablist" multiple="" ng-show="$ctrl.user">
+        <li role="presentation" class="active" ><a href="" data-target="#tab1" aria-controls="latest" role="tab" data-toggle="tab">{{$ctrl.user.firstName}}'s Profile</a></li>
+      </ul>
+      <div class="tab-content profile-content">
+        <div role="tabpanel" class="tab-pane  active" id="tab1">
+          <div ng-include src="'app/publicprofile/template/_myaccount.html'"> </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<div block-ui="mmListLoading">
+  <div class="savvytimes-main__savvy clearfix" ng-repeat="item in $ctrl.memberMinutes">
+    <div class="savvytimes-main__savvy__thumb">
+      <div class="prl-banner__bg" style="background-image: url({{item.thumbnail}})"></div>
+      <div class="prl-banner">
+        <div class="prl-banner__content">
+          <!--<div class="heading-underline tiny">-->
+          <h2 class="prl-banner__title">{{item.title}}</h2>
+          <!--</div>-->
+          <h4 class="prl-banner__subtitle"></h4>
+          <div class="prl-banner__buttons">
+            <a class="btn btn-yellow" ng-href="{{item.pdf_remote_url}}" target="_blank">DIGITAL</a>
+            <a class="btn btn-yellow" ng-href="{{item.pdf}}" download>PDF</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="savvytimes-main__savvy__content">
+      <div class="savvytimes-main__savvy__content__col" ng-show="item.issue.length > 0">
+        <div class="content-list style1">
+          <h2 class="style1__title">{{item.issue_title}}</h2>
+          <ul class="style1__list">
+            <li ng-repeat="issue in item.issue">{{issue.title}}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="savvytimes-main__savvy__content__col" ng-show="item.member_minute_sections.length > 0">
+        <div class="content-list style1">
+          <h2 class="style1__title">{{item.memberminute_title}}</h2>
+          <ul class="style1__list">
+            <li ng-repeat="mm in item.member_minute_sections"><a ui-sref="memberminutesdetail({id: mm.id})">{{mm.title}}</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pl-error__container" ng-show="!$ctrl.memberMinutes.length > 0">
+    <div class="pl-error">
+      <span class="pl-error__message">We're sorry, but there are no Member Minutes available at this time. Please check back again soon.</span>
+    </div>
+  </div>
+</div>

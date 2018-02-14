@@ -1,0 +1,39 @@
+<div id="main" class="prl-eventcalendar">
+  <dashboard-header title="Events Calendar"></dashboard-header>
+  <div class="holder  ">
+    <div class="hold-program blog prl-no-padding">
+      <ul class="nav nav-tabs profile-tabs" role="tablist" multiple="">
+        <li role="presentation" ng-class="{'active': $ctrl.contentTitle == 'All Events'}" class="active event-calendar-menu-all" ng-click="$ctrl.onCountryClicked('all', 'All')"><a href="" data-target="#tab1" aria-controls="latest" role="tab" data-toggle="tab">All Events</a></li>
+        <li role="presentation" ng-class="{'active': $ctrl.contentTitle == 'USA Events'}" ng-click="$ctrl.onCountryClicked('us', 'USA')"><a href="" data-target="#tab2" aria-controls="popular" role="tab" data-toggle="tab">USA Events</a></li>
+        <li role="presentation" ng-class="{'active': $ctrl.contentTitle == 'Australia Events'}" ng-click="$ctrl.onCountryClicked('au', 'Australia')"><a href="" data-target="#tab3" aria-controls="" role="tab" data-toggle="tab">Australia Events</a></li>
+        <li role="presentation" ng-class="{'active': $ctrl.contentTitle == 'UK Events'}" ng-click="$ctrl.onCountryClicked('gb', 'UK')"><a href="" data-target="#tab4" aria-controls="" role="tab" data-toggle="tab">UK Events</a></li>
+        <li role="presentation" ng-class="{'active': $ctrl.contentTitle == 'Europe Events'}" ng-click="$ctrl.onCountryClicked('eu', 'Europe')"><a href="" data-target="#tab5" aria-controls="" role="tab" data-toggle="tab">Europe Events</a></li>
+      </ul>
+      <div class="tab-content profile-content">
+        <div role="tabpanel" class="tab-pane  active prl-no-padding" id="tab1">
+          <div ng-include src="'app/events/template/_allevents.html'"> </div>
+          <!-- tab pane 1 ends -->
+        </div>
+        <div role="tabpanel" class="tab-pane  prl-no-padding" id="tab2">
+          <div ng-include src="'app/events/template/_allevents.html'"> </div>
+          <!-- tab pane 2 ends -->
+        </div>
+        <div role="tabpanel" class="tab-pane  prl-no-padding" id="tab3">
+          <div ng-include src="'app/events/template/_allevents.html'"> </div>
+          <!-- tab pane 3 ends -->
+        </div>
+        <div role="tabpanel" class="tab-pane  prl-no-padding" id="tab4">
+          <div ng-include src="'app/events/template/_allevents.html'"> </div>
+          <!-- tab pane 4 ends -->
+        </div>
+        <div role="tabpanel" class="tab-pane  prl-no-padding" id="tab5">
+          <div ng-include src="'app/events/template/_allevents.html'"> </div>
+          <!-- tab pane 5 ends -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div ng-include="'app/events/template/_create.html'"></div>
+  
+</div>

@@ -1,0 +1,28 @@
+.prl-checklist {
+  ul {
+    list-style: disc;
+    li {
+      color: $ld-objectives;
+      margin-bottom: 10px;
+      // padding-left: 20px;
+      // position: relative;
+
+      // &:before {
+      //   background-color: $pr-memberbar-tick-bg;
+      //   border-radius: 3px;
+      //   color: $pr-memberbar-text;
+      //   content: "✓";
+      //   display: block;
+      //   height: 18px;
+      //   left: 0;
+      //   margin-right: 10px;
+      //   position: absolute;
+      //   text-align: center;
+      //   width: 18px;
+			// 	line-height: 18px;
+    	// 	font-size: 12px;
+			// 	top: 4px;
+      // }
+    }
+  }
+}

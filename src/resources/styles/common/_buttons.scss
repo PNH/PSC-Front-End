@@ -1,0 +1,313 @@
+.btn {
+  background-color: $btn-bg-white;
+  border: 2px solid $btn-border-grey;
+  border-radius: 6px;
+  font-size: 1em;
+  font-weight: 600;
+  min-width: 195px;
+  min-height: 40px;
+  margin-left: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: auto !important;
+  &:last-child {
+    margin-left: 0;
+  }
+  &.btn-yellow {
+    background-color: $btn-bg-yellow;
+    border-color: $btn-border-yellow;
+    color: $btn-font-black;
+  }
+  &.btn-black {
+    background-color: $btn-bg-black;
+    border-color: $btn-border-black;
+    color: $btn-font-white;
+  }
+  &.btn-red {
+    background-color: $btn-bg-red;
+    border-color: $btn-border-red;
+    color: $btn-font-white;
+  }
+  &.btn-grey {
+    background-color: $grey11;
+    border-color: $grey11;
+    color: $btn-font-white;
+  }
+  &.btn-sm {
+    font-size: 0.778em;
+    line-height: 0;
+    margin-left: 10px;
+    min-width: 0;
+    min-height: 0;
+    padding: 10px;
+  }
+  &.btn-thin {
+    line-height: 1em;
+    margin-left: 10px;
+    min-width: 0;
+    min-height: 0;
+    padding: 4px 14px;
+  }
+  &.btn-notclickable {
+    cursor: default !important;
+  }
+  &.btn-like {
+    border-color: $white;
+    padding: 0;
+    .btn-like__thumb {
+      background: url(../resources/images/sprite.png) no-repeat 1px -212px;
+      display: inline-block;
+      height: 25px;
+      width: 28px;
+      vertical-align: middle;
+    }
+    &.liked {
+      color: $yellow;
+      .btn-like__thumb {
+        background: url(../resources/images/sprite.png) no-repeat -27px -212px;
+      }
+    }
+  }
+}
+
+.btn-link {
+  text-decoration: underline;
+}
+
+.btn-empty {
+  background-color: transparent;
+  border: none;
+}
+
+.btn-clear {
+  color: #626890;
+}
+
+.btn-viewmore {
+  color: #7c7c7c;
+  cursor: pointer;
+  display: block;
+  font-size: 0.833em;
+  margin: 0 auto;
+  text-align: center;
+  &.processing {
+    .btn-viewmore__label {
+      display: none;
+    }
+    .uil-ring-css {
+      display: block;
+    }
+  }
+  .uil-ring-css {
+    display: none;
+    height: 20px;
+    margin: 0 auto;
+    width: 20px;
+    &>div {
+      box-shadow: 0 2px 0 0 #7c7c7c;
+      height: 20px;
+      width: 20px;
+    }
+  }
+}
+
+&.btn-md {
+  min-width: 100px;
+  min-height: 20px;
+  padding-bottom: 4px;
+  padding-top: 4px;
+}
+
+.transperent-btn {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 17px;
+  line-height: 20px;
+  font-family: $OS_Semibold;
+  text-transform: uppercase;
+  color: #fefefe;
+  width: 250px;
+  padding: 16px 10px 15px;
+  border: 2px solid #b8b4b0;
+  border-radius: 6px;
+  margin: 0 13px 10px;
+  @include transition-element (all);
+  &:hover {
+    color: #1f2023;
+    background-color: $yellow;
+    border-color: $yellow;
+  }
+}
+
+.up-btn {
+  background: url(../resources/images/sprite.png) no-repeat -234px -1px;
+  cursor: pointer;
+  display: block;
+  height: 18px;
+  margin: -50px auto 40px;
+  position: relative;
+  width: 33px;
+}
+
+.grey_bg {
+  background: #3e3e3e;
+  color: #fff;
+}
+
+.btn.big-btn {
+  width: 48px;
+  height: 48px;
+}
+
+.drpdown {
+  border-radius: 6px;
+  font-size: 1.125em;
+  line-height: 1em;
+  min-width: 150px;
+  width: auto;
+  &.dark {
+    background-color: $drpdown-bg-dark;
+    color: $drpdown-font-light;
+  }
+}
+
+.btn-submit {
+  // opacity: 1 !important;
+  &.processing {
+    background-color: lighten($yellow, 20%);
+    border-color: lighten($yellow, 20%);
+    cursor: progress !important;
+    .bs-process-bar {
+      display: block;
+    }
+    .bs-login-text {
+      display: none;
+    }
+    &.btn-grey {
+      background-color: lighten($grey11, 20%);
+      border-color: lighten($grey11, 20%);
+    }
+    &.btn-red {
+      background-color: lighten($red, 20%) !important;
+      border-color: lighten($red, 20%) !important;
+    }
+  }
+  .bs-process-bar {
+    display: none;
+    height: 20px;
+    margin: 0 auto;
+    width: 20px;
+    &>div {
+      box-shadow: 0 2px 0 0 #333333;
+      height: 20px;
+      width: 20px;
+    }
+    &.yellow {
+      &>div {
+        box-shadow: 0 2px 0 0 darken($yellow, 10%);
+      }
+    }
+    &.grey {
+      &>div {
+        box-shadow: 0 2px 0 0 darken($grey11, 10%);
+      }
+    }
+    &.red {
+      &>div {
+        box-shadow: 0 2px 0 0 darken($red, 10%) !important;
+      }
+    }
+  }
+}
+
+.btn-like[disabled],
+.btn-busy[disabled] {
+  cursor: progress !important;
+}
+
+.btn-reply-options {
+  border: none;
+  margin-left: 0;
+  min-height: 0;
+  min-width: 0;
+  padding: 0;
+  opacity: 0.6;
+  transition: opacity 200ms ease-in-out;
+  &:hover {
+    opacity: 1;
+  }
+  .glyphicon {
+    margin-right: 6px;
+  }
+}
+
+.post-option-btns {
+  margin-top: -20px;
+}
+
+.post-option-btns-container,
+.post-option-btns {
+  // padding-left: 8px;
+  .btn {
+    margin-left: 0;
+  }
+  .btn:focus {
+    outline: none;
+    background-color: transparent;
+    color: $grey3;
+  }
+  .btn:hover {
+    background-color: transparent;
+    color: $grey3;
+    transition: all .4s ease;
+  }
+  .visibility-opt {
+    border: none;
+    color: #939393;
+    @include bp(sm) {
+      margin-top: 10px;
+    }
+    @include bp(xs) {
+      margin-left: 25px;
+      // margin-bottom: 30px;
+      margin-top: 10px;
+    }
+    @include bp(xxs) {
+      margin-left: 25px;
+      margin-bottom: 30px;
+    }
+  }
+  & span {
+    margin-right: 10px;
+    color: #939393;
+  }
+  .btn-file {
+    border: none;
+    color: #939393;
+    padding-top: 8px;
+    padding-left: -10px;
+    min-width: 100px;
+    @include bp(xxs) {
+      margin-left: 70px;
+    }
+    span {
+      margin-right: 10px;
+      color: #939393;
+      margin-left: -10px;
+    }
+  }
+  @include bp(sm) {
+    margin-bottom: 20px;
+  }
+  @include bp(xs) {
+    margin-top: -10px;
+    align-content: center;
+    margin-bottom: 20px;
+  }
+  @include bp(xxs) {
+    float: none !important;
+    align-content: center;
+    margin-left: 50px;
+    margin-bottom: 20px;
+  }
+}

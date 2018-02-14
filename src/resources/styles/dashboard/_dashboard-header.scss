@@ -1,0 +1,49 @@
+.horse-dropdown {
+  display: inline-block;
+  &:hover ul.dropdown-menu {
+    display: block;
+    margin-top: 0; // remove the gap so it doesn't close
+  }
+  button {
+    background-color: transparent;
+    border: none;
+    height: 9px;
+    padding: 0;
+    width: 19px;
+    span {
+      // border-top: 7px dashed;
+      // border-right: 7px solid transparent;
+      // border-left: 7px solid transparent;
+      // font-size: 1.2em;
+      background: url(../resources/images/sprite.png) no-repeat 0px -42px;
+      width: 19px;
+      height: 9px;
+      position: absolute;
+      top: 8px;
+      left: 2px;
+    }
+  }
+  .dropdown-menu {
+    background-color: #343333;
+    li {
+      background-color: #343333;
+      border-bottom: 1px solid $grey40;
+      &:last-child {
+        border: none;
+      }
+      a {
+        font-family: 'Open Sans', helvetica, sans-serif !important;
+        padding: 8px 20px;
+        &:hover {
+          background-color: transparent;
+          color: $yellow !important;
+        }
+      }
+    }
+  }
+}
+
+.horse-dropdown:hover ul.dropdown-menu {
+  display: block;
+  margin-top: 0; // remove the gap so it doesn't close
+}

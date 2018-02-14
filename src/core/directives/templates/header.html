@@ -1,0 +1,127 @@
+<header id="header" class="" ng-class="{'admin-fill': headerCtrl.loggedIn}">
+  <div class="gradient-box">
+    <div class="holder">
+      <nav class="navbar navbar-default">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-menu" aria-expanded="false"> 
+            <!-- ng-hide="stateHidden" -->
+          <!-- <button type="button" class="navbar-toggle collapsed" ng-show="headerCtrl.isHeaderLoding"> -->
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <li ng-if="headerCtrl.loggedIn && !headerCtrl.isLargeSearch" id="search-container" class="header-search-sm">
+            <prl-search></prl-search>
+          </li>
+          <strong class="logo">
+            <a ng-if="headerCtrl.loggedIn" ui-sref="dashboard({horseid: headerCtrl.horseId})">
+                <img src="./resources/images/logo.png" alt="">
+            </a>
+            <a ng-if="!headerCtrl.loggedIn" ui-sref="home">
+                <img src="./resources/images/logo.png" alt="">
+            </a>
+          </strong>
+        </div>
+        <div class="collapse navbar-collapse" id="header-menu" ng-if="!headerCtrl.loggedIn">
+          <ul class="nav navbar-nav navbar-before-login" ng-show="state === 'home' || state === 'about' || state === 'contact' || state === 'blog' || state === 'blogdetail' || state === 'custompage'">
+            <!-- <li>
+              <a href="" class="chat icon" ng-click="liveChat.toggle()">Live Chat</a>
+            </li> -->
+            <li><a ui-sref="blog({blogslug: null})" ng-click="collapseNavbar()">Blog</a></li>
+            <li><a ui-sref="contact" ng-click="collapseNavbar()">Contact</a></li>
+            <li><a ui-sref="about" ng-click="collapseNavbar()">About Us</a></li>
+            <li><a href="" data-toggle="modal" data-target="#loginPopup" ng-click="collapseNavbar()">Sign In</a></li>
+          </ul>
+          <ul class="nav navbar-nav" ng-hide="state === 'home' || state === 'about' || state === 'contact' || state === 'blog' || state === 'blogdetail' || state === 'custompage'">
+            <li ng-show="headerCtrl.horsey" class="horsey-name">
+              <span class="horse-name">{{headerCtrl.horsey}}</span>
+            </li>
+            <!-- <li>
+              <a href="" class="chat icon" ng-click="liveChat.toggle()">Live Chat</a>
+            </li> -->
+          </ul>
+        </div>
+        <!-- <perfect-scrollbar class="header-perfect-scroller" wheel-propagation="false" wheel-speed="3" min-scrollbar-length="5" suppress-scroll-x="true"> -->
+        <div class="collapse navbar-collapse navbar-admin" id="header-menu" ng-if="headerCtrl.loggedIn">
+          <ul class="main-nav clearfix">
+            <li ng-class="{'active':state === 'dashboard'}" class="nav-main-menu"><a class="navbar-main-menu-text" ui-sref="dashboard({horseid: headerCtrl.horseId})" ng-click="collapseNavbar()">My Dashboard</a></li>
+            <li ng-class="{'active': state === 'groups' || state === 'forums' || state === 'connections' || state === 'wall' || state === 'blog'}" class="hourse-nav resources-nav nav-main-menu"><a class="navbar-main-menu-text">Community  <!-- <i class="fa fa-caret-down" aria-hidden="true"></i> --></a>
+              <ul class="resources-list">
+                <li ng-class="{'active':state === 'wall'}"><a ui-sref="wall({userid: headerCtrl.user.id})" ng-click="collapseNavbar()">Wall</a></li>
+                <li ng-class="{'active':state === 'connections'}"><a ui-sref="connections" ng-click="collapseNavbar()">Connections</a></li>
+                <li ng-class="{'active':state === 'forums'}"><a ui-sref="forums" ng-click="collapseNavbar()">Forums</a></li>
+                <li ng-class="{'active':state === 'groups'}"><a ui-sref="groups" ng-click="collapseNavbar()">Groups</a></li>
+                <li ng-class="{'active':state === 'blog'}"><a ui-sref="blog({blogslug: null})" ng-click="collapseNavbar()">Blog</a></li>
+              </ul>
+            </li>
+            <li ng-class="{'active': state === 'library' || state === 'playlist' || state === 'touchstones' || state === 'touchstonesdetail' || state === 'memberminutes' || state === 'savvyessentials'}" class="hourse-nav resources-nav nav-main-menu"><a class="navbar-main-menu-text">Resources <!-- <i class="fa fa-caret-down" aria-hidden="true"></i> --></a>
+              <ul class="resources-list">
+                <li ng-class="{'active':state === 'library'}"><a ui-sref="library" ng-click="collapseNavbar()">Learning Library</a></li>
+                <li ng-class="{'active':state === 'playlist'}"><a ui-sref="playlist" ng-click="collapseNavbar()">Playlist</a></li>
+                <li ng-class="{'active':state === 'memberminutes'}"><a ui-sref="memberminutes" ng-click="collapseNavbar()">Savvy Times &amp; Member Minutes</a></li>
+                <li ng-class="{'active':state === 'savvyessentials'}"><a ui-sref="savvyessentials" ng-click="collapseNavbar()">Savvy Essentials</a></li>
+                <li ng-class="{'active':state === 'library-subcategories'}"><a ui-sref="library-subcategories({categoryid: 639})" ng-click="collapseNavbar()">FAQ</a></li>
+              </ul>
+            </li>
+
+            <li ng-class="{'active': state === 'eventcalendar' || state === 'myevents'}" class="hourse-nav resources-nav nav-main-menu"><a class="navbar-main-menu-text">Events <!-- <i class="fa fa-caret-down" aria-hidden="true"></i> --></a>
+              <ul class="resources-list">
+                <li ng-class="{'active':state === 'eventcalendar'}"><a ui-sref="eventcalendar" ng-click="collapseNavbar()">Events Calendar</a></li>
+                <li ng-class="{'active':state === 'myevents'}"><a ui-sref="myevents" ng-click="collapseNavbar()">My Events</a></li>
+              </ul>
+            </li>
+
+            <li ng-class="{'active': state === 'custompage'}" class="hourse-nav resources-nav nav-main-menu nav-main-menu-last"><a class="navbar-main-menu-text">More</a>
+              <ul class="resources-list" block-ui="customPagesLoading">
+                <li><a href="https://shop.parelli.com" target="_blank" ng-click="collapseNavbar()">Shop</a></li>
+                <li ng-repeat="page in headerCtrl.menuItems | orderBy: 'position'" ng-class="{'active':(state === 'custompage' && pageslug == '{{page.slug}}')}"><a ui-sref="custompage({pageslug: '{{page.slug}}'})" ng-click="collapseNavbar()" class="header-menu-custom-page">{{page.menu}}</a></li>
+              </ul>
+            </li>
+
+            <!-- <li class="nav-main-menu"><a class="navbar-main-menu-text" href="https://shop.parelli.com" ng-click="collapseNavbar()">Shop</a>
+              <ul class="resources-list">
+              </ul>
+            </li> -->
+
+            <!--<li><a ui-sref="about" ng-click="collapseNavbar()">About Us</a></li>
+            <li><a ui-sref="contact" ng-click="collapseNavbar()">Contact</a></li>-->
+            <!-- <li><a href="#">Community</a></li>
+            <li><a href="#">Events</a></li> -->
+          </ul>
+
+          <ul class="log-data">
+            <li class="user-nav">
+              <a href=""><span class="user"></span><span class="text">User</span></a> <!--profile()-->
+              <ul class="user-list" >
+                <li><a ui-sref="profile()" class="logout" ng-click="collapseNavbar()"><i class="fa fa-user" aria-hidden="true"></i>My Account</a></li>
+                <li><a ui-sref="settings()" class="logout" ng-click="collapseNavbar()"><i class="fa fa-cog" aria-hidden="true"></i>Settings</a></li>
+                <li><a ui-sref="home({logout: true})" class="logout" ng-click="collapseNavbar()"><i class="fa fa-sign-out" aria-hidden="true"></i>Log Out</a></li>
+              </ul>
+            </li>
+
+            <li class="hourse-nav">
+              <a href=""><span class="horse-name"></span><span class="text">Horse</span></a>
+              <ul class="horse-list" ng-if="headerCtrl.horses">
+                <li ng-repeat="(horse_index, horse) in headerCtrl.horses"><a ui-sref="dashboard({horseid: horse.id})" ng-click="headerCtrl.onHorseClicked(horse.id)" ng-click="collapseNavbar()">{{horse.name}}</a></li>
+                <li><a ui-sref="onboard.goals" class="add" ng-click="collapseNavbar()">Add horse</a></li>
+              </ul>
+            </li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <!-- <li>
+              <a href="" class="chat icon" ng-click="liveChat.toggle()">Live Chat</a>
+            </li> -->
+            <li ng-if="headerCtrl.isLargeSearch" id="search-container" class="bottom-search-lg">
+              <prl-search></prl-search>
+            </li>
+          </ul>
+        </div>
+        <!-- </perfect-scrollbar> -->
+
+      </nav>
+    </div>
+  </div>
+  <notification-bar></notification-bar>
+</header>

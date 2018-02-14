@@ -1,0 +1,81 @@
+<div id="content">
+  <div class="bottom-buffer-40">
+    <h1 class="membership-type-heading">Become part of the most influential, transformational horsemanship program in the world.</h1>
+    <div class="tiny-border"></div>
+  </div>
+
+  <div class="hold-program">
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a data-target="#monthly" aria-controls="monthly" role="tab" data-toggle="tab">Monthly</a></li>
+      <li role="presentation"><a data-target="#annualy" aria-controls="annualy" role="tab" data-toggle="tab">Annually</a></li>
+    </ul>
+    <div class="tab-content">
+      <div class="currency-picker">
+        <div class="currency-picker__switcher clearfix">
+          <span>CURRENCY</span>
+          <select ng-if="$ctrl.currencies" name="country" ng-model="$ctrl.selectedCurrency" convert-to-number>
+            <option value="-1" selected>Select your currency*</option>
+            <option ng-repeat="(currency_index, currency) in $ctrl.currencies" value="{{currency.id}}">{{currency.title}}</option>
+          </select>
+          <small></small>
+        </div>
+      </div>
+      <div role="tabpanel" class="tab-pane active" id="monthly">
+        <ul class="program-list">
+          <li>
+            <strong class="title">{{$ctrl.memberTypes[0].level}}</strong>
+            <span class="title-info">{{$ctrl.memberTypes[0].benefit_title}}</span>
+            <span class="price" ng-repeat="(currency_index, currency) in $ctrl.memberTypes[0].costs | filter : {'currencyId': $ctrl.selectedCurrency} | limitTo : 1">{{currency.cost | currency : currency.symbol}}</span>
+            <span class="period">Per Month</span>
+            <div ng-bind-html="$ctrl.memberTypes[0].benefits | trusthtml" class="specification-list"></div>
+            <a ui-sref="registration.userinfo({type: $ctrl.memberTypes[0].id, currency: $ctrl.selectedCurrency, referral: $ctrl.referralCode})" class="sign-up">Sign Up</a>
+          </li>
+          <li class="silver">
+            <strong class="title">{{$ctrl.memberTypes[1].level}}</strong>
+            <span class="title-info">{{$ctrl.memberTypes[1].benefit_title}}</span>
+            <span class="price" ng-repeat="(currency_index, currency) in $ctrl.memberTypes[1].costs | filter : {'currencyId': $ctrl.selectedCurrency} | limitTo : 1">{{currency.cost | currency : currency.symbol}}</span>
+            <span class="period">Per Month</span>
+            <div ng-bind-html="$ctrl.memberTypes[1].benefits | trusthtml" class="specification-list"></div>
+            <a ui-sref="registration.userinfo({type: $ctrl.memberTypes[1].id, currency: $ctrl.selectedCurrency, referral: $ctrl.referralCode})" class="sign-up">Sign Up</a>
+          </li>
+          <li>
+            <strong class="title">{{$ctrl.memberTypes[2].level}}</strong>
+            <span class="title-info">{{$ctrl.memberTypes[2].benefit_title}}</span>
+            <span class="price" ng-repeat="(currency_index, currency) in $ctrl.memberTypes[2].costs | filter : {'currencyId': $ctrl.selectedCurrency} | limitTo : 1">{{currency.cost | currency : currency.symbol}}</span>
+            <span class="period">Per Month</span>
+            <div ng-bind-html="$ctrl.memberTypes[2].benefits | trusthtml" class="specification-list"></div>
+            <a ui-sref="registration.userinfo({type: $ctrl.memberTypes[2].id, currency: $ctrl.selectedCurrency, referral: $ctrl.referralCode})" class="sign-up">Sign Up</a>
+          </li>
+        </ul>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="annualy">
+        <ul class="program-list">
+          <li>
+            <strong class="title">{{$ctrl.memberTypes[3].level}}</strong>
+            <span class="title-info">{{$ctrl.memberTypes[3].benefit_title}}</span>
+            <span class="price" ng-repeat="(currency_index, currency) in $ctrl.memberTypes[3].costs | filter : {'currencyId': $ctrl.selectedCurrency} | limitTo : 1">{{currency.cost | currency : currency.symbol}}</span>
+            <span class="period">Per Annum</span>
+            <div ng-bind-html="$ctrl.memberTypes[3].benefits | trusthtml" class="specification-list"></div>
+            <a ui-sref="registration.userinfo({type: $ctrl.memberTypes[3].id, currency: $ctrl.selectedCurrency, referral: $ctrl.referralCode})" class="sign-up">Sign Up</a>
+          </li>
+          <li class="silver">
+            <strong class="title">{{$ctrl.memberTypes[4].level}}</strong>
+            <span class="title-info">{{$ctrl.memberTypes[4].benefit_title}}</span>
+            <span class="price" ng-repeat="(currency_index, currency) in $ctrl.memberTypes[4].costs | filter : {'currencyId': $ctrl.selectedCurrency} | limitTo : 1">{{currency.cost | currency : currency.symbol}}</span>
+            <span class="period">Per Annum</span>
+            <div ng-bind-html="$ctrl.memberTypes[4].benefits | trusthtml" class="specification-list"></div>
+            <a ui-sref="registration.userinfo({type: $ctrl.memberTypes[4].id, currency: $ctrl.selectedCurrency, referral: $ctrl.referralCode})" class="sign-up">Sign Up</a>
+          </li>
+          <li>
+            <strong class="title">{{$ctrl.memberTypes[5].level}}</strong>
+            <span class="title-info">{{$ctrl.memberTypes[5].benefit_title}}</span>
+            <span class="price" ng-repeat="(currency_index, currency) in $ctrl.memberTypes[5].costs | filter : {'currencyId': $ctrl.selectedCurrency} | limitTo : 1">{{currency.cost | currency : currency.symbol}}</span>
+            <span class="period">Per Annum</span>
+            <div ng-bind-html="$ctrl.memberTypes[5].benefits | trusthtml" class="specification-list"></div>
+            <a ui-sref="registration.userinfo({type: $ctrl.memberTypes[5].id, currency: $ctrl.selectedCurrency, referral: $ctrl.referralCode})" class="sign-up">Sign Up</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,187 @@
+.online-container {
+  margin: 10px 15px 0;
+
+  .forum-content {
+    background: $content-holder-bg;
+  }
+
+  .topic-box .answer-box {
+    background: $content-holder-bg;
+  }
+
+  .prl-groups-detail__posts {
+    background-color: $content-holder-bg;
+  }
+
+  .btn.btn-like {
+    background: $content-holder-bg;
+    border-color: $content-holder-bg;
+  }
+
+  .prl-horse-update-box {
+    background-color: $white;
+  }
+
+  .prl-comment {
+    background-color: $white !important;
+  }
+
+  .prl-viewmore-btn {
+    margin: 0px 40px;
+  }
+
+  .po-s2-form-container {
+    padding: 50px !important;
+    @include bp(md) {
+      padding: 20px !important;
+    }
+    @include bp(sm) {
+      padding: 50px !important;
+    }
+  }
+}
+
+.tab-content {
+  .post-option-btns {
+    margin-left: 40px;
+  }
+
+  .progress-save-btn {
+    height: 30px;
+  }
+
+
+  // .multi-upload__container {
+  //   margin-left: 40px;
+  // }
+}
+
+
+
+// #editHealthPost {
+.editHorsePostCSS {
+  .modal-dialog {
+    width: 90%;
+    max-height: 80%;
+    max-width: 1000px;
+
+    @include bp(sm) {
+      max-width: 90%;
+    }
+  }
+
+  .close {
+    background: white;
+    opacity: 0.75;
+    padding: 3px 8px;
+    border-radius: 100%;
+  }
+
+  .modal-content .modal-title {
+    text-align: center;
+    font-size: 1.250em;
+    padding-left: 30px;
+  }
+
+  .modal-content {
+      // margin: 5% 0;
+      margin-bottom: 5%;
+      border-radius: 0;
+      border: 0;
+      background-color: #fff;
+
+      .modal-header {
+        padding: 8px;
+        background-color: #333333;
+        color: #fff;
+        border-top: 3px solid #333333;
+      }
+
+      .modal-title {
+        font-weight: 300;
+      }
+
+      .arrow-down {
+        border-top-color: #333333;
+        border-left-width: 20px;
+        border-top-width: 20px;
+        border-right-width: 20px;
+        left: 50%;
+        position: absolute;
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-50%);
+      }
+    }
+
+    .calender {
+      .multi-upload__remove {
+        right: 60px;
+        margin-top: 15px;
+        color: #dcdcdc;
+
+        &:hover {
+          color: $red;
+        }
+      }
+    }
+
+
+  .po-s2-form-container {
+    padding: 50px !important;
+
+    @include bp(xxs) {
+      padding: 20px !important;
+    }
+    
+  }
+
+  .progress-save-btn {
+    margin-right: 50px;
+    margin-top: 40px;
+    @include bp(xxs) {
+      margin: 20px 0 100px 0;
+      text-align: center;
+    }
+
+    input[type=button] {
+      @include bp(xxs) {
+        margin: 10px;
+      }
+    }
+  }
+}
+
+.online-container-row {
+  .comments-container__content {
+    // background-color: red !important;
+    margin-bottom: 0px;
+  }
+
+  .btn-viewmore {
+    margin-bottom: 5px;
+  }
+}
+
+.horse-health-post {
+  &__container {
+    float: left;
+    padding-right: 40px;
+    width: 75%;
+    @include bp(sm) {
+      float: none;
+      padding-right: 0;
+      width: 100%;
+    }
+    .block-ui-container {
+      background-color: $grey1;
+    }
+  }
+  .sidebar {
+    float: right;
+    width: 25%;
+    @include bp(sm) {
+      float: none;
+      width: 100%;
+    }
+  }
+}

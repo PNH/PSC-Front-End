@@ -1,0 +1,94 @@
+<div ng-switch="groupPostCtrl.post.groupposting_type">
+  <div class="answer-box prl-groups-detail__answerbox" ng-switch-when="Playlist">
+    <figure class="hold-img" style="background-image: url('{{groupPostCtrl.post.user.profileImage}}');" go-to-wall wall-id="groupPostCtrl.post.user.id"
+      ng-class="{'clickable': groupPostCtrl.post.user.id > 0}"></figure>
+    <div class="hold-title line-l">
+      <div class="hold-date">
+        <strong go-to-wall wall-id="groupPostCtrl.post.user.id" ng-class="{'clickable': groupPostCtrl.post.user.id > 0}">{{groupPostCtrl.post.user.firstName + ' ' + groupPostCtrl.post.user.lastName}}</strong>
+        <span class="date">{{groupPostCtrl.post.created_at | formatdate: 1}}</span>
+      </div>
+      <div class="btn-box">
+        <button class="btn btn-sm btn-like" ng-click="groupPostCtrl.onLikePostClicked(groupPostCtrl.post.id, groupPostCtrl.post.likes, groupPostCtrl.post.liked)"
+          ng-disabled="groupPostCtrl.isLikeProcessing" ng-class="{'liked': groupPostCtrl.post.liked}"><span class="btn-like__thumb"></span> {{groupPostCtrl.post.likes > 0 ? groupPostCtrl.post.likes : ''}}</button>
+        <button class="btn btn-grey btn-sm" ng-click="groupPostCtrl.toggleCommentBox = !groupPostCtrl.toggleCommentBox">Comment</button>
+        <button class="btn btn-grey btn-sm" ng-click="groupPostCtrl.deletePostClicked(groupPostCtrl.post.id)" ng-if="groupPostCtrl.deletePost && (groupPostCtrl.post.isowner || groupPostCtrl.rootAccess)"
+          ng-disabled="groupPostCtrl.isDeleteProcessing">Delete</button>
+        <button class="btn btn-grey btn-sm" ng-click="groupPostCtrl.toggleEditBox = !groupPostCtrl.toggleEditBox" ng-if="groupPostCtrl.post.groupposting_type != 'Playlist' && groupPostCtrl.editPost && (groupPostCtrl.post.isowner || groupPostCtrl.rootAccess)">Edit</button>
+      </div>
+    </div>
+    <div>
+      <div class="playlist-player__container" ng-if="groupPostCtrl.post.groupposting">
+        <share-playlist ng-if="groupPostCtrl.post.groupposting.id" playlist-id="groupPostCtrl.post.groupposting.id" share-callback="groupPostCtrl.sharePlaylist"></share-playlist>
+        <div>
+          <prl-player videos="groupPostCtrl.post.groupposting.resources" numberofplaylistitems="3" add-video-fn="groupPostCtrl.onAddToPlaylist"
+            user-playlist="groupPostCtrl.playlists" ng-if="groupPostCtrl.playlists"></prl-player>
+        </div>
+      </div>
+      <div class="pl-error__container" ng-if="!groupPostCtrl.post.groupposting">
+        <div class="pl-error">
+          <span class="pl-error__message">This shared playlist has been deleted.</span>
+        </div>
+      </div>
+    </div>
+    <div class="answer-box__attachments" ng-if="groupPostCtrl.post.group_post_attachment.length > 0">
+      <span class="answer-box__attachments__title">Attachments:</span>
+      <ul>
+        <li ng-repeat="(attachmentIndex, attachment) in groupPostCtrl.post.group_post_attachment">
+          <a ng-href="{{attachment.resourceUrl}}" target="_blank"><img ng-href="{{attachment.resourceUrl}}" class="post-attachment-img" src="{{attachment.resourceUrl}}"></a>
+          <a class="post-attachment-name" ng-href="{{attachment.resourceUrl}}" target="_blank">Attachment : {{attachment.id}}</a>
+        </li>
+      </ul>
+    </div>
+    <simple-reply button-text="SAVE" ng-if="groupPostCtrl.toggleEditBox" post="groupPostCtrl.editPostClicked" content="groupPostCtrl.post.content"
+      text-area="groupPostCtrl.showTextArea"></simple-reply>
+    <simple-reply class="comment-box" button-text="COMMENT" ng-if="groupPostCtrl.toggleCommentBox" post="groupPostCtrl.createPostComment"
+      text-area="groupPostCtrl.showTextArea"></simple-reply>
+    <div class="comments-container">
+      <div class="comments-container__content" block-ui="commentsLoading" ng-if="groupPostCtrl.comments.length > 0">
+        <prl-comment ng-repeat="comment in groupPostCtrl.comments | orderBy: '-created_at' track by comment.id" comment="comment"
+          edit="groupPostCtrl.editCommentClicked" delete-comment="groupPostCtrl.deleteCommentClicked" text-area="groupPostCtrl.showTextArea"></prl-comment>
+      </div>
+      <!--<button class="comments-container__toggle btn-empty" ng-click="groupPostCtrl.loadComments(groupPostCtrl.post.id)" ><span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span> Load comments</button>-->
+      <load-more-btn label="Load comments" load="groupPostCtrl.loadComments" id="groupPostCtrl.post.id" ng-hide="groupPostCtrl._commentReachedEnd || !groupPostCtrl.post.commentcount > 0 || groupPostCtrl.post.commentcount < groupPostCtrl._paginationLimit"></load-more-btn>
+    </div>
+  </div>
+  <div class="answer-box prl-groups-detail__answerbox" ng-switch-default>
+    <figure class="hold-img" style="background-image: url('{{groupPostCtrl.post.user.profileImage}}');" ng-click="groupPostCtrl.goToWall(groupPostCtrl.post.user.id)"
+      ng-class="{'clickable': groupPostCtrl.post.user.id > 0}"></figure>
+    <div class="hold-title line-l">
+      <div class="hold-date">
+        <strong ng-click="groupPostCtrl.goToWall(groupPostCtrl.post.user.id)" ng-class="{'clickable': groupPostCtrl.post.user.id > 0}">{{groupPostCtrl.post.user.firstName + ' ' + groupPostCtrl.post.user.lastName}}</strong>
+        <span class="date">{{groupPostCtrl.post.created_at | formatdate: 1}}</span>
+      </div>
+      <div class="btn-box">
+        <button class="btn btn-sm btn-like" ng-click="groupPostCtrl.onLikePostClicked(groupPostCtrl.post.id, groupPostCtrl.post.likes, groupPostCtrl.post.liked)"
+          ng-disabled="groupPostCtrl.isLikeProcessing" ng-class="{'liked': groupPostCtrl.post.liked}"><span class="btn-like__thumb"></span> {{groupPostCtrl.post.likes > 0 ? groupPostCtrl.post.likes : ''}}</button>
+        <button class="btn btn-grey btn-sm" ng-click="groupPostCtrl.toggleCommentBox = !groupPostCtrl.toggleCommentBox">Comment</button>
+        <button class="btn btn-grey btn-sm" ng-click="groupPostCtrl.deletePostClicked(groupPostCtrl.post.id)" ng-if="groupPostCtrl.deletePost && (groupPostCtrl.post.isowner || groupPostCtrl.rootAccess)"
+          ng-disabled="groupPostCtrl.isDeleteProcessing">Delete</button>
+        <button class="btn btn-grey btn-sm" ng-click="groupPostCtrl.toggleEditBox = !groupPostCtrl.toggleEditBox" ng-if="groupPostCtrl.editPost && (groupPostCtrl.post.isowner || groupPostCtrl.rootAccess)">Edit</button>
+      </div>
+    </div>
+    <div class="content-block answer-box__content" ng-bind-html="groupPostCtrl.post.content | trusthtml" ng-hide="groupPostCtrl.toggleEditBox"></div>
+    <div class="answer-box__attachments" ng-if="groupPostCtrl.post.group_post_attachment.length > 0">
+      <span class="answer-box__attachments__title">Attachments:</span>
+      <ul>
+        <li ng-repeat="(attachmentIndex, attachment) in groupPostCtrl.post.group_post_attachment">
+          <a ng-href="{{attachment.resourceUrl}}" target="_blank"><img ng-href="{{attachment.resourceUrl}}" class="post-attachment-img" src="{{attachment.resourceUrl}}"></a>
+          <a class="post-attachment-name" ng-href="{{attachment.resourceUrl}}" target="_blank">Attachment : {{attachment.id}}</a>
+        </li>
+      </ul>
+    </div>
+    <simple-reply button-text="SAVE" ng-if="groupPostCtrl.toggleEditBox" post="groupPostCtrl.editPostClicked" content="groupPostCtrl.post.content"
+      attachments-available="groupPostCtrl.post.group_post_attachment.length > 0"></simple-reply>
+    <simple-reply class="comment-box" button-text="COMMENT" ng-if="groupPostCtrl.toggleCommentBox" post="groupPostCtrl.createPostComment"></simple-reply>
+    <div class="comments-container">
+      <div class="comments-container__content" block-ui="commentsLoading" ng-if="groupPostCtrl.comments.length > 0">
+        <prl-comment ng-repeat="comment in groupPostCtrl.comments | orderBy: '-created_at' track by comment.id" comment="comment"
+          edit="groupPostCtrl.editCommentClicked" delete-comment="groupPostCtrl.deleteCommentClicked" text-area="groupPostCtrl.showTextArea"></prl-comment>
+      </div>
+      <!--<button class="comments-container__toggle btn-empty" ng-click="groupPostCtrl.loadComments(groupPostCtrl.post.id)" ><span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span> Load comments</button>-->
+      <load-more-btn label="Load comments" load="groupPostCtrl.loadComments" id="groupPostCtrl.post.id" ng-hide="groupPostCtrl._commentReachedEnd || !groupPostCtrl.post.commentcount > 0 || groupPostCtrl.post.commentcount < groupPostCtrl._paginationLimit"></load-more-btn>
+    </div>
+  </div>
+</div>

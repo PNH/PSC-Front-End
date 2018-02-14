@@ -1,0 +1,171 @@
+.pathway-popup {
+	.modal-dialog {
+		left: 50%;
+		position: absolute;
+		transform: translate(-50%, -50%) !important;
+		top: 50%;
+		margin: 0 !important;
+		max-width: 100%;
+		max-height: 100%;
+		width: 100% !important;
+		max-width: calc(1284px - 132px);
+	}
+	.modal-content {
+		border: none;
+		border-radius: 0;
+	}
+	&__badge-container {
+		align-item: center;
+		display: flex;
+		float: left;
+		justify-content: center;
+		min-width: 25px;
+		padding: 50px;
+		width: 25%;
+		@include bp(xs) {
+			float: none;
+			padding: 50px 10px 10px 10px;
+			width: 100%;
+		}
+	}
+	button.close {
+		position: absolute;
+		right: 10px;
+		top: 10px;
+
+		span {
+			font-size: 2.125em;
+			font-weight: 300;
+			display: block;
+			line-height: 25px;
+		}
+	}
+	// Popup badge
+	.pw-badge {
+	  position: relative;
+	  cursor: default;
+	  top: auto;
+	  transform: none;
+	  .badge-icon {
+	  	transform: none;
+	  	margin-bottom: 10px;
+	  }
+	  .arrow-down {
+	    border-top-color: $pw-badge-bg;
+	    right: -25px;
+	    transform: translateY(-50%) rotate(270deg);
+	  }
+	  &.grey.completed {
+	    background-color: $pw-savvy-grey;
+	    .arrow-down {
+	      border-top-color: $pw-savvy-grey;
+	    }
+	  }
+    &.blue.completed {
+      background-color: $pw-savvy-blue;
+      .arrow-down {
+        border-top-color: $pw-savvy-blue;
+      }
+    }
+    &.red.completed {
+      background-color: $pw-savvy-red;
+      .arrow-down {
+        border-top-color: $pw-savvy-red;
+      }
+    }
+    &.green.completed {
+  		background-color: $pw-savvy-green;
+  		.arrow-down {
+  		  border-top-color: $pw-savvy-green;
+  		}
+    }
+	}
+	&__lesson-container {
+		border-left: 1px solid $pw-popup-border;
+		float: left;
+		min-height: 280px;
+		padding: 25px 40px;
+		width: 75%;
+		@include bp(xs) {
+			float: none;
+			padding: 10px;
+			width: 100%;
+		}
+
+		a.button {
+			background-color: $pw-popup-btn-bg;
+			width: 50%;
+			margin: 0 auto 20px;
+			display: block;
+			padding: 15px 75px 15px 25px;
+			font-size: 1.125em;
+			border-radius: 2px;
+			color: $white;
+			position: relative;
+			@include bp(xxs) {
+				width: 80%;
+			}
+			&:hover {
+				color: $white;
+			}
+			span.glyphicon {
+				position: absolute;
+				right: 25px;
+				top: 50%;
+				transform: translateY(-50%);
+			}
+		}
+	}
+	&__lessons {
+		display: flex;
+		flex-wrap: wrap;
+		margin: 0;
+		padding: 0;
+		position: relative;
+		border-bottom: 1px solid $pw-popup-border;
+		&:after {
+			content: '';
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			background-color: $white;
+			width: 1px;
+			right: 0;
+		}
+		li {
+			flex: 0 0 50%;
+			list-style: none;
+			border-top: 1px solid $pw-popup-border;
+			border-right: 1px solid $pw-popup-border;
+			padding-top: 30px;
+			padding-bottom: 30px;
+			@include bp(xxs) {
+				border-right: 0;
+				flex: 0 0 100%;
+				padding-left: 10px !important;
+				padding-right: 10px;
+			}
+			&:nth-child(even) {
+				padding-left: 20px;
+			}
+			a {
+				color: $pw-popup-lesson;
+				position: relative;
+				padding-right: 50px;
+				display: inline-block;
+				@include bp(xxs) {
+					display: block;
+					padding-right: 20px;
+				}
+				span.glyphicon {
+					position: absolute;
+					right: 20px;
+					top: 3px;
+					@include bp(xxs) {
+						right: 0;
+					}
+				}
+			}
+		}
+	}
+}

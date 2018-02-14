@@ -1,0 +1,89 @@
+<div id="main" class="prl-connections">
+  <dashboard-header title="Connections"></dashboard-header>
+  <div id="content" class="clearfix">
+    <div class="forum-content library">
+      <div class="holder">
+        <div class="hold-title line-l">
+          <h2>Connection Requests</h2>
+        </div>
+        <div class="hold-form">
+          <a ui-sref="makeconnections" class="btn btn-yellow pull-right">+ MAKE CONNECTIONS</a>
+        </div>
+      </div>
+      <div class="browse-box">
+        <div class="allgroups-header">
+          Filter By:
+          <select ng-model="$ctrl.selectedInvitationType" ng-change="$ctrl.changeInvitationType($ctrl.selectedInvitationType)">
+            <option value="sent">Sent</option>
+            <option value="received">Received</option>
+          </select>
+          <div class="arrow-down"></div>
+        </div>
+        <div class="browse-box__container" block-ui="requestsLoading">
+          <ul class="user-connect" ng-show="$ctrl.invitations.length > 0">
+            <li ng-if="$ctrl.selectedInvitationType === 'sent'" ng-repeat="invitation in $ctrl.invitations track by invitation.id">
+              <prl-connection id="invitation.id" user="invitation.user" label="Pending" delete="$ctrl.deleteInvitation"></prl-connection>
+            </li>
+            <li ng-if="$ctrl.selectedInvitationType === 'received'" ng-repeat="invitation in $ctrl.invitations track by invitation.id">
+              <prl-connection id="invitation.id" user="invitation.user" action="$ctrl.invitationAction"></prl-connection>
+            </li>
+          </ul>
+          <div class="pl-error__container" ng-hide="$ctrl.invitations.length > 0">
+            <div class="pl-error">
+              <span class="pl-error__message">There are no new connection requests at this moment.</span>
+            </div>
+          </div>
+          <load-more-btn label="View More" load="$ctrl.viewMoreInvitations" id="$ctrl.selectedInvitationType" ng-hide="$ctrl.hasInvitationsReachedEnd"></load-more-btn>
+        </div>
+      </div>
+    </div>
+    <div class="forum-content library">
+      <div class="holder">
+        <div class="hold-title line-l">
+          <h2>Existing Connections</h2>
+        </div>
+      </div>
+      <div class="browse-box">
+        <div class="allgroups-header connections-filter-box">
+          <form class="clearfix">
+            <div class="allgroups-header__filters">
+              <div class="allgroups-header__form">
+                <span class="connections-filterby-text">Filter By:</span>
+                <input type="checkbox" id="instructor" class="dark" ng-model="$ctrl.filterMembers.instructor" ng-change="$ctrl.filterResult($ctrl.filterMembers)"
+                />
+                <label for="instructor">Instructors</label>
+                <input type="checkbox" id="member" class="dark" ng-model="$ctrl.filterMembers.member" ng-change="$ctrl.filterResult($ctrl.filterMembers)"
+                />
+                <label for="member">Members</label>
+                <input type="checkbox" id="staff" class="dark" ng-model="$ctrl.filterMembers.staff" ng-change="$ctrl.filterResult($ctrl.filterMembers)"
+                />
+                <label for="staff">Staff</label>
+              </div>
+            </div>
+            <!--<div class="allgroups-header__filters">
+              <span>Sort By:</span>
+              <select ng-model="$ctrl._sortConnections" ng-change="$ctrl.sortConnections($ctrl._sortConnections)">
+                <option value="name">Alpha</option>
+              </select>
+            </div>-->
+          </form>
+          <div class="arrow-down"></div>
+        </div>
+        <div class="browse-box__container" block-ui="existingConnectionsLoading">
+          <ul class="user-connect half clearfix" ng-show="$ctrl.filteredConnections.length > 0">
+            <li ng-repeat="connection in $ctrl.filteredConnections track by connection.user.id">
+              <prl-connection id="connection.id" user="connection.user" disconnect="$ctrl.disconnectConnection"></prl-connection>
+            </li>
+          </ul>
+          <div class="pl-error__container" ng-hide="$ctrl.filteredConnections.length > 0">
+            <div class="pl-error">
+              <span class="pl-error__message">The Savvy Club is more fun with friends! Go make connections today!</span>
+            </div>
+          </div>
+          <load-more-btn label="View More" load="$ctrl.viewMoreConnections" id="1" ng-hide="$ctrl.hasConnectionsReachedEnd"></load-more-btn>
+        </div>
+      </div>
+    </div>
+    <!--<button class="btn btn-yellow pull-right">VIEW MORE</button>-->
+  </div>
+</div>

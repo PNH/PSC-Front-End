@@ -1,0 +1,163 @@
+<div id="main" class="prl-event-details">
+  <dashboard-header title="Event Details"></dashboard-header>
+  <div class="holder  ">
+    <div class="general-box prl-events">
+      <div class="main-container" block-ui="eventDetailsLoading">
+
+        <div ng-show="$ctrl.currentUser.id == $ctrl.eventDetail.organizer.id || $ctrl.eventDetail.status.status == 3 || $ctrl.isEventCancelled" class="prl-event-control">
+          <button ng-if="$ctrl.currentUser.id == $ctrl.eventDetail.organizer.id && $ctrl.eventDetail.status.status == 1" class="btn btn-black btn-sm" ng-click="$ctrl.onDeletEventClicked()">{{$ctrl.deleteOrCancel}}</button>
+          <div ng-if="$ctrl.isEventCancelled" class="btn btn-black btn-sm prl-cancel-label" > Event has been cancelled</div>
+          <div ng-if="$ctrl.eventDetail.status.status == 3" class="btn btn-black btn-sm prl-cancel-label" > Ended event</div>
+        </div>
+
+        <div class="block-holder forum-item clearfix">
+          <div class="prl-subheader">Details</div>
+          <div class="form-part-line prl-linebreak-details"></div>
+          <div class="topic-box prl-event-item">
+            <figure class="hold-img" style="background-image: url('{{$ctrl.eventDetail.organizer.profileImage}}');"></figure>
+            <div class="hold-title line-l prl-subtitle">
+              <strong>{{$ctrl.eventDetail.title}}</strong>
+            </div>
+            <span class="prl-date">{{$ctrl.eventDetail.startDate | formatdate:4}}{{$ctrl.eventDetail.startDate != $ctrl.eventDetail.endDate ?  ' — ' + ($ctrl.eventDetail.endDate | formatdate:4) : ""}}</span>
+            <div class="content-block answer-box__content prl-date event-address">{{$ctrl.eventDetail.location.address}}</div>
+            <!-- <div class="content-block answer-box__content prl-date event-address">{{$ctrl.eventDetail.location.street ? $ctrl.eventDetail.location.street + ', ' : ''}}{{$ctrl.eventDetail.location.zipcode ? $ctrl.eventDetail.location.zipcode + ', ' : '' }}{{$ctrl.eventDetail.location.city ? $ctrl.eventDetail.location.city + ', ' : '' }}{{$ctrl.eventDetail.location.country}}</div> -->
+            <div class="forums-posts" block-ui="postsLoading">
+              <forum-post ng-repeat="post in $ctrl.posts | orderBy: 'created_at' track by post.id" post="post" comment="$ctrl.createPostComment" delete-comment="$ctrl.deleteComment" get-comments="$ctrl.getComments" edit-post="$ctrl.editPost" edit-comment="$ctrl.editComment" delete-post="$ctrl.deletePost"></forum-post>
+            </div>
+          </div>
+        </div>
+
+        <div class="block-holder forum-item clearfix">
+          <div class="prl-subheader">Description</div>
+          <div class="form-part-line prl-linebreak-details"></div>
+          <div class="">
+            <div class="line-l prl-description-text content-block">
+              <div ng-bind-html="$ctrl.eventDetail.description | trusthtml"></div>
+            </div>
+<!--             <ul class="prl-description-list">
+              <li>Day 1 will be Online and liberty.</li>
+              <li>Day 2 will be Online and Freestyle Riding.</li>
+              <li>Day 3 will be Freestyle and Finesse.</li>
+            </ul>
+            <div class="prl-description-subtitle">Medical Arm Band:</div>
+            <span class="prl-description-subtext">If coming alone, please wear an armband or notify organizer  before mounting that you are alone, and given them number of emergency contact.</span>
+            <div class="prl-description-subtitle">Food and Drink:</div>
+            <span class="prl-description-subtext">We are having a BBQ for lunch on saturday at Wind Ridge, Please bring something and join in on the fun. Everyone (riders, grooms, friends, parents, auditors) welcome!.</span> -->
+          </div>
+        </div>
+
+        <div class="block-holder forum-item clearfix" ng-if="$ctrl.eventDetail.pricings.length">
+          <div class="prl-subheader">Price</div>
+          <div class="form-part-line prl-linebreak-details"></div>
+          <div class="prl-event-price">
+            <div ng-repeat="priceSet in $ctrl.eventDetail.pricings">
+              <div class="prl-price-text"><strong>{{priceSet.title}}:</strong>
+                {{priceSet.description}}
+                <span class="prl-price-value">{{priceSet.price}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a ng-hide="$ctrl.isEventCancelled || !$ctrl.hasSignupUrl" ng-href="{{$ctrl.eventDetail.url}}" target="_blank" class="btn btn-yellow pull-right btn-submit prl-btn-signup" type="submit">
+          <div class="bs-process-bar uil-ring-css yellow">
+            <div></div>
+          </div>
+          <span class="bs-login-text">
+            SIGN UP
+          </span>
+        </a>
+
+      </div>
+      
+
+      <aside id="sidebar">
+
+        <div class="prl-sidebox col-md-12 col-sm-6 col-xs-12">
+          <div class="prl-sidebox-title-1">Organizer</div>
+          <div class="form-part-line prl-linebreak-details"></div>
+          <div class="prl-conncetion">
+            <span class="prl-username">{{$ctrl.eventDetail.organizer.firstName}} {{$ctrl.eventDetail.organizer.lastName}}</span>
+            <span ng-if="$ctrl.currentUser.id != $ctrl.eventDetail.organizer.id" >
+              <button ng-if="$ctrl.eventDetail.organizer.connectionStatus.status == 0" ng-click="$ctrl.connectConnection('organizer', $ctrl.eventDetail.organizer.id)" class="btn btn-yellow pull-right prl-sidebox-connect" ng-disabled="$ctrl.isConnectProcessing">Connect +</button>
+              <div ng-if="$ctrl.eventDetail.organizer.connectionStatus.status == 1" class="connection-label btn-busy pull-right prl-sidebox-connect prl-sidebox-pending">Connection Pending</div>
+              <div ng-if="$ctrl.eventDetail.organizer.connectionStatus.status == 2" class="btn btn-yellow pull-right prl-sidebox-connect">Connected</div>
+            </span>
+          </div>
+        </div>
+
+        <div class="prl-sidebox prl-sidebox-map col-md-12 col-sm-6 col-xs-12">
+          <div map-lazy-load="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkLJt6qh1IocAzXwg9zCrAtE8rZYB43YY">
+            <ng-map center="{{$ctrl.eventDetail.location.latitude}}, {{$ctrl.eventDetail.location.longitude}}" zoom="15">
+              <marker position="[{{$ctrl.eventDetail.location.latitude}}, {{$ctrl.eventDetail.location.longitude}}]" draggable="false" title="event location"></marker>
+            </ng-map>
+          </div>
+
+          <div ng-if="$ctrl.currentUser.id != $ctrl.eventDetail.organizer.id && $ctrl.eventDetail.status.status != 2" class="prl-map-status-set" >
+            <button ng-if="$ctrl.eventDetail.participationStatus.status == 3 || $ctrl.eventDetail.participationStatus.status == -1" class="btn btn-grey btn-busy prl-map-status-full prl-join-btn2 " ng-click="$ctrl.onEventStatusClicked(1)" ng-disabled="$ctrl.isStatusProcessing" ng-class="{'processing': $ctrl.isStatusProcessing}">Add to my events</button>
+            <button ng-if="$ctrl.eventDetail.participationStatus.status == 1" class="btn btn-grey btn-busy prl-map-status-full prl-join-btn2 " ng-click="$ctrl.onEventStatusClicked(3)" ng-disabled="$ctrl.isStatusProcessing" ng-class="{'processing': $ctrl.isStatusProcessing}">Remove from my events</button>
+          </div>
+
+<!--           <div>
+            <div ng-if="$ctrl.eventDetail.participationStatus.status != -1" class="prl-map-status prl-map-status-full grey_bg">{{$ctrl.statusText}}</div>
+          </div>
+          <div ng-if="$ctrl.currentUser.id != $ctrl.eventDetail.organizer.id" class="prl-map-status-set" >
+            <button ng-if="$ctrl.eventDetail.participationStatus.status != 1" class="prl-map-status prl-join-btn" ng-click="$ctrl.onEventStatusClicked(1)" ng-disabled="$ctrl.isStatusProcessing" ng-class="{'processing': $ctrl.isStatusProcessing}">Going</button>
+            <button ng-if="$ctrl.eventDetail.participationStatus.status != 2" class="prl-map-status prl-join-btn" ng-click="$ctrl.onEventStatusClicked(2)" ng-disabled="$ctrl.isStatusProcessing" ng-class="{'processing': $ctrl.isStatusProcessing}">Maybe</button>
+            <button ng-if="$ctrl.eventDetail.participationStatus.status == 1 || $ctrl.eventDetail.participationStatus.status == 2" class="prl-map-status prl-join-btn" ng-click="$ctrl.onEventStatusClicked(3)" ng-disabled="$ctrl.isStatusProcessing" ng-class="{'processing': $ctrl.isStatusProcessing}">Not Going</button>
+          </div> -->
+
+
+        </div>
+<!-- 
+        <div class="prl-sidebox col-md-12 col-sm-6 col-xs-12">
+          <div class="prl-sidebox-title-1">Instructor</div>
+          <div class="form-part-line prl-linebreak-details"></div>
+          <div class="prl-conncetion">
+            <span class="prl-username">{{$ctrl.eventDetail.instructors[0].firstName}} {{$ctrl.eventDetail.instructors[0].lastName}}</span>
+            <span ng-if="$ctrl.currentUser.id != $ctrl.eventDetail.instructors[0].id">
+              <button ng-if="$ctrl.eventDetail.instructors[0].connectionStatus.status == 0" ng-click="$ctrl.connectConnection('instructor', $ctrl.eventDetail.instructors[0].id)" class="btn btn-yellow pull-right prl-sidebox-connect" ng-disabled="$ctrl.isConnectProcessing">Connect +</button>
+              <div ng-if="$ctrl.eventDetail.instructors[0].connectionStatus.status == 1" class="btn btn-grey btn-busy pull-right prl-sidebox-connect">Pending</div>
+              <div ng-if="$ctrl.eventDetail.instructors[0].connectionStatus.status == 2" class="btn btn-yellow pull-right prl-sidebox-connect">Connected</div>
+            </span>
+          </div>
+        </div> -->
+
+        <div class="prl-sidebox col-md-12 col-sm-6 col-xs-12">
+          <div class="prl-sidebox-title-1">Primary Instructor</div>
+          <div class="form-part-line prl-linebreak-details"></div>
+          <div class="prl-conncetion" ng-if="!$ctrl.primaryInstructors.length">
+            <span class="prl-username">None</span>
+          </div>
+          <div class="prl-conncetion" ng-repeat="instructor in $ctrl.primaryInstructors">
+            <span class="prl-username">{{instructor.firstName}} {{instructor.lastName}}</span>
+            <span ng-if="$ctrl.currentUser.id != instructor.id">
+              <button ng-if="instructor.connectionStatus.status == 0" ng-click="$ctrl.connectConnection('instructor', instructor.id)" class="btn btn-yellow pull-right prl-sidebox-connect" ng-disabled="$ctrl.isConnectProcessing">Connect +</button>
+              <div ng-if="instructor.connectionStatus.status == 1" class="connection-label btn-busy pull-right prl-sidebox-connect prl-sidebox-pending">Pending</div>
+              <div ng-if="instructor.connectionStatus.status == 2" class="btn btn-yellow pull-right prl-sidebox-connect">Connected</div>
+            </span>
+          </div>
+
+          <div class="prl-sidebox-title-2">Assisting Instructor(s)</div>
+          <div class="form-part-line prl-linebreak-details"></div>
+          <div class="prl-conncetion" ng-if="!$ctrl.assistingInstructors.length">
+            <span class="prl-username">None</span>
+          </div>
+          <div class="prl-conncetion" ng-repeat="instructor in $ctrl.assistingInstructors">
+            <span class="prl-username">{{instructor.firstName}} {{instructor.lastName}}</span>
+            <span ng-if="$ctrl.currentUser.id != instructor.id">
+              <button ng-if="instructor.connectionStatus.status == 0" ng-click="$ctrl.connectConnection('instructor', instructor.id)" class="btn btn-yellow pull-right prl-sidebox-connect" ng-disabled="$ctrl.isConnectProcessing">Connect +</button>
+              <div ng-if="instructor.connectionStatus.status == 1" class="connection-label btn-busy pull-right prl-sidebox-connect prl-sidebox-pending">Pending</div>
+              <div ng-if="instructor.connectionStatus.status == 2" class="btn btn-yellow pull-right prl-sidebox-connect">Connected</div>
+            </span>
+          </div>
+        </div>
+
+      </aside>
+
+
+
+    </div>
+  </div>
+</div>
+</div>

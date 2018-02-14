@@ -1,0 +1,264 @@
+$white: #fff;
+$black: #000;
+$blue : #626890;
+$blue2: #317fa5;
+$yellow: #ffc745;
+$red: #e4535a;
+$green: #38824b;
+
+// Almost fifty shades of grey :)
+$grey1: #f1f2f6;
+$grey2: #eeeeee;
+$grey3: #333333;
+$grey4: #cfcfcf;
+$grey5: #3e3e3e;
+$grey6: #f1f2f6;
+$grey7: #858585;
+$grey8: #e9ebec;
+$grey9: #7c7c7c;
+$grey10: #eaebec;
+$grey11: #616161;
+$grey12: #e0e2e3;
+$grey13: #959595;
+$grey14: #222222;
+$grey15: #434343;
+$grey16: #dddddd;
+$grey17: #ebebeb;
+$grey18: #787878;
+$grey19: #303133;
+$grey20: #b9b9b9;
+$grey21: #4a4b4d;
+$grey22: #969696;
+$grey23: #c5c5c5;
+$grey24: #5a5a5a;
+$grey25: #8e8e8e;
+$grey26: #f1f1f1;
+$grey27: #7f7f7f;
+$grey28: #555555;
+$grey29: #c9cacc;
+$grey30: #d5d5d5;
+$grey31: #626262;
+$grey32: #7b7c7e;
+$grey33: #7a7879;
+$grey34: #b4b4b4;
+$grey35: #eceaeb;
+$grey36: #515151;
+$grey37: #c1c1c1;
+$grey38: #565656;
+$grey39: #c8c8c8;
+$grey40: #585858;
+$grey41: #2c2c2c;
+$grey42: #737373;
+$grey43: #e4e5e6;
+$grey44: #5f5f5f;
+$grey45: #555454;
+$grey46: #d6d6d6;
+$grey47: #828282;
+$grey48: #202020;
+$grey49: #d8d9da;
+$grey50: #c6c6c6;
+$grey51: #dedede;
+$grey52: #eaeaea;
+$grey53: #474747;
+$grey53: #9b9e9f;
+
+/**
+ * Common background
+ */
+$body-background: $grey1;
+$anchor-color: $blue;
+
+/**
+ * Buttons
+ */
+$btn-border-grey: $grey4;
+$btn-border-yellow: $yellow;
+$btn-border-black: $grey5;
+$btn-border-red: $red;
+
+$btn-bg-white: $white;
+$btn-bg-yellow: $yellow;
+$btn-bg-black: $grey5;
+$btn-bg-red: $red;
+
+$btn-font-white: $white;
+$btn-font-black: $grey5;
+
+$drpdown-bg-dark: $grey3;
+$drpdown-font-light: $grey46;
+
+/**
+ * Forms
+ */
+$form-text-color: $grey7;
+$form-placeholder-color: $grey37;
+$forms-checkbox-bg: $grey29;
+$form-checkbox-tic: $grey11;
+$forms-checkbox-dark-bg: $grey3;
+$form-checkbox-dark-tic: $white;
+
+/**
+ * Icons
+ */
+$icon-bg-grey: $grey6;
+
+/**
+ * Onboarding
+ */
+// Step 1
+$po-s1-item-heading-bg: transparentize($black, .6);
+$po-s1-item-bg: $grey3;
+
+// Step 2
+$po-s2-form-bg: $grey6;
+
+// Step 3
+$po-s3-commonIssues-border: $grey8;
+$po-s3-commonIssues-text: $grey9;
+$po-s3-moreIssues-tab-bg: $grey12;
+$po-s3-moreIssues-tab-text: $grey13;
+$po-s3-moreIssues-check-border: $grey8;
+
+// Step 4
+$po-s4-pathway-heading-red: $red;
+$po-s4-pathway-heading-blue: $blue2;
+$po-s4-pathway-heading-green: $green;
+$po-s4-pathway-heading-grey: $grey14;
+
+$po-s4-pathway-item-label-bg: $grey15;
+$po-s4-pathway-item-label-text: $grey16;
+
+$po-s4-pathway-footer-text: $grey17;
+
+// Step 5
+$po-s5-desc-text: $grey18;
+$po-s5-desc-title: $grey19;
+
+$po-s5-chat-bg: $grey3;
+$po-s5-chat-text: $grey20;
+$po-s5-chat-border: $grey2;
+
+/**
+ * Notification Bar
+ */
+$nb-error: $red;
+$nb-success: $green;
+
+/**
+ * Registration
+ */
+$pr-text-heading: $grey21;
+$pr-text: $grey22;
+$pr-memberbar-currency-bg: $grey41;
+$pr-memberbar-bg: $grey3;
+$pr-memberbar-text: $white;
+$pr-memberbar-text-dark: $grey23;
+$pr-memberbar-text-yellow: $yellow;
+$pr-memberbar-tick-bg: $grey3;
+
+/**
+ * Pathway
+ */
+$pw-container-border: $grey2;
+$pw-badge-bg: $grey26;
+$pw-badge-savvy: $grey7;
+$pw-badge-category: $grey25;
+$pw-desc: $grey3;
+
+$pw-savvy-red: $red;
+$pw-savvy-blue: $blue2;
+$pw-savvy-green: $green;
+$pw-savvy-grey: $grey14;
+
+$pw-popup-border: $grey2;
+$pw-popup-btn-bg: $grey3;
+$pw-popup-lesson: $grey27;
+$pw-list-bg: $grey28;
+
+/**
+ * Lesson details
+ */
+$ld-category: $grey33;
+$ld-objectives: $grey3;
+
+/**
+ * Sidebar
+ */
+$sb-text-color: $grey18;
+$sb-expand: $grey34;
+$sb-tools-bg: $grey35;
+$sb-tools-text: $grey5;
+$sb-sa-text: $grey18;
+$sb-completed-text: $grey36;
+$sb-alert: $grey7;
+
+/**
+ * Quick Selector
+ */
+$qs-bg: $grey5;
+$qs-sep: $grey38;
+$qs-text: $grey37;
+
+/**
+ * Login
+ */
+$li-border: $grey6;
+$li-header-bg: $grey29;
+$li-close-bg: $grey30;
+$li-close: $grey3;
+$li-modal-bg: $grey6;
+$li-modal-label: $grey32;
+$li-border: $grey29;
+$li-error-bg: $red;
+$li-success-bg: $green;
+
+/**
+ * Video player
+ */
+$vp-playlist-bg: $grey1;
+$vp-addtoplaylist-bg: $grey3;
+$vp-userplaylist-text: $grey29;
+$vp-userplaylist-border: $grey30;
+
+/**
+ * Playlist popup
+ */
+$pp-bg: $grey41;
+$pp-border: $grey38;
+$pp-text: $grey20;
+
+/**
+ * Learning Library
+ */
+$ll-detail-text: $grey29;
+
+/**
+ * Learning Library Search
+ */
+$lls-tab-text: $grey3;
+$lls-tab-bg: $grey39;
+$lls-tab-border: $grey1;
+
+/**
+ * Content
+ */
+$content-text: $grey3;
+$content-holder-bg: $grey1;
+$content-list-border: $grey49;
+$content-title: $grey3;
+
+/**
+ * Footer
+ */
+$icon-color: $grey25;
+
+/**
+ * 404
+ */
+$nf-sub: $grey40;
+
+/**
+ * Touchstones
+ */
+ // Detail
+ $tsd-db-header-bg: $grey5;

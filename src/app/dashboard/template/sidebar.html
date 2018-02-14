@@ -1,0 +1,78 @@
+<aside id="sidebar" class="side-info">
+  <div class="side-info-box first dashboard white-bg">
+    <h3>Recently Earned Badges</h3>
+    <div class="badges-box" ng-if="$ctrl.badges.length > 0">
+      <div class="badge-item" ng-repeat="(badge_index, badge) in $ctrl.badges | orderBy : 'earned_at' : true | limitTo : 2">
+        <span class="badge-icon grey" ng-class="{'red': badge.level === 1, 'blue': badge.level === 2, 'green': badge.level === 3, 'black': badge.level === 4}"></span>
+        <strong class="title">{{badge.savvy_title}}</strong>
+        <span class="text">{{badge.title}}</span>
+      </div>
+    </div>
+    <div class="coming-soon__notice" ng-if="!$ctrl.badges.length > 0">
+      You haven't earned any badges yet. Don't worry, you'll get one as soon as you complete your first topic.
+    </div>
+    <div class="hold-btn" ng-if="$ctrl.badges.length > 0">
+      <a ui-sref="badges({horseid: $ctrl.horseid})" class="view-all">View all</a>
+    </div>
+  </div>
+
+  <div class="side-info-box white-bg" block-ui="notificationsLoading">
+    <h3>Notifications</h3>
+    <div class="notifications-list">
+      <prl-notification ng-repeat="notify in $ctrl.notifications | orderBy: '-created_at' | limitTo: 4 track by notify.id" notification="notify"
+        read="$ctrl.readNotification" remove="$ctrl.deleteNotification"></prl-notification>
+    </div>
+    <div class="coming-soon__notice" ng-if="!$ctrl.notifications.length > 0">
+      There are no new notifications.
+    </div>
+    <div class="hold-btn" ng-if="$ctrl.notifications.length > 0">
+      <a ui-sref="notifications" class="view-all">View all</a>
+    </div>
+  </div>
+
+  <div class="side-info-box white-bg" block-ui="myeventsLoading">
+    <h3>My Events</h3>
+    <ul class="info-box-list">
+      <li class="dashboard-event-item" ng-repeat="event in $ctrl.myevents | orderBy: 'startDate' | limitTo: 4 track by event.id" ng-click="$ctrl.onEventItemClicked(event.id, event.statusLabel)">
+        <p>{{event.title}}</p>
+        <span class="date">{{event.startDate | formatdate:5}} - {{event.endDate | formatdate:5}}</span>
+      </li>
+    </ul>
+    <div class="coming-soon__notice" ng-if="!$ctrl.myevents.length > 0">
+      Add an event to your calendar today!
+    </div>
+    <div class="hold-btn" ng-if="$ctrl.myevents.length > 0">
+      <a ui-sref="myevents" class="view-all">View all</a>
+    </div>
+  </div>
+
+  <div class="side-info-box white-bg savvy-essentials-dashboard" block-ui="savvyEssentialsLoading">
+    <h3>Savvy Essentials</h3>
+    <div class="savvy-essentials-banner" style="background-image: url('{{$ctrl.savvyEssentials.resource.thumbnail_extra}}')"></div>
+    <!-- <p class="content-block">{{$ctrl.savvyEssentials.description | limitTo: 100}}<span ng-if="$ctrl.savvyEssentials.description.length > 100">...</span></p> -->
+    <p class="content-block dashboard-sidebar-se">Check out this month's new videos, audio, and written content, related archives, and your Action Plan, which will keep you on track as you dive in!</p>
+    <div class="hold-btn">
+      <a ui-sref="savvyessentials" class="view-all">View all</a>
+    </div>
+  </div>
+  <!-- <div class="coming-soon__notice">
+      Please keep training your horse with Parelli Training Program, this feature will be added soon...
+    </div>
+  </div>
+
+
+  <div class="side-info-box white-bg">
+    <h3>Touchstones</h3> -->
+
+  <!-- <figure class="hold-img">
+      <img src="img/img25.jpg" alt="">
+    </figure>
+    <p>Lorem ipsum dolor sitamet consecteturgg adipisicing elitsed doeiusmod tempor....</p>
+    <div class="hold-btn">
+      <a href="#" class="view-all">View all</a>
+    </div> -->
+  <!-- <div class="coming-soon__notice">
+      Please keep training your horse with Parelli Training Program, this feature will be added soon...
+    </div> -->
+  </div>
+</aside>

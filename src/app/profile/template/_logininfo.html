@@ -1,0 +1,81 @@
+
+  <div class="row formRow bgColor">
+    <div class="col-md-12">
+      <!-- <form name="eamilRestForm">
+        <div class="row po-s2-form-container-header">
+          <h2>Change Email</h2>
+        </div>
+        <div class="po-s2-form-container">
+          <div class="row">
+            <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : eamilRestForm.email.$invalid && !eamilRestForm.email.$pristine || $ctrl.emailExists}">
+              <label>E-mail</label>
+              <input type="text" name="email" placeholder="{{$ctrl.user.email}}" class="form-control" ng-model="$ctrl.user.newEmail" ng-blur="$ctrl.onEmailValidateCheck()" ng-model-options="{debounce: 100}" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" required>
+              <p ng-show="eamilRestForm.email.$invalid && !eamilRestForm.email.$pristine" class="help-block">Please enter a valid email.</p>
+              <p ng-show="$ctrl.emailExists && !eamilRestForm.email.$invalid" class="help-block">Email address already taken.</p>
+            </div>
+            <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : eamilRestForm.oldpassword.$invalid && !eamilRestForm.oldpassword.$pristine }">
+              <label>Current Password</label>
+              <input type="password" name="oldpassword" placeholder="" class="form-control" ng-model="$ctrl.user.passwordForEmail" required>
+              <p ng-show="eamilRestForm.oldpassword.$invalid && !eamilRestForm.oldpassword.$pristine && $ctrl.user.oldpassword !== null" class="help-block">Please enter a valid name.</p>
+            </div>
+          </div>
+        </div>
+        <div class="save-btn">
+          <input ng-disabled="eamilRestForm.$invalid || $ctrl.user.confpassword !== $ctrl.user.password || $ctrl.isProcessing" ng-click="$ctrl.onEmailRestClicked()" type="button" id="po-next" class="btn btn-yellow pull-right" value="{{$ctrl.isProcessing ? 'UPDATING...' : 'UPDATE'}}" href="" disabled="disabled">
+        </div>
+      </form> -->
+
+      <form name="passRestForm">
+        <div class="row po-s2-form-container-header">
+          <h2>Change Password</h2>
+        </div>
+        <div class="po-s2-form-container">
+
+          <div class="row">
+            <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : eamilRestForm.email.$invalid && !eamilRestForm.email.$pristine || $ctrl.emailExists}">
+              <label>E-mail</label>
+              <input type="text" name="email" class="form-control" value="{{$ctrl.user.email}}" disabled="">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : passRestForm.oldpassword.$invalid && !passRestForm.oldpassword.$pristine }">
+              <label>Current Password</label>
+              <input type="password" name="oldpassword" placeholder="" class="form-control" ng-model="$ctrl.user.oldpassword" required>
+              <p ng-show="passRestForm.oldpassword.$invalid && !passRestForm.oldpassword.$pristine && $ctrl.user.oldpassword !== null" class="help-block">Please enter a valid password.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : passRestForm.password.$invalid && !passRestForm.password.$pristine }">
+              <label>New Password</label>
+              <input type="password" name="password" placeholder="" class="form-control" ng-model="$ctrl.user.password" ng-minlength="6" ng-model-options="{updateOn: 'blur'}" required>
+              <p ng-show="passRestForm.password.$invalid && !passRestForm.password.$pristine && $ctrl.user.password !== null" class="help-block">Password length should be more than 6 characters long.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : $ctrl.user.confpassword !== $ctrl.user.password && !passRestForm.confpassword.$pristine }">
+              <label>Confirm New Password</label>
+              <input type="password" name="confpassword" class="form-control" ng-model="$ctrl.user.confpassword" ng-model-options="{updateOn: 'blur'}" required >
+              <p ng-show="$ctrl.user.confpassword !== $ctrl.user.password && !passRestForm.confpassword.$pristine && $ctrl.user.confpassword !== null" class="help-block">Your passwords don't appear to match, please try again.</p>
+            </div>
+          </div>
+          <div class="row" ng-if="$ctrl.passwordError.data.error">
+            <div class="col-sm-12 has-errors-big">
+              <p class="help-block">{{$ctrl.passwordError.data.error}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="save-btn">
+          <!--<input ng-disabled="passRestForm.$invalid || $ctrl.user.confpassword !== $ctrl.user.password || $ctrl.isProcessing" ng-click="$ctrl.onPasswordRestClicked()" type="button" id="po-next" class="btn btn-yellow pull-right" value="{{$ctrl.isProcessing ? 'UPDATING...' : 'UPDATE'}}" href="" disabled="disabled">-->
+          <button ng-disabled="passRestForm.$invalid || $ctrl.user.confpassword !== $ctrl.user.password || $ctrl.isProcessing" ng-click="$ctrl.onPasswordRestClicked()" class="btn btn-yellow pull-right btn-submit" type="submit" ng-class="{'processing': $ctrl.isProcessing}">
+            <div class="bs-process-bar uil-ring-css yellow">
+              <div></div>
+            </div>
+            <span class="bs-login-text">
+              UPDATE
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>

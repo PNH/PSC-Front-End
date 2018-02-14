@@ -1,0 +1,87 @@
+<div class="holder">
+  <div class="hat-box clearfix">
+    <div class="hold-title">
+      <h1>{{::dashboardHeaderCtrl.title}}</h1>
+    </div>
+    <div class="user-info">
+      <a ng-hide="dashboardHeaderCtrl.externalUser || !dashboardHeaderCtrl.user" ui-sref="profile()">
+        <figure class="hold-img" style="background-image: url('{{dashboardHeaderCtrl.user.profilePic}}')">
+          <!-- <img ng-src="http:{{dashboardHeaderCtrl.user.profilePic}}" alt="image"> -->
+        </figure>
+      </a>
+      <a ng-show="dashboardHeaderCtrl.externalUser" ui-sref="wall({userid: dashboardHeaderCtrl.user.id})">
+        <figure class="hold-img" style="background-image: url('{{dashboardHeaderCtrl.user.profilePic}}')">
+          <!-- <img ng-src="http:{{dashboardHeaderCtrl.user.profilePic}}" alt="image"> -->
+        </figure>
+      </a>
+      <div class="flex-box">
+        <strong class="title">
+          <a ng-hide="dashboardHeaderCtrl.externalUser" ui-sref="profile()">{{dashboardHeaderCtrl.user.first_name}} {{dashboardHeaderCtrl.user.last_name}}</a>
+          <a ng-show="dashboardHeaderCtrl.externalUser" ui-sref="wall({userid: dashboardHeaderCtrl.user.id})">{{dashboardHeaderCtrl.user.first_name}} {{dashboardHeaderCtrl.user.last_name}}</a>
+        </strong>
+        <!-- User Profile -->
+        <ul class="info-list clickable" ng-hide="dashboardHeaderCtrl.externalUser || !dashboardHeaderCtrl.user">
+          <li ng-show="dashboardHeaderCtrl.user.unread_messages_count === 0 || dashboardHeaderCtrl.user.unread_messages_count > 0" ui-sref="messages({userid: dashboardHeaderCtrl.user.id})">{{dashboardHeaderCtrl.user.unread_messages_count === 1 ? dashboardHeaderCtrl.user.unread_messages_count + ' Message' : dashboardHeaderCtrl.user.unread_messages_count + ' Messages'}}
+          </li>
+          <li ng-show="dashboardHeaderCtrl.user.wall_posts_count === 0 || dashboardHeaderCtrl.user.wall_posts_count > 0" ui-sref="wall({userid: dashboardHeaderCtrl.user.id})">{{dashboardHeaderCtrl.user.wall_posts_count === 1 ? dashboardHeaderCtrl.user.wall_posts_count + ' Post' : dashboardHeaderCtrl.user.wall_posts_count + ' Posts'}}</li>
+          <li ng-show="dashboardHeaderCtrl.user.connections_count === 0 || dashboardHeaderCtrl.user.connections_count > 0" ui-sref="connections">{{dashboardHeaderCtrl.user.connections_count === 1 ? dashboardHeaderCtrl.user.connections_count + ' Connection' : dashboardHeaderCtrl.user.connections_count + ' Connections'}}</li>
+        </ul>
+        <!-- Public Profile -->
+        <ul class="info-list" ng-show="dashboardHeaderCtrl.externalUser">
+          <li ng-show="dashboardHeaderCtrl.user.wall_posts_count === 0 || dashboardHeaderCtrl.user.wall_posts_count > 0">{{dashboardHeaderCtrl.user.wall_posts_count === 1 ? dashboardHeaderCtrl.user.wall_posts_count + ' Post' : dashboardHeaderCtrl.user.wall_posts_count + ' Posts'}}</li>
+          <li ng-show="dashboardHeaderCtrl.user.connections_count === 0 || dashboardHeaderCtrl.user.connections_count > 0">{{dashboardHeaderCtrl.user.connections_count === 1 ? dashboardHeaderCtrl.user.connections_count + ' Connection' : dashboardHeaderCtrl.user.connections_count + ' Connections'}}</li>
+        </ul>
+        <ul class="info-list__useractions" ng-if="dashboardHeaderCtrl.externalUser">
+          <li ng-if="!dashboardHeaderCtrl.user.connection_status.connected && dashboardHeaderCtrl.user.connection_status.status === 0">
+            <button class="btn btn-yellow btn-thin btn-busy" ng-disabled="dashboardHeaderCtrl.isConnectProcessing" ng-click="dashboardHeaderCtrl.onConnectClicked(dashboardHeaderCtrl.user.id)">Connect +</button>
+          </li>
+          <li ng-if="dashboardHeaderCtrl.user.connection_status.connected && dashboardHeaderCtrl.user.connection_status.status === 2">
+            <button class="btn btn-black btn-thin btn-busy" ng-disabled="dashboardHeaderCtrl.isDisconnectProcessing" ng-click="dashboardHeaderCtrl.onDisconnectClicked(dashboardHeaderCtrl.user.connection_status.id)">Disconnect</button>
+          </li>
+          <li ng-if="!dashboardHeaderCtrl.user.connection_status.connected && dashboardHeaderCtrl.user.connection_status.status === 1">
+            <button class="btn btn-black btn-thin btn-notclickable" ng-disabled="true">Pending</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="hourse-info">
+      <div ng-if="!dashboardHeaderCtrl.externalUser.horses.length > 0 && dashboardHeaderCtrl.horse">
+        <a ui-sref="horse({horseid: dashboardHeaderCtrl.horse.id})">
+          <figure class="hold-img" style="background-image: url('{{dashboardHeaderCtrl.horse.profilePic}}')">
+            <!-- <img src="http:{{horse.profilePic}}" alt="image"> -->
+          </figure>
+        </a>
+        <div class="flex-box">
+          <strong class="title"><a ui-sref="horse({horseid: dashboardHeaderCtrl.horse.id})">{{dashboardHeaderCtrl.horse.name}}</a></strong>
+          <ul class="info-list clickable">
+            <li ui-sref="horse({horseid: dashboardHeaderCtrl.horse.id, type: '1'})">Progress </li>
+            <li ui-sref="horse({horseid: dashboardHeaderCtrl.horse.id, type: '2'})">Health</li>
+          </ul>
+        </div>
+      </div>
+      <div ng-if="dashboardHeaderCtrl.externalUser.horses.length > 0">
+        <a ui-sref="horseprofile({userid: dashboardHeaderCtrl.externalUser.id, horseid: dashboardHeaderCtrl.selectedHorse.id})">
+          <figure class="hold-img" style="background-image: url('{{dashboardHeaderCtrl.selectedHorse.profilePic}}')">
+          </figure>
+        </a>
+        <div class="flex-box">
+          <strong class="title">
+            <a ui-sref="horseprofile({userid: dashboardHeaderCtrl.externalUser.id, horseid: dashboardHeaderCtrl.selectedHorse.id})">{{dashboardHeaderCtrl.selectedHorse.name}}</a>
+            <div class="dropdown horse-dropdown">
+              <button class="dropdown-toggle" type="button" id="horseDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <span></span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="horseDropdown">
+                <li ng-repeat="horse in dashboardHeaderCtrl.externalUser.horses"><a ng-click="dashboardHeaderCtrl.selectHorse(dashboardHeaderCtrl.externalUser, horse)">{{horse.name}}</a></li>
+              </ul>
+            </div>
+          </strong>
+          <ul class="info-list clickable">
+            <li ui-sref="horseprofile({userid: dashboardHeaderCtrl.externalUser.id, horseid: dashboardHeaderCtrl.selectedHorse.id, type: '1'})">Progress</li>
+            <li ui-sref="horseprofile({userid: dashboardHeaderCtrl.externalUser.id, horseid: dashboardHeaderCtrl.selectedHorse.id, type: '2'})">Health</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

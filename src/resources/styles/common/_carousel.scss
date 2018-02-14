@@ -1,0 +1,43 @@
+.carousel-control.left,
+.carousel-control.right {
+  background: none;
+  width: 19px;
+  height: 73px;
+  background: url(../resources/images/sprite.png) no-repeat -191px -38px;
+  top: 50%;
+  transform: translateY(-50%);
+  right: -50px;
+}
+
+.carousel-control.left {
+  background: url(../resources/images/sprite.png) no-repeat -217px -38px;
+  left: -4%;
+}
+
+.resource-carousel {
+  margin: 0 auto;
+  width: 75%;
+  @include bp(xxs) {
+    width: 84%;
+  }
+  .carousel-control.left,
+  .carousel-control.right {
+    // background: none;
+    width: 19px;
+    height: 73px;
+    // background: url(../resources/images/sprite.png) no-repeat -191px -38px;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -10%;
+    @include bp(xxs) {
+      right: -12%;
+    }
+  }
+  .carousel-control.left {
+    // background: url(../resources/images/sprite.png) no-repeat -217px -38px;
+    left: -10%;
+    @include bp(xxs) {
+      left: -12%;
+    }
+  }
+}

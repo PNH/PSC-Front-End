@@ -1,0 +1,52 @@
+<div id="step1" class="tab-pane">
+    <!-- po-heading block -->
+    <div class="row po-heading bottom-buffer-60">
+        <div class="col-md-12">
+            <h1>Tell us which best describes you.</h1>
+            <h4>(Choose an option below to get started.)</h4>
+            <div class="tiny-border"></div>
+        </div>
+    </div>
+    <!-- /po-heading -->
+
+    <div class="row bottom-buffer-40" block-ui="goalsLoading">
+      <div class="col-md-12" block-ui="myBlockUI">
+          <div class="row po-s1-selection">
+            <span ng-if="$ctrl.goals">
+              <div ng-repeat="(index, goal) in $ctrl.goals">
+                <div class="col-sm-4 col-md-3 item-container">
+                    <div class="item" ng-class="{'active': formData.goal == goal.id}" ng-click="$ctrl.onGoalClicked(index)">
+                        <div class="bg-image" style="background-image:url('{{goal.image}}')"></div>
+                        <div class="heading">
+                            <span>
+                              {{goal.title}}
+                              <img ng-src="./resources/images/ob-goal-tick.png" alt="Selected goal">
+                            </span>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </span>
+          </div>
+      </div>
+      <div class="loading-indecator" ng-if="$ctrl.goalBussy">
+        <div class='uil-ring-css yellow'><div></div></div>
+      </div>
+    </div>
+
+    <span ng-if="$ctrl.categories.data">
+      <div ng-repeat="category in $ctrl.categories.data">
+        {{category.title}}
+      </div>
+    </span>
+
+    <!-- po-footer -->
+    <div class="row po-footer">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <div class="po-navigations">
+                <input ui-sref="updateOnboard.comissues" ng-disabled="!formData.goal" ng-click="$ctrl.onNextClicked()" type="button" id="po-next" class="btn btn-yellow pull-right" value="NEXT">
+            </div>
+        </div>
+    </div><!-- /po-footer -->
+</div>

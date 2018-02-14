@@ -1,0 +1,90 @@
+<div id="main">
+  <dashboard-header title="Topic"></dashboard-header>
+  <div id="content" class="subforums-main dashboard">
+    <div class="forum-content topic-detail" block-ui="topicDetailLoading">
+      <ul class="breadcrumbs">
+        <li>
+          <a ui-sref="forums">Forum</a>
+        </li>
+        <li>
+          <a ui-sref="subforums({subforumid: $ctrl.topic.subForum.id})">{{$ctrl.topic.subForum.title}}</a>
+        </li>
+        <li class="active">
+          {{$ctrl.topic.title}}
+        </li>
+      </ul>
+      <div class="hold-title line-l">
+        <h1>{{$ctrl.topic.title}}</h1>
+        <!--<div class="btn-box">
+          <a href="#" class="btn btn-yellow">SUBSCRIBE</a>
+          <a href="#" class="back-btn"></a>
+        </div>-->
+        <div class="btn-box">
+          <button class="btn btn-grey btn-sm" ng-if="$ctrl.topic.isowner || $ctrl.rootAccess" ng-click="$ctrl.onDeleteTopicClicked($ctrl.subForumId, $ctrl.topic.id)">Delete</button>
+          <!-- <button class="btn btn-grey btn-sm" data-toggle="modal" data-target="#editTopic" ng-if="$ctrl.topic.isowner || $ctrl.rootAccess">Edit</button> -->
+          <button class="btn btn-grey btn-sm" ng-if="$ctrl.topic.isowner || $ctrl.rootAccess" ng-click="$ctrl.toggleTopicEditBox = !$ctrl.toggleTopicEditBox">Edit</button>
+        </div>
+      </div>
+      <div class="block-holder forum-item clearfix">
+        <div class="topic-box">
+          <figure class="hold-img" style="background-image: url('{{$ctrl.topic.user.profileImage}}');" go-to-wall wall-id="$ctrl.topic.user.id" ng-class="{'clickable': $ctrl.topic.user.id > 0}"></figure>
+          <div class="hold-title line-l">
+            <strong go-to-wall wall-id="$ctrl.topic.user.id" ng-class="{'clickable': $ctrl.topic.user.id > 0}">{{$ctrl.topic.user.firstName + ' ' + $ctrl.topic.user.lastName}}</strong>
+            <span class="date">{{$ctrl.topic.created_at | formatdate: 1}}</span>
+          </div>
+          <span class="no">#{{$ctrl.topic.id}}</span>
+          <div ng-hide="$ctrl.toggleTopicEditBox" ng-bind-html="$ctrl.topic.description | trusthtml" class="content-block answer-box__content"></div>
+
+          <div ng-if="$ctrl.toggleTopicEditBox">
+            <div class="forum-topic-edit-box">
+              <div class="login-error" ng-if="error">
+                <div class="row">
+                  <div class="col-xs-12 login-error__container">
+                    <div class="login-error__message">
+                      {{error.message}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <form name="editTopic">
+                <div class="row">
+                  <div class="col-xs-12 form-field-group" ng-class="{ 'has-error' : editTopic.groupName.$invalid && !editTopic.groupName.$pristine }">
+                    <input type="text" name="title" ng-model="$ctrl.editTopic.title" placeholder="Topic name" class="form-control" ng-disabled="$ctrl.topicEditIsProcessing" required>
+                  </div>
+                  <div class="col-xs-12 form-field-group forum-topic-edit-summernote" ng-class="{ 'has-error' : editTopic.description.$invalid && !editTopic.description.$pristine }">
+                    <text-editor post-model="$ctrl.editTopic.description" config="$ctrl.summernoteOptions" is-busy="$ctrl.isUploading" post-type="3"></text-editor>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-12 form-field-group">
+                    <button ng-disabled="!$ctrl.editTopic.description || editTopic.$invalid || $ctrl.topicEditIsProcessing || $ctrl.isUploading" type="submit" class="btn btn-yellow btn-submit pull-right" ng-click="$ctrl.onEditTopicClicked($ctrl.subForumId, $ctrl.topicId, $ctrl.editTopic); $ctrl.toggleTopicEditBox = !$ctrl.toggleTopicEditBox"
+                    ng-class="{'processing': $ctrl.topicEditIsProcessing}">
+                    <div class="bs-process-bar uil-ring-css yellow">
+                      <div></div>
+                    </div>
+                    <span class="bs-login-text">SAVE</span>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+          <div class="forums-posts" block-ui="postsLoading">
+            <forum-post ng-repeat="post in $ctrl.posts | orderBy: 'created_at' track by post.id" post="post" comment="$ctrl.createPostComment" delete-comment="$ctrl.deleteComment" get-comments="$ctrl.getComments"
+              edit-post="$ctrl.editPost" edit-comment="$ctrl.editComment" delete-post="$ctrl.deletePost" root-access="$ctrl.rootAccess"></forum-post>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-yellow btn-submit pull-right subforums-main__loadmore" ng-disabled="$ctrl.postsLoadIsProcessing || $ctrl.postsReachedEnd"
+          ng-click="$ctrl.onGetMorePostsClicked()" ng-class="{'processing': $ctrl.postsLoadIsProcessing}">
+          <div class="bs-process-bar uil-ring-css yellow">
+            <div></div>
+          </div>
+          <span class="bs-login-text">VIEW MORE</span>
+        </button>
+      </div>
+      <div class="" ng-include="'app/forums/template/_reply-form.html'"></div>
+    </div>
+  </div>
+</div>
+<div ng-include="'app/forums/template/_popup.html'"></div>

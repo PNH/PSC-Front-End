@@ -1,0 +1,27 @@
+.input-dropdown {
+  /* div wrapper for the whole directive, can be used to set the width for the input and dropdown list */
+}
+
+.input-dropdown input[type='text'] {
+  /* Style the input field */
+}
+
+.input-dropdown ul {
+  /* Style the dropdown list */
+  max-height: 250px;
+  overflow-y: auto;
+  margin-top: 5px;
+  // border: 1px solid $grey4;
+  border: none;
+  border-radius: 5px;
+}
+
+.input-dropdown ul > li {
+  /* Style the dropdown list item */
+}
+
+.input-dropdown ul > li.active {
+  /* Style the dropdown list item when active.
+    The active class is added to an item on mouse over or when it's selected with the arrow keys. */
+    background-color: $yellow;
+}

@@ -1,0 +1,31 @@
+.forums-posts {
+  .answer-box {
+    border-bottom: none;
+    padding: 20px 20px 20px 115px !important;
+    textarea {
+      background-color: $grey1;
+    }
+    @include bp(xs) {
+      padding: 20px !important;
+    }
+  }
+}
+
+.edit-topic-popup {
+  text-angular .btn-group .btn {
+    width: auto !important;
+  }
+  .ta-editor {
+    background-color: $white;
+    height: 300px !important;
+  }
+}
+
+.forum-topic-edit-box {
+  padding: 20px;
+  background-color: $grey43;
+
+  .forum-topic-edit-summernote {
+    margin-top: 20px;
+  }
+}

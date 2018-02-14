@@ -1,0 +1,71 @@
+<form name="regForm" novalidate>
+  <div id="step2" class="tab-pane">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="po-s2-form-heading">Billing Information</h2>
+        <div class="po-s2-form-container">
+          <div class="row">
+            <div class="form-group col-sm-12 po-s2-form-field-group" ng-class="{ 'has-error' : regForm.address1.$invalid && !regForm.address1.$pristine }">
+              <input type="text" name="address1" placeholder="Address line 1*" class="form-control" ng-model="formData.billing.address1" ng-minlength="3" ng-maxlength="100" ng-model-options="{updateOn: 'blur'}" required autocomplete="false">
+              <p ng-show="regForm.address1.$invalid && !regForm.address1.$pristine" class="help-block">Please enter a valid address.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-12 po-s2-form-field-group" ng-class="{ 'has-error' : regForm.address2.$invalid && !regForm.address2.$pristine }">
+              <input type="text" name="address2" placeholder="Address line 2" class="form-control" ng-model="formData.billing.address2" ng-maxlength="100" ng-model-options="{updateOn: 'blur'}" autocomplete="false">
+              <p ng-show="regForm.address2.$invalid && !regForm.address2.$pristine" class="help-block">Please enter a valid address.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : regForm.country.$invalid && !regForm.country.$pristine || formData.billing.country === '-1'}">
+              <select ng-if="$ctrl.countries" name="country" ng-model="formData.billing.country" ng-change="$ctrl.onCountrySelected(formData.billing.country)" autocomplete="false">
+                <option ng-repeat="(country_index, country) in $ctrl.countries" value="{{country.code}}">{{country.name}}</option>
+              </select>
+              <p ng-show="regForm.country.$invalid || formData.billing.country === '-1' && !regForm.country.$pristine" class="help-block">Please select country.</p>
+            </div>
+            <div ng-if="!$ctrl.states" class="form-group col-sm-6 col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : regForm.province.$invalid && !regForm.province.$pristine }">
+              <input type="text" name="province" placeholder="State/Province*" class="form-control" ng-model="formData.billing.province" ng-maxlength="100" ng-pattern="/^[a-zA-Z\s_.-]*$/" ng-model-options="{updateOn: 'blur'}" required autocomplete="false">
+              <p ng-show="regForm.province.$invalid && !regForm.province.$pristine" class="help-block">Please enter a valid State/Province.</p>
+            </div>
+            <div ng-if="$ctrl.states" class="form-group col-sm-6 col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : regForm.province.$invalid && !regForm.province.$pristine }">
+              <select ng-if="$ctrl.states" name="province" ng-model="formData.billing.province" autocomplete="false">
+                <option ng-repeat="(state_index, state) in $ctrl.states" value="{{state.code}}">{{state.name}}</option>
+              </select>
+              <p ng-show="regForm.province.$invalid && !regForm.province.$pristine" class="help-block">Please enter a valid State/Province.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : regForm.city.$invalid && !regForm.city.$pristine }">
+              <input type="text" name="city" placeholder="City*" class="form-control" ng-model="formData.billing.city" ng-maxlength="100" ng-pattern="/^[a-zA-Z\s_.-]*$/" ng-model-options="{updateOn: 'blur'}" required autocomplete="false">
+              <p ng-show="regForm.city.$invalid && !regForm.city.$pristine" class="help-block">Please enter a valid city.</p>
+            </div>
+
+            <div class="form-group col-sm-6 col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : regForm.zip.$invalid && !regForm.zip.$pristine }">
+              <input type="text" name="zip" placeholder="Zip/Post Code*" class="form-control" ng-minlength="3" ng-model="formData.billing.zip" ng-model-options="{updateOn: 'blur'}" required autocomplete="false">
+              <p ng-show="regForm.zip.$invalid && !regForm.zip.$pristine" class="help-block">Please enter a valid Zip/Post code.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6 po-s2-form-field-group">
+              <input type="text" name="referral" placeholder="Referral Code*" class="form-control" ng-model="formData.billing.referral" required autocomplete="false">
+              <small id="emailHelp" class="form-text text-muted text-hint">Please enter "NONE" if you don't have a referral code</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row po-footer">
+      <div class="col-md-6">
+        <div class="po-navigations">
+          <input ui-sref="registration.userinfo({type: $ctrl.memtype})" type="button" id="po-back" class="btn btn-black pull-left" value="BACK">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="po-navigations clearfix">
+          <input ui-sref="registration.creditcard" ng-disabled="regForm.$invalid || formData.billing.country < 1" ng-click="$ctrl.onNextClicked()" type="button" id="po-next" class="btn btn-yellow pull-right" value="NEXT">
+        </div>
+      </div>
+    </div>
+    <!-- /po-footer -->
+  </div>
+</form>

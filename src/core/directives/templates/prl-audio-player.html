@@ -1,0 +1,49 @@
+<div class="row prl__video-player bottom-buffer-30" ng-class="{'playlist': playerCtrl.template === 'playlist' || playerCtrl.video}">
+  <div ng-class="(playerCtrl.video || playerCtrl.template === 'playlist'? 'col-md-12' : 'col-md-6')">
+    <div class="prl__video-player__player__container">
+      <jwplayer class="prl__video-player__player" ng-src="{{playerCtrl.path}}" player-options="playerCtrl.playerOptions" player-id="prlAudioPlayer">
+      </jwplayer>
+      <div class="prl__video-player__bottom-bar">
+        <div class="row">
+          <div class="col-xs-10 prl__video-player__bottom-bar__title">
+            {{playerCtrl.playerOptions.title | humanize}}
+          </div>
+          <div class="col-xs-2 prl__video-player__bottom-bar__time">
+            <span class="pull-right">{{playerCtrl.playerOptions.duration}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6" ng-class="(playerCtrl.template === 'playlist' ? 'col-md-12' : 'col-md-6')" ng-if="!playerCtrl.audio">
+    <perfect-scrollbar class="prl__video-player__playlist__container" wheel-propagation="false" wheel-speed="6" min-scrollbar-length="5" suppress-scroll-x="true">
+      <ul ng-if="playerCtrl.audios">
+        <li ng-repeat="(index, audio) in playerCtrl.audios" ng-class="{ 'play-item-selected' : index === playerCtrl.selectedaudioIndex }">
+          <div class="row">
+            <div class="col-xs-4 col-sm-3">
+              <div class="prl__video-player__playlist__thumb" style="background-image:url('{{audio.thumbnail}}')">
+                <div class="prl__video-player__play-btn" ng-click="playerCtrl.playAudio(index)">
+                  <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                </div>
+                <span class="prl__video-player__playlist__addtoplaylist" ng-show="playerCtrl.enableplaylist" ng-click="openUserPlaylists($event)">
+                  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </span>
+                <perfect-scrollbar class="prl__video-player__playlist__userplaylist" wheel-propagation="true" wheel-speed="6" min-scrollbar-length="5" suppress-scroll-x="true">
+                  <ul>
+                    <li ng-repeat="userplaylist in playerCtrl.userPlaylists">Playlist</li>
+                  </ul>
+                </perfect-scrollbar>
+              </div>
+            </div>
+            <div class="col-xs-5 col-sm-6 prl__video-player__playlist__title" ng-click="playerCtrl.playAudio(index)">
+              {{audio.name | humanize}}
+            </div>
+            <div class="col-xs-2" ng-click="playerCtrl.playAudio(index)">
+              <span class="pull-right">{{audio.duration}}</span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </perfect-scrollbar>
+  </div>
+</div>

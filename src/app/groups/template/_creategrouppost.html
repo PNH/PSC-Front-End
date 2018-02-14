@@ -1,0 +1,26 @@
+<div class="hold-title line-l" ng-show="$ctrl.group">
+  <h1>{{$ctrl.group.title}}</h1>
+</div>
+<div class="reply-box simple-reply group-post clearfix">
+  <form name="groupDetailPost">
+    <text-editor post-model="$ctrl.postModel" config="$ctrl.summernoteOptions" is-busy="$ctrl.isUploading" post-type="3"></text-editor>
+    <!--<button type="button" class="btn btn-reply-options" ng-click="$ctrl.attachClicked()"><span class="glyphicon glyphicon-paperclip"></span>Add Media</button>
+    <multi-upload files="$ctrl.attachedFiles" controls="$ctrl.uploadCtrl"></multi-upload>-->
+    <button ng-disabled="$ctrl.createProcessing || !($ctrl.postModel || $ctrl.attachedFiles.length > 0) || $ctrl.isUploading" type="submit" class="btn btn-yellow btn-submit pull-right" ng-click="$ctrl.createGroupPost($ctrl.postModel)"ng-class="{'processing': $ctrl.createProcessing}">
+      <div class="bs-process-bar uil-ring-css yellow">
+        <div></div>
+      </div>
+      <span class="bs-login-text">POST</span>
+    </button>
+    <div class="multi-upload__container">
+      <div class="multi-upload__selected">
+        <ul>
+          <li ng-repeat="item in $ctrl.attachedFiles track by $index">
+            {{item.name}}
+            <span class="glyphicon glyphicon-remove multi-upload__remove" aria-hidden="true" ng-click="$ctrl.removeAttachedFileClicked($index)"></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </form>
+</div>

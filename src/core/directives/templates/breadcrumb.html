@@ -1,0 +1,13 @@
+<div>
+  <ul class="breadcrumbs">
+    <li ng-if="home">
+      <a ui-sref="home">Home</a>
+    </li>
+    <li ng-repeat="item in breadcrumbCtrl.items">
+      <a ui-sref="{{item.state}}">{{item.name}}</a>
+    </li>
+    <li>
+      <a class="active">{{breadcrumbCtrl.current | capitalize}}</a>
+    </li>
+  </ul>
+</div>

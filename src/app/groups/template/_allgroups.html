@@ -1,0 +1,26 @@
+<div class="tab-pane__container allgroups" block-ui="allGroupsLoading">
+  <div class="allgroups-header">
+    Sort By:
+    <select ng-options="item.label for item in $ctrl.allGroupsSortOptions track by item.id" ng-model="$ctrl.allGroupsSortModel"
+      ng-change="$ctrl.sortAllGroups($ctrl.allGroupsSortModel)"></select>
+    <div class="arrow-down"></div>
+  </div>
+  <div block-ui="sortedAllGroupsLoading" class="allgroups__container">
+    <div class="groups clearfix" ng-if="$ctrl.allGroups.length > 0">
+      <group-item ng-repeat="group in $ctrl.allGroups track by group.id" details="group" join="$ctrl.joinGroup" leave="$ctrl.leaveGroup"
+        delete="$ctrl.deleteGroup" edit="$ctrl.updateGroup"></group-item>
+    </div>
+    <div class="pl-error__container" ng-if="!$ctrl.allGroups.length > 0">
+      <div class="pl-error">
+        <span class="pl-error__message">Looks like there are no groups. <a data-toggle="modal" data-target="#createGroup">Create one now!</a></span>
+      </div>
+    </div>
+  </div>
+</div>
+<button type="submit" class="btn btn-yellow btn-submit pull-right" ng-disabled="$ctrl.allIsProcessing || $ctrl._allReachedEnd"
+  ng-click="$ctrl.onLoadAllGroupsClicked()" ng-class="{'processing': $ctrl.allIsProcessing}">
+  <div class="bs-process-bar uil-ring-css yellow">
+    <div></div>
+  </div>
+  <span class="bs-login-text">VIEW MORE</span>
+</button>

@@ -1,0 +1,62 @@
+.search-popup {
+	.modal-dialog {
+		left: 50%;
+		position: absolute;
+		transform: translate(-50%, -50%) !important;
+		top: 50%;
+		margin: 0 !important;
+		max-width: 100%;
+		max-height: 100%;
+		width: 100% !important;
+		max-width: 700px;
+	}
+	.modal-content {
+		border: none;
+		border-radius: 0;
+	}
+	&__badge-container {
+		align-items: center;
+		display: flex;
+		float: left;
+		justify-content: center;
+		min-width: 25px;
+		padding: 50px;
+		width: 25%;
+		@include bp(xs) {
+			float: none;
+			padding: 50px 10px 10px 10px;
+			width: 100%;
+		}
+	}
+  button.close {
+		position: absolute;
+		right: 10px;
+		// top: 10px;
+
+		span {
+			font-size: 2.125em;
+			font-weight: 300;
+			display: block;
+			line-height: 25px;
+		}
+	}
+}
+
+.document-modal {
+	.modal-dialog {
+		height: 80%;
+		@include bp(xxs) {
+			height: 95%;
+		}
+	}
+	.modal-content {
+		height: 100%;
+	}
+	.modal-body {
+		height: calc(100% - 60px);
+	}
+	iframe {
+		height: 100%;
+		width: 100%;
+	}
+}

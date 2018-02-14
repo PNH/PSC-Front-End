@@ -1,0 +1,20 @@
+<!-- Document Popup -->
+<div id="documentModal" class="modal fade login-popup search-popup pdfviewer-popup document-modal" tabindex="100" role="dialog" aria-hidden="true" on-close="$ctrl.stopPlayer()">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">{{$ctrl.selectedDocument.name}}</h4>
+      </div>
+      <div class="modal-body" ng-if="$ctrl.selectedDocument">
+        <!-- <iframe ng-src="{{$ctrl.selectedDocument.fullPath}}"></iframe> -->
+        <prl-pdf src="$ctrl.selectedDocument.fullPath"></prl-pdf>
+        <!-- <div class="uil-flickr-css" style="transform:scale(0.2);">
+          <div></div>
+          <div></div>
+        </div> -->
+        <!-- <pdf-viewer url="{{$ctrl.selectedDocument.fullPath}}"></pdf-viewer> -->
+      </div>
+    </div>
+  </div>
+</div>

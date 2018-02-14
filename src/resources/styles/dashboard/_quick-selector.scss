@@ -1,0 +1,116 @@
+.quick-selector {
+	height: 0;
+	position: absolute;
+	right: 0;
+	top: 200px;
+	z-index: 5;
+	@media (max-width: 1380px) {
+		position: fixed;
+		top: 200px;
+	}
+	.ps-scrollbar-y-rail,
+	.ps-scrollbar-y {
+		width: 10px !important;
+	}
+}
+.qs-toggle {
+	position: relative;
+	cursor: pointer;
+	transform: rotate(90deg);
+	transform-origin: 100% 0;
+	background-color: $qs-bg;
+	height: 40px;
+	padding: 10px 10px 10px 64px;
+	width: 465px;
+	right: -40px;
+	top: 400px;
+	@media (max-width: 1380px) {
+		right: 0;
+	}
+	&__icon {
+		border-right: 1px solid $qs-sep;
+		width: 45px;
+		text-align: center;
+		padding-right: 6px;
+		position: absolute;
+		left: 5px;
+		span {
+			color: $qs-sep;
+			font-size: 1.125em;
+			vertical-align: bottom;
+		}
+	}
+	&__title {
+		color: $qs-text;
+		white-space: nowrap;
+		max-width: 400px;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		line-height: 1.250em;
+		font-weight: 600;
+	}
+}
+.qs-list {
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	right: 0;
+	width: 350px;
+	display: none;
+	// @media (max-width: 1380px) {
+	// 	right: 40px;
+	// }
+	&__container {
+		height: 0;
+		overflow: hidden;
+		position: relative;
+		top: -105px;
+		transition: height 300ms ease-in-out;
+		right: 0;
+		@media (max-width: 1380px) {
+			right: 40px;
+		}
+		&.active {
+			height: 350px;
+		}
+		.ps-scrollbar-* {
+			display: none;
+		}
+		.ps-scrollbar-y-rail,
+		.ps-scrollbar-y {
+			border-radius: 0 !important;
+		}
+	}
+	li {
+		list-style: none;
+		border-bottom: 1px solid $qs-sep;
+		&:last-child {
+			border: none;
+		}
+		a {
+			position: relative;
+			display: block;
+			background-color: transparentize($qs-bg, 0.07);
+			width: 100%;
+			color: $qs-text;
+			padding: 20px 60px 20px 30px;
+			text-overflow: ellipsis;
+	    white-space: nowrap;
+	    display: block;
+	    overflow: hidden;
+	    line-height: 1em;
+			&:hover {
+				background-color: $qs-bg;
+			}
+			span.glyphicon {
+				position: absolute;
+				right: 20px;
+				top: 50%;
+				transform: translateY(-50%);
+			}
+			&.self-assessment {
+				background-color: $black !important;
+			}
+		}
+	}
+}

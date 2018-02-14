@@ -1,0 +1,146 @@
+<div id="main" class="prl-blog">
+  <dashboard-header title="Blog"></dashboard-header>
+  <div id="content" class="clearfix blog-create-content">
+    <div class="forum-content library">
+      <div class="holder">
+        <div class="hold-title line-l">
+          <h2>Create Blog Post</h2>
+        </div>
+      </div>
+      <div class="browse-box">
+
+      <div class="blog-create-block">
+
+        <div class="reply-box simple-reply group-post clearfix">
+          <form name="$ctrl.blogCreateForm" novalidate>
+            <div class="row">
+              <div class="col-xs-12 form-field-group po-s2-form-field-group" ng-class="{ 'has-error' : $ctrl.blogCreateForm.title.$invalid && $ctrl.submitBtnClicked }">
+                <label>Title </label>
+                <input type="text" name="title" placeholder="" class="form-control" ng-model="$ctrl.blogFormData.title" ng-model-options="{updateOn: 'blur'}" required>
+                <p ng-show="$ctrl.blogCreateForm.title.$invalid && $ctrl.submitBtnClicked" class="help-block">Please enter a valid title</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12 form-field-group po-s2-form-field-group" ng-class="{ 'has-error' : $ctrl.blogCreateForm.tagline.$invalid && $ctrl.submitBtnClicked }">
+                <label>Summary </label>
+                <input type="text" name="tagline" placeholder="" class="form-control" ng-model="$ctrl.blogFormData.tagline" ng-maxlength="60" ng-model-options="{updateOn: 'blur'}" required>
+                <p ng-show="$ctrl.blogCreateForm.tagline.$invalid && $ctrl.submitBtnClicked" class="help-block">Please enter a valid tagline (Maximum character limit 60)</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12 form-field-group po-s2-form-field-group" ng-class="{ 'has-error' : $ctrl.blogCreateForm.category.$invalid && $ctrl.submitBtnClicked }">
+                <label>Category </label>
+                <ul class="equestrian-interest__container clearfix">
+                  <li ng-repeat="category in $ctrl.blogCategories">
+                    <input type="checkbox" id="blogcategory-{{category.id}}" ng-model="$ctrl.selectedCategories[category.id]" ng-change="$ctrl.onBlogCategoryChanged($ctrl.selectedCategories)">
+                    <label for="blogcategory-{{category.id}}">{{category.name}}</label>
+                  </li>
+                </ul>
+                <!-- <select name="visitType" ng-model="$ctrl.blogFormData.category" ng-change="$ctrl.onBlogCategorySelected($ctrl.blogFormData.category)" required> -->
+                  <!-- <option ng-repeat="" value=""></option> -->
+                <!-- </select> -->
+                <p ng-show="$ctrl.blogCreateForm.category.$invalid && $ctrl.submitBtnClicked" class="help-block">Please select a category</p>
+              </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 form-field-group po-s2-form-field-group" ng-class="{ 'has-error' : $ctrl.blogCreateForm.tag.$invalid && $ctrl.submitBtnClicked }">
+                  <label>Tags </label>
+                  <input-dropdown allow-custom-input="true" input-name="tag" input-placeholder="Search Tag" ng-model-options="{ debounce: 250 }" filter-list-method="$ctrl.onSearchTag(userInput)" selected-item="$ctrl.blogFormData.tagItem" item-selected-method="$ctrl.onAddTagItem(item)" input-required="false" keypress-event="$ctrl.tagSubmitEnterEvent()"></input-dropdown>
+                  <p ng-show="$ctrl.blogCreateForm.tag.$invalid && $ctrl.submitBtnClicked" class="help-block">Please enter a tag</p>
+                  <div class="multi-upload__container instructors-list__container" ng-show="$ctrl.blogFormData.selectedTags.length > 0">
+                    <div class="multi-upload__selected">
+                      <ul>
+                        <li ng-repeat="tag in $ctrl.blogFormData.selectedTags track by $index">
+                          <span>{{tag.readableName}}</span>
+                          <span class="glyphicon glyphicon-remove multi-upload__remove" aria-hidden="true" ng-click="$ctrl.onRemoveTagItem($index)"></span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+            </div>
+<!--
+            <div class="row">
+              <div class="col-xs-12 form-field-group po-s2-form-field-group" ng-class="{ 'has-error' : $ctrl.blogCreateForm.$invalid && $ctrl.submitBtnClicked }">
+                <label>Image </label>
+                <input type="file" name="image" placeholder="" class="form-control" ng-model="$ctrl.blogFormData.image" ng-model-options="{updateOn: 'blur'}">
+                <p ng-show="$ctrl.blogCreateForm.$invalid && $ctrl.submitBtnClicked" class="help-block">Please enter a valid image</p>
+              </div>
+            </div> -->
+
+            <div class="row">
+              <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : profForm.profImage.$invalid && !profForm.profImage.$pristine }">
+              <profile-image file="$ctrl.blogFormData.image" title="Blog Image" dimensions="Size 1200 x 320 pixels" controls="$ctrl.profileImageCtrl"></profile-image>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12 form-field-group po-s2-form-field-group" ng-class="{ 'has-error' : $ctrl.postModel.$invalid && $ctrl.submitBtnClicked }">
+                <label>Content </label>
+                <text-editor post-model="$ctrl.postModel" config="$ctrl.summernoteOptions" is-busy="$ctrl.isUploading" post-type="0"></text-editor>
+                <!-- <summernote class="wallpost-create-form" ng-model="$ctrl.postModel" config="$ctrl.summernoteOptions"></summernote> -->
+                <p ng-show="$ctrl.postModel.$invalid && $ctrl.submitBtnClicked" class="help-block">Please enter a valid content</p>
+              </div>
+            </div>
+
+            <div class="post-option-btns post-option-btns-blog">
+              <ol class="nya-bs-select privacy-selector add-media-privacy no-margin-left" ng-model="$ctrl.selectedBlogPostPrivacy">
+                <li class="nya-bs-option disabled" data-value="9999">
+                  <a>
+                    <span><span class="glyphicon"></span>Who can see this post?</span>
+                  </a>
+                </li>
+                <li class="nya-bs-option" data-value="1">
+                  <a>
+                    <span><span class="glyphicon glyphicon-eye-close"></span>Members Only</span>
+                  </a>
+                </li>
+                <li class="nya-bs-option" data-value="0">
+                  <a>
+                    <span><span class="glyphicon glyphicon-globe"></span>Public</span>
+                  </a>
+                </li>
+                <!-- <li class="nya-bs-option" data-value="2">
+                  <a>
+                    <span><span class="glyphicon glyphicon-user"></span>Connections Only</span>
+                  </a>
+                </li> -->
+              </ol>
+            </div>
+            <div class="blog-create-btn-block">
+              <button ng-disabled="$ctrl.isNewBlogProcessing || !($ctrl.postModel)" type="submit" class="btn btn-yellow btn-submit pull-right group-post__btn"
+                ng-click="$ctrl.onNewBlogClicked()" ng-class="{'processing': $ctrl.isNewBlogProcessing}">
+                <div class="bs-process-bar uil-ring-css yellow">
+                  <div></div>
+                </div>
+                <span class="bs-login-text">POST</span>
+              </button>
+              <button ui-sref="blog({blogslug: null})" ng-disabled="$ctrl.isNewBlogProcessing" type="submit" class="btn btn-grey pull-right group-post__btn">
+                <span class="bs-login-text">CANCEL</span>
+              </button>
+            </div>
+            <div class="multi-upload__container">
+              <div class="multi-upload__selected">
+                <ul>
+                  <li ng-repeat="item in $ctrl.attachedFiles track by $index">
+                    {{item.name}}
+                    <span class="glyphicon glyphicon-remove multi-upload__remove" aria-hidden="true" ng-click="$ctrl.removeAttachedFileClicked($index)"></span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </form>
+        </div>
+
+
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,102 @@
+<div id="content" class="bg__white">
+  <div class="onboard-languages">
+    <ul>
+      <li>
+        <a href="https://s3.amazonaws.com/new-parelli/default/translations/Guide-Utilisation-SavvyClub2017.pdf" target="_blank" download><img src="./resources/images/icons/france_flag_low.jpg" alt="France Flag"></a>
+      </li>
+      <li>
+        <a href="https://s3.amazonaws.com/new-parelli/default/translations/Anleitung-Savvy-Club-2017-German.pdf" target="_blank"
+          download><img src="./resources/images/icons/germany_flag_low.jpg" alt="Germany Flag"></a>
+      </li>
+    </ul>
+  </div>
+  <div id="form-container" class="prl-onboarding">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="step-navigator bottom-buffer-60">
+          <!-- the links to our nested states using relative paths -->
+          <!-- add the active class if the state matches our ui-sref -->
+          <ul step-navigator class="step-navigator-block">
+            <li class="home" ng-class="{'active': 'onboard.home' == $ctrl.state}">
+              <a>
+                <span class="sn-title">Home</span>
+                <span class="sn-circle"></span>
+              </a>
+            </li>
+            <!-- temporarily added .active into li -->
+            <li ng-class="{'active': 'onboard.goals' == $ctrl.state}">
+              <a ui-sref-active="active" ui-sref="#">
+                <span class="sn-title">Me</span>
+                <span class="sn-circle">
+                                    <span class="sn-connector"></span>
+                </span>
+              </a>
+            </li>
+            <li ng-class="{'active': 'onboard.horseinfo' == $ctrl.state}">
+              <a ui-sref-active="active" ui-sref="#">
+                <span class="sn-title">Details</span>
+                <span class="sn-circle">
+                                    <span class="sn-connector"></span>
+                </span>
+              </a>
+            </li>
+            <li ng-class="{'active': 'onboard.comissues' == $ctrl.state}">
+              <a ui-sref-active="active" ui-sref="#">
+                <span class="sn-title">Goals &amp; Challenges</span>
+                <span class="sn-circle">
+                                    <span class="sn-connector"></span>
+                </span>
+              </a>
+            </li>
+            <li ng-class="{'active': 'onboard.pathway' == $ctrl.state}">
+              <a ui-sref-active="active" ui-sref="#">
+                <span class="sn-title">Solutions Map</span>
+                <span class="sn-circle">
+                                    <span class="sn-connector"></span>
+                </span>
+              </a>
+            </li>
+            <li ng-class="{'active': 'onboard.samplemodule' == $ctrl.state}">
+              <a ui-sref-active="active" ui-sref="#">
+                <span class="sn-title">Sample Lesson</span>
+                <span class="sn-circle">
+                                    <span class="sn-connector"></span>
+                </span>
+              </a>
+            </li>
+          </ul>
+
+          <ul class="step-title visible-xs">
+            <li ng-class="{'active': 'onboard.home' == $ctrl.state}">
+              <h4>Home</h4>
+            </li>
+            <li ng-class="{'active': 'onboard.goals' == $ctrl.state}">
+              Goals
+            </li>
+            <li ng-class="{'active': 'onboard.horseinfo' == $ctrl.state}">
+              Horse Info
+            </li>
+            <li ng-class="{'active': 'onboard.comissues' == $ctrl.state}">
+              Common Issues
+            </li>
+            <li ng-class="{'active': 'onboard.pathway' == $ctrl.state}">
+              Pathway Overview
+            </li>
+            <li ng-class="{'active': 'onboard.samplemodule' == $ctrl.state}">
+              Sample Lesson
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- use ng-submit to catch the form submission and use our Angular function -->
+    <div>
+      <!-- our nested state views will be injected here -->
+      <div id="form-views" ui-view autoscroll="false"></div>
+    </div>
+  </div>
+  <div class="row">
+    <!-- show our formData as it is being typed -->
+  </div>
+</div>

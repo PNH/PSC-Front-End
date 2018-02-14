@@ -1,0 +1,229 @@
+.join-section {
+  background: #ebebeb;
+  padding-bottom: 33px;
+  .holder {
+    position: relative;
+    top: -69px;
+  }
+  .hold-carousel {
+    padding: 0;
+    background-image: url(../resources/images/img07.jpg);
+    .container {
+      padding: 160px 165px 20px;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      @include bp(sm) {
+        padding: 150px 100px 20px;
+      }
+      @include bp(xs) {
+        padding: 130px 80px 20px;
+      }
+      @include bp(xxs) {
+        padding: 130px 50px 20px;
+      }
+    }
+    .title-container {
+      position: absolute;
+      left: 50%;
+      top: 50px;
+      transform: translateX(-50%);
+      width: 100%;
+      @include bp(xs) {
+        top: 30px;
+      }
+    }
+    .title {
+      font-size: 45px;
+      line-height: 47px;
+      font-weight: 400;
+      display: block;
+      margin-bottom: 40px;
+      color: $white;
+      text-align: center;
+      @include bp(sm) {
+        font-size: 38px;
+        line-height: 40px;
+      }
+      @include bp(xs) {
+        margin-bottom: 20px;
+      }
+      &:after {
+        content: '';
+        width: 113px;
+        height: 2px;
+        background: $white;
+        display: block;
+        margin: 30px auto 0;
+      }
+    }
+    cite {
+      font-size: 30px;
+      line-height: 36px;
+      font-family: $OSItalic;
+      color: $white;
+      display: block;
+      margin-bottom: 40px;
+      @include bp(sm) {
+        margin-bottom: 30px;
+      }
+      @include bp(xs) {
+        font-size: 20px;
+        line-height: 28px;
+      }
+    }
+    .carousel-control.left,
+    .carousel-control.right {
+      width: 18px;
+      height: 80px;
+      right: 5%;
+      left: 5%;
+      display: block;
+    }
+    .carousel-control.left {
+      background-position: -283px -37px;
+    }
+    .carousel-control.right {
+      left: auto;
+      background-position: -259px -37px;
+    }
+  }
+  .carousel-inner {
+    max-height: none;
+  }
+  .carousel .carousel-inner>.item {
+    height: 469px;
+    max-height: 469px;
+    @include bp(sm) {
+      height: 430px;
+      max-height: 430px;
+    }
+    @include bp(xs) {
+      height: auto !important;
+      max-height: none !important;
+    }
+  }
+  .user-box {
+    width: 370px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  .hold-img {
+    width: 83px;
+    height: 83px;
+    border: 3px solid $white;
+    border-radius: 50%;
+    float: left;
+    margin-right: 20px;
+    @include bp(xxs) {
+      width: 70px;
+      height: 70px;
+      margin-right: 10px;
+    }
+  }
+  .wrap {
+    float: left;
+    border-left: 1px solid #afb2ae;
+    padding-left: 20px;
+    display: table;
+    height: 84px;
+    @include bp(xxs) {
+      padding-left: 10px;
+      height: 70px;
+    }
+  }
+  .aligned-box {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  .name,
+  .member {
+    display: block;
+    margin-bottom: 5px;
+    color: $white;
+    text-align: left;
+  }
+  .name {
+    font-size: 20px;
+    line-height: 22px;
+    font-family: $OS_Semibold;
+    @include bp(xxs) {
+      font-size: 16px;
+      line-height: 18px;
+    }
+  }
+  .member {
+    font-size: 16px;
+    line-height: 18px;
+    color: $yellow;
+    @include bp(xxs) {
+      font-size: 14px;
+      line-height: 18px;
+      white-space: normal;
+    }
+  }
+}
+
+.advantages-list {
+  margin: 0 0 40px;
+  padding: 0;
+  text-align: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  li {
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 100px;
+    text-align: center;
+    width: 25%;
+    padding-left: 15px;
+    padding-right: 15px;
+    @include bp(xxs) {
+      width: 100%;
+      margin: 0 0 15px;
+    }
+    p {
+      color: #818181;
+    }
+    .icon {
+      display: block;
+      margin: -90px auto 0;
+      width: 82px;
+      img {
+        width: 100%;
+        opacity: 0.8;
+        margin-bottom: 15px;
+      }
+    }
+    .title {
+      font-size: 27px;
+      line-height: 30px;
+      font-family: $OSLight;
+      display: block;
+      text-align: center;
+      font-weight: 400;
+      margin-bottom: 10px;
+    }
+    &.program {
+      background-position: -1px -136px;
+    }
+  }
+}
+.index {
+  .hold-title {
+    padding: 32px 65px 4px!important;
+    margin-bottom: 33px;
+    text-align: center;
+    background: none!important;
+    h2 {
+      font-size: 45px;
+      line-height: 47px;
+    }
+  }
+}
+
+.join-section {
+  .holder {
+    background-color: $white;
+  }
+}

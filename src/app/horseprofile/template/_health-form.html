@@ -1,0 +1,79 @@
+<div class="po-s2-form-container">
+  <div class="row">
+    <div class="col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : $ctrl.horseHealthForm.providerName.$invalid && $ctrl.submitBtnClicked }">
+      <label>Provider Name*</label>
+      <input type="text" name="providerName" placeholder="" class="form-control" ng-model="$ctrl.healthlog.providerName" ng-minlength="1" ng-maxlength="100" ng-pattern="/^[\D]*$/" required>
+      <p ng-show="$ctrl.horseHealthForm.providerName.$invalid && $ctrl.submitBtnClicked" class="help-block">Please enter a valid provider name.</p>
+    </div>
+    <div class="col-md-6 po-s2-form-field-group calender" ng-class="{ 'has-error' : $ctrl.horseHealthForm.visitDate.$invalid && $ctrl.submitBtnClicked }">
+      <label>Visit Date*</label>
+      <input name="visitDate" type="text" placeholder="" class="form-control" moment-picker="$ctrl.healthlog.visitDate" ng-model="$ctrl.healthlog.visitDate" format="M/D/YYYY" max-view="day" autoclose="true" position="bottom" ng-paste="$event.preventDefault();" required/>
+      <p ng-show="$ctrl.horseHealthForm.visitDate.$invalid && $ctrl.submitBtnClicked" class="help-block">Please enter a valid visit date.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 po-s2-form-field-group calender" ng-class="{ 'has-error' : $ctrl.horseHealthForm.nextVisitDate.$invalid && $ctrl.submitBtnClicked }">
+      <label>Next Visit Date</label>
+      <input name="nextVisitDate" type="text" placeholder="" class="form-control" moment-picker="$ctrl.healthlog.nextVisitDate" ng-model="$ctrl.healthlog.nextVisitDate" format="M/D/YYYY" max-view="day" min-date="$ctrl.healthlog.visitDate" autoclose="true" position="bottom" ng-paste="$event.preventDefault();"/><span ng-show="$ctrl.healthlog.nextVisitDate" class="glyphicon glyphicon-remove multi-upload__remove" aria-hidden="true" ng-click="$ctrl.onHealthLogDateRemove()"></span>
+      <p ng-show="$ctrl.horseHealthForm.nextVisitDate.$invalid && $ctrl.submitBtnClicked" class="help-block">Please enter a valid next visit date.</p>
+    </div>
+    <div class="col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : $ctrl.horseHealthForm.visitType.$invalid && $ctrl.submitBtnClicked }">
+      <label>Visit Type*</label>
+      <select name="visitType" ng-model="$ctrl.healthlog.selectedHealthVisitType" class="horse-health-form-select" required>
+        <option ng-repeat="(key, value) in ($ctrl.healthLogType == 0 ? $ctrl.healthLogTypes.farrier.types[0] : ($ctrl.healthLogType == 1 ? $ctrl.healthLogTypes.veterinary.types[0] : $ctrl.healthLogTypes.holistic.types[0]))" value="{{value}}">{{key | capitalize}}</option>
+      </select>
+      <p ng-show="$ctrl.horseHealthForm.visitType.$invalid && $ctrl.submitBtnClicked" class="help-block">Please enter a valid visit type.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : $ctrl.horseHealthForm.notes.$invalid && $ctrl.submitBtnClicked }">
+      <label>Notes<span ng-show="$ctrl.healthlog.selectedHealthVisitType == 100">*</span> </label>
+      <textarea type="text" name="notes" rows="8" placeholder="" class="form-control" ng-model="$ctrl.healthlog.notes" ng-required="$ctrl.healthlog.selectedHealthVisitType == 100"></textarea>
+      <p ng-show="$ctrl.horseHealthForm.notes.$invalid && $ctrl.submitBtnClicked" class="help-block">Please enter a valid notes.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : $ctrl.horseHealthForm.assessment.$invalid && $ctrl.submitBtnClicked }">
+      <label>Assessment </label>
+      <textarea type="text" name="assessment" rows="8" placeholder="" class="form-control" ng-model="$ctrl.healthlog.assessment"></textarea>
+      <p ng-show="$ctrl.horseHealthForm.assessment.$invalid && $ctrl.submitBtnClicked" class="help-block">Please enter a valid assessment.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : $ctrl.horseHealthForm.treatmentOutcome.$invalid && $ctrl.submitBtnClicked }">
+      <label>Treatment Outcome </label>
+      <textarea type="text" name="treatmentOutcome" rows="8" placeholder="" class="form-control" ng-model="$ctrl.healthlog.treatmentOutcome"></textarea>
+      <p ng-show="$ctrl.horseHealthForm.treatmentOutcome.$invalid && $ctrl.submitBtnClicked" class="help-block">Please enter a valid treatment Outcome.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : $ctrl.horseHealthForm.treatmentCare.$invalid && $ctrl.submitBtnClicked }">
+      <label>Treatment Care </label>
+      <textarea type="text" name="treatmentCare" rows="8" placeholder="" class="form-control" ng-model="$ctrl.healthlog.treatmentCare"></textarea>
+      <p ng-show="$ctrl.horseHealthForm.treatmentCare.$invalid && $ctrl.submitBtnClicked" class="help-block">Please enter a valid treatment Care.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : $ctrl.horseHealthForm.recommendations.$invalid && $ctrl.submitBtnClicked }">
+      <label>Recommendations</label>
+      <textarea type="text" name="recommendations" rows="8" placeholder="" class="form-control" ng-model="$ctrl.healthlog.recommendations"></textarea>
+      <p ng-show="$ctrl.horseHealthForm.recommendations.$invalid && $ctrl.submitBtnClicked" class="help-block">Please enter a valid recommendations.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="multi-upload__container">
+      <div class="multi-upload__selected">
+        <ul>
+          <li ng-repeat="item in $ctrl.attachedFiles track by $index">
+            {{item.name}}
+            <span class="glyphicon glyphicon-remove multi-upload__remove" aria-hidden="true" ng-click="$ctrl.removeAttachedFileClicked($index)"></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

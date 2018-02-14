@@ -1,0 +1,25 @@
+<!--<div class="main-container prl-groups-detail__replycontainer" ng-include="'app/wall/template/_createwallpost.html'"></div>-->
+<div class="main-container prl-wall__container clearfix" block-ui="groupsPostsLoading">
+  <div class="content-holder forum-content">
+    <div class="block-holder forum-item prl-groups-detail__posts">
+      <div class="topic-box comments-box prl-groups-detail__postbox" block-ui="postLoading">
+        <wall-post ng-repeat="post in $ctrl.posts | orderBy: '-created_at' track by post.id" post="post" owner-id="$ctrl.ownerId"
+          like="$ctrl.likePost" comment="$ctrl.commentPost" get-comments="$ctrl.getComments" edit-post="$ctrl.editPost" delete-post="$ctrl.deletePost"
+          edit-comment="$ctrl.editComment" delete-comment="$ctrl.deleteComment" has-commented="$ctrl.hasCommented" root-access="$ctrl.rootAccess"
+          share-playlist-callback="$ctrl.playlistShared"></wall-post>
+      </div>
+    </div>
+  </div>
+  <div class="pl-error__container" ng-if="!$ctrl.posts.length > 0">
+    <div class="pl-error">
+      <span class="pl-error__message">Be the first to tell us what's new! Create a post!</span>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-yellow btn-submit pull-right" ng-disabled="$ctrl.postLoadIsProcessing || $ctrl._postReachedEnd"
+    ng-click="$ctrl.onLoadMorePostsClicked()" ng-class="{'processing': $ctrl.postLoadIsProcessing}">
+    <div class="bs-process-bar uil-ring-css yellow">
+      <div></div>
+    </div>
+    <span class="bs-login-text">VIEW MORE</span>
+  </button>
+</div>

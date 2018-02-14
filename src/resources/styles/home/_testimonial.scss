@@ -1,0 +1,43 @@
+#testimonials {
+  position: relative;
+  .carousel-inner {
+  	max-height: none;
+  }
+  .hold-img {
+  	float: left;
+  	margin-right: 20px;
+  	width: 83px;
+  	height: 83px;
+  	border: 3px solid #fff;
+  	border-radius: 50%;
+  	background-position: 50%;
+  	background-size: cover;
+  	background-repeat: no-repeat;
+    @include bp(xxs) {
+      width: 70px;
+      height: 70px;
+      margin-right: 10px;
+    }
+  }
+  .carousel-control.left,
+  .carousel-control.right {
+  	width: 18px;
+  	height: 80px;
+  	right: 5%;
+  	left: 5%;
+  	display: block;
+  }
+  .carousel-control.right {
+  	left: auto;
+  	background-position: -259px -37px;
+  }
+  .carousel-control.left {
+  	background-position: -283px -37px;
+  }
+}
+
+.prl-testimonials {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}

@@ -1,0 +1,56 @@
+.horse-profile-content {
+  .progress-save-btn {
+    margin-right: 50px;
+    input[type=button] {
+      margin-left: 0;
+      margin-right: -10px;
+      margin-top: -20px;
+      @include bp(sm) {
+        margin-top: -10px;
+        margin-right: -10px;
+      }
+      @include bp(xs) {
+        margin-right: -10px;
+      }
+      @include bp(xxs) {
+        width: 92% !important;
+        float: none !important;
+        margin-left: 40px;
+      }
+    }
+
+    .cancel-btn {
+      margin-right: 20px !important;
+      @include bp(xxs) {
+        margin-top: 30px;
+      }
+    }
+  }
+  .save-btn {
+    margin-right: 50px;
+    .btn:first-child {
+      margin-left: 0;
+      margin-right: -10px;
+      @include bp(sm) {
+        margin-right: -10px;
+      }
+      @include bp(xs) {
+        margin-right: -10px;
+      }
+      @include bp(xxs) {
+        width: 92% !important;
+        float: none !important;
+        margin-left: 40px !important;
+      }
+    }
+  }
+}
+
+.delete-btn {
+  margin-right: 20px;
+  @include bp(xxs) {
+    width: 92% !important;
+    float: none !important;
+    margin-left: 40px !important;
+  }
+}

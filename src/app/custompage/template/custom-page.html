@@ -1,0 +1,34 @@
+<div id="main" class="prl-connections" ng-class="{'guest-user': !$ctrl.userId}">
+  <dashboard-header ng-if="$ctrl.pageContent" title="{{$ctrl.pageContent.title}}"></dashboard-header>
+  <dashboard-header ng-if="!$ctrl.pageContent" title="{{$ctrl.pageContent.title}}"></dashboard-header>
+  <div id="content" class="clearfix" block-ui="pageContentLoading">
+    <div class="forum-content library">
+      <breadcrumb ng-if="!$ctrl.userId && $ctrl.pageContent.title" home="true" current="$ctrl.pageContent.title"></breadcrumb>
+      <div class="holder">
+        <div class="hold-title line-l">
+          <h2>{{$ctrl.pageContent.title}}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="content-block" ng-bind-html="$ctrl.pageContent.content | trusthtml"></div>
+
+    <div class="prl-custom-page-attachments-content" ng-show="$ctrl.pageContent.attachments.length > 0">
+      <div class="col-xs-12">
+        <div class="style1">
+          <h2 class="style1__title">Attachments</h2>
+          <ul class="style1__list ll-detail-document__container touchstone-document">
+            <li ng-repeat="attachment in $ctrl.pageContent.attachments">
+              <a href="" ng-click="attachment.type == 'pdf' ? $ctrl.onDocumentItemClicked(attachment) : attachment.type == 'image' ? $ctrl.onImageItemClicked(attachment) : attachment.type == 'video' ? $ctrl.onMediaItemClicked(attachment) : attachment.type == 'audio' ? $ctrl.onMediaItemClicked(attachment) :  $ctrl.onDocumentItemClicked(attachment)">
+                <div class="ll-detail-document__content file-type-icon" ng-class="{'pdf': attachment.type == 'pdf', 'vid': attachment.type == 'video', 'aud': attachment.type == 'audio', 'img': attachment.type == 'image', 'docx': attachment.type == 'other'}">
+                  {{attachment.name}}
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div ng-include="'app/custompage/template/_popups.html'"></div>

@@ -1,0 +1,560 @@
+@import 'pathway';
+@import 'pathway-popup';
+@import 'quick-selector';
+@import 'lesson';
+@import 'sidebar';
+@import 'dashboard-header';
+.dashboard {
+  .hold-title {
+    margin-bottom: 20px;
+    padding: 0;
+  }
+  h1 {
+    float: none;
+    text-align: center; // margin-bottom: 24px;
+    margin-top: 0;
+  }
+  .block.big {
+    margin-bottom: 14px;
+    .dd_title {
+      font-size: 25px;
+      line-height: 43px;
+      font-family: $OSLight;
+      @include bp(xxs) {
+        font-size: 22px;
+        line-height: 29px;
+      }
+    }
+    .box {
+      padding-left: 94px;
+      @include bp(xs) {
+        padding-left: 45px;
+        padding-right: 0%;
+      }
+    }
+    .btn {
+      margin-left: -94px;
+      @include bp(xs) {
+        width: 38px;
+        height: 38px;
+        margin-left: -45px;
+      }
+    }
+  } // &__community {
+  //   .prl-wall__container {
+  //     background-color: transparent;
+  //     padding: 0 !important;
+  //     .forum-content {
+  //       background-color: transparent;
+  //       .prl-groups-detail__posts {
+  //         background-color: transparent;
+  //         .answer-box {
+  //           background-color: transparent;
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+  .prl-groups-detail__postbox {
+    wall-post:nth-of-type(3) {
+      .answer-box {
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+.hat-box {
+  // overflow: hidden;
+  margin-bottom: 21px;
+  @include bp(xxs) {
+    margin-bottom: 31px;
+  }
+  .hold-title {
+    padding: 0;
+    background: none;
+    margin-bottom: 0;
+    margin-top: -15px;
+    text-align: center;
+    @include bp(sm) {
+      margin-bottom: 15px;
+    }
+    @include bp(xxs) {
+      margin-bottom: 30px;
+    }
+    h1 {
+      font-size: 50px;
+      line-height: 50px;
+      font-family: $OS_Semibold;
+      color: rgba(255, 255, 255, 0.2);
+      margin-bottom: 0;
+      @include bp(xxs) {
+        font-size: 40px;
+        line-height: 42px;
+      }
+    }
+    &:after {
+      content: none;
+    }
+  }
+  .title {
+    font-size: 20px;
+    line-height: 22px;
+    color: #fff;
+    font-family: $OS_Semibold;
+    display: block;
+    margin-bottom: 10px;
+    @include bp(xxs) {
+      font-size: 18px;
+    }
+    a {
+      color: #fff !important;
+      word-break: break-all;
+    }
+  }
+  .info-list {
+    padding: 0;
+    margin: 0;
+    overflow: hidden; // display: none;
+    &.clickable {
+      li {
+        cursor: pointer;
+        transition: background-color 200ms ease-in-out;
+        &:hover {
+          background-color: lighten($grey3, 0.1);
+        }
+      }
+    }
+    li {
+      border-radius: 4px;
+      background-color: $black;
+      color: #fff;
+      float: left;
+      margin: 0 8px 8px 0;
+      padding: 5px 14px;
+      @include bp(xxs) {
+        font-size: 14px;
+        padding: 3px 8px;
+      }
+    }
+    &__useractions {
+      margin: 0;
+      padding: 0;
+      li {
+        list-style: none;
+        button {
+          border-radius: 4px;
+          margin: 0;
+        }
+      }
+    }
+  }
+  .flex-box {
+    min-height: 105px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    @include bp(xxs) {
+      height: auto;
+      min-height: 90px;
+      margin-left: -10px;
+    }
+  }
+  .user-info,
+  .hourse-info {
+    float: left;
+    width: 45%;
+    padding: 0 0 0 10%;
+    margin: 0 0 0 4%;
+    @include bp(xs) {
+      margin: 0 0 10px;
+      padding: 0 0 0 140px;
+      width: 100%;
+    }
+    @include bp(xxs) {
+      margin: 0 0 10px;
+      padding: 0px 22px 0 93px;
+      width: 100% !important;
+    }
+    .hold-img {
+      float: left;
+      margin-left: -125px;
+      width: 102px;
+      height: 102px;
+      border-radius: 50%;
+      border: 4px solid #fff;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      @include bp(xxs) {
+        margin-left: -90px;
+        width: 70px;
+        height: 70px;
+        margin-top: 5px;
+      }
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+  .user-info {
+    @include bp(sm) {
+      padding: 0 0 0 170px;
+      margin: 0;
+      width: 50%;
+    }
+    @include bp(xxs) {
+      padding: 0 0 0 95px;
+      width: 100%;
+    }
+  }
+  .horse-info {
+    @include bp(sm) {
+      padding-left: 100px;
+    }
+    .hold-img {
+      @include bp(xs) {
+        margin-left: -110px;
+      }
+      @include bp(xxs) {
+        margin-left: -82px;
+        width: 70px;
+        height: 70px;
+        margin-top: 10px;
+      }
+    }
+  }
+  .hourse-info {
+    float: right;
+    padding-left: 5%;
+    width: 27%;
+    margin: 0;
+    .hold-img {
+      width: 65px;
+      height: 65px;
+      margin-top: 10px;
+      margin-left: -90px;
+      @include bp(xsml) {
+        margin-top: 20px;
+      }
+      @include bp(xxs) {
+        float: right;
+      }
+    }
+    .flex-box {
+      @include bp(xxs) {
+        // margin-left: -15px;
+        float: right;
+        text-align: right;
+        margin-right: 80px;
+        align-items: flex-end;
+
+        .info-list li {
+          margin: 0 0 8px 8px;
+        }
+      }
+    }
+  }
+}
+
+.general-box {
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 78px;
+  .main-container {
+    float: left;
+    width: 71.5%;
+    padding: 30px 36px;
+    background: #fff;
+    .hold-title {
+      padding: 0 0 10px !important;
+      h2 {
+        margin: 0 0 10px;
+        @include bp(xxs) {
+          text-align: center;
+        }
+      }
+      .date {
+        font-size: 16px;
+        line-height: 18px;
+        color: #7a7878;
+        display: block;
+        margin-bottom: 10px;
+      }
+    }
+  }
+  .select-horse {
+    float: left;
+    width: 71.5%;
+    .main-container {
+      float: none;
+      width: 100%;
+      margin-bottom: 40px;
+    }
+  }
+  #sidebar {
+    background: #f1f2f6;
+    .block {
+      margin-bottom: 10px;
+    }
+    .box {
+      padding-left: 25px;
+    }
+    .btn {
+      float: right;
+      margin: 0;
+    }
+  }
+  .full-video {
+    padding: 0 10% 30px;
+    .video {
+      max-width: 682px;
+      margin: 0 auto 19px;
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+  .hold-btn {
+    overflow: hidden;
+    margin-bottom: 30px;
+  }
+  .share {
+    float: right;
+    width: 157px;
+    padding: 7px 35px 7px 5px;
+    position: relative;
+    &:after {
+      content: '';
+      background: url(../img/sprite.png) no-repeat -31px -108px;
+      width: 17px;
+      height: 10px;
+      position: absolute;
+      right: 15px;
+      top: 10px;
+    }
+  }
+  .video-list {
+    margin-bottom: 20px;
+    li {
+      margin-bottom: 12px;
+    }
+  }
+}
+
+#sidebar {
+  float: right;
+  width: 28.5%;
+  padding: 46px 1.5% 20px 3%;
+  background: #f1f2f6;
+  &.side-info {
+    // padding: 0 0 20px 1.75%;
+    padding: 0 0 0 20px;
+  }
+  &.playlist {
+    padding: 30px 2.5% 20px 2.5%;
+  }
+  h2 {
+    font-size: 27px;
+    line-height: 29px;
+    font-family: $OSLight;
+  }
+  h3 {
+    font-size: 25px;
+    line-height: 27px;
+    color: #303133;
+    font-family: $OSLight;
+    margin: 0 0 22px;
+  }
+}
+
+.holder-box {
+  padding: 30px 30px 10px;
+  margin-bottom: 10px;
+  .hold-title {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  p {
+    font-size: 15px;
+    line-height: 18px;
+    color: #787878;
+    margin-bottom: 30px;
+  }
+  .hold-btn {
+    padding: 10px 0;
+    border-top: 1px solid #d8d9da;
+    margin-bottom: 0;
+    .view-all {
+      float: right;
+    }
+  }
+}
+
+.info-box-list {
+  padding: 0;
+  margin: 0 0 20px;
+  border-bottom: 1px solid #dedede;
+  li {
+    border-top: 1px solid #dedede;
+    padding: 15px 10px;
+    font-size: 15px;
+    line-height: 18px;
+    p {
+      margin-bottom: 10px;
+    }
+  }
+  .date {
+    color: #a4a4a4;
+    font-size: 14px;
+    line-height: 16px;
+  }
+}
+
+.view-all {
+  font-size: 16px;
+  line-height: 20px;
+  font-family: $OS_Semibold;
+  text-transform: uppercase;
+  color: #616161;
+  padding-right: 28px;
+  position: relative;
+  @include transition-element (color);
+  &:hover {
+    color: #ffc746;
+  }
+  &:after {
+    content: '';
+    background: url(../resources/images/sprite.png) no-repeat -51px -104px;
+    width: 20px;
+    height: 19px;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .general-box .select-horse {
+    float: none;
+    width: 100%;
+  }
+  .general-box .main-container {
+    width: 100%;
+    float: none;
+  }
+  #sidebar,
+  .archive-list {
+    float: none;
+    width: 100%;
+  }
+  #sidebar {
+    padding: 30px 0 20px 0;
+    &.side-info,
+    &.playlist {
+      padding: 30px 0 20px 0;
+    }
+  }
+  #sidebar h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 675px) {
+  .general-box .full-video {
+    padding: 0 0 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .general-box .select-horse .main-container {
+    margin-bottom: 10px;
+  }
+  .holder-box {
+    padding: 10px 15px 10px;
+  }
+}
+
+@media (max-width: 425px) {
+  .general-box .share {
+    float: none;
+  }
+  .general-box .hold-btn {
+    text-align: center;
+  }
+}
+
+@media (max-width: 400px) {
+  #sidebar {
+    padding-top: 0;
+  }
+  .tab-content #sidebar {
+    padding-top: 20px;
+  }
+}
+
+.libary-video-list {
+  margin-left: -10px;
+  margin-right: -10px;
+  padding: 0;
+  li {
+    display: inline-block;
+    padding: 10px;
+    width: 33.33%;
+    @include bp(xxs) {
+      display: block;
+      width: 100%;
+    }
+  }
+}
+
+.dashboard__community {
+  simple-reply {
+    textarea {
+      background-color: $grey1;
+    }
+    .privacy-selector {
+      margin-left: 0 !important;
+    }
+  }
+  &__links {
+    margin: 0 -15px;
+    padding: 0;
+    li {
+      float: left;
+      padding: 15px;
+      position: relative;
+      width: 33.3333%;
+      @include bp(xxs) {
+        width: 100%;
+      }
+    }
+    &__container {
+      background-color: $grey3;
+      height: 180px;
+      position: relative;
+      cursor: pointer;
+    }
+    &__footer {
+      background-color: transparentize($black, 0.8);
+      bottom: 0;
+      color: $white;
+      cursor: pointer;
+      left: 0;
+      padding: 20px;
+      position: absolute;
+      right: 0;
+    }
+    &__arrow {
+      @include bp(md) {
+        display: none;
+      }
+    }
+  }
+}

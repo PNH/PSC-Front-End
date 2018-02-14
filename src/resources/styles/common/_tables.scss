@@ -1,0 +1,36 @@
+.prl-table {
+    width: 100%;
+    &.style1 {
+        th,
+        td {
+            &:last-child {
+                border: none;
+            }
+            border-right: 3px solid $grey1;
+            padding: 10px 30px;
+        }
+        th {
+            background-color: $grey5;
+            color: $white;
+            font-weight: 400;
+            text-align: center;
+        }
+        td {
+            &:first-child {
+                text-align: left !important;
+            }
+            background-color: $white;
+            height: 120px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        tbody {
+            tr {
+                &:last-child {
+                    border-bottom: none !important;
+                }
+                border-bottom: 3px solid $grey1;
+            }
+        }
+    }
+}

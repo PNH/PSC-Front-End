@@ -1,0 +1,63 @@
+<aside id="sidebar" class="playlist prl-event-sidebar">
+  <div class="col-md-12 col-sm-6 clearfix">
+    <a data-toggle="modal" data-target="#createEvent" class="btn btn-yellow prl-create-btn" ng-click="$ctrl.onPopupClicked()">+ CREATE EVENT</a>
+    <div ng-if="!$ctrl.isCalendarClearProcessing" class="block prl-calendar-div">
+      <prl-calendar selected="$ctrl.todayDate" prl-calendar-controls="$ctrl.controllers"></prl-calendar>
+    </div>
+    <button class="btn-empty btn-sm btn-clear calendar-clear" ng-click="$ctrl.clearCalendar()">Clear</button>
+  </div>
+
+  <form name="$ctrl.sidebarFilter" novalidate="">
+    <div class="col-md-12 col-sm-6">
+
+      <div class="row prl-event-filter" ng-if="$ctrl.contentTitle != 'All Events'">
+        <div class="form-group col-sm-12 po-s2-form-field-group" ng-class="{ 'has-error' : $ctrl.sidebarCountry == '-1' && $ctrl.onGoFilterClicked }">
+          <label>Filter by Radius:</label>
+          <select name="country" ng-model="$ctrl.sidebarCountry" ng-pattern="/^[a-zA-Z\s]*$/" autocomplete="off" required>
+          <option ng-repeat="(country_index, country) in ($ctrl.contentTitle == 'USA Events' ? $ctrl.countriesRegion.USA : $ctrl.contentTitle == 'Australia Events' ? $ctrl.countriesRegion.Australia : $ctrl.contentTitle == 'UK Events' ? $ctrl.countriesRegion.UK : $ctrl.countriesRegion.Europe )" value="{{country.code}}">{{country.name}}</option></select>
+          <p ng-show="$ctrl.sidebarCountry == '-1' && $ctrl.onGoFilterClicked" class="help-block">Please select a country.</p>
+        </div>
+      </div>
+      <div class="row prl-event-filter" ng-if="$ctrl.contentTitle == 'All Events'">
+        <div class="form-group col-sm-12 po-s2-form-field-group" ng-class="{ 'has-error' : $ctrl.sidebarCountry == '-1' && $ctrl.onGoFilterClicked }">
+          <label>Filter by Radius:</label>
+          <select name="country" ng-model="$ctrl.sidebarCountry" ng-pattern="/^[a-zA-Z\s]*$/" autocomplete="off" required>
+          <option ng-repeat="(country_index, country) in $ctrl.countries" value="{{country.code}}">{{country.name}}</option></select>
+          <p ng-show="$ctrl.sidebarCountry == '-1' && $ctrl.onGoFilterClicked" class="help-block">Please select a country.</p>
+        </div>
+      </div>
+
+      <div class="row prl-event-filter">
+        <div class="form-group col-sm-12 po-s2-form-field-group" ng-class="{ 'has-error' : $ctrl.sidebarFilter.zipcode.$invalid && $ctrl.onGoFilterClicked }">
+          <!--<label>Filter by Radius: </label>-->
+          <input type="text" name="zipcode" placeholder="Zip/Postal Code" class="form-control" ng-model="$ctrl.zipcode" ng-model-options="{debounce: 500}"
+            ng-minlength="3" ng-model-options="{updateOn: 'blur'}" required>
+          <p ng-show="$ctrl.sidebarFilter.zipcode.$invalid && $ctrl.onGoFilterClicked" class="help-block">Please enter a valid Zip/Postal Code.</p>
+        </div>
+      </div>
+
+      <div class="row prl-event-filter">
+        <div class="form-group col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : $ctrl.withinMiles !== String(0) && $ctrl.onGoFilterClicked }">
+          <label>Within:</label>
+          <select name="withinMiles" ng-model="$ctrl.withinMiles">
+            <option value="0">Please Select</option>
+            <option value="10">10 Miles (16 Km)</option>
+            <option value="25">25 Miles (40 Km)</option>
+            <option value="50">50 Miles (80 Km)</option>
+            <option value="100">100 Miles (160 Km)</option>
+            <option value="200">200 Miles (321 Km)</option>
+            <option value="500">500 Miles (804 Km)</option>
+          </select>
+          <p ng-show="$ctrl.withinMiles === '0' && $ctrl.onGoFilterClicked" class="help-block">Please select radius.</p>
+        </div>
+      </div>
+
+      <div class="prl-filter-btn">
+        <button type="submit" class="btn btn-yellow btn-empty btn-sidebar-go" ng-click="$ctrl.onGoSubmitClicked()" ng-disabled="$ctrl.isEventCalendarLoading"><span aria-hidden="true" ng-class="{'processing': $ctrl.isEventCalendarLoading}"></span> GO </button>
+        <button type="reset" class="btn btn-grey btn-empty btn-sidebar-reset" ng-click="$ctrl.onResetClicked()" ng-disabled="$ctrl.isEventCalendarLoading"><span aria-hidden="true" ng-class="{'processing': $ctrl.isEventCalendarLoading}"></span> RESET </button>
+      </div>
+    </div>
+    </div>
+  </form>
+</aside>
+

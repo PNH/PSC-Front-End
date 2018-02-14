@@ -1,0 +1,97 @@
+<div id="content">
+    <section class="video-box">
+
+        <div class="holder-video">
+            <div class="video-overlay"></div>
+            <video id="video" width="100%" height="100%" autoplay loop muted poster="./resources/images/main.jpg">
+              <source src='https://s3.amazonaws.com/new-parelli-test/rich/rich_files/rich_files/33/original/what-20is-20the-20parelli-20savvy-20club.mp4' type="video/mp4">
+            </video>
+        </div>
+        <div class="welcome-box">
+            <h1>Welcome to the Parelli Savvy Club!</h1>
+            <strong class="title">A proven training program for you and your horse, and so much more ...</strong>
+            <div class="hold-btn">
+                <a ui-sref="onboard.goals" class="transperent-btn">Sample the Program</a>
+                <a ui-sref="membertype" class="transperent-btn" ng-if="!$ctrl.loggedIn">Sign Me Up</a>
+            </div>
+        </div>
+    </section>
+    <section class="join-section">
+        <div class="holder">
+            <div class="hold-title">
+                <h2>Join the Club</h2>
+            </div>
+            <ul class="advantages-list">
+                <li ng-repeat="item in ::$ctrl.joinTheClub">
+                    <span class="icon program">
+                        <img ng-src="{{item.logo}}" alt="">
+                    </span>
+                    <strong class="title">{{item.title}}</strong>
+                    <p>{{item.message}}</p>
+                </li>
+            </ul>
+            <div class="hold-carousel prl-testimonials" ng-style="{'background-image': 'url(' + $ctrl.testimonialsBackgroundURL + ')'}">
+                <div id="testimonials" class="carousel slide main-page" data-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        <div class="title-container">
+                            <strong class="title">In Their Words</strong>
+                        </div>
+                        <div class="item" ng-class="{'active': index == 0}" ng-repeat="(index, testimonial) in ::$ctrl.testimonials">
+                            <div class="container">
+                                <cite>&Prime; {{testimonial.message}} &Prime;</cite>
+                                <div class="user-box">
+                                    <figure class="hold-img" style="background-image: url('{{testimonial.author.profile_picture}}');">
+                                        <!-- <img ng-src="" alt="user"> -->
+                                    </figure>
+                                    <div class="wrap">
+                                        <div class="aligned-box">
+                                            <span class="name">{{testimonial.author.name}}</span>
+                                            <span class="member">{{testimonial.author.title}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="left carousel-control" data-target="#testimonials" role="button" data-slide="prev"></a>
+                    <a class="right carousel-control" data-target="#testimonials" role="button" data-slide="next"></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="benefits">
+        <div class="holder">
+            <div class="hold-title">
+                <h2>More Savvy Club Benefits</h2>
+            </div>
+            <ul class="benefit-list">
+                <li class="benefit1">
+                    <span class="overlay"></span>
+                    <!-- <div class="title" ui-sref="custompage({pageslug: 'tickets-to-parelli-sponsored-clinics'})"> -->
+                    <div class="title">Tickets to
+                        <br /> Parelli-Sponsored Clinics</div>
+                </li>
+                <li class="benefit2">
+                    <span class="overlay"></span>
+                    <div class="title">Parelli
+                        <br /> Games</div>
+                </li>
+                <li class="benefit3">
+                    <span class="overlay"></span>
+                    <div class="title">Free
+                        <br /> Auditions</div>
+                </li>
+                <li class="benefit4 big">
+                    <span class="overlay"></span>
+                    <div class="title">Live Webinars with
+                        <br /> Pat &amp; Linda</div>
+                </li>
+                <li class="benefit5 big">
+                    <span class="overlay"></span>
+                    <div class="title">Campus Course
+                        <br /> Discounts</div>
+                </li>
+            </ul>
+        </div>
+    </section>
+</div>

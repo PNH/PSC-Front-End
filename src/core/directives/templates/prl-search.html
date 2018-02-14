@@ -1,0 +1,56 @@
+<form class="search-form" novalidate>
+  <input type="text" placeholder="Search" ng-model="searchCtrl.search.query" required>
+  <button type="submit" class="search-btn" ng-click="searchCtrl.onSearch(searchCtrl.search.query)"></button>
+</form>
+<div class="prl-search-popup">
+  <div class="prl-search-popup__header">
+    <div class="prl-search-popup__container">
+      <h3>Search Results {{searchCtrl.searchCriteria ? ' for ' + searchCtrl.searchCriteria : ''}}</h3>
+      <button class="btn-empty prl-search-popup__dismiss" ng-click="searchCtrl.closePopup()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+    </div>
+  </div>
+  <div class="prl-search-popup__content prl-search-popup__container" block-ui="searchLoading">
+    <div class="prl-search-filters">
+      <form class="clearfix">
+      <!--   <div class="prl-search-filter-item equestrian-interest__container clearfix">
+          <input type="checkbox" name="test123" id="test123" class="dark" >
+          <label for="test123">testing</label>
+          <input type="checkbox" name="gg21" id="gg21" class="dark" ng-checked="true">
+          <label for="gg21">testing</label>
+        </div>
+
+    <div class="theme-input bottom-project-tic"><input type="checkbox" name="allprojectselector" id="allprojectselector" ng-model="$ctrl.selectedGetProjectType" ng-click="$ctrl.changeGetProjectType()"><label for="allprojectselector">All Projects</label></div> -->
+              <!-- <li ng-repeat="(equestrain, equestrain_index) in searchCtrl.equestrain"> -->
+
+<!-- ng-change="searchCtrl.isAllFilterSelected ? searchCtrl.onSearchFilterChanged(searchCtrl.isAllFilterSelected) : searchCtrl.onSearchFilterChanged(searchCtrl.filterList)" -->
+        <ul class="search-filters__container">
+          <li>
+            <input type="checkbox" id="filterAll" class="dark" ng-model="searchCtrl.isAllFilterSelected" ng-change="searchCtrl.onSearchFilterChanged(searchCtrl.isAllFilterSelected)" />
+            <label for="filterAll">All</label>
+          </li>
+          <li ng-repeat="filter in searchCtrl.searchFilters">
+            <input type="checkbox" id="filter{{filter.value}}" class="dark" ng-model="searchCtrl.filterList[filter.value]" ng-change="searchCtrl.onSearchFilterChanged(searchCtrl.filterList)" />
+            <label for="filter{{filter.value}}">{{filter.name}}</label>
+          </li>
+        </ul>
+
+      </form>
+    </div>
+    <perfect-scrollbar class="prl-search-popup__result" wheel-propagation="false" wheel-speed="6" min-scrollbar-length="5" suppress-scroll-x="true"
+      ng-if="searchCtrl.result.length > 0">
+      <div class="prl-search-popup__result-item" ng-repeat="result in searchCtrl.result | orderBy: ['type', 'object.role']">
+        <span>
+          <span class="tag">{{result.type === 'User' ? result.object.role : result.type === 'LearngingLibrary' ? 'Learning Library' : result.type === 'ForumTopic' ? 'Forum Topic' : result.type}}</span>
+          <a ng-click="searchCtrl.goTo(result.type, result.object)">{{result.content}}</a>
+        </span>
+      </div>
+    </perfect-scrollbar>
+    <div class="prl-search-popup__error" ng-if="!searchCtrl.result.length > 0">
+      <span class="prl-search-popup__error__message">No results for the searched criteria.</span>
+    </div>
+  </div>
+</div>
+
+
+
+

@@ -1,0 +1,52 @@
+<form name="regForm" id="signup-form" ng-submit="onSubmit()" novalidate>
+  <div id="step2" class="tab-pane">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="po-s2-form-heading">Credit Card Information</h2>
+        <div class="po-s2-form-container">
+          <div class="row">
+            <div class="form-group col-sm-12 po-s2-form-field-group" ng-class="{ 'has-error' : regForm.cardname.$invalid && !regForm.cardname.$pristine }">
+              <input type="text" name="cardname" placeholder="Full Name on Card*" class="form-control" ng-model="formData.ccard.cardname" ng-minlength="3" ng-maxlength="100" ng-model-options="{updateOn: 'blur'}" required>
+              <p ng-show="regForm.cardname.$invalid && !regForm.cardname.$pristine" class="help-block">Please enter a valid name.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : regForm.cardnumber.$invalid && !regForm.cardnumber.$pristine }">
+              <input type="number" name="cardnumber" placeholder="Credit Card Number*" class="form-control" ng-model="formData.ccard.cardnumber" ng-minlength="8" ng-maxlength="16" ng-pattern="/^[0-9]+$/" ng-model-options="{updateOn: 'blur'}" required>
+              <small id="cardHelp" class="form-text text-muted text-hint">MasterCard, VISA, Discover, American Express (USA Only)</small>
+              <p ng-show="regForm.cardnumber.$invalid && !regForm.cardnumber.$pristine" class="help-block">Please enter a valid card number.</p>
+            </div>
+            <div class="form-group col-sm-6 col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : regForm.cardcode.$invalid && !regForm.cardcode.$pristine }">
+              <input type="number" name="cardcode" placeholder="Security Code*" class="form-control" ng-model="formData.ccard.cardcode" ng-minlength="3" ng-maxlength="4" ng-pattern="/^[0-9]+$/"  ng-model-options="{updateOn: 'blur'}"required>
+              <p ng-show="regForm.cardcode.$invalid && !regForm.cardcode.$pristine" class="help-block">Please enter a valid security code.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : regForm.cardmonth.$invalid && !regForm.cardmonth.$pristine || !$ctrl.monthValid}">
+              <input name="cardmonth" type="text" placeholder="Card Month*" class="form-control" moment-picker ng-model="formData.ccard.cardmonth" ng-blur="$ctrl.isExpireyValid()" format="M" max-view="month" autoclose="true" today="true" ng-paste="$event.preventDefault();" ng-max="12" ng-min="1" ng-pattern="/^(0?[1-9]|1[012])$/" required/>
+              <p ng-show="regForm.cardmonth.$invalid && !regForm.cardmonth.$pristine || regForm.cardmonth > 10" class="help-block">Please select your card expiry month.</p>
+              <p ng-show="!$ctrl.monthValid" class="help-block">Your card has been expired, please enter a valid card.</p>
+            </div>
+            <div class="form-group col-sm-6 col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : regForm.cardyear.$invalid && !regForm.cardyear.$pristine}">
+              <input name="country" type="text" placeholder="Card Year*" class="form-control" moment-picker ng-model="formData.ccard.cardyear" ng-blur="$ctrl.isExpireyValid()" format="YYYY" max-view="year" autoclose="true" min-date="'2016'" today="true" ng-paste="$event.preventDefault();" ng-pattern="/^[0-9]{4}$/" required/>
+              <p ng-show="regForm.cardyear.$invalid && !regForm.cardyear.$pristine" class="help-block">Please select your card expiry year.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row po-footer">
+      <div class="col-md-6">
+        <div class="po-navigations">
+          <input ui-sref="registration.billing" type="button" id="po-back" class="btn btn-black pull-left" value="BACK">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="po-navigations clearfix">
+          <input ui-sref="registration.review" ng-disabled="regForm.$invalid || !$ctrl.monthValid" ng-click="$ctrl.onNextClicked()" type="button" id="po-next" class="btn btn-yellow pull-right" value="NEXT">
+        </div>
+      </div>
+    </div>
+    <!-- /po-footer -->
+  </div>
+</form>

@@ -1,0 +1,449 @@
+<div ng-switch="wallPostCtrl.post.wallposting_type">
+  <div class="answer-box prl-groups-detail__answerbox">
+    <figure class="hold-img" style="background-image: url('{{wallPostCtrl.post.author.profileImage}}');" go-to-wall wall-id="wallPostCtrl.post.author.id"
+      ng-class="{'clickable': wallPostCtrl.post.author.id > 0}"></figure>
+    <div class="hold-title line-l">
+      <div class="hold-date">
+        <strong go-to-wall wall-id="wallPostCtrl.post.author.id" ng-class="{'clickable': wallPostCtrl.post.author.id > 0}">{{wallPostCtrl.post.author.firstName + ' ' + wallPostCtrl.post.author.lastName}}</strong>
+        <span class="date">{{wallPostCtrl.post.created_at | formatdate: 1}}</span>
+      </div>
+      <div class="btn-box">
+        <button class="btn btn-sm btn-like" ng-click="wallPostCtrl.onLikePostClicked(wallPostCtrl.post.id, wallPostCtrl.post.likes, wallPostCtrl.post.liked)"
+          ng-disabled="wallPostCtrl.isLikeProcessing" ng-class="{'liked': wallPostCtrl.post.liked}"><span class="btn-like__thumb"></span> {{wallPostCtrl.post.likes > 0 ? wallPostCtrl.post.likes : ''}}</button>
+        <button class="btn btn-grey btn-sm" ng-click="wallPostCtrl.toggleCommentBox = !wallPostCtrl.toggleCommentBox">Comment</button>
+        <button class="btn btn-grey btn-sm" ng-click="wallPostCtrl.deletePostClicked(wallPostCtrl.post.id)" ng-if="wallPostCtrl.deletePost && (wallPostCtrl.post.isowner || wallPostCtrl.rootAccess || wallPostCtrl.post.user_id === wallPostCtrl.ownerId)"
+          ng-disabled="wallPostCtrl.isDeleteProcessing">Delete</button>
+        <button ng-switch-when="WallPost" class="btn btn-grey btn-sm" ng-click="wallPostCtrl.toggleEditBox = !wallPostCtrl.toggleEditBox"
+          ng-if="wallPostCtrl.editPost && (wallPostCtrl.post.isowner || wallPostCtrl.rootAccess)">Edit</button>
+        <button ng-switch-when="HorseHealth" data-toggle="modal" ng-click="wallPostCtrl.onEditHealthLogPopupClicked()" data-target="#editHealthPost{{wallPostCtrl.post.id}}"
+          class="btn btn-grey btn-sm" ng-if="wallPostCtrl.editPost && (wallPostCtrl.post.isowner || wallPostCtrl.rootAccess)">Edit</button>
+        <button ng-switch-when="HorseProgress" data-toggle="modal" ng-click="wallPostCtrl.onEditProgressLogPopupClicked()" data-target="#editProgressPost{{wallPostCtrl.post.id}}"
+          class="btn btn-grey btn-sm" ng-if="wallPostCtrl.editPost && (wallPostCtrl.post.isowner || wallPostCtrl.rootAccess)">Edit</button>
+      </div>
+    </div>
+    <div ng-switch-when="WallPost">
+      <div ng-hide="wallPostCtrl.toggleEditBox" class="content-block answer-box__content" ng-bind-html="wallPostCtrl.post.wallposting.content | trusthtml">
+      </div>
+      <div class="answer-box__attachments" ng-if="wallPostCtrl.post.wall_post_attachment.length > 0">
+        <span class="answer-box__attachments__title">Attachments:</span>
+        <ul>
+          <li ng-repeat="(attachmentIndex, attachment) in wallPostCtrl.post.wall_post_attachment">
+            <a ng-href="{{attachment.resourceUrl}}" target="_blank"><img ng-href="{{attachment.resourceUrl}}" class="post-attachment-img" src="{{attachment.resourceUrl}}"></a>
+            <a class="post-attachment-name" ng-href="{{attachment.resourceUrl}}" target="_blank">{{attachment.title | truncate : 18}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="full-video playlist-player__container" ng-switch-when="Playlist">
+      <div ng-if="wallPostCtrl.post.wallposting && wallPostCtrl.post.wallposting.resources.length > 0">
+        <share-playlist ng-if="wallPostCtrl.post.wallposting.id" playlist-id="wallPostCtrl.post.wallposting.id" share-callback="wallPostCtrl.sharePlaylist"></share-playlist>
+        <div>
+          <h2 class="wallpost-title">{{wallPostCtrl.post.wallposting.title}}</h2>
+          <prl-player videos="wallPostCtrl.post.wallposting.resources" numberofplaylistitems="3" add-video-fn="wallPostCtrl.onAddToPlaylist"
+            user-playlist="wallPostCtrl.playlists" data-template="playlist"></prl-player>
+        </div>
+      </div>
+      <div class="pl-error__container" ng-if="!wallPostCtrl.post.wallposting">
+        <div class="pl-error">
+          <span class="pl-error__message">This shared playlist has been deleted.</span>
+        </div>
+      </div>
+      <div class="pl-error__container" ng-if="!wallPostCtrl.post.wallposting.resources.length > 0">
+        <div class="pl-error">
+          <span class="pl-error__message">This shared playlist doesn't have any resources.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="solutionmap__container" ng-switch-when="WallSolutionmapPost">
+      <h2 class="wallpost-title">{{wallPostCtrl.post.wallposting.horse.name}}'s Solution Map</h2>
+      <a ng-href="{{wallPostCtrl.post.wallposting.poster}}" target="_blank"><img ng-src="{{wallPostCtrl.post.wallposting.poster}}" alt="Solution Map"></a>
+    </div>
+
+    <div ng-switch-when="HorseHealth">
+      <div class="">
+        <h2 class="wallpost-title">{{wallPostCtrl.post.wallposting.horse.name}}'s Health Update</h2>
+        <div class="prl-horse-update-box" ng-class="{'horse-bottom-margin': !(wallPostCtrl.post.wallposting.nextVisit || wallPostCtrl.post.wallposting.note || wallPostCtrl.post.wallposting.assessment || wallPostCtrl.post.wallposting.treatmentOutcome || wallPostCtrl.post.wallposting.treatmentCare || wallPostCtrl.post.wallposting.recommendations)}">
+          <div class="prl-horse-box-content">
+            <div class="prl-hb-img">
+              <div class="prl-hb-img__thumb prl-hb-img__health" alt="Horse Update" ng-class="[wallPostCtrl.editHealthlog.healthType]"></div>
+              <!-- <img src="../resources/images/horse/{{wallPostCtrl.editHealthlog.healthType}}.png" alt="Horse Update"> -->
+            </div>
+            <div class="prl-hb-line"></div>
+            <div class="prl-hb-header">
+              <div class="prl-hb-subtitle">{{wallPostCtrl.editHealthlog.healthType}} Visit: {{wallPostCtrl.post.wallposting.visit | datetoiso | formatdate: 4}}</div>
+              <div class="prl-hb-title">{{wallPostCtrl.post.wallposting.horse.name}} had a {{wallPostCtrl.editHealthlog.healthVisitType}} {{wallPostCtrl.editHealthlog.healthType}}
+                visit by {{wallPostCtrl.post.wallposting.provider}}
+              </div>
+            </div>
+          </div>
+          <div class="answer-box__attachments" ng-if="wallPostCtrl.post.wall_post_attachment.length > 0">
+            <span class="answer-box__attachments__title">Attachments:</span>
+            <ul>
+              <li ng-repeat="(attachmentIndex, attachment) in wallPostCtrl.post.wall_post_attachment">
+                <a ng-href="{{attachment.resourceUrl}}" target="_blank"><img ng-href="{{attachment.resourceUrl}}" class="post-attachment-img" src="{{attachment.resourceUrl}}"></a>
+                <a class="post-attachment-name" ng-href="{{attachment.resourceUrl}}" target="_blank">{{attachment.title | truncate : 18}}</a>
+              </li>
+            </ul>
+          </div>
+          <div class="prl-horse-box-more" data-slide-toggle="horseUpdateDetails">
+            <div ng-if="wallPostCtrl.post.wallposting.nextVisit" class="prl-hbm-item">
+              <div class="prl-hbm-title">Next Visit Date :</div>
+              <div class="prl-hbm-text">{{wallPostCtrl.post.wallposting.nextVisit | datetoiso | formatdate: 2}}</div>
+            </div>
+            <div ng-if="wallPostCtrl.post.wallposting.note" class="prl-hbm-item">
+              <div class="prl-hbm-title">Notes :</div>
+              <div class="prl-hbm-text">{{wallPostCtrl.post.wallposting.note}}</div>
+            </div>
+            <div ng-if="wallPostCtrl.post.wallposting.assessment" class="prl-hbm-item">
+              <div class="prl-hbm-title">Assessment :</div>
+              <div class="prl-hbm-text">{{wallPostCtrl.post.wallposting.assessment}}</div>
+            </div>
+            <div ng-if="wallPostCtrl.post.wallposting.treatmentOutcome" class="prl-hbm-item">
+              <div class="prl-hbm-title">Treatment Outcome :</div>
+              <div class="prl-hbm-text">{{wallPostCtrl.post.wallposting.treatmentOutcome}}</div>
+            </div>
+            <div ng-if="wallPostCtrl.post.wallposting.treatmentCare" class="prl-hbm-item">
+              <div class="prl-hbm-title">Treatment Care :</div>
+              <div class="prl-hbm-text">{{wallPostCtrl.post.wallposting.treatmentCare}}</div>
+            </div>
+            <div ng-if="wallPostCtrl.post.wallposting.recommendations" class="prl-hbm-item">
+              <div class="prl-hbm-title">Recommendations :</div>
+              <div class="prl-hbm-text">{{wallPostCtrl.post.wallposting.recommendations}}</div>
+            </div>
+          </div>
+        </div>
+        <div ng-show="wallPostCtrl.post.wallposting.nextVisit || wallPostCtrl.post.wallposting.note || wallPostCtrl.post.wallposting.assessment || wallPostCtrl.post.wallposting.treatmentOutcome || wallPostCtrl.post.wallposting.treatmentCare || wallPostCtrl.post.wallposting.recommendations" ng-click="horseUpdateDetails=!horseUpdateDetails; (wallPostCtrl.toggleText == 'Less' ? wallPostCtrl.toggleText = 'More' : wallPostCtrl.toggleText = 'Less')"
+          class="prl-horse-box-viewmore btn btn-grey horse-bottom-margin">{{wallPostCtrl.toggleText}} Details</div>
+      </div>
+    </div>
+
+    <div ng-switch-when="HorseProgress">
+      <div class="">
+        <h2 class="wallpost-title">{{wallPostCtrl.post.wallposting.horse.name}}'s Progress Update</h2>
+        <div class="prl-horse-update-box" ng-class="{'horse-bottom-margin': (wallPostCtrl.post.wallposting.note.length < 120 && wallPostCtrl.post.wallposting.logs.length == 1 || wallPostCtrl.post.wallposting.note == null)}">
+          <div ng-switch="wallPostCtrl.post.wallposting.logs.length">
+            <div ng-switch-when="1" class="prl-horse-box-content">
+              <div class="prl-hb-img">
+                 <div class="prl-hb-img__thumb prl-hb-img__progress" alt="Horse Update" ng-class="[wallPostCtrl.post.wallposting.logs[0].savvy.title, {'progress-level-1': wallPostCtrl.post.wallposting.logs[0].level.id == 1, 'progress-level-2': wallPostCtrl.post.wallposting.logs[0].level.id == 2, 'progress-level-3': wallPostCtrl.post.wallposting.logs[0].level.id == 3, 'progress-level-4': wallPostCtrl.post.wallposting.logs[0].level.id == 4, 'progress-level-5': wallPostCtrl.post.wallposting.logs[0].level.id == 5}]"></div>
+              </div>
+              <div class="prl-hb-line prl-hb-line-progress-single"></div>
+              <div class="prl-hb-header">
+                <div class="prl-hb-title">{{wallPostCtrl.post.wallposting.logs[0].level.title}} {{wallPostCtrl.post.wallposting.logs[0].savvy.title}}</div>
+                <div class="prl-hb-subtitle">{{wallPostCtrl.post.wallposting.logs[0].time}} Minutes</div>
+              </div>
+            </div>
+            <div ng-switch-default>
+              <perfect-scrollbar class="prl-horse-update-box-progress__container" wheel-propagation="false" wheel-speed="6" min-scrollbar-length="5"
+                suppress-scroll-y="true">
+                <div class="prl-horse-update-box-progress">
+                  <div class="prl-horse-box-content prl-horse-box-content-progress" ng-repeat-start="progressLog in wallPostCtrl.post.wallposting.logs track by $index">
+                  <div class="prl-hb-img">
+                    <div class="prl-hb-img__thumb prl-hb-img__progress" alt="Horse Update" ng-class="[progressLog.savvy.title, {'progress-level-1': progressLog.level.id == 1, 'progress-level-2': progressLog.level.id == 2, 'progress-level-3': progressLog.level.id == 3, 'progress-level-4': progressLog.level.id == 4, 'progress-level-5': progressLog.level.id == 5}]"></div>
+                  </div>
+                  <div class="prl-hb-progress-header">
+                    <div class="prl-hb-title">{{progressLog.level.title}}<br />{{progressLog.savvy.title}}</div>
+                    <div class="prl-hb-subtitle">{{progressLog.time}} Minutes</div>
+                  </div>
+                </div>
+                <div ng-repeat-end ng-hide="$last" class="prl-hb-line"></div>
+                </div>
+              </perfect-scrollbar>
+            </div>
+          </div>
+          <div class="answer-box__attachments" ng-if="wallPostCtrl.post.wall_post_attachment.length > 0">
+            <span class="answer-box__attachments__title">Attachments:</span>
+            <ul>
+              <li ng-repeat="(attachmentIndex, attachment) in wallPostCtrl.post.wall_post_attachment">
+                <a ng-href="{{attachment.resourceUrl}}" target="_blank"><img ng-href="{{attachment.resourceUrl}}" class="post-attachment-img" src="{{attachment.resourceUrl}}"></a>
+                <a class="post-attachment-name" ng-href="{{attachment.resourceUrl}}" target="_blank">{{attachment.title | truncate : 18}}</a>
+              </li>
+            </ul>
+          </div>
+          <div ng-if="wallPostCtrl.post.wallposting.note.length < 120 && wallPostCtrl.post.wallposting.logs.length == 1" class="prl-horse-box-more">
+            <div class="prl-hbm-item prl-hbm-item-progress">
+              <div class="prl-hbm-title">Notes :</div>
+              <div class="prl-hbm-text">{{wallPostCtrl.post.wallposting.note}}</div>
+            </div>
+          </div>
+          <div ng-if="(wallPostCtrl.post.wallposting.note.length > 120 || wallPostCtrl.post.wallposting.logs.length > 1) && wallPostCtrl.post.wallposting.note != null"
+            class="prl-horse-box-more" data-slide-toggle="horseUpdateDetails">
+            <div class="prl-hbm-item prl-hbm-item-progress">
+              <div class="prl-hbm-title">Notes :</div>
+              <div class="prl-hbm-text">{{wallPostCtrl.post.wallposting.note}}</div>
+            </div>
+          </div>
+        </div>
+        <div ng-show="(wallPostCtrl.post.wallposting.note.length > 120 || wallPostCtrl.post.wallposting.logs.length > 1) && wallPostCtrl.post.wallposting.note != null"
+          ng-click="horseUpdateDetails=!horseUpdateDetails; (wallPostCtrl.toggleText == 'Less' ? wallPostCtrl.toggleText = 'More' : wallPostCtrl.toggleText = 'Less')"
+          class="prl-horse-box-viewmore btn btn-grey horse-bottom-margin">{{wallPostCtrl.toggleText}} Details</div>
+      </div>
+    </div>
+
+    <simple-reply button-text="SAVE" ng-if="wallPostCtrl.toggleEditBox" post="wallPostCtrl.editPostClicked" content="wallPostCtrl.post.wallposting.content"
+      attachments-available="wallPostCtrl.post.wall_post_attachment.length > 0" privacy="wallPostCtrl.post.privacy"></simple-reply>
+    <simple-reply class="comment-box" button-text="COMMENT" ng-if="wallPostCtrl.toggleCommentBox" post="wallPostCtrl.createPostComment"></simple-reply>
+    <div class="comments-container">
+      <div class="comments-container__content" block-ui="commentsLoading" ng-if="wallPostCtrl.comments.length > 0">
+        <prl-comment ng-repeat="comment in wallPostCtrl.comments | orderBy: '-created_at' track by comment.id" comment="comment" edit="wallPostCtrl.editCommentClicked"
+          delete-comment="wallPostCtrl.deleteCommentClicked" text-area="wallPostCtrl.showTextArea" root-access="wallPostCtrl.rootAccess"
+          owner-id="wallPostCtrl.ownerId"></prl-comment>
+      </div>
+      <load-more-btn label="Load comments" load="wallPostCtrl.loadComments" id="wallPostCtrl.post.id" ng-hide="wallPostCtrl._commentReachedEnd || !wallPostCtrl.post.comment_count > 0 || wallPostCtrl.post.comment_count < wallPostCtrl._paginationLimit"></load-more-btn>
+    </div>
+  </div>
+
+  <!-- ******************** Health Post Edit Popup ******************** -->
+  <div ng-if="wallPostCtrl.hasHealthLogEditPopup" id="editHealthPost{{wallPostCtrl.post.id}}" class="modal editHorsePostCSS fade"
+    tabindex="100" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="onCloseClicked()"><span aria-hidden="true">×</span></button> -->
+          <h4 class="modal-title" id="myEventLabel">Health Log</h4>
+          <div class="arrow-down"></div>
+        </div>
+        <div class="modal-body" block-ui="editPopupLoading">
+          <form name="wallPostCtrl.horseHealthEditForm" novalidate="">
+            <div class="row formRow bgColor">
+              <div class="col-md-12">
+                <div class="po-s2-form-container">
+                  <div class="row">
+                    <div class="col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : wallPostCtrl.horseHealthEditForm.providerName.$invalid && wallPostCtrl.editHealthlogBtnClicked }">
+                      <label>Provider Name*</label>
+                      <input type="text" name="providerName" placeholder="" class="form-control" ng-model="wallPostCtrl.editHealthlog.providerName"
+                        ng-minlength="1" ng-maxlength="100" ng-pattern="/^[\D]*$/" required>
+                      <p ng-show="wallPostCtrl.horseHealthEditForm.providerName.$invalid && wallPostCtrl.editHealthlogBtnClicked" class="help-block">Please enter a valid provider name.</p>
+                    </div>
+                    <div class="col-md-6 po-s2-form-field-group calender" ng-class="{ 'has-error' : wallPostCtrl.horseHealthEditForm.visitDate.$invalid && wallPostCtrl.editHealthlogBtnClicked }">
+                      <label>Visit Date*</label>
+                      <input name="visitDate" type="text" placeholder="" class="form-control" moment-picker="wallPostCtrl.editHealthlog.visitDate"
+                        start-date="wallPostCtrl.editHealthlog.visitDate" ng-model="wallPostCtrl.editHealthlog.visitDate" format="M/D/YYYY"
+                        max-view="day" autoclose="true" position="bottom" ng-paste="$event.preventDefault();" required/>
+                      <p ng-show="wallPostCtrl.horseHealthEditForm.visitDate.$invalid && wallPostCtrl.editHealthlogBtnClicked" class="help-block">Please enter a valid visit date.</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 po-s2-form-field-group calender" ng-class="{ 'has-error' : wallPostCtrl.horseHealthEditForm.nextVisitDate.$invalid && wallPostCtrl.editHealthlogBtnClicked }">
+                      <label>Next Visit Date</label>
+                      <input name="nextVisitDate" type="text" placeholder="" class="form-control" moment-picker="wallPostCtrl.editHealthlog.nextVisitDate"
+                        ng-model="wallPostCtrl.editHealthlog.nextVisitDate" format="M/D/YYYY" max-view="day" min-date="wallPostCtrl.editHealthlog.visitDate"
+                        autoclose="true" position="bottom" /><span ng-show="wallPostCtrl.editHealthlog.nextVisitDate" class="glyphicon glyphicon-remove multi-upload__remove" aria-hidden="true" ng-click="wallPostCtrl.onHealthLogDateRemove()"></span>
+                        <p ng-show="wallPostCtrl.horseHealthEditForm.nextVisitDate.$invalid && wallPostCtrl.editHealthlogBtnClicked" class="help-block">Please enter a valid next visit date.</p>
+                      </div>
+                      <div class="col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : wallPostCtrl.horseHealthEditForm.visitType.$invalid && wallPostCtrl.editHealthlogBtnClicked }">
+                        <label>Visit Type*</label>
+                        <select name="visitType" ng-model="wallPostCtrl.editHealthlog.selectedHealthVisitType" class="horse-health-form-select" required>
+                          <option ng-show="wallPostCtrl.healthLogTypes" ng-repeat="(key, value) in (wallPostCtrl.editHealthlog.healthTypeId == '0' ? wallPostCtrl.healthLogTypes.farrier.types[0] : (wallPostCtrl.editHealthlog.healthTypeId == '1' ? wallPostCtrl.healthLogTypes.veterinary.types[0] : wallPostCtrl.healthLogTypes.holistic.types[0]))" value="{{value}}">{{key | capitalize}}</option>
+                          <option ng-hide="wallPostCtrl.healthLogTypes" ng-repeat="(key, value) in wallPostCtrl.post.wallposting.visitType" value="{{value}}" selected>{{key | capitalize}}</option>
+                        </select>
+                        <p ng-show="wallPostCtrl.horseHealthEditForm.visitType.$invalid && wallPostCtrl.editHealthlogBtnClicked" class="help-block">Please enter a valid visit type.</p>
+                      </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : wallPostCtrl.horseHealthEditForm.notes.$invalid && wallPostCtrl.editHealthlogBtnClicked }">
+                      <label>Notes<span ng-show="wallPostCtrl.editHealthlog.selectedHealthVisitType == 100">*</span> </label>
+                      <textarea type="text" name="notes" rows="8" placeholder="" class="form-control" ng-model="wallPostCtrl.editHealthlog.notes" ng-required="wallPostCtrl.editHealthlog.selectedHealthVisitType == 100"></textarea>
+                      <p ng-show="wallPostCtrl.horseHealthEditForm.notes.$invalid && wallPostCtrl.editHealthlogBtnClicked" class="help-block">Please enter a valid notes.</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : wallPostCtrl.horseHealthEditForm.assessment.$invalid && wallPostCtrl.editHealthlogBtnClicked }">
+                      <label>Assessment </label>
+                      <textarea type="text" name="assessment" rows="8" placeholder="" class="form-control" ng-model="wallPostCtrl.editHealthlog.assessment"></textarea>
+                      <p ng-show="wallPostCtrl.horseHealthEditForm.assessment.$invalid && wallPostCtrl.editHealthlogBtnClicked" class="help-block">Please enter a valid assessment.</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : wallPostCtrl.horseHealthEditForm.treatmentOutcome.$invalid && wallPostCtrl.editHealthlogBtnClicked }">
+                      <label>Treatment Outcome </label>
+                      <textarea type="text" name="treatmentOutcome" rows="8" placeholder="" class="form-control" ng-model="wallPostCtrl.editHealthlog.treatmentOutcome"></textarea>
+                      <p ng-show="wallPostCtrl.horseHealthEditForm.treatmentOutcome.$invalid && wallPostCtrl.editHealthlogBtnClicked" class="help-block">Please enter a valid treatment Outcome.</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : wallPostCtrl.horseHealthEditForm.treatmentCare.$invalid && wallPostCtrl.editHealthlogBtnClicked }">
+                      <label>Treatment Care </label>
+                      <textarea type="text" name="treatmentCare" rows="8" placeholder="" class="form-control" ng-model="wallPostCtrl.editHealthlog.treatmentCare"></textarea>
+                      <p ng-show="wallPostCtrl.horseHealthEditForm.treatmentCare.$invalid && wallPostCtrl.editHealthlogBtnClicked" class="help-block">Please enter a valid treatment Care.</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : wallPostCtrl.horseHealthEditForm.recommendations.$invalid && wallPostCtrl.editHealthlogBtnClicked }">
+                      <label>Recommendations</label>
+                      <textarea type="text" name="recommendations" rows="8" placeholder="" class="form-control" ng-model="wallPostCtrl.editHealthlog.recommendations"></textarea>
+                      <p ng-show="wallPostCtrl.horseHealthEditForm.recommendations.$invalid && wallPostCtrl.editHealthlogBtnClicked" class="help-block">Please enter a valid recommendations.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="post-option-btns horse-edit-popup-privacy">
+                  <ol class="nya-bs-select privacy-selector" ng-model="wallPostCtrl.selectedHealthPostPrivacy">
+                    <li class="nya-bs-option disabled" data-value='9999'>
+                      <a>
+                        <span><span class="glyphicon"></span>Who can see this post?</span>
+                      </a>
+                    </li>
+                    <li class="nya-bs-option" data-value='0'>
+                      <a>
+                        <span><span class="glyphicon glyphicon-eye-close"></span>Private</span>
+                      </a>
+                    </li>
+                    <li class="nya-bs-option" data-value='1'>
+                      <a>
+                        <span><span class="glyphicon glyphicon-globe"></span>Public</span>
+                      </a>
+                    </li>
+                    <li class="nya-bs-option" data-value="2">
+                      <a>
+                        <span><span class="glyphicon glyphicon-user"></span>Connections Only</span>
+                      </a>
+                    </li>
+                  </ol>
+                </div>
+                <div class="progress-save-btn">
+                  <input ng-disabled="wallPostCtrl.isNewHealthLogProcessing" ng-click="wallPostCtrl.onHealthPostEdit()" type="button" id="po-next"
+                    class="btn btn-yellow pull-right" value="UPDATE" href="" disabled="disabled">
+                  <input ng-disabled="wallPostCtrl.isNewHealthLogProcessing" type="button" id="po-next" data-dismiss="modal" aria-label="Close"
+                    class="btn pull-right cancel-btn btn-black" value="CANCEL" href="">
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- ******************** Health Post Edit Popup ******************** -->
+
+  <!-- ******************** Progress Post Edit Popup ******************** -->
+  <div ng-if="wallPostCtrl.hasProgressLogEditPopup" id="editProgressPost{{wallPostCtrl.post.id}}" class="modal editHorsePostCSS fade"
+    tabindex="100" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="onCloseClicked()"><span aria-hidden="true">×</span></button> -->
+          <h4 class="modal-title" id="myEventLabel">Progress Log</h4>
+          <div class="arrow-down"></div>
+        </div>
+        <div class="modal-body" block-ui="editPopupLoading">
+          <form name="wallPostCtrl.horseProgressEditForm" novalidate="">
+            <div class="row formRow bgColor">
+              <div class="col-md-12">
+                <div class="po-s2-form-container">
+                  <div class="row prl-horse-progress-form-row">
+                    <div class="col-md-8 col-xs-12 po-s2-form-field-group">
+                      <label>On Line</label>
+                      <select name="onlineLevel" ng-model="wallPostCtrl.editProgresslog.onlineLevel">
+                      <option value="9999">None</option>
+                      <option ng-repeat="level in wallPostCtrl.levelItems.online.levels" value="{{level}}">{{level.name}}</option>
+                    </select>
+                    </div>
+                    <div class="col-md-4 col-xs-12 po-s2-form-field-group" ng-class="{ 'has-error' : wallPostCtrl.horseProgressEditForm.onlineTime.$invalid && wallPostCtrl.editProgresslogBtnClicked }">
+                      <label>Time (Minutes)</label>
+                      <input type="number" name="onlineTime" ng-model="wallPostCtrl.editProgresslog.onlineTime" ng-disabled="wallPostCtrl.editProgresslog.onlineLevel == '9999'"
+                        value="" placeholder="E.G. 20 Minutes" ng-pattern="/^-?[0-9][^\.]*$/" min="0" ng-required="wallPostCtrl.editProgresslog.onlineLevel != '9999'">
+                      <p ng-show="wallPostCtrl.horseProgressEditForm.onlineTime.$invalid && wallPostCtrl.editProgresslogBtnClicked" class="help-block">Please enter a whole value.</p>
+                    </div>
+                  </div>
+
+                  <div class="row prl-horse-progress-form-row">
+                    <div class="col-md-8 col-xs-12 po-s2-form-field-group">
+                      <label>Liberty</label>
+                      <select name="libertyLevel" ng-model="wallPostCtrl.editProgresslog.libertyLevel">
+                      <option value="9999">None</option>
+                      <option ng-repeat="level in wallPostCtrl.levelItems.liberty.levels" value="{{level}}">{{level.name}}</option>
+                    </select>
+                    </div>
+                    <div class="col-md-4 col-xs-12 po-s2-form-field-group" ng-class="{ 'has-error' : wallPostCtrl.horseProgressEditForm.libertyTime.$invalid && wallPostCtrl.editProgresslogBtnClicked }">
+                      <label>Time (Minutes)</label>
+                      <input type="number" name="libertyTime" ng-model="wallPostCtrl.editProgresslog.libertyTime" ng-disabled="wallPostCtrl.editProgresslog.libertyLevel == '9999'"
+                        value="" placeholder="E.G. 20 Minutes" ng-pattern="/^-?[0-9][^\.]*$/" min="0" ng-required="wallPostCtrl.editProgresslog.libertyLevel != '9999'">
+                      <p ng-show="wallPostCtrl.horseProgressEditForm.libertyTime.$invalid && wallPostCtrl.editProgresslogBtnClicked" class="help-block">Please enter a whole value.</p>
+                    </div>
+                  </div>
+
+                  <div class="row prl-horse-progress-form-row">
+                    <div class="col-md-8 col-xs-12 po-s2-form-field-group">
+                      <label>Freestyle</label>
+                      <select name="freestyleLevel" ng-model="wallPostCtrl.editProgresslog.freestyleLevel">
+                      <option value="9999">None</option>
+                      <option ng-repeat="level in wallPostCtrl.levelItems.freestyle.levels" value="{{level}}">{{level.name}}</option>
+                    </select>
+                    </div>
+                    <div class="col-md-4 col-xs-12 po-s2-form-field-group" ng-class="{ 'has-error' : wallPostCtrl.horseProgressEditForm.freestyleTime.$invalid && wallPostCtrl.editProgresslogBtnClicked }">
+                      <label>Time (Minutes)</label>
+                      <input type="number" name="freestyleTime" ng-model="wallPostCtrl.editProgresslog.freestyleTime" ng-disabled="wallPostCtrl.editProgresslog.freestyleLevel == '9999'"
+                        value="" placeholder="E.G. 20 Minutes" ng-pattern="/^-?[0-9][^\.]*$/" min="0" ng-required="wallPostCtrl.editProgresslog.freestyleLevel != '9999'">
+                      <p ng-show="wallPostCtrl.horseProgressEditForm.freestyleTime.$invalid && wallPostCtrl.editProgresslogBtnClicked" class="help-block">Please enter a whole value.</p>
+                    </div>
+                  </div>
+
+                  <div class="row prl-horse-progress-form-row">
+                    <div class="col-md-8 col-xs-12 po-s2-form-field-group">
+                      <label>Finesse</label>
+                      <select name="finesseLevel" ng-model="wallPostCtrl.editProgresslog.finesseLevel">
+                      <option value="9999">None</option>
+                      <option ng-repeat="level in wallPostCtrl.levelItems.finesse.levels" value="{{level}}">{{level.name}}</option>
+                    </select>
+                    </div>
+                    <div class="col-md-4 col-xs-12 po-s2-form-field-group" ng-class="{ 'has-error' : wallPostCtrl.horseProgressEditForm.finesseTime.$invalid && wallPostCtrl.editProgresslogBtnClicked }">
+                      <label>Time (Minutes)</label>
+                      <input type="number" name="finesseTime" ng-model="wallPostCtrl.editProgresslog.finesseTime" ng-disabled="wallPostCtrl.editProgresslog.finesseLevel == '9999'"
+                        value="" placeholder="E.G. 20 Minutes" ng-pattern="/^-?[0-9][^\.]*$/" min="0" ng-required="wallPostCtrl.editProgresslog.finesseLevel != '9999'">
+                      <p ng-show="wallPostCtrl.horseProgressEditForm.finesseTime.$invalid && wallPostCtrl.editProgresslogBtnClicked" class="help-block">Please enter a whole value.</p>
+                    </div>
+                  </div>
+
+                  <div class="row prl-horse-progress-form-row">
+                    <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : wallPostCtrl.horseProgressEditForm.notes.$invalid && wallPostCtrl.editProgresslogBtnClicked }">
+                      <label>Notes</label>
+                      <textarea type="text" name="notes" rows="5" placeholder="" class="form-control" ng-model="wallPostCtrl.editProgresslog.notes"></textarea>
+                      <p ng-show="wallPostCtrl.horseProgressEditForm.notes.$invalid && wallPostCtrl.editProgresslogBtnClicked" class="help-block">Please enter a valid note.</p>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="post-option-btns horse-edit-popup-privacy">
+                  <ol class="nya-bs-select privacy-selector" ng-model="wallPostCtrl.selectedProgressPostPrivacy">
+                    <li class="nya-bs-option disabled" data-value='9999'>
+                      <a>
+                        <span><span class="glyphicon"></span>Who can see this post?</span>
+                      </a>
+                    </li>
+                    <li class="nya-bs-option" data-value='0'>
+                      <a>
+                        <span><span class="glyphicon glyphicon-eye-close"></span>Private</span>
+                      </a>
+                    </li>
+                    <li class="nya-bs-option" data-value='1'>
+                      <a>
+                        <span><span class="glyphicon glyphicon-globe"></span>Public</span>
+                      </a>
+                    </li>
+                    <li class="nya-bs-option" data-value="2">
+                      <a>
+                        <span><span class="glyphicon glyphicon-user"></span>Connections Only</span>
+                      </a>
+                    </li>
+                  </ol>
+                </div>
+
+                <div class="progress-save-btn">
+                  <input ng-disabled="wallPostCtrl.isNewProgressLogProcessing" ng-click="wallPostCtrl.onProgressPostEdit()" type="button" id="po-next"
+                    class="btn btn-yellow pull-right" value="UPDATE" href="">
+                  <input ng-disabled="wallPostCtrl.isNewProgressLogProcessing" type="button" id="po-next" data-dismiss="modal" aria-label="Close"
+                    class="btn pull-right cancel-btn btn-black" value="CANCEL" href="">
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ******************** Progress Post Edit Popup ******************** -->
+</div>

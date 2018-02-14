@@ -1,0 +1,38 @@
+<div id="step5" class="tab-pane">
+  <!-- po-heading block -->
+  <div class="row po-heading bottom-buffer-60">
+    <div class="col-md-12">
+      <h1>Here's just a taste of what you'll get ...</h1>
+      <div class="tiny-border"></div>
+    </div>
+  </div>
+  <!-- /po-heading -->
+  <div ng-if="$ctrl.resources !== null && $ctrl.resources.length > 0">
+  	<prl-player data-videos="$ctrl.resources" data-numberofplaylistitems="4"></prl-player>
+  </div>
+  <div class="row">
+    <div class="col-md-6 prl__s5__description">
+      <h3>{{$ctrl.lesson.title}}</h3>
+      <div class="large-border"></div>
+      <div ng-bind-html="$ctrl.lesson.description" class="lesson-content content-block"></div>
+      <!--<input ng-if="!$ctrl.loggedIn" ng-click="$ctrl.onSubmitFormClicked()" ui-sref="#" type="button" id="po-next" class="btn btn-yellow" value="{{'I\'m Interested in Joining' | uppercase}}">-->
+      <!--<input ng-if="$ctrl.loggedIn" ng-click="$ctrl.onSubmitFormClicked()" ui-sref="#" type="button" id="po-next" class="btn btn-yellow" value="{{'Let\'s Get Started!' | uppercase}}">-->
+      <button type="submit" class="btn btn-yellow btn-submit" ng-disabled="$ctrl.isProcessing" ng-click="$ctrl.onSubmitFormClicked()" ng-class="{'processing': $ctrl.isProcessing}" id="po-next" ui-sref="#">
+        <div class="bs-process-bar uil-ring-css yellow">
+          <div></div>
+        </div>
+        <span class="bs-login-text">
+          {{$ctrl.loggedIn ? 'LET\'S GET STARTED!' : 'I\'M INTERESTED IN JOINING'}}
+        </span>
+      </button>
+    </div>
+  </div>
+  <div class="chat-bubble" ng-show="$ctrl.lesson.chat_bubble.id">
+    <div class="chat-body">
+      <p>"{{$ctrl.lesson.chat_bubble.message}}"</p>
+      <p>- {{$ctrl.lesson.chat_bubble.author}}<span ng-if="$ctrl.lesson.chat_bubble.user_country">, {{$ctrl.lesson.chat_bubble.user_country}}</span></p>
+      <div class="arrow-down"></div>
+    </div>
+    <div class="chat-head" style="background-image: url('{{$ctrl.lesson.chat_bubble.profile_picture}}')"></div>
+  </div>
+</div>

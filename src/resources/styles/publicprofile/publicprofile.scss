@@ -1,0 +1,29 @@
+.public-profile {
+  &__container {
+    input[disabled],
+    textarea[disabled],
+    select[disabled] {
+      cursor: default !important;
+    }
+    .bgColor {
+      padding-bottom: 0;
+    }
+  }
+}
+
+.profile-image {
+  background-position: center;
+  background-size: cover;
+  bottom: 5px;
+  left: 5px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  &__container {
+    border: 1px solid $grey4;
+    border-radius: 5px;
+    height: 180px;
+    position: relative;
+    width: 180px;
+  }
+}

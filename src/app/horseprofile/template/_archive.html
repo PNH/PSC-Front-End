@@ -1,0 +1,21 @@
+<aside class="archive sidebar">
+  <div class="sidebar__header clearfix">
+    <h2>Archive</h2>
+    <button class="btn-empty btn-sm btn-clear" ng-click="$ctrl.resetArchive()">Clear</button>
+  </div>
+  <div class="block dropdown-box__container" ng-repeat="archive in $ctrl.archives track by $index" ng-class="{'open': $first}" dropdown-box>
+    <div class="box light_bg">
+      <span class="dd-toggle"></span>
+      <div class="dd_title">
+        {{archive.name}}
+      </div>
+    </div>
+    <div class="dropdown-box">
+      <ul class="month-list">
+        <li ng-repeat="month in archive.count" ng-class="{'active': archive.name === $ctrl.year && month.name === $ctrl.month}">
+          <a ng-click="$ctrl.onArchiveClicked($ctrl.horseId, archive.name, month.name, $ctrl.horseTabType)">{{month.name | formatdate: 9}} (<span class="amount">{{month.count}}</span>)</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</aside>

@@ -1,0 +1,104 @@
+
+<div ng-if="wallPostCtrl.hasHealthLogEditPopup" id="editHealthPost" class="modal fade" tabindex="100" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="onCloseClicked()"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title" id="myEventLabel">Health Log</h4>
+        <div class="arrow-down"></div>
+      </div>
+      <div class="modal-body">
+
+
+        <form name="wallPostCtrl.horseHealthEditForm" novalidate="">
+          <div class="row formRow bgColor">
+            <div class="col-md-12">
+
+
+
+
+
+              <div class="po-s2-form-container">
+                <div class="row">
+                  <div class="col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : wallPostCtrl.horseHealthEditForm.providerName.$invalid && wallPostCtrl.editHealthlogBtnClicked }">
+                    <label>Provider Name*</label>
+                    <input type="text" name="providerName" placeholder="" class="form-control" ng-model="wallPostCtrl.editHealthlog.providerName" ng-minlength="3" ng-maxlength="100" ng-pattern="/^[a-zA-Z\s]*$/" required>
+                    <p ng-show="wallPostCtrl.horseHealthEditForm.providerName.$invalid && wallPostCtrl.editHealthlogBtnClicked" class="help-block">Please enter a valid provider name.</p>
+                  </div>
+                  <div class="col-md-6 po-s2-form-field-group calender" ng-class="{ 'has-error' : wallPostCtrl.horseHealthEditForm.visitDate.$invalid && wallPostCtrl.editHealthlogBtnClicked }">
+                    <label>Visit Date*</label>
+                    <input name="visitDate" type="text" placeholder="" class="form-control" moment-picker="wallPostCtrl.editHealthlog.visitDate" ng-model="wallPostCtrl.editHealthlog.visitDate" format="MM-DD-YYYY" max-view="day" autoclose="true" position="bottom" ng-paste="$event.preventDefault();" required/>
+                    <p ng-show="wallPostCtrl.horseHealthEditForm.visitDate.$invalid && wallPostCtrl.editHealthlogBtnClicked" class="help-block">Please enter a valid visit date.</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 po-s2-form-field-group calender" ng-class="{ 'has-error' : wallPostCtrl.horseHealthEditForm.nextVisitDate.$invalid && wallPostCtrl.editHealthlogBtnClicked }">
+                    <label>Next Visit Date</label>
+                    <input name="nextVisitDate" type="text" placeholder="" class="form-control" moment-picker="wallPostCtrl.editHealthlog.nextVisitDate" ng-model="wallPostCtrl.editHealthlog.nextVisitDate" format="MM-DD-YYYY" max-view="day" min-date="wallPostCtrl.editHealthlog.visitDate" autoclose="true" position="bottom" ng-paste="$event.preventDefault();"/>
+                    <p ng-show="wallPostCtrl.horseHealthEditForm.nextVisitDate.$invalid && wallPostCtrl.editHealthlogBtnClicked" class="help-block">Please enter a valid next visit date.</p>
+                  </div>
+                  <div class="col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : wallPostCtrl.horseHealthEditForm.visitType.$invalid && wallPostCtrl.editHealthlogBtnClicked }">
+                    <label>Visit Type*</label>
+                    <select name="visitType" ng-model="wallPostCtrl.editHealthlog.selectedHealthVisitType" ng-change="wallPostCtrl.onChangeHealthVisitType(wallPostCtrl.editHealthlog.selectedHealthVisitType)" required>
+                      <option ng-repeat="(key, value) in (wallPostCtrl.healthTypeTab == '0' ? wallPostCtrl.healthLogTypes.farrier.types[0] : (wallPostCtrl.healthTypeTab == '1' ? wallPostCtrl.healthLogTypes.veterinary.types[0] : wallPostCtrl.healthLogTypes.holistic.types[0]))" value="{{value}}">{{key}}</option>
+                    </select>
+                    <p ng-show="wallPostCtrl.horseHealthEditForm.visitType.$invalid && wallPostCtrl.editHealthlogBtnClicked" class="help-block">Please enter a valid visit type.</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : wallPostCtrl.horseHealthEditForm.notes.$invalid && wallPostCtrl.editHealthlogBtnClicked }">
+                    <label>Notes<span ng-show="wallPostCtrl.editHealthlog.selectedHealthVisitType == 100">*</span> </label>
+                    <textarea type="text" name="notes" rows="8" placeholder="" class="form-control" ng-model="wallPostCtrl.editHealthlog.notes" ng-minlength="3" ng-maxlength="100" ng-pattern="/^[a-zA-Z\s]*$/" ng-required="wallPostCtrl.editHealthlog.selectedHealthVisitType == 100"></textarea>
+                    <p ng-show="wallPostCtrl.horseHealthEditForm.notes.$invalid && wallPostCtrl.editHealthlogBtnClicked" class="help-block">Please enter a valid notes.</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : wallPostCtrl.horseHealthEditForm.assessment.$invalid && wallPostCtrl.editHealthlogBtnClicked }">
+                    <label>Assessment </label>
+                    <textarea type="text" name="assessment" rows="8" placeholder="" class="form-control" ng-model="wallPostCtrl.editHealthlog.assessment" ng-minlength="3" ng-maxlength="100" ng-pattern="/^[a-zA-Z\s]*$/"></textarea>
+                    <p ng-show="wallPostCtrl.horseHealthEditForm.assessment.$invalid && wallPostCtrl.editHealthlogBtnClicked" class="help-block">Please enter a valid assessment.</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : wallPostCtrl.horseHealthEditForm.treatmentOutcome.$invalid && wallPostCtrl.editHealthlogBtnClicked }">
+                    <label>Treatment Outcome </label>
+                    <textarea type="text" name="treatmentOutcome" rows="8" placeholder="" class="form-control" ng-model="wallPostCtrl.editHealthlog.treatmentOutcome" ng-minlength="3" ng-maxlength="100" ng-pattern="/^[a-zA-Z\s]*$/"></textarea>
+                    <p ng-show="wallPostCtrl.horseHealthEditForm.treatmentOutcome.$invalid && wallPostCtrl.editHealthlogBtnClicked" class="help-block">Please enter a valid treatment Outcome.</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : wallPostCtrl.horseHealthEditForm.treatmentCare.$invalid && wallPostCtrl.editHealthlogBtnClicked }">
+                    <label>Treatment Care </label>
+                    <textarea type="text" name="treatmentCare" rows="8" placeholder="" class="form-control" ng-model="wallPostCtrl.editHealthlog.treatmentCare" ng-minlength="3" ng-maxlength="100" ng-pattern="/^[a-zA-Z\s]*$/"></textarea>
+                    <p ng-show="wallPostCtrl.horseHealthEditForm.treatmentCare.$invalid && wallPostCtrl.editHealthlogBtnClicked" class="help-block">Please enter a valid treatment Care.</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : wallPostCtrl.horseHealthEditForm.recommendations.$invalid && wallPostCtrl.editHealthlogBtnClicked }">
+                    <label>Recommendations</label>
+                    <textarea type="text" name="recommendations" rows="8" placeholder="" class="form-control" ng-model="wallPostCtrl.editHealthlog.recommendations" ng-minlength="3" ng-maxlength="100" ng-pattern="/^[a-zA-Z\s]*$/"></textarea>
+                    <p ng-show="wallPostCtrl.horseHealthEditForm.recommendations.$invalid && wallPostCtrl.editHealthlogBtnClicked" class="help-block">Please enter a valid recommendations.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="progress-save-btn">
+<!--                 <button ng-disabled="wallPostCtrl.isNewHealthLogProcessing" type="submit" class="btn btn-yellow btn-submit pull-right group-post__btn"
+                  ng-click="wallPostCtrl.onHealthPostEdit()" ng-class="{'processing': wallPostCtrl.isNewHealthLogProcessing}">
+                  <div class="bs-process-bar uil-ring-css yellow">
+                    <div></div>
+                  </div>
+                  <span class="bs-login-text">POST</span>
+                </button> -->
+                <input ng-disabled="wallPostCtrl.isNewHealthLogProcessing" ng-class="{'processing': wallPostCtrl.isNewHealthLogProcessing}" ng-click="wallPostCtrl.onHealthPostEdit()" type="button" id="po-next" class="btn btn-yellow pull-right" value="POST" href="" disabled="disabled">
+              </div>
+            </div>
+          </div>
+        </form>
+
+
+      </div>
+    </div>
+  </div>
+
+</div>

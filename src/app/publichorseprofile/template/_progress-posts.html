@@ -1,0 +1,28 @@
+<div class="row online-container-row" block-ui="existingProgressLogLoading">
+  <div class="online-container">
+    <div class="po-s2-form-container " ng-show="$ctrl.progressLogs.length > 0">
+      <div class="main-container prl-wall__container clearfix">
+        <div class="content-holder forum-content">
+          <div class="block-holder forum-item prl-groups-detail__posts">
+            <div class="topic-box comments-box prl-groups-detail__postbox">
+              <wall-post ng-repeat="post in $ctrl.progressLogs | orderBy: '-created_at' track by post.id" post="post" owner-id="$ctrl.ownerId" like="$ctrl.likePost" comment="$ctrl.commentPost" get-comments="$ctrl.getComments" edit-post="$ctrl.editPost" delete-post="$ctrl.deletePost" edit-comment="$ctrl.editComment" delete-comment="$ctrl.deleteComment" has-commented="$ctrl.hasCommented" root-access="$ctrl.rootAccess"></wall-post>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pl-error__container" ng-if="!$ctrl.progressLogs.length > 0">
+      <div class="pl-error">
+        <span class="pl-error__message">No progress updates to show!</span>
+      </div>
+    </div>
+    <div class="prl-viewmore-btn">
+      <button type="submit" class="btn btn-yellow btn-submit pull-right" ng-disabled="$ctrl.isProgressLogLoading || $ctrl.hasProgressLogReachedEnd" ng-click="$ctrl.viewMoreProgressLog()" ng-class="{'processing': $ctrl.isProgressLogLoading}">
+        <div class="bs-process-bar uil-ring-css yellow">
+          <div></div>
+        </div>
+        <span class="bs-login-text">VIEW MORE</span>
+      </button>
+    </div>
+  </div>
+</div>

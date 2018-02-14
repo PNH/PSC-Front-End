@@ -1,0 +1,113 @@
+<div id="main">
+  <dashboard-header></dashboard-header>
+  <!-- <div id="content"> -->
+  <div class="dashboard">
+    <div class="holder">
+      <div class="general-box">
+        <div class="select-horse">
+          <div class="main-container" block-ui="savvystatusLoading">
+            <div class="hold-title line-l">
+              <h2>Parelli Levels Program</h2>
+            </div>
+            <div ng-if="$ctrl.levels !== null">
+              <div ng-if="$ctrl.levels.length > 0" class="level-progress">
+                <level-progress data-level="{{level}}" data-showprogress="true" ng-repeat="(level_index, level) in $ctrl.levels | orderBy : 'level.id' | limitTo: 4"
+                  ui-sref="pathway({horseid: $ctrl.horseid, levelid: level.level.id})" class="level-progress__container"></level-progress>
+              </div>
+              <div class="pl-error__container" ng-if="!$ctrl.levels.length > 0">
+                <div class="pl-error">
+                  <span class="pl-error__message" ng-if="!$ctrl.levels.length > 0">Looks like you don't have any horses in your stall. <a ui-sref="onboard.goals">Add one now!</a></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="holder-box dashboard__community">
+            <div class="hold-title line-l">
+              <h2>Community News</h2>
+            </div>
+            <ul class="dashboard__community__links clearfix">
+              <li>
+                <div class="dashboard__community__links__container" style="background: url('resources/images/dashboard/Parelli_Logo.png') no-repeat center center; background-size: cover" ui-sref="wall({userid: 6933})">
+                  <div class="dashboard__community__links__footer">
+                    <div class="dashboard__community__links__name pull-left">Visit Parelli Central Wall</div>
+                    <div class="dashboard__community__links__arrow pull-right">
+                      <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="dashboard__community__links__container" style="background: url('resources/images/dashboard/Pat.jpg') no-repeat top center; background-size: cover" ui-sref="wall({userid: 6945})">
+                  <div class="dashboard__community__links__footer">
+                    <div class="dashboard__community__links__name pull-left">Visit Pat's Wall</div>
+                    <div class="dashboard__community__links__arrow pull-right">
+                      <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="dashboard__community__links__container" style="background: url('resources/images/dashboard/Linda.jpg') no-repeat center center; background-size: cover" ui-sref="wall({userid: 712})">
+                  <div class="dashboard__community__links__footer">
+                    <div class="dashboard__community__links__name pull-left">Visit Linda's Wall</div>
+                    <div class="dashboard__community__links__arrow pull-right">
+                      <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <div class="main-container prl-wall__container clearfix" block-ui="parelliWallLoading" ng-if="$ctrl.posts.length > 0">
+              <div view-more data-height="700">
+                <div class="view-more__content">
+                  <div class="content-holder forum-content">
+                    <div class="block-holder forum-item prl-groups-detail__posts">
+                      <div class="topic-box comments-box prl-groups-detail__postbox" block-ui="parelliWallLoading">
+                        <wall-post ng-repeat="post in $ctrl.posts | limitTo: 3 | orderBy: '-created_at' track by post.id" post="post" owner-id="$ctrl.ownerId"
+                          like="$ctrl.likePost" comment="$ctrl.commentPost" get-comments="$ctrl.getComments" edit-post="$ctrl.editPost"
+                          delete-post="$ctrl.deletePost" edit-comment="$ctrl.editComment" delete-comment="$ctrl.deleteComment"
+                          has-commented="$ctrl.hasCommented" root-access="$ctrl.rootAccess"></wall-post>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="hold-btn">
+              <a ui-sref="wall({userid: $ctrl.wallId, public: true})" class="view-all">View Live Wall</a>
+            </div>
+          </div>
+          <div class="holder-box" ng-if="$ctrl.featured.length > 0">
+            <div class="hold-title line-l">
+              <h2>Learning Library</h2>
+            </div>
+            <ul class="libary-video-list" block-ui="featuredloading" ng-if="$ctrl.featured">
+              <li ng-repeat="(feature_index, feature) in $ctrl.featured">
+                <div class="prl-player-thumb__container" style="background-image: url('{{feature.thumbnail}}');">
+                  <!--<div class="prl-player-thumb__overlay"></div>-->
+                  <add-to-playlist ng-if="$ctrl.userPlaylist && $ctrl.addtoplaylistPopupClicked" show="$ctrl.triggerCtrl" popup-toggle="$ctrl.addtoplaylistPopupClicked" add-to-playlist="$ctrl.onAddToPlaylist" user-playlists="$ctrl.userPlaylist" keypress-event key-value="27"></add-to-playlist>
+                  <span class="prl__player__playlist__addtoplaylist prl-addtoplaylist-icon" ng-click="$ctrl.triggerUserPlaylist(feature, feature.playlist)">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                  </span>
+                  <div class="prl-player-thumb__play small" data-toggle="modal" data-target="#videoModal" ng-click="$ctrl.onVideoItemClicked(feature_index)">
+                    <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                  </div>
+                  <div class="prl-player-thumb__details">
+                    <span class="title">{{feature.name}}</span>
+                    <span class="duration">{{feature.duration | duration}}</span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <div class="hold-btn">
+              <a ui-sref="library()" class="view-all">View all</a>
+            </div>
+          </div>
+        </div>
+        <div ng-include="'app/dashboard/template/sidebar.html'"></div>
+      </div>
+    </div>
+  </div>
+  <!-- </div> -->
+</div>
+<div ng-include="'app/dashboard/template/_popup.html'"></div>

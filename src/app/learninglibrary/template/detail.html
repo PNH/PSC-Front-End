@@ -1,0 +1,90 @@
+<div id="main">
+  <dashboard-header title="Learning Library"></dashboard-header>
+  <div id="content">
+    <div class="forum-content library media">
+      <div class="holder">
+        <ul class="breadcrumbs">
+          <li>
+            <a ui-sref="library()">Learning Library</a>
+          </li>
+          <li ng-if="$ctrl.parentCategory">
+            <a ui-sref="library-subcategories({categoryid: $ctrl.parentCategory.id})">{{$ctrl.parentCategory.title}}</a>
+          </li>
+          <li class="active">
+            {{$ctrl.title}}
+          </li>
+        </ul>
+        <div class="hold-form">
+          <form name="searchForm">
+            <fieldset>
+              <input-dropdown input-name="query" ng-model-options="{ debounce: 250 }" filter-list-method="$ctrl.onSearch(searchForm.query.$viewValue)" input-placeholder="Search Learning  Library" selected-item="$ctrl.selectedDropdownItem" default-dropdown-items="$ctrl.dropdownItems" allow-custom-input="true" id="ll-search__input">
+              </input-dropdown>
+              <button type="submit" ng-if="searchForm.query.$viewValue" ui-sref="library-search({query: searchForm.query.$viewValue})" class="search-btn"></button>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+      <div class="browse-box">
+        <div class="hold-browse-title">
+          <span class="title">{{$ctrl.title}}</span>
+          <a href="" class="dark-btn" data-toggle="modal" data-target="#createPlaylist">Create Playlist<i class="bar"></i></a>
+        </div>
+        <div class="hold-tabs media-tab ll-detail-tabs" tabs on-switch="$ctrl.stopPlayer()">
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a data-target="#video" aria-controls="video" role="tab" data-toggle="tab">Video</a></li>
+            <li role="presentation"><a data-target="#audio" aria-controls="audio" role="tab" data-toggle="tab">Audio</a></li>
+            <li role="presentation"><a data-target="#document" aria-controls="document" role="tab" data-toggle="tab">Document</a></li>
+          </ul>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active" id="video" ng-if="$ctrl.videos !== null">
+              <div ng-if="$ctrl.videos.length > 0">
+                <prl-player videos="$ctrl.videos" numberofplaylistitems="4" add-video-fn="$ctrl.onAddToPlaylist" user-playlist="$ctrl.playlists" class="prl-player-playlist__white" player-controls="$ctrl.videoPlayerControls"></prl-player>
+              </div>
+              <div class="search-result-container search-result-container__error" ng-if="!$ctrl.videos.length > 0">
+                <p>There are no resources under this category.</p>
+              </div>
+              <div class="loading-indecator" ng-if="$ctrl.videos === null">
+                <div class='uil-ring-css yellow'>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="audio" ng-if="$ctrl.audios !== null">
+              <div ng-if="$ctrl.audios.length > 0">
+                <prl-player videos="$ctrl.audios" numberofplaylistitems="4" add-video-fn="$ctrl.onAddToPlaylist" user-playlist="$ctrl.playlists" class="prl-player-playlist__white" player-controls="$ctrl.audioPlayerControls"></prl-player>
+              </div>
+              <div class="search-result-container search-result-container__error" ng-if="!$ctrl.audios.length > 0">
+                <p>There are no resources under this category.</p>
+              </div>
+              <div class="loading-indecator" ng-if="$ctrl.audios === null">
+                <div class='uil-ring-css yellow'>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="document" ng-if="$ctrl.documents !== null">
+              <ul class="ll-detail-document__container clearfix" ng-if="$ctrl.documents.length > 0">
+                <li ng-repeat="(document_index, document) in $ctrl.documents">
+                  <!-- Add class for following file types. Leave empty for unknown file types -->
+                  <!-- Text file: 'txt', Word Doc: 'doc', Powerpoint Presentation: 'ppt', PDF: 'pdf' -->
+                  <a href="" data-toggle="modal" data-target="#documentModal" ng-click="$ctrl.onDocumentItemClicked(document_index)">
+                    <div class="ll-detail-document__content file-type-icon {{document.type | lowercase}}">{{document.name}}</div>
+                  </a>
+                </li>
+              </ul>
+              <div class="search-result-container search-result-container__error" ng-if="!$ctrl.documents.length > 0">
+                <p>There are no resources under this category.</p>
+              </div>
+              <div class="loading-indecator" ng-if="$ctrl.documents === null">
+                <div class='uil-ring-css yellow'>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div ng-include="'app/learninglibrary/template/_popups.html'"></div>

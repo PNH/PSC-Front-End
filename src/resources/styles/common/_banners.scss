@@ -1,0 +1,41 @@
+.prl-banner {
+    background-color: $content-holder-bg;
+    background-image: url('../resources/images/body-bg.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    color: $white;
+    margin-bottom: 35px;
+    padding: 85px 100px;
+    position: relative;
+    text-align: center;
+    @include bp(xxs) {
+        padding: 80px 20px;
+    }
+    &:before {
+        background-color: transparentize($content-holder-bg, 0.9);
+        bottom: 0;
+        content: '';
+        left: 0;
+        right: 0;
+        position: absolute;
+        top: 0;
+        z-index: 0;
+    }
+    &__content {
+        position: relative;
+        z-index: 1;
+    }
+    &__title {
+        font-weight: 400;
+        margin-top: 0;
+    }
+    &__buttons {
+        .btn {
+            margin: 10px 10px 0 10px;
+        }
+    }
+    button {
+        margin-bottom: 0;
+    }
+}

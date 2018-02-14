@@ -1,0 +1,49 @@
+.breadcrumbs {
+  margin: 0;
+  padding: 0 0 3px;
+  overflow: hidden;
+  float: left;
+  li {
+    float: left;
+    padding-right: 15px;
+    padding-left: 6px;
+    position: relative;
+    margin-bottom: 5px;
+    a {
+      font-size: 16px;
+      line-height: 19px;
+      color: #585858;
+      @include transition-element (color);
+      &:hover {
+        color: #dba432;
+      }
+    }
+    &:after {
+      content: '';
+      background: url(../resources/images/sprite.png) no-repeat -359px -21px;
+      width: 7px;
+      height: 12px;
+      position: absolute;
+      right: 0;
+      top: 3px;
+    }
+    &:last-child {
+      &:after {
+        content: none;
+      }
+    }
+    &.active {
+      color: #dba432;
+      a {
+        color: #dba432 !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 675px) {
+  .breadcrumbs {
+    float: none;
+    margin-bottom: 15px;
+  }
+}

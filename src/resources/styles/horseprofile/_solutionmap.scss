@@ -1,0 +1,81 @@
+.solution-map {
+  &__container {
+    padding: 40px !important;
+    h2 {
+      margin-top: 0;
+    }
+  }
+  &__buttons {
+    margin: 0;
+    padding: 0;
+    li {
+      float: right;
+      padding-left: 15px;
+      @include bp(xs) {
+        // float: none;
+        margin-bottom: 15px;
+        padding-left: 0;
+        width: 100%;
+        float: right;
+      }
+      .btn {
+        margin: 0;
+        @include bp(sm) {
+          min-width: 160px;
+        }
+        @include bp(xs) {
+          min-width: 100%;
+        }
+      }
+    }
+  }
+  &__ieerror {
+    margin-top: 20px;
+    text-align: center;
+  }
+  &__savvy-icon {
+    background-image: url('../resources/images/savvy/savvies.png');
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 62px;
+    width: 62px;
+    vertical-align: middle;
+    @include bp(xxs) {
+      background-size: 180px 45px;
+      height: 45px;
+      width: 45px;
+    }
+    &.Liberty {
+      background-position-x: -62px;
+      @include bp(xxs) {
+        background-position-x: -45px;
+      }
+    }
+    &.FreeStyle {
+      background-position-x: -124px;
+      @include bp(xxs) {
+        background-position-x: -90px;
+      }
+    }
+    &.Finesse {
+      background-position-x: -186px;
+      @include bp(xxs) {
+        background-position-x: -135px;
+      }
+    }
+    &--sm {
+      background-size: 232px 58px;
+      height: 58px;
+      width: 58px;
+      &.Liberty {
+        background-position-x: -58px;
+      }
+      &.FreeStyle {
+        background-position-x: -116px;
+      }
+      &.Finesse {
+        background-position-x: -174px;
+      }
+    }
+  }
+}

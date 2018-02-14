@@ -1,0 +1,123 @@
+.prl-search-popup {
+  background-color: $grey3;
+  display: none;
+  left: 0;
+  max-height: 400px;
+  position: fixed;
+  right: 0;
+  top: 69px;
+  @media (max-width: 1260px) {
+    left: -15px;
+    right: -15px;
+  }
+  h3,
+  li,
+  a {
+    color: #fff !important;
+  }
+  h3 {
+    margin: 0;
+  }
+  &__container {
+    margin: 0 auto;
+    max-width: 1284px;
+    position: relative;
+  }
+  &__header {
+    background-color: lighten($grey3, 10%);
+    padding: 15px 30px;
+    position: relative;
+  }
+  &__content {
+    // height: 280px;
+    padding: 20px 30px 30px 30px;
+    @include bp(xxs) {
+      padding: 15px 30px;
+    }
+    @include bp(xsml) {
+      padding: 10px 30px;
+    }
+  }
+  &__dismiss {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    span {
+      color: #fff !important;
+    }
+  }
+  .prl-search-filters {
+    margin-bottom: 15px;
+    @include bp(xsml) {
+      margin-bottom: 5px;
+    }
+
+    .search-filters {
+      &__container {
+        @include bp(xs) {
+          padding: 0 10px;
+        }
+
+        li {
+          padding: 5px 20px 5px 0 !important;
+          float: left !important;
+        }
+      }
+    }
+
+    label {
+      // margin-right: 20px;
+      color: $grey4;
+    }
+
+    input[type="checkbox"].dark:checked+label:before,
+    input[type="checkbox"].dark:not(:checked)+label:before {
+      background: $grey21;
+    }
+  }
+
+  .prl-search-popup__result {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    &-item {
+      float: left !important;
+      padding: 10px !important;
+      width: 33.33333%;
+      @include bp(xs) {
+        width: 50%;
+      }
+      @include bp(xxs) {
+        width: 100%;
+      }
+      .tag {
+        background-color: $yellow;
+        border-radius: 5px;
+        color: $grey3;
+        font-size: 0.678em;
+        font-weight: 600;
+        padding: 1px 4px;
+        text-transform: capitalize;
+      }
+    }
+    .ps-scrollbar-y-rail {
+      background-color: lighten($grey1, 10%);
+      opacity: 0.6;
+    }
+  }
+  &__error {
+    background-color: lighten($grey3, 10%);
+    padding: 20px;
+    text-align: center;
+    &__message {
+      color: $white;
+    }
+  }
+  .block-ui-container {
+    background-color: $grey3;
+    .uil-flickr-css {
+      height: 100px;
+    }
+  }
+}

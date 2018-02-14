@@ -1,0 +1,49 @@
+<div id="main" infinite-scroll="$ctrl.hitBottom()" infinite-scroll-disabled='$ctrl.pathwayBusy' infinite-scroll-distance='2'>
+  <dashboard-header title="Parelli Levels Program"></dashboard-header>
+  <div id="content">
+    <div class="dashboard">
+      <div class="hold-title line-c">
+        <h1>Pathway</h1>
+      </div>
+      <div class="pathway-container" block-ui="savvystatusLoading">
+        <div class="level-progress" ng-if="$ctrl.levels">
+          <level-progress data-level="{{level}}" ng-repeat="(level_index, level) in $ctrl.levels | limitTo: 4 | orderBy : 'level.id'" ui-sref="pathway({horseid: $ctrl.horseid, levelid: level.level.id})" class="level-progress__container" ng-if="level.level.id !== $ctrl.level.id"></level-progress>
+          <level-progress data-level="{{level}}" ng-repeat="(level_index, level) in $ctrl.levels | limitTo: 4 | orderBy : 'level.id'" ui-sref="pathway({horseid: $ctrl.horseid, levelid: level.level.id})" class="level-progress__container selected" ng-if="level.level.id === $ctrl.level.id"></level-progress>
+        </div>
+        <div class="pw-progress-container clearfix">
+          <!-- Add color as a class to change the color of the items -->
+          <!-- Colors: blue, red, green, grey -->
+          <div ng-if="$ctrl.pathway" ng-repeat="(category_index, category) in $ctrl.pathway" id="{{category.lessonCategory}}" class="pw-progress-category" ng-class="{'blue': $ctrl.level.color == '#3080a5', 'red': $ctrl.level.color == '#e4535a', 'green': $ctrl.level.color == '#398f62', 'grey': $ctrl.level.color == '#000000'}" pathway-progress data-itemid="{{category_index}}" data-progress="{{category.percentageComplete}}">
+            <!-- Add class `completed` if the category is completed -->
+            <div class="pw-badge" data-toggle="modal" data-target="#myModal" ng-click="$ctrl.onLessonCategoryClicked(category_index)" ng-class="{'completed': category.percentageComplete === 100}">
+              <div class="pw-badge__content">
+                <div class="badge-icon grey" ng-class="{'white': category.percentageComplete === 100}"></div>
+                <span class="savvy">{{category.savvy.title}}</span>
+                <span class="category">{{category.title}}</span>
+              </div>
+              <div class="arrow-down"></div>
+            </div>
+            <div class="pw-desc">
+              <div class="pw-desc__prog">
+                {{category.percentageComplete}}%
+                <div class="arrow-rounded">
+                  <div class="arrow-rounded__inner">&nbsp;</div>
+                </div>
+              </div>
+              <div class="pw-desc__desc" ng-bind-html="category.description">
+              </div>
+            </div>
+            <div class="pw-progress">
+              <div class="pw-progress__bar" style="height: {{category.percentageComplete}}%"></div>
+            </div>
+          </div>
+          <div class="loading-indecator" ng-if="$ctrl.pathwayBusy">
+            <div class='uil-ring-css' ng-class="{'red': $ctrl.level.id == 1, 'blue': $ctrl.level.id == 2, 'green': $ctrl.level.id == 3, 'black': $ctrl.level.id == 4}"><div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <quick-selector ng-if="$ctrl.selector.data"></quick-selector>
+  </div>
+</div>
+<div ng-include="'app/pathway/template/popup.html'"></div>

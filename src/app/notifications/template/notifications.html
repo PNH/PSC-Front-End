@@ -1,0 +1,29 @@
+<div id="main" class="prl-notifications">
+  <dashboard-header title="Notifications"></dashboard-header>
+  <div id="content" class="clearfix">
+    <div class="forum-content library">
+      <div class="holder">
+        <div class="hold-title line-l">
+          <h2>Notifications</h2>
+        </div>
+      </div>
+      <div class="notifications-list" block-ui="notificationsLoading">
+        <prl-notification ng-repeat="notify in $ctrl.notifications | orderBy: '-created_at' track by notify.id" notification="notify"
+          read="$ctrl.readNotification" remove="$ctrl.deleteNotification"></prl-notification>
+      </div>
+      <div class="pl-error__container" ng-if="!$ctrl.notifications.length > 0">
+        <div class="pl-error">
+          <span class="pl-error__message">There are no new notifications.</span>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-yellow btn-submit pull-right" ng-disabled="$ctrl.loadingNotificationsProcessing || $ctrl._notificationsReachedEnd"
+      ng-click="$ctrl.loadNotifications()" ng-class="{'processing': $ctrl.loadingNotificationsProcessing}" ng-show="$ctrl.notifications.length > 0">
+        <div class="bs-process-bar uil-ring-css yellow">
+          <div></div>
+        </div>
+        <span class="bs-login-text">VIEW MORE</span>
+      </button>
+  </div>
+</div>
+</div>

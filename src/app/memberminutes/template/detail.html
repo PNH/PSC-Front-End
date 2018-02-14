@@ -1,0 +1,26 @@
+<div id="main" class="savvytimes-pages-top">
+  <dashboard-header title="Savvy Times &amp; Member Minutes"></dashboard-header>
+  <div id="content" class="savvytimes-detail" block-ui="mmDetailLoading">
+    <div class="holder">
+      <div class="savvytimes-detail__container">
+        <div class="clearfix">
+          <ul class="breadcrumbs">
+            <li>
+              <a ui-sref="memberminutes">Savvy Times &amp; Member Minutes</a>
+            </li>
+            <li class="active">
+              {{$ctrl.detail.title}}
+            </li>
+          </ul>
+        </div>
+        <div class="hold-title line-l">
+          <h1>{{$ctrl.detail.title}}</h1>
+        </div>
+        <prl-player data-video="$ctrl.detail.rich_file" ng-if="$ctrl.detail.kind === 'audio' || $ctrl.detail.kind === 'video'"></prl-player>
+        <img ng-src="{{$ctrl.detail.rich_file.path}}" ng-if="$ctrl.detail.kind === 'image'">
+        <div class="lesson-content content-block" ng-bind-html="$ctrl.detail.description | trusthtml"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div ng-include="'app/touchstones/template/_popups.html'"></div>

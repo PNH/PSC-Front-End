@@ -1,0 +1,160 @@
+.login-popup {
+	.modal-dialog {
+		width: 100%;
+		max-width: 470px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%) !important;
+		margin: 0;
+		&.login {
+			@include bp(xsml) {
+				top: auto !important;
+				transform: translateX(-50%) !important;
+			}
+		}
+	}
+	.modal-content {
+		overflow: hidden;
+		border: 1px solid $li-border;
+		background-color: $li-modal-bg;
+	}
+	.modal-header {
+		background-color: $li-header-bg;
+		button.close {
+			background-color: $li-close-bg !important;
+			width: 26px;
+			height: 26px;
+			border-radius: 50%;
+			opacity: 1 !important;
+			text-align: center;
+			margin: 0 !important;
+			// position: absolute;
+			// top: 15px;
+			// right: 15px;
+			span {
+				font-size: 1.25em;
+				font-weight: 300;
+				color: $li-close;
+				line-height: 20px;
+				display: block;
+				opacity: 0.4;
+				&:hover {
+					opacity: 0.9;
+				}
+			}
+		}
+	}
+	.modal-title {
+		text-align: center;
+		font-size: 1.250em;
+	}
+	.modal-body {
+		padding: 18px 28px;
+		label {
+			color: $li-modal-label;
+		}
+		hr.li-separator {
+			border-color: $li-border;
+			margin: 0 0 8px;
+		}
+		p:not('.help-block') {
+			color: $li-modal-label;
+			text-align: center;
+			margin-bottom: 20px;
+		}
+		.li-link {
+			color: $li-modal-label;
+			display: block;
+			white-space: nowrap;
+			cursor: pointer;
+			text-decoration: none;
+			&:hover {
+				text-decoration: underline;
+			}
+			&.li-signup-link {
+				margin-top: 6px;
+				@include bp(xxs) {
+					margin-top: 0;
+					text-align: center;
+				}
+			}
+		}
+		.li-signup-btn {
+			margin: 0;
+			min-width: 0;
+			width: 100% !important;
+		}
+	}
+	.form-field-group {
+		padding: 10px;
+	}
+	form {
+		.forgot-pass {
+			text-align: right;
+		}
+		input.btn,
+		button.btn {
+			width: 100% !important;
+		}
+		.btn-submit {
+			// opacity: 1 !important;
+			&.processing {
+				background-color: lighten($yellow, 20%);
+				border-color: lighten($yellow, 20%);
+				cursor: default !important;
+				.bs-process-bar {
+					display: block;
+				}
+				.bs-login-text {
+					display: none;
+				}
+			}
+			.bs-process-bar {
+				display: none;
+				height: 20px;
+				margin: 0 auto;
+				width: 20px;
+				& > div {
+			    box-shadow: 0 2px 0 0 #333333;
+					height: 20px;
+					width: 20px;
+				}
+				&.yellow {
+					& > div {
+						box-shadow: 0 2px 0 0 darken($yellow, 10%);
+					}
+				}
+			}
+		}
+	}
+}
+.forgotpass-popup {
+	hr.li-separator {
+		margin: 8px 0 16px !important;
+	}
+}
+.login-error {
+	&__container {
+		padding: 10px;
+	}
+	&__message {
+		background-color: $li-error-bg;
+		color: $white;
+		padding: 10px;
+		&.success {
+			background-color: $li-success-bg !important;
+		}
+	}
+}
+.pdfviewer-popup {
+	.modal-dialog {
+		backface-visibility: hidden;
+	}
+}
+.search-popup .modal-header {
+	overflow: hidden;
+	padding-right: 50px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

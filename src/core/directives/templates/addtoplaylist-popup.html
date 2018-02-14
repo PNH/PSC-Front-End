@@ -1,0 +1,42 @@
+<div id="atp-close-bg" class="add-to-playlist__bg" keypress-event>
+  <!-- keypress-event -->
+  <div class="add-to-playlist__container">
+    <div id="atp-close" class="add-to-playlist__close">
+      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+    </div>
+    <h3 class="add-to-playlist__title">Add to Playlist</h3>
+    <div ng-if="playlists.length > 0">
+      <div class="add-to-playlist__search">
+        <form name="searchForm">
+          <input type="text" placeholder="Search" ng-model="query">
+        </form>
+      </div>
+      <perfect-scrollbar class="add-to-playlist__userplaylist" wheel-propagation="true" wheel-speed="2" min-scrollbar-length="5"
+        suppress-scroll-x="true">
+        <ul>
+          <li ng-click="addVideo(video.id, playlist.id, (video.playlist | contains:playlist.id))" ng-repeat="playlist in filteredPlaylists = (playlists | filter : query)"
+            ng-class="{'added' : (video.playlist | contains:playlist.id) === true}">
+            {{playlist.title}}
+          </li>
+          <li ng-hide="filteredPlaylists.length" class="addtoplaylist-popup-error">did not match any playlists.</li>
+        </ul>
+      </perfect-scrollbar>
+    </div>
+    <div ng-if="playlists.length === 0">
+      <div class="pl-error__popup">
+        <div class="pl-error">
+          <span class="pl-error__message">It looks like you don't have any playlists yet. <a ng-click="toggleCreatePlaylist()">Create one now.</a></span>
+        </div>
+      </div>
+    </div>
+    <div class="add-to-playlist__createplaylist">
+      <div class="add-to-playlist__search" ng-show="createPlaylistToggle">
+        <form name="createPlaylist">
+          <input type="text" name="playlistName" ng-model="playlistName" placeholder="Playlist name" class="form-control" ng-minlength="1" ng-maxlength="100" required>
+        </form>
+      </div>
+      <button ng-disabled="createPlaylist.$invalid || isProcessing" ng-click="onNewPlaylistCreateClicked(playlistName)" class="btn btn-sm btn-yellow" ng-show="createPlaylistToggle">Create</button>
+      <button ng-click="toggleCreatePlaylist()" class="btn btn-sm btn-yellow" ng-show="playlists.length > 0 && !createPlaylistToggle">+ Create Playlist</button>
+    </div>
+  </div>
+</div>

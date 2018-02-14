@@ -1,0 +1,31 @@
+<div class="reply-box simple-reply clearfix">
+    <form name="simpleReplyForm">
+      <text-editor post-model="simpleReplyCtrl.postModel.content" config="simpleReplyCtrl.summernoteOptions" is-busy="simpleReplyCtrl.isBusy" post-type="5"></text-editor>
+      <input type="file" fileread="simpleReplyCtrl.postAttachment" ng-if="simpleReplyCtrl.attachments" multiple>
+      <div class="post-option-btns-container">
+        <ol class="nya-bs-select privacy-selector" ng-model="simpleReplyCtrl.postModel.privacy" ng-if="simpleReplyCtrl.privacy === 0 || simpleReplyCtrl.privacy === 1 || simpleReplyCtrl.privacy === 2">
+          <li class="nya-bs-option" data-value="0">
+            <a>
+              <span><span class="glyphicon glyphicon-eye-close"></span>Private</span>
+            </a>
+          </li>
+          <li class="nya-bs-option" data-value="1">
+            <a>
+              <span><span class="glyphicon glyphicon-globe"></span>Public</span>
+            </a>
+          </li>
+          <li class="nya-bs-option" data-value="2">
+            <a>
+              <span><span class="glyphicon glyphicon-user"></span>Connections Only</span>
+            </a>
+          </li>
+        </ol>
+      </div>
+      <button ng-disabled="simpleReplyCtrl.isProcessing || simpleReplyForm.$invalid || (!simpleReplyCtrl.saveEnabled && !simpleReplyCtrl.postModel.content) || simpleReplyCtrl.isBusy" type="submit" class="btn btn-yellow btn-submit pull-right" ng-click="simpleReplyCtrl.onCreatePostClicked(simpleReplyCtrl.postModel)" ng-class="{'processing': simpleReplyCtrl.isProcessing}">
+        <div class="bs-process-bar uil-ring-css yellow">
+          <div></div>
+        </div>
+        <span class="bs-login-text">{{simpleReplyCtrl.buttonText}}</span>
+      </button>
+    </form>
+</div>

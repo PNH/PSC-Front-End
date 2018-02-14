@@ -1,0 +1,30 @@
+
+.blog-create-content {
+  .blog-create-block {
+    padding: 50px 15%;
+
+    .row {
+      label {
+        color: #939393;
+        font-family: "Open Sans", helvetica, sans-serif;
+        padding-bottom: 8px;
+      }
+    }
+
+    .post-option-btns-blog {
+      display: inline;
+
+      .btn {
+        background-color: transparent;
+      }
+    }
+
+    .blog-create-btn-block {
+      button {
+        @include bp(xs) {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

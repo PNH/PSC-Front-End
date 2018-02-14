@@ -1,0 +1,91 @@
+<div id="main" class="prl-connections">
+  <dashboard-header title="Make Connections"></dashboard-header>
+  <div id="content" class="clearfix">
+    <div class="forum-content library">
+      <ul class="breadcrumbs">
+        <li>
+          <a ui-sref="connections">Connections</a>
+        </li>
+        <li class="active">
+          Make Connections
+        </li>
+      </ul>
+      <div class="holder">
+        <div class="hold-title line-l">
+          <h2>Make Connections</h2>
+        </div>
+        <div class="hold-form prl-connections__make-hold">
+          <div class="simple-search clearfix">
+            <form name="searchForm" novalidate>
+              <ul>
+                <li>
+                  <span>Search by Name:</span>
+                  <input type="text" placeholder="Search" name="search" ng-model="$ctrl.search.query" ng-disabled="$ctrl.searchProcessing"
+                  />
+                </li>
+                <li>
+                  <span>Filter by Radius Within:</span>
+                  <select name="range" class="simple-search__dropdown" ng-model="$ctrl.search.radius" ng-options="option.name for option in $ctrl.rangeOptions track by option.value" ng-disabled="$ctrl.searchProcessing"></select>
+                </li>
+                <li>
+                  <span>&nbsp;</span>
+                  <!--<button type="submit" class="btn btn-yellow" ng-disabled="searchForm.search.$invalid || $ctrl.searchProcessing" ng-click="$ctrl.onSearch($ctrl.search)">Search</button>-->
+                  <button type="submit" class="btn btn-yellow btn-submit pull-right" ng-disabled="searchForm.search.$invalid || $ctrl.searchProcessing" ng-click="$ctrl.onSearch($ctrl.search)" ng-class="{'processing': $ctrl.searchProcessing}">
+                    <div class="bs-process-bar uil-ring-css yellow">
+                      <div></div>
+                    </div>
+                    <span class="bs-login-text">Search</span>
+                  </button>
+                </li>
+              </ul>
+              <button class="btn-empty btn-sm simple-search__clear" ng-click="$ctrl.clearForm()">Clear</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="browse-box">
+        <div class="allgroups-header connections-filter-box">
+          <div class="allgroups-header__form">
+            <form class="clearfix">
+              <span class="connections-filterby-text">Filter By:</span>
+              <!--<select name="" id="">
+                <option value="1">Alpha</option>
+                <option value="2">Joined Date</option>
+              </select>-->
+              <input type="checkbox" id="instructor" class="dark" ng-model="$ctrl.filterMembers.instructor" ng-change="$ctrl.filterResult($ctrl.filterMembers)"
+              />
+              <label for="instructor">Instructors</label>
+              <input type="checkbox" id="member" class="dark" ng-model="$ctrl.filterMembers.member" ng-change="$ctrl.filterResult($ctrl.filterMembers)"
+              />
+              <label for="member">Members</label>
+              <input type="checkbox" id="staff" class="dark" ng-model="$ctrl.filterMembers.staff" ng-change="$ctrl.filterResult($ctrl.filterMembers)"
+              />
+              <label for="staff">Staff</label>
+            </form>
+          </div>
+          <div class="arrow-down"></div>
+        </div>
+        <div class="browse-box__container" block-ui="connectionSearchLoading">
+          <ul class="user-connect half clearfix">
+            <li ng-repeat="people in $ctrl.filteredPeople track by people.user.id">
+              <prl-connection id="people.user.id" user="people.user" connect="$ctrl.connectConnection"></prl-connection>
+            </li>
+          </ul>
+          <div class="pl-error__container" ng-show="(!$ctrl.filteredPeople.length > 0 && !$ctrl.hasSearched) || (!$ctrl.filteredPeople.length > 0 && $ctrl.hasSearched)">
+            <div class="pl-error">
+              <span class="pl-error__message" ng-show="!$ctrl.filteredPeople.length > 0 && !$ctrl.hasSearched">Widen your network by connecting with other Parelli connections. Search by Name or Radius.</span>
+              <span class="pl-error__message" ng-show="!$ctrl.filteredPeople.length > 0 && $ctrl.hasSearched">We couldn't find anyone {{$ctrl.searchedQuery.query ? "for '" + $ctrl.searchedQuery.query + "'" : ""}}{{$ctrl.searchedQuery.radius.name !== "Everywhere" ? " within " + $ctrl.searchedQuery.radius.name : ''}}. Try entering a different name or radius and filter type.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-yellow btn-submit pull-right" ng-disabled="$ctrl.searchLoadingProcessing || $ctrl.searchResultReachedEnd"
+      ng-click="$ctrl.loadSearchResults($ctrl.searchedQuery)" ng-class="{'processing': $ctrl.searchLoadingProcessing}">
+      <div class="bs-process-bar uil-ring-css yellow">
+        <div></div>
+      </div>
+      <span class="bs-login-text">VIEW MORE</span>
+    </button>
+  </div>
+</div>

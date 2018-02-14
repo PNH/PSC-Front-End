@@ -1,0 +1,10 @@
+<button class="btn-viewmore btn-empty" ng-click="loadMoreCtrl.loadContent(loadMoreCtrl.id)" ng-disabled="loadMoreCtrl.isProcessing" ng-class="{'processing': loadMoreCtrl.isProcessing}">
+  <span class="btn-viewmore__label">
+    <span ng-show="!loadMoreCtrl.direction || loadMoreCtrl.direction === 'down'" class="glyphicon glyphicon-menu-down" aria-hidden="true"></span> 
+    <span ng-show="loadMoreCtrl.direction === 'up'" class="glyphicon glyphicon-menu-up" aria-hidden="true"></span> 
+    {{loadMoreCtrl.label}}
+  </span>
+  <div class="uil-ring-css">
+    <div></div>
+  </div>
+</button>

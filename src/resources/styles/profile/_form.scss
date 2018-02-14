@@ -1,0 +1,153 @@
+.profile-content {
+  .tab-pane {
+    .formRow {
+      .po-s2-form-container {
+        background-color: $po-s2-form-bg; //$po-s2-form-bg
+        padding: 50px 170px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+        margin-left: 40px;
+        margin-right: 40px;
+        // .row {
+        //   margin-left: 0px;
+        //   margin-right: 0px;
+        // }
+        @include bp(md) {
+          padding: 50px 100px;
+        }
+        @include bp(sm) {
+          padding: 50px 75px;
+        }
+        @include bp(xs) {
+          padding: 30px;
+        }
+      }
+      .po-s2-form-container-header {
+        margin-left: 40px;
+        padding-bottom: 10px;
+        padding-top: 20px;
+      }
+    }
+  }
+}
+
+.profile-content {
+  .tab-pane {
+    .formRow {
+      .po-s2-form-container {
+        .po-s2-form-field-group {
+          padding: 10px;
+          margin-bottom: 20px;
+          background-color: #f1f2f6;
+        }
+        & label {
+          color: #939393;
+          font-family: "Open Sans", helvetica, sans-serif;
+          padding-bottom: 8px;
+        }
+        & p {
+          font-family: "Open Sans", helvetica, sans-serif;
+          font-size: 12px;
+          margin-top: 20px;
+        }
+      }
+    }
+  }
+}
+
+
+
+textarea {
+  resize: none;
+}
+
+.dpHolder {
+  #profilePhotoHolder {
+    background-image: url('../resources/images/profile/dp.png');
+    background-repeat: no-repeat;
+    width: 300px;
+    height: 90px;
+  }
+  & label {
+    color: #606163;
+    font-family: "Open Sans", helvetica, sans-serif;
+    float: left;
+    margin-left: 80px;
+    margin-top: 25px;
+    font-size: 18px;
+    font-weight: thin;
+  }
+}
+
+.profile-content {
+  .save-btn {
+    margin-right: 50px;
+    input[type=button]:first-child {
+      margin-left: 0;
+      margin-right: -10px;
+      @include bp(sm) {
+        margin-right: -10px;
+      }
+      @include bp(xs) {
+        margin-right: -10px;
+      }
+      @include bp(xxs) {
+        width: 92% !important;
+        float: none !important;
+        margin-left: 40px;
+      }
+    }
+  }
+
+}
+
+textarea.form-control {
+  border: none;
+}
+
+.form-part-line {
+  border-bottom: 1px solid #dedede;
+}
+
+.form-header {
+  label {
+    color: #454648 !important;
+    font-family: "Open Sans", helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: thin;
+    padding-bottom: 25px;
+    margin-bottom: 25px;
+  }
+}
+
+.calender {
+  input {
+    background-image: url('../resources/images/select-field-arrow.png');
+    background-repeat: no-repeat;
+    background-position: right 20px top 50%;
+  }
+}
+
+#deleteMembership {
+  .modal-dialog {
+    @include bp(sm) {
+      max-width: 90%;
+      max-height: 80%;
+    }
+  }
+
+  .modal-content {
+    @include bp(sm) {
+      margin-bottom: 10%;
+    }
+  }
+
+  .btn-submit {
+    @include bp(xxs) {
+      height: 60px;
+      word-break: break-word;
+      white-space: normal;
+    }
+  }
+}
+

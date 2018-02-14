@@ -1,0 +1,78 @@
+@import 'step-navigator';
+@import 'step1';
+@import 'step2';
+@import 'step3';
+@import 'step4';
+@import 'step5';
+
+.po-heading {
+	text-align: center;
+
+	h1 {
+		margin-top: 0;
+		margin-bottom: 8px;
+	}
+
+	h3 {
+		margin: 0;
+	}
+
+	a {
+		@include bp(xxs) {
+			display: block;
+			text-align: center;
+			float: none !important;
+		}
+	}
+}
+
+.po-footer {
+	a {
+		@include bp(xxs) {
+			display: block;
+			text-align: center;
+			float: none !important;
+		}
+	}
+}
+
+.po-navigations {
+	input[type=button]:first-child {
+		margin-left: 0;
+	}
+	
+	input[type=button] {
+		@include bp(xxs) {
+			width: 100% !important;
+			float: none !important;
+			margin-left: 0;
+		}
+	}
+}
+
+.po-submitlinks {
+	background-color: transparent;
+	border: none;
+	&[disabled] {
+		cursor: progress;
+	}
+}
+
+.onboard-languages {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	ul {
+		margin: 0;
+		padding: 0;
+
+		li {
+			float: left;
+			padding-left: 8px;
+
+			img {
+				width: 30px;
+			}
+		}
+	}
+}

@@ -1,0 +1,38 @@
+<aside id="sidebar">
+  <div class="create-blog-btn" ng-if="$ctrl.userId">
+    <a ui-sref="blogcreate" class="btn btn-yellow">CREATE BLOG POST</a>
+  </div>
+  <div class="hold-form">
+    <form>
+      <fieldset>
+        <input type="text" placeholder="Search" ng-model="$ctrl.searchModel" class="blog-searchbar"><span ng-show="$ctrl.searchModel" class="glyphicon glyphicon-remove multi-upload__remove" aria-hidden="true" ng-click="$ctrl.onBlogSearchClear()"></span>
+        <button type="submit" class="search-btn" ng-click="$ctrl.searchBlogPosts($ctrl.searchModel)"></button>
+      </fieldset>
+    </form>
+  </div>
+
+  <div class="blog-sidebar-line-break"></div>
+
+  <div class="archive sidebar" ng-if="$ctrl.archives.length > 0">
+    <div class="sidebar__header clearfix">
+      <h2>Archive</h2>
+      <button class="btn-empty btn-sm btn-clear" ng-click="$ctrl.resetArchive()">Clear</button>
+    </div>
+    <div class="block dropdown-box__container" ng-repeat="archive in $ctrl.archives track by $index" ng-class="{'open': $first}" dropdown-box>
+      <div class="box light_bg">
+        <span class="dd-toggle"></span>
+        <div class="dd_title">
+          {{archive.name}}
+        </div>
+      </div>
+      <div class="dropdown-box">
+        <ul class="month-list">
+          <li ng-repeat="month in archive.months" ng-class="{'active': archive.name === $ctrl.archive.year && month.name === $ctrl.archive.month}">
+            <a ng-click="$ctrl.onArchiveClicked(archive.name, month.name)">{{month.name}} (<span class="amount">{{month.count}}</span>)</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</aside>
+

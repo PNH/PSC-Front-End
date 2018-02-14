@@ -1,0 +1,55 @@
+<div id="createGroup" class="modal fade login-popup" tabindex="100" role="dialog" on-close="$ctrl.resetGroup()">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="onCloseClicked()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Create Group</h4>
+      </div>
+      <div class="modal-body">
+        <div class="login-error" ng-if="$ctrl.groupCreationErrors">
+          <div class="row">
+            <div class="col-xs-12 login-error__container">
+              <div class="login-error__message">
+                {{$ctrl.groupCreationErrors}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <form name="createGroup" novalidate>
+          <div class="row">
+            <div class="col-xs-12 form-field-group" ng-class="{ 'has-error' : createGroup.title.$invalid && $ctrl.hasSubmitted }">
+              <input type="text" name="title" ng-model="$ctrl.createGroup.title" placeholder="Group name" class="form-control"
+                ng-minlength="5" ng-maxlength="50" required>
+              <p ng-show="createGroup.title.$error.maxlength && $ctrl.hasSubmitted" class="help-block">Title is too long (maximum is 50 characters)</p>
+              <p ng-show="createGroup.title.$error.minlength && $ctrl.hasSubmitted" class="help-block">Title is too short (minimum is 5 characters)</p>
+              <p ng-show="createGroup.title.$error.required && $ctrl.hasSubmitted" class="help-block">Title is required</p>
+            </div>
+            <div class="col-xs-12 form-field-group" ng-class="{ 'has-error' : createGroup.description.$invalid && $ctrl.hasSubmitted }">
+              <textarea type="text" name="description" ng-model="$ctrl.createGroup.description" placeholder="Group description"
+                rows="5" ng-minlength="5" ng-maxlength="100" required></textarea>
+              <p ng-show="createGroup.description.$error.maxlength && $ctrl.hasSubmitted" class="help-block">Description is too long (maximum is 100 characters)</p>
+              <p ng-show="createGroup.description.$error.minlength && $ctrl.hasSubmitted" class="help-block">Description is too short (minimum is 5 characters)</p>
+              <p ng-show="createGroup.description.$error.required && $ctrl.hasSubmitted" class="help-block">Description is required</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : profForm.profImage.$invalid && !profForm.profImage.$pristine }">
+              <profile-image file="$ctrl.createGroup.image" title="Group Image" dimensions="Size 570 x 230 pixels" controls="$ctrl.profileImageCtrl"></profile-image>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 form-field-group">
+              <button ng-disabled="$ctrl.creationProcessing" type="submit" class="btn btn-yellow btn-submit" ng-click="$ctrl.onGroupCreateClicked($ctrl.createGroup, createGroup.$valid)"
+                ng-class="{'processing': $ctrl.creationProcessing}">
+                <div class="bs-process-bar uil-ring-css yellow">
+                  <div></div>
+                </div>
+                <span class="bs-login-text">CREATE</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

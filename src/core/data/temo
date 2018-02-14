@@ -1,0 +1,48 @@
+var paper = Snap("#svg");
+
+var _width = 600;
+var _height= 600;
+
+var _start_x = 10;
+var _start_y = 10;
+var _line_width = _width - _width/2;
+var _line_height = _height / 3;
+var _line_curve = _line_width + _line_height/1.5;
+var _padding = 10;
+
+var _path = "M10 10 H 200 C 300 10, 300 180, 200, 180 H10 V170 H190 C 290 180, 290 10, 190, 20 H10 Z";
+
+var _outer_extend = "M10 10 H200";
+var _outer_curv_1 = "C 200 10, 240 10, 240, 45";
+var _outer_drop = "V145";
+var _outer_curv_2 = "C 240 180, 200 180, 200, 180";
+var _outer_retuer = "H10";
+var _outer_up = "V170";
+var _inner_extend = "H200";
+var _inner_curv_2 = "C 230 170, 200 170, 240, 145";
+var _inner_up = "V45";
+
+var _path = "M"+_start_x+" "+_start_y+" H "+_line_width+" C "+_line_curve+" "+_start_y+", "+_line_curve+" "+(_line_height)+", "+_line_width+", "+_line_height+" H"+_padding+" V"+(_line_height-_padding)+" H"+(_line_width-_padding)+" C "+(_line_curve -_padding)+" "+_line_height+", "+(_line_curve -_padding)+" "+_start_x+", "+(_line_width-_padding)+", "+(_start_x + _padding)+" H"+_start_x+" Z";
+
+var _path_exp = _outer_extend + _outer_curv_1  +_outer_drop+ _outer_curv_2 + _outer_retuer;
+
+var sector1 = paper.path(_path_exp);
+sector1.attr({
+    fill: "transparent",
+    stroke: "#ccc",
+    strokeWidth: 5,
+    class: "gray"
+});
+
+var sector2 = paper.path(_path_exp);
+sector2.attr({
+    fill: "transparent",
+    stroke: "#000",
+    strokeWidth: 10,
+    strokeLinejoin:"round",
+    strokeLinecap:"round",
+    class:"black"
+});
+
+// https://css-tricks.com/svg-line-animation-works/
+// http://codepen.io/chriscoyier/pen/bGyoz

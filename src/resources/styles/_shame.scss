@@ -1,0 +1,107 @@
+// Home
+.index .video-box {
+  video {
+    @include bp(xxs) {
+      display: none;
+    }
+  }
+}
+
+// Header
+.index #header {
+  .horsey-name {
+    @include bp(xxs) {
+      .horsey-name {
+        width: 80px;
+      }
+    }
+  }
+}
+
+#form-container .page-header {
+  background: #fff;
+  margin: 0;
+  padding: 30px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+#status-buttons a {
+  color: #333;
+  display: inline-block;
+  font-size: 12px;
+  margin-right: 10px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#status-buttons a:hover {
+  text-decoration: none;
+}
+
+#status-buttons span {
+  background: #080808;
+  display: block;
+  height: 30px;
+  margin: 0 auto 10px;
+  padding-top: 5px;
+  width: 30px;
+  border-radius: 50%;
+}
+
+#status-buttons a.active span {
+  background: #00BC8C;
+}
+
+#signup-form {
+  position: relative;
+  min-height: 300px;
+  /*overflow:hidden;*/
+  /*padding:30px;*/
+}
+
+.panel-default {
+  border-color: #fff !important;
+}
+
+.panel {
+  border-radius: 1px !important;
+}
+
+.underline-text {
+  text-decoration: underline !important;
+}
+
+.tooltips {
+  font-size: 14px;
+}
+
+.coming-soon {
+  &__notice {
+    color: $sb-alert;
+    font-size: 0.889em;
+    margin-bottom: 10px;
+  }
+}
+
+.membership-message {
+  padding: 0 40px;
+  text-align: right;
+}
+
+[class*=" note-icon-"]:before, [class^=note-icon-]:before {
+    font: normal normal normal 14px summernoteFix;
+}
+
+// Remove add media button styles
+.no-margin-left {
+  margin-left: 0 !important;
+}
+
+.post-option-btns.privacy-selector.add-media-privacy,
+.add-media-privacy {
+  margin-left: 0 !important;
+  .btn {
+    padding-left: 0 !important;
+  }
+}

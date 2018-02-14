@@ -1,0 +1,46 @@
+<aside id="sidebar" class="side-info">
+  <div class="side-info-box first sb-testimonial white-bg" ng-if="$ctrl.lesson.chat_bubble.message">
+    <h3>Testimonial</h3>
+    <div view-more data-height="150" >
+      <div class="view-more__content">
+        <p>{{$ctrl.lesson.chat_bubble.message}}</p>
+        <br>
+        - <span>{{$ctrl.lesson.chat_bubble.author}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="side-info-box white-bg" ng-if="$ctrl.lesson.lesson_tools.length > 0 || !$ctrl.lesson === null">
+    <h3>Tools</h3>
+    <div view-more data-height="200">
+      <div class="view-more__content">
+        <ul ng-if="$ctrl.lesson.lesson_tools" class="tools-list">
+          <li ng-repeat="(tool_index, tool) in ::$ctrl.lesson.lesson_tools">{{::tool.title}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="side-info-box" ng-if="$ctrl.lesson.documents.length > 0 || !$ctrl.lesson === null">
+    <h3>Supporting Materials</h3>
+    <div view-more data-height="200" class="grey">
+      <div class="view-more__content">
+        <ul ng-if="$ctrl.lesson.documents" class="info-box-list sb-support-article-list">
+          <li ng-repeat="(document_index, document) in ::$ctrl.lesson.documents"><a href="" data-toggle="modal" data-target="#documentModal" ng-click="$ctrl.onDocumentItemClicked(document_index)">{{document.name}}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="side-info-box">
+    <div class="sb-link-box">
+      <img src="resources/images/img10.jpg" alt="">
+      <a ui-sref="library()">Learning Library <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
+    </div>
+    <div class="sb-lesson-controls">
+      <div class="completed" ng-show="!$ctrl.isLessonCompleted">
+        <input type="checkbox" id="completed" class="dark" ng-model="$ctrl.isLessonCompleted" ng-click="$ctrl.onCompleteLessonChecked()"/>
+        <label for="completed">Mark Complete</label>
+      </div>
+      <button ng-if="$ctrl.lesson.nextLesson" ng-disabled="!$ctrl.isLessonCompleted" ng-class="{'disabled':!$ctrl.isLessonCompleted}"  ui-sref="lesson({horseid: $ctrl.horseid, lessonid: $ctrl.lesson.nextLesson})" class="btn btn-yellow">Next Lesson</button>
+      <a ui-sref="pathway({horseid: $ctrl.horseid, levelid: $ctrl.levelId})" class="btn btn-black">Back to Pathway</a>
+    </div>
+  </div>
+</aside>

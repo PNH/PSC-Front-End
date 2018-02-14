@@ -1,0 +1,21 @@
+<div class="quick-selector">
+	<div class="qs-toggle">
+		<div class="qs-toggle__icon">
+			<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+		</div>
+		<div class="qs-toggle__title">
+			{{$ctrl.selector.title}}
+		</div>
+	</div>
+	<perfect-scrollbar class="qs-list__container" wheel-propagation="false" wheel-speed="6" min-scrollbar-length="5" suppress-scroll-x="true">
+		<ul class="qs-list" ng-if="$ctrl.selector.data">
+			<!-- <li ng-repeat="(category_index, category) in $ctrl.lessonsCategories | limitTo : 1">
+				<a href="" class="self-assessment">{{category.title}}<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
+			</li> -->
+			<li ng-repeat="(item_index, item) in $ctrl.selector.data" ng-click="$ctrl.onQuickSelectionClicked(item_index)" data-toggle="modal" data-target="#myModal">
+				<a ng-class="{'self-assessment': item.kind === 'fast_track'}"><span>{{item.title}}</span><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
+			</li>
+		</ul>
+	</perfer-scrollbar>
+
+</div>

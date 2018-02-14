@@ -1,0 +1,181 @@
+<div id="loginPopup" class="modal fade login-popup" tabindex="100" role="dialog">
+  <div class="modal-dialog login" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="onCloseClicked()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Log In</h4>
+      </div>
+      <div class="modal-body">
+        <div class="login-error" ng-if="error">
+          <div class="row">
+            <div class="col-xs-12 login-error__container">
+              <div class="login-error__message">
+                {{error.message}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <form name="loginForm" novalidate>
+          <div class="row">
+            <div class="col-xs-12 form-field-group" ng-class="{ 'has-error' : loginForm.email.$invalid && !loginForm.email.$pristine }">
+              <input type="text" name="email" ng-model="email" placeholder="E-mail" class="form-control" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
+                required>
+                <!-- <p ng-show="loginForm.email.$empty && !loginForm.email.$pristine" class="help-block">Please enter a valid email.</p> -->
+            </div>
+            <div class="col-xs-12 form-field-group" ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine }">
+              <input type="password" name="password" ng-model="password" placeholder="Password" class="form-control" required>
+              <!-- <p ng-show="loginForm.password.$invalid && !loginForm.password.$pristine" class="help-block">Please enter your password.</p> -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-6 form-field-group">
+              <input type="checkbox" name="rememberme" ng-model="rememberme" id="remember-me">
+              <label for="remember-me" class="ng-binding">Remember me</label>
+            </div>
+            <div class="col-xs-6 form-field-group">
+              <span class="li-link forgot-pass" id="forgotPassBtn2" ng-click="onCloseClicked()">Forgot password?</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 form-field-group">
+              <button type="submit" class="btn btn-yellow btn-submit" ng-disabled="isProcessing" ng-click="onLoginClicked()" ng-class="{'processing': isProcessing}">
+                <div class="bs-process-bar uil-ring-css yellow">
+                  <div></div>
+                </div>
+                <span class="bs-login-text">LOG IN</span>
+              </button>
+            </div>
+          </div>
+        </form>
+        <div class="row">
+          <div class="col-xs-12 form-field-group">
+            <hr class="li-separator">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 form-field-group">
+            <a ui-sref="membertype" class="li-link li-signup-link">Don't have an account?</a>
+          </div>
+          <div class="col-xs-12 col-sm-6 form-field-group">
+            <a ui-sref="membertype" data-dismiss="modal" class="btn btn-black li-signup-btn">SIGN UP</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="forgotPassPopup" class="modal fade login-popup forgotpass-popup" tabindex="100" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="onCloseClicked()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Reset Password</h4>
+      </div>
+      <div class="modal-body">
+        <div class="login-error" ng-if="error">
+          <div class="row">
+            <div class="col-xs-12 login-error__container">
+              <div class="login-error__message" ng-class="{'success': error.isSuccess}">
+                {{error.message}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <form action="" name="forgetPass">
+          <div class="row">
+            <div class="col-xs-12 form-field-group" ng-class="{ 'has-error' : forgetPass.email.$invalid && !forgetPass.email.$pristine }">
+              <p>Enter the email address associated with your account, and we'll email you a link to reset your password.</p>
+              <input type="text" name="email" ng-model="email" placeholder="E-mail" class="form-control" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
+                required>
+                <!--<p ng-show="forgetPass.email.$invalid && !forgetPass.email.$pristine" class="help-block">Please enter a valid email.</p>-->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 form-field-group">
+              <hr class="li-separator">
+              <button type="submit" class="btn btn-yellow btn-submit" ng-disabled="isProcessing" ng-click="onForgetPassClicked()" ng-class="{'processing': isProcessing}">
+                <div class="bs-process-bar uil-ring-css yellow">
+                  <div></div>
+                </div>
+                <span class="bs-login-text">SEND REQUEST</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="authenticationPopup" class="modal fade login-popup popmessage blog-auth-popup" tabindex="100" role="dialog">
+  <div class="modal-dialog login" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="onCloseClicked()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Are You a Member?</h4>
+      </div>
+      <div class="modal-body">
+
+      <div class="prl-auth-contents">
+          <div class="prl-auth-signup-content">
+            <div class="prl-auth-signup-title">Membership has its benefits, and exclusive member-only articles like these are just one of many!</div>
+            <p class="prl-auth-signup-text">The Savvy Club is the world's most safe, ethical, effective, and rewarding training program for you and your horse! Follow a proven educational system with tracking for each of your horses and access thousands of articles, videos, and audio in our world-class Learning Library. Save time and money as you learn the secrets of horse psychology, put principles to purpose, and get savvy!</p>
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 form-field-group">
+                <a ui-sref="membertype" data-dismiss="modal" class="btn btn-black li-signup-btn">SIGN UP</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-separator"></div>
+
+          <div class="prl-auth-signin-content">
+            <div class="login-error" ng-if="error">
+              <div class="row">
+                <div class="col-xs-12 login-error__container">
+                  <div class="login-error__message">
+                    {{error.message}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <form name="loginForm" novalidate>
+              <div class="row">
+                <div class="col-xs-12 form-field-group" ng-class="{ 'has-error' : loginForm.email.$invalid && !loginForm.email.$pristine }">
+                  <input type="text" name="email" ng-model="email" placeholder="E-mail" class="form-control" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
+                  required>
+                  <!-- <p ng-show="loginForm.email.$empty && !loginForm.email.$pristine" class="help-block">Please enter a valid email.</p> -->
+                </div>
+                <div class="col-xs-12 form-field-group" ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine }">
+                  <input type="password" name="password" ng-model="password" placeholder="Password" class="form-control" required>
+                  <!-- <p ng-show="loginForm.password.$invalid && !loginForm.password.$pristine" class="help-block">Please enter your password.</p> -->
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-6 form-field-group">
+                  <input type="checkbox" name="rememberme" ng-model="rememberme" id="remember-me">
+                  <label for="remember-me" class="ng-binding">Remember me</label>
+                </div>
+                <div class="col-xs-6 form-field-group">
+                  <span class="li-link forgot-pass" id="forgotPassBtn2" ng-click="onCloseClicked()">Forgot password?</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 form-field-group">
+                  <button type="submit" class="btn btn-yellow btn-submit" ng-disabled="isProcessing" ng-click="onLoginClicked()" ng-class="{'processing': isProcessing}">
+                    <div class="bs-process-bar uil-ring-css yellow">
+                      <div></div>
+                    </div>
+                    <span class="bs-login-text">LOG IN</span>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+

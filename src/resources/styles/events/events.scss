@@ -1,0 +1,977 @@
+.alertify-logs {
+  z-index: 1051;
+}
+
+.event-address {
+  text-transform: capitalize;
+}
+
+#createEvent {
+  .modal-dialog {
+    max-width: 1000px;
+    max-height: 80%;
+    background-color: #fff;
+    @include bp(sm) {
+      max-width: 90%;
+    }
+  }
+  .modal-content {
+    // margin: 5% 0;
+    margin-bottom: 5%;
+    border-radius: 0;
+    border: 0;
+    background-color: #fff;
+    .modal-header {
+      padding: 8px;
+      background-color: #333333;
+      color: #fff;
+      border-top: 3px solid #333333;
+    }
+    .modal-title {
+      font-weight: 300;
+    }
+    .arrow-down {
+      border-top-color: #333333;
+      border-left-width: 20px;
+      border-top-width: 20px;
+      border-right-width: 20px;
+      left: 50%;
+      position: absolute;
+      -webkit-transform: translateX(-50%);
+      transform: translateX(-50%);
+    }
+  }
+  .modal-body {
+    margin: 3% 2% 1% 2%;
+    padding: 15px 10%;
+    background-color: #f1f2f6;
+    @include bp(xxs) {
+      text-align: center;
+    }
+    form label {
+      font-size: 15px;
+      padding: 5px 2px;
+    }
+    select {
+      height: 40px;
+      padding: 2px 25px;
+    }
+    input {
+      height: 40px;
+      @include bp(xxs) {
+        padding: 10px;
+        text-align: center;
+      }
+    }
+    .form-field-group {
+      padding: 10px 25px;
+      @include bp(xxs) {
+        padding: 10px;
+      }
+    }
+    // text-angular {
+    //   .btn-group .btn {
+    //     width: auto !important;
+    //   }
+    //   .ta-editor {
+    //     background-color: #fff;
+    //     max-height: 200px;
+    //   }
+    //   .btn-toolbar {
+    //     @include bp(xxs) {
+    //       display: inline-block;
+    //     }
+    //   }
+    // }
+    .note-editor {
+      .btn {
+        width: auto !important;
+      }
+    }
+    .caledar-iocn .moment-picker:after {
+      content: "\f073";
+      font-family: FontAwesome;
+      font-size: 20px;
+      right: 0;
+      color: #d2d2d2;
+      position: absolute;
+      margin-top: -30px;
+      margin-right: 3%;
+      @include bp(xxs) {
+        // margin-right: 10%;
+        display: none;
+      }
+    }
+    ng-map {
+      margin-top: 15px;
+    }
+    .event-create-url-input-lg {
+      @include bp(xxs) {
+        display: none;
+      }
+    }
+    .event-create-url-input-sm {
+      display: none;
+      @include bp(xxs) {
+        display: block;
+      }
+    }
+    .prl-linebreak {
+      margin: 25px 10px;
+    }
+    .selected-instructor-list {
+      margin-top: 10px;
+      ul {
+        padding: 0;
+      }
+      li {
+        display: inline-block;
+        margin: 0 15px;
+      }
+      a {
+        font-size: 20px;
+        font-weight: 600;
+        margin-left: 10px;
+        padding: 5px;
+        cursor: pointer;
+      }
+    }
+    .add-more-btn {
+      margin-bottom: 40px;
+      @include bp(xxs) {
+        transform: translateX(-15%);
+      }
+      span {
+        color: #fff;
+        background-color: #333333;
+        margin-left: 25px;
+        padding: 0px 10px;
+        font-size: 25px;
+        font-weight: 300;
+        @include bp(xxs) {
+          margin-left: 0;
+        }
+      }
+      label {
+        position: absolute;
+        margin-left: 10px;
+        margin-top: -5px;
+      }
+    }
+    .pricegroup-set {
+      @include bp(xsml) {
+        margin-bottom: 40px;
+      }
+      @include bp(xxs) {
+        margin-bottom: 40px;
+      }
+    }
+    .prl-remove-price {
+      float: right;
+      border: none;
+      text-align: center;
+      width: 20px;
+      height: 20px;
+    }
+  }
+  .btn-list {
+    width: 100%;
+    padding: 0px 2%;
+    height: 90px;
+    @include bp(xxs) {
+      width: 80%;
+      height: 150px;
+      padding: 0;
+      margin: 10px auto;
+    }
+    button {
+      float: right;
+      font-size: 14px;
+      min-width: 180px;
+      @include bp(xxs) {
+        float: none;
+        min-width: 100%;
+        margin: 10px 0;
+      }
+    }
+  }
+}
+
+
+/*  ---------------------------------------------------------------  */
+/*  ----------------------- Event Calendar ------------------------  */
+/*  ---------------------------------------------------------------  */
+
+.prl-eventcalendar {
+  .prl-no-padding {
+    padding-bottom: 0 !important;
+  }
+  .hold-program {
+    .nav li {
+      width: 20% !important;
+      a {
+        font-size: 20px;
+        @include bp(sm) {
+          height: 90px;
+        }
+        @include bp(md) {
+          // height: 90px;
+          vertical-align: middle;
+          display: table-cell;
+          width: 20%;
+        }
+        @include bp(xxs) {
+          height: 65px;
+          font-size: 16px;
+          line-height: 24px;
+          padding: 9px 5px;
+          width: 20%;
+        }
+      }
+    }
+  }
+}
+
+.prl-events {
+  .prl-content-title {
+    width: 30%;
+    margin-bottom: 10px;
+    float: left !important;
+    @include bp(md) {
+      width: 30%;
+    }
+    @include bp(xxs) {
+      margin-bottom: 0;
+    }
+    @include bp(xsml) {
+     margin-bottom: 0;
+    }
+    h2 {
+      font-size: 25px;
+      color: #333333;
+    }
+    &:after {
+      display: none;
+    }
+  }
+
+  .prl-dropdown-list {
+    float: right;
+    display: flex;
+    @include bp(xsml) {
+      width: 100%;
+    }
+
+    div {
+      margin-bottom: 15px;
+    }
+    div:last-child {
+      @include bp(xxs) {
+        margin-bottom: 30px;
+      }
+      @include bp(xsml) {
+        margin-bottom: 30px;
+      }
+    }
+  }
+
+  .prl-event-item {
+    cursor: pointer;
+  }
+
+  .prl-dropdown {
+    color: #333333;
+    background-color: #fff;
+    margin: 0 0 0 20px;
+    padding: 0;
+    @include bp(md) {
+      font-size: 14px;
+    }
+    @include bp(xxs) {
+        width: 100%;
+        text-align: center;
+        margin-left: 0;
+    }
+    @include bp(xsml) {
+        width: 100%;
+        text-align: center;
+        margin-left: 0;
+    }
+    select {
+      width: 180px;
+      background-color: #333333;
+      margin-left: 10px;
+      padding-left: 10px;
+      padding-right: 50px;
+      @include bp(md) {
+        font-size: 14px;
+        width: 120px;
+      }
+    }
+  }
+
+  .pl-error {
+    padding: 0;
+  }
+
+  .event-list {
+    padding: 55px 5%;
+    margin-bottom: 8px;
+  }
+
+  .main-container {
+    padding: 30px 36px 10px 36px;
+    @include bp(sm) {
+      padding: 30px 36px 70px 36px;
+    }
+
+    .prl-linebreak {
+      margin: 50px 0 !important;
+      @include bp(xxs) {
+        margin: 30px 0 50px 0 !important;
+      }
+      @include bp(sm) {
+        display: block;
+      }
+    }
+  }
+
+  .prl-linebreak {
+    margin: 50px 0 !important;
+    @include bp(xxs) {
+      margin: 30px 0 50px 0 !important;
+    }
+    @include bp(sm) {
+      display: none;
+    }
+  }
+
+
+  .hold-title {    
+    @include bp(xxs) {
+      text-align: center;
+      width: 100%;
+    }
+    @include bp(xsml) {
+      text-align: center;
+      width: 100%;
+    }
+    strong {
+      float: none;
+      display: block;
+    }
+    &:after {
+      @include bp(md) {
+        // margin: 0 auto !important;
+      }
+      @include bp(sm) {
+        margin: 0 auto !important;
+      }
+    }
+  }
+
+  .prl-subtitle {
+    margin-bottom: 0px !important;
+  }
+
+  .prl-date {
+    display: block;
+    color: $grey3;
+    font-weight: 400;
+    line-height: 25px;
+    @include bp(md) {
+      text-align: left;
+    }
+    @include bp(sm) {
+      text-align: center;
+    }
+  }
+
+  .btn-viewmore {
+    margin-top: 50px;
+  }
+}
+
+.prl-event-sidebar {
+  .prl-create-btn {
+    width: 100% !important;
+    margin-bottom: 20px !important;
+  }
+
+  .prl-calendar-div {
+    display: inline-block;
+
+    prl-calendar {
+      margin-bottom: 0;
+
+      .header {
+        color: #c6c6c6;
+        padding: 0 5px;
+
+        i {
+          font-weight: 300;
+        }
+      }
+
+      .header span {
+        padding-left: 15%;
+        padding-right: 15%;
+        text-transform: capitalize;
+      }
+
+      .different-month {
+        // display: none;
+        opacity: 0;
+        pointer-events: none;
+        cursor: default;
+      }
+
+      .day.highlighted {
+        background-color: #ffc745 !important;
+        color: #000;
+      }
+      .day.today{
+        // background-color: #FFE8B4;
+        background-color: $grey13;
+      }
+
+      .day {
+        width: calc(100%/7 - 8.5px);
+        font-size: 13px;
+        @include bp(md) {
+          height: 22px !important;
+          line-height: 22px !important;
+        }
+        @include bp(sm) {
+          height: 26px !important;
+          line-height: 26px !important;
+        }
+      }
+    }
+
+    div:first-child, div:last-child {
+      margin-bottom: 10px;
+      // @include bp(md) {
+      //   margin-bottom: 26px;
+      // }
+      @include bp(sm) {
+        margin-bottom: 13px;
+      }
+    }
+
+    .week {
+      padding: 0 10px;
+    }
+  }
+
+  .calendar-clear {
+    float: right;
+    line-height: 0;
+    @include bp(xxs) {
+      margin-bottom: 15px;
+    }
+  }
+
+  .prl-linebreak {
+    margin: 300px 5% 20px 5% !important;
+
+    @include bp(md) {
+      margin: 250px 7% 20px 7% !important;
+    }
+  }
+
+  .prl-event-filter {
+    margin: 0;
+    .form-group {
+      padding: 0;
+      margin-bottom: 10px;
+    }
+    label {
+      width: 100%;
+      text-align: center;
+      margin: 10px 0;
+    }
+    // input {
+    //   text-align: center;
+    // }
+    // select {
+    //   text-align: center;
+    //   text-align-last: center;
+    // }
+  }
+
+  .prl-filter-btn {
+    margin-top: 15px;
+    text-align: center;
+    display: flex;
+
+    button {
+      width: 100% !important;
+    }
+
+    .btn-sidebar-go {
+      margin-right: 2.5% !important;
+      min-width: 45% !important;
+    }
+    .btn-sidebar-reset {
+      margin-left: 2.5% !important;
+      min-width: 45% !important;
+      // padding: 0;
+    }
+
+  }
+}
+
+/*  ---------------------------------------------------------------  */
+/*  -------------------------- My Events --------------------------  */
+/*  ---------------------------------------------------------------  */
+
+.prl-myevents {
+
+  #content {
+    padding: 40px 35px 20px 35px !important;
+    padding-top: 15px !important;
+  }
+
+  .forum-content .holder {
+    margin: 15px 0 30px 0;
+
+    @include bp(xxs) {
+      margin: 0 0 30px 0;
+    }
+
+    .hold-title {
+      float: left !important;
+    }
+
+    .hold-form {
+      float: right !important;
+    }
+  }
+
+  .prl-content-title {
+    width: 30%;
+    margin-bottom: 10px;
+    @include bp(xxs) {
+      width: 100%;
+      text-align: center;
+    }
+    @include bp(xxsml) {
+      text-align: left !important;
+      float: left !important;
+    }
+    h2 {
+      color: #333333;
+    }
+    &:after {
+      position: initial;
+    }
+  }
+
+  .prl-dropdown {
+    color: #000;
+    float: left;
+    background-color: #fff;
+    margin: 0 0 0 20px;
+    padding: 0;
+    @include bp(xxs) {
+      width: 100%;
+      margin: 10px 0 0 0;
+    }
+    select {
+      width: 180px;
+      background-color: #333333;
+      margin-left: 10px;
+      margin-right: 30px;
+      padding-left: 10px;
+      @include bp(sm) {
+        width: 140px;
+      }
+      @include bp(xxs) {
+        text-align: center;
+        text-align-last: center;
+        width: 100%;
+        margin: 5px 0;
+      }
+    }
+  }
+
+  .prl-create-btn {
+    margin: 0;
+    padding: 5px 12px;
+    min-height: 30px;
+    font-size: 14px;
+    @include bp(sm) {
+      font-size: 12px;
+      min-width: 150px;
+    }
+    @include bp(xxs) {
+      width: 100% !important;
+      margin: 20px 0;
+    }
+  }
+
+  .myevent-empty-label {
+    strong {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+
+  .prl-myevents-all .prl-myevent-day:first-child {
+    margin-top: -20px;
+  }
+
+  .prl-myevents-all .prl-myevent-day:last-child {
+    margin-bottom: -20px;
+    @include bp(xxs) {
+      margin-bottom: -40px;
+    }
+  }
+
+  .prl-myevent-day {
+    display: inline-block;
+    width: 100%;
+    height: auto;
+
+    .allgroups-header {
+      margin: 0px -30px 0px -10px;
+      padding: 15px 30px;
+      .arrow-down {
+        margin-top: 11px;
+        z-index: 1;
+      }
+    }
+
+    .hold-title {
+      &:after {
+        @include bp(sm) {
+          position: initial;
+          margin: 0 auto !important;
+        }
+      }
+    }
+
+    .prl-event-item {
+      padding-left: 140px;
+      cursor: pointer;
+      @include bp(sm) {
+        padding-left: 0;
+      }
+      @include bp(xxs) {
+        margin: 50px 0;
+      }
+    }
+
+    .forum-item {
+      padding: 40px 1%;
+    }
+
+    .prl-subtitle {
+      width: 100%;
+      margin: 15px auto;
+      strong {
+        font-size: 16px;
+      }
+    }
+
+    .prl-linebreak {
+      width: 70%;
+      margin: 50px 2% 30px 2% !important;
+      @include bp(xxs) {
+        width: 100%;
+        margin: 50px 0 60px !important;
+      }
+      @include bp(xxsml) {
+        width: 100%;
+        margin: 50px 0 60px !important;
+      }
+    }
+
+    .prl-date {
+      display: block;
+      color: #a2a2a2;
+      // font-size: 15px;
+      font-weight: 400;
+      line-height: 15px;
+      @include bp(md) {
+        text-align: left;
+      }
+      @include bp(xs) {
+        text-align: center;
+        line-height: 20px;
+      }
+    }
+
+  }
+
+}
+
+
+/*  ---------------------------------------------------------------  */
+/*  ------------------------ Event Details ------------------------  */
+/*  ---------------------------------------------------------------  */
+
+
+.prl-event-details {
+  .main-container {
+    padding: 36px;
+    @include bp(sm) {
+      padding-bottom: 100px;
+    }
+  }
+
+  .prl-cancel-label {
+    cursor: default;
+    background-color: $red;
+    border-color: $red;
+  }
+
+  .prl-event-control {
+    height: 50px;
+
+    button {
+      float: right;
+    }
+  }
+
+  .forum-item {
+    padding: 30px 5%;
+    margin-bottom: 30px;
+  }
+
+  .prl-subheader {
+    font-size: 25px;
+    font-weight: 300;
+    color: #888888;
+    @include bp(sm) {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+  }
+
+  .prl-linebreak-details {
+    margin: 15px 0 !important;
+    @include bp(sm) {
+      margin: 20px 0 !important;
+    }
+  }
+
+  .prl-event-item {
+    cursor: default !important;
+    @include bp(sm) {
+      padding-top: 120px;
+    }
+  }
+
+  .prl-subtitle {
+    font-size: 15px;
+
+    &:after {
+      @include bp(md) {
+        margin: 0 !important;
+      }
+      @include bp(sm) {
+        margin: 0 auto !important;
+      }
+    }
+  }
+
+  .prl-date {
+    font-size: 15px;
+    line-height: 22px;
+    @include bp(md) {
+      text-align: left;
+    }
+    @include bp(sm) {
+      text-align: center;
+    }
+  }
+
+  .prl-event-description {
+    font-weight: 300;
+    color: #999999;
+    text-align: justify;
+    word-break: break-word;
+    line-height: 1.5em;
+    @include bp(sm) {
+      text-align: center;
+    }
+
+    // .prl-description-list {
+    ul {
+      margin: 20px 0;
+      @include bp(sm) {
+        padding: 0;
+      }
+
+      li:before {
+        content: "\f105"; /* FontAwesome Unicode */
+        font-family: FontAwesome;
+        display: inline-block;
+        margin-left: -1.3em; /* same as padding-left set on li */
+        width: 1.3em; /* same as padding-left set on li */
+      }
+      li {
+        line-height: 25px;
+      }
+    }
+
+    .prl-description-subtitle {
+      color: #444444;
+      font-weight: 600;
+      margin: 25px 0 15px 0;
+    }
+  }
+
+  .prl-event-price {
+    font-weight: 300;
+    line-height: 35px;
+    color: #999999;
+    width: 40%;
+    @include bp(md) {
+      width: 50%;
+    }
+    @include bp(sm) {
+      margin: 0 auto;
+    }
+    @include bp(xxs) {
+      width: 100%;
+      font-size: 14px;
+    }
+
+    .prl-price-text {
+      strong {
+        font-weight: 600;
+        color: #444444;
+      }
+    }
+
+    .prl-price-value {
+      float: right;
+      text-align: right;
+    }
+  }
+
+  .prl-btn-signup {
+    @include bp(xxs) {
+      width: 100% !important;
+    }
+  }
+
+
+  #sidebar {
+    padding: 36px 3% 20px 3%;
+  }
+
+  .prl-sidebox {
+    background-color: #fff;
+    color: #888888;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    @include bp(md) {
+      text-align: center;
+    }
+    @include bp(sm) {
+      float: left;
+      width: 48%;
+      margin-bottom: 27px;
+    }
+    @include bp(xxs) {
+      width: 100%;
+    }
+
+    .prl-sidebox-title-1 {
+      font-size: 22px;
+      font-weight: 300;
+      margin: 15px 0;
+    }
+
+    .prl-sidebox-title-2 {
+      font-size: 22px;
+      font-weight: 300;
+      margin: 30px 0 15px;
+    }
+
+    .prl-conncetion {
+      display: flex;
+      height: auto;
+      margin-bottom: 10px;
+      @include bp(md) {
+        font-size: 14px;
+        text-align: left;
+      }
+    }
+
+    .prl-username {
+      width: 100%;
+      margin: auto 0;
+    }
+
+    .prl-sidebox-connect {
+      min-width: 120px;
+      min-height: 10px;
+      font-size: 14px;
+      padding: 2px;
+      border-radius: 0;
+      margin: auto 0 !important;
+      @include bp(sm) {
+        margin-left: 20px !important;
+        margin-top: 0 !important;
+      }
+    }
+
+    .prl-sidebox-pending {
+      text-align: center;
+    }
+  }
+
+  .prl-sidebox-map {
+    padding: 0;
+    @include bp(sm) {
+      float: right !important;
+    }
+
+    ng-map {
+      height: 230px !important;
+    }
+
+    .prl-map-status-set {
+      display: flex;
+      // margin-top: 4px;
+
+      // button:first-child {
+      //   margin-right: 4px;
+      // }
+    }
+
+    .prl-map-status {
+      height: 40px;
+      width: 100%;
+      // width: 50%;
+      text-align: center;
+      font-size: 13;
+      color: #d2d2d2;
+      padding: 10px;
+    }
+
+    .prl-map-status-full {
+      width: 100% !important;
+      border-radius: 0;
+    }
+
+    .prl-join-btn {
+      background-color: #ffc745;
+      color: #3e3e3e;
+      cursor: pointer;
+      border: none;
+    }
+
+    .prl-join-btn2 {
+      border: none;
+    }
+  }
+
+}
+
+

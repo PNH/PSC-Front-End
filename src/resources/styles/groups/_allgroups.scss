@@ -1,0 +1,77 @@
+.allgroups,
+.my-groups {
+  margin-bottom: 30px;
+}
+.allgroups {
+  &__container {
+    .block-ui-container {
+      background-color: $grey1;
+    }
+  }
+}
+.allgroups-header {
+  background-color: $grey5;
+  color: $grey50;
+  min-height: 48px;
+  margin: -30px -30px 30px -30px;
+  padding: 8px 30px;
+  position: relative;
+  select {
+    background-color: transparentize($grey1, 0.9);
+    border-radius: 5px;
+    color: $grey50;
+    display: inline-block;
+    height: auto;
+    padding: 4px 12px;
+    width: 200px;
+  }
+  .arrow-down {
+    border-top-color: $grey5;
+    border-left-width: 15px;
+    border-top-width: 15px;
+    border-right-width: 15px;
+    bottom: -8px;
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%);
+  }
+  &__form {
+    padding: 7px 0;
+    label {
+      margin-right: 10px;
+    }
+  }
+  &__filters {
+    border-left: 1px solid $grey50;
+    float: left;
+    padding-left: 10px;
+    &:first-child {
+      border-left: none;
+      padding-left: 0;
+    }
+  }
+  &.white {
+    background-color: transparent;
+    color: $grey3;
+    // min-height: 48px;
+    margin: 0;
+    padding: 0;
+    @include bp(md) {
+      padding: 20px;
+    }
+    .allgroups-header__form {
+      padding: 0;
+    }
+    select {
+      background-color: $white;
+      background-position: right 10px top 50%;
+      color: $grey3;
+      margin-right: 15px;
+      width: 160px;
+      @include bp(xxs) {
+        margin-bottom: 6px;
+        width: 100%;
+      }
+    }
+  }
+}

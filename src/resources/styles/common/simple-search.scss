@@ -1,0 +1,78 @@
+.simple-search {
+  padding: 5px 5px 0 5px;
+  @include bp(xsml) {
+    padding: 0;
+  }
+  ul {
+    padding: 0;
+  }
+  li:nth-child(1), li:nth-child(2) {
+    @include bp(xsml) {
+      padding-right: 20px;
+    }
+  }
+  li {
+    float: left;
+    padding: 0 5px;
+    width: 195px;
+    @include bp(xs) {
+      width: calc(100% / 3);
+    }
+    @include bp(xsml) {
+      padding: 0;
+    }
+    @include bp(xxs) {
+      width: 100%;
+    }
+    &:last-child {
+      padding-right: 0;
+    }
+    span {
+      color: $grey47;
+      display: block;
+      margin-bottom: 5px;
+      @include bp(xxs) {
+        margin-top: 10px;
+      }
+    }
+  }
+  &__dropdown {
+    padding-right: 43px;
+  }
+  input,
+  select,
+  button {
+    border-radius: 6px !important;
+    height: auto !important;
+    line-height: 1.5em !important;
+    padding: 7px 10px !important;
+    @include bp(xs) {
+      width: 100% !important;
+    }
+  }
+  input,
+  select {
+    border: 1px solid lighten($grey5, 60) !important;
+    color: $grey47 !important;
+  }
+  select {
+    background-position: right 8px top 50%;
+  }
+  button {
+    border: none;
+    margin: 0 !important;
+    @include bp(xsml) {
+      margin-left: 30px !important;
+    }
+    span {
+      color: $grey5;
+      margin: 0;
+    }
+  }
+  button.simple-search__clear {
+    color: #626890;
+    float: right;
+    padding-bottom: 5px !important;
+    padding-top: 5px !important;
+  }
+}

@@ -1,0 +1,242 @@
+<div id="createEvent" class="modal fade login-popup" tabindex="100" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myEventLabel">New Event</h4>
+        <div class="arrow-down"></div>
+      </div>
+      <div class="modal-body">
+        <!--         <div class="login-error" ng-if="error">
+          <div class="row">
+            <div class="col-xs-12 login-error__container">
+              <div class="login-error__message">
+                {{error.message}}
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <form name="$ctrl.createNewEvent" novalidate="">
+          <div class="row">
+            <div class="col-xs-12 form-field-group" ng-class="{ 'has-error' : $ctrl.createNewEvent.eventTitle.$invalid && $ctrl.submitBtnClicked}">
+              <label>Event Title* </label>
+              <input type="text" name="eventTitle" ng-model="$ctrl.event.eventTitle" class="form-control" ng-minlength="3" ng-maxlength="200"
+                required>
+              <p ng-show="$ctrl.createNewEvent.eventTitle.$invalid && $ctrl.submitBtnClicked" class="help-block">Please enter a valid event title.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 form-field-group" ng-class="{ 'has-error' : !$ctrl.event.eventDescription && $ctrl.submitBtnClicked}">
+              <label>Description* </label>
+              <div class="form-element">
+                <!-- <text-angular name="eventDescription" ng-model="$ctrl.event.eventDescription" data-ng-required="true" placeholder=""></text-angular> -->
+                <summernote class="wallpost-create-form" ng-model="$ctrl.event.eventDescription" config="$ctrl.summernoteOptions"></summernote>
+              </div>
+              <p ng-show="!$ctrl.event.eventDescription && $ctrl.submitBtnClicked" class="help-block">Please enter a valid description.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-6 form-field-group caledar-iocn" ng-class="{ 'has-error' : $ctrl.createNewEvent.startDate.$invalid && $ctrl.submitBtnClicked }">
+              <label>Start Date* </label>
+              <input name="startDate" type="text" placeholder="" class="form-control" moment-picker="$ctrl.event.startDate" ng-model="$ctrl.event.startDate"
+                format="M/D/YYYY" max-view="day" min-date="$ctrl.todayDate" autoclose="true" ng-paste="$event.preventDefault();"
+                required/>
+              <p ng-show="$ctrl.createNewEvent.startDate.$invalid && $ctrl.submitBtnClicked" class="help-block">Please enter a valid start date.</p>
+            </div>
+            <div class="col-xs-6 form-field-group caledar-iocn" ng-class="{ 'has-error' : $ctrl.createNewEvent.endDate.$invalid && $ctrl.submitBtnClicked }">
+              <label>End Date* </label>
+              <input name="endDate" type="text" placeholder="" class="form-control" moment-picker="$ctrl.event.endDate" ng-model="$ctrl.event.endDate"
+                format="M/D/YYYY" max-view="day" min-date="$ctrl.event.startDate" autoclose="true" ng-paste="$event.preventDefault();"
+                required/>
+              <p ng-show="$ctrl.createNewEvent.endDate.$invalid && $ctrl.submitBtnClicked" class="help-block">Please enter a valid end date.</p>
+            </div>
+          </div>
+          <!-- <div class="row">
+            <div class="col-xs-6 form-field-group" ng-class="{ 'has-error' : $ctrl.createNewEvent.startTime.$invalid && $ctrl.submitBtnClicked }">
+              <label>Start Time </label>
+              <input name="startTime" type="text" placeholder="" class="form-control" moment-picker="$ctrl.event.startTime" ng-model="$ctrl.event.startTime" format="HH:mm" max-view="minute" min-date="$ctrl.startDate" autoclose="true" ng-paste="$event.preventDefault();" required/>
+              <p ng-show="$ctrl.createNewEvent.startTime.$invalid && $ctrl.submitBtnClicked" class="help-block">Please enter a valid start time.</p>
+            </div>
+            <div class="col-xs-6 form-field-group" ng-class="{ 'has-error' : $ctrl.createNewEvent.endTime.$invalid && $ctrl.submitBtnClicked }">
+              <label>End Time </label>
+              <input name="endTime" type="text" placeholder="" class="form-control" moment-picker="$ctrl.event.endTime" ng-model="$ctrl.event.endTime" format="HH:mm" max-view="minute" min-date="$ctrl.event.startTime" autoclose="true" ng-paste="$event.preventDefault();" required/>
+              <p ng-show="$ctrl.createNewEvent.endTime.$invalid && $ctrl.submitBtnClicked" class="help-block">Please enter a valid end time.</p>
+            </div>
+          </div> -->
+          <div class="row">
+            <div class="col-xs-6 form-field-group caledar-iocn" ng-class="{ 'has-error' : $ctrl.createNewEvent.regOpenDate.$invalid && $ctrl.submitBtnClicked }">
+              <label>Registration Open Date </label>
+              <input name="regOpenDate" type="text" placeholder="" class="form-control" moment-picker="$ctrl.event.regOpenDate" ng-model="$ctrl.event.regOpenDate"
+                format="M/D/YYYY" max-view="day" min-date="$ctrl.todayDate" max-date="$ctrl.event.startDate" autoclose="true"
+                ng-paste="$event.preventDefault();"/>
+              <p ng-show="$ctrl.createNewEvent.regOpenDate.$invalid && $ctrl.submitBtnClicked" class="help-block">Please enter a valid registration open date.</p>
+            </div>
+            <div class="col-xs-6 form-field-group caledar-iocn" ng-class="{ 'has-error' : $ctrl.createNewEvent.regCloseDate.$invalid && $ctrl.submitBtnClicked }">
+              <label>Registration Close Date </label>
+              <input name="regCloseDate" type="text" placeholder="" class="form-control" moment-picker="$ctrl.event.regCloseDate" ng-model="$ctrl.event.regCloseDate"
+                format="M/D/YYYY" max-view="day" min-date="$ctrl.event.regOpenDate" max-date="$ctrl.event.startDate" autoclose="true"
+                ng-paste="$event.preventDefault();"/>
+              <p ng-show="$ctrl.createNewEvent.regCloseDate.$invalid && $ctrl.submitBtnClicked" class="help-block">Please enter a valid registration close date.</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 form-field-group" ng-class="{ 'has-error' : $ctrl.createNewEvent.street.$invalid && $ctrl.submitBtnClicked }">
+              <label>Street Address* </label>
+              <input type="text" name="street" ng-model="$ctrl.event.location.street" class="form-control" ng-minlength="3" ng-maxlength="100"
+                ng-blur="$ctrl.onAddressInputComplted()" ng-model-options="{debounce: 500}" autocomplete="off" required>
+              <p ng-show="$ctrl.createNewEvent.street.$invalid && $ctrl.submitBtnClicked" class="help-block">Please enter a valid street address.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6 form-field-group" ng-class="{ 'has-error' : ($ctrl.createNewEvent.country.$invalid || $ctrl.event.location.country === '-1') && $ctrl.submitBtnClicked }">
+              <label>Country* </label>
+              <select name="country" ng-model="$ctrl.event.location.country" ng-change="$ctrl.onCountrySelected($ctrl.event.location.country)"
+                ng-pattern="/^[a-zA-Z\s]*$/" autocomplete="off" required>
+                <option ng-repeat="(country_index, country) in $ctrl.countries" value="{{country.code}}">{{country.name}}</option>
+              </select>
+              <p ng-show="($ctrl.createNewEvent.country.$invalid || $ctrl.event.location.country === '-1') && $ctrl.submitBtnClicked" class="help-block">Please select a country.</p>
+            </div>
+            <div class="form-group col-sm-6 col-md-6 form-field-group" ng-class="{ 'has-error' : $ctrl.createNewEvent.province.$invalid && $ctrl.submitBtnClicked }">
+              <label>State/Province* </label>
+              <select ng-if="$ctrl.states" name="province" ng-model="$ctrl.event.location.state" autocomplete="off" required>
+                <option ng-repeat="(state_index, state) in $ctrl.states" value="{{state.code}}">{{state.name}}</option>
+              </select>
+              <input ng-if="!$ctrl.states" type="text" name="province" class="form-control" ng-model="$ctrl.event.location.state" ng-maxlength="100"
+                ng-model-options="{updateOn: 'blur'}" ng-pattern="/^[a-zA-Z\s_.-]*$/" autocomplete="off" required>
+              <p ng-show="$ctrl.createNewEvent.province.$invalid && $ctrl.submitBtnClicked" class="help-block">Please enter a valid State/Province.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6 form-field-group" ng-class="{ 'has-error' : $ctrl.createNewEvent.city.$invalid && $ctrl.submitBtnClicked }">
+              <label>City* </label>
+              <input type="text" name="city" class="form-control" ng-model="$ctrl.event.location.city" ng-maxlength="100" ng-model-options="{updateOn: 'blur'}"
+                ng-pattern="/^[a-zA-Z\s_.-]*$/" autocomplete="off" required>
+              <p ng-show="$ctrl.createNewEvent.city.$invalid && $ctrl.submitBtnClicked" class="help-block">Please enter a valid city.</p>
+            </div>
+            <div class="form-group col-sm-6 col-md-6 form-field-group" ng-class="{ 'has-error' : $ctrl.createNewEvent.zip.$invalid && $ctrl.submitBtnClicked }">
+              <label>Zip/Post Code* </label>
+              <input type="text" name="zip" class="form-control" ng-minlength="3" ng-model="$ctrl.event.location.zipcode" ng-blur="$ctrl.onAddressInputComplted()"
+                ng-model-options="{debounce: 500}" autocomplete="off" required>
+              <p ng-show="$ctrl.createNewEvent.zip.$invalid && $ctrl.submitBtnClicked" class="help-block">Please enter a valid Zip/Post code.</p>
+            </div>
+          </div>
+          <div ng-if="$ctrl.openMap" class="row">
+            <div class="col-md-12 form-field-group">
+              <div map-lazy-load="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkLJt6qh1IocAzXwg9zCrAtE8rZYB43YY">
+                <ng-map center="{{$ctrl.pointMarker.lat}}, {{$ctrl.pointMarker.lng}}" zoom="15">
+                  <!--  trigger-resize="true" -->
+                  <marker position="[{{$ctrl.pointMarker.lat}}, {{$ctrl.pointMarker.lng}}]" draggable="true" on-dragend="$ctrl.onMapMarkerDrag($event)"
+                    title="your location"></marker>
+                </ng-map>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 form-field-group" ng-class="{ 'has-error' : $ctrl.createNewEvent.mainCategory.$invalid && $ctrl.submitBtnClicked }">
+              <label>Event Category*</label>
+              <select name="mainCategory" ng-model="$ctrl.event.mainCategory" ng-change="$ctrl.onMainCategorySelected($ctrl.event.mainCategory)"
+                required>
+                <option ng-repeat="mainCategory in $ctrl.mainCategories" value={{mainCategory.id}}>{{mainCategory.title}}</option>
+              </select>
+              <p ng-show="$ctrl.createNewEvent.mainCategory.$invalid && $ctrl.submitBtnClicked" class="help-block">Please select a category.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 form-field-group" ng-class="{ 'has-error' : $ctrl.createNewEvent.subCategory.$invalid && $ctrl.submitBtnClicked }">
+              <label>Event Sub Category*</label>
+              <select name="subCategory" ng-model="$ctrl.event.subCategory" required>
+                <!-- <option value="">- Please select main category first -</option> -->
+                <option ng-repeat="(subCategory_index, subCategory) in $ctrl.subCategories" value="{{subCategory.id}}">{{subCategory.title}}</option>
+              </select>
+              <p ng-show="$ctrl.createNewEvent.subCategory.$invalid && $ctrl.submitBtnClicked" class="help-block">Please select a sub category.</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div ng-if="$ctrl.resetInstructorInputDropdown" class="col-xs-12 form-field-group" ng-class="{ 'has-error' : ($ctrl.createNewEvent.priInstructor.$invalid && $ctrl.submitBtnClicked) || ($ctrl.event.primaryInstructorName.length == null && $ctrl.event.selectedAssistingInstructors.length != 0) }">
+              <label>Primary Instructor</label>
+              <input-dropdown allow-custom-input="false" input-name="priInstructor" input-placeholder="Search Instructor" ng-model-options="{ debounce: 250 }"
+                selected-item="$ctrl.event.primaryInstructorName" filter-list-method="$ctrl.onSearchInstructor(userInput)" item-selected-method="$ctrl.onAddPrimaryInstructor(item)" input-required="false" id="input-primary-instructor" input-class-name="input-primary-instructor-class"></input-dropdown>
+              <p ng-show="$ctrl.createNewEvent.priInstructor.$invalid && $ctrl.submitBtnClicked" class="help-block">Please enter a valid event primary instructor.</p>
+              <p ng-show="$ctrl.submitBtnClicked && $ctrl.event.primaryInstructorName == null && $ctrl.event.selectedAssistingInstructors.length != 0" class="help-block">Please enter a valid event primary instructor.</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div ng-if="$ctrl.resetInstructorInputDropdown" class="col-xs-12 form-field-group" ng-class="{ 'has-error' : $ctrl.createNewEvent.assistInstructor.$invalid && $ctrl.submitBtnClicked }">
+              <label>Assisting Instructor(s)</label>
+              <input-dropdown allow-custom-input="false" input-name="assistInstructor" input-placeholder="Search Instructor" ng-model-options="{ debounce: 250 }"
+                selected-item="$ctrl.event.assistInstructorName" filter-list-method="$ctrl.onSearchInstructor(userInput)" item-selected-method="$ctrl.onAddAssistingInstructor(item)" input-required="false" id="input-assisting-instructor" input-class-name="input-assisting-instructor-class"></input-dropdown>
+              <p ng-show="$ctrl.createNewEvent.assistInstructor.$invalid && $ctrl.submitBtnClicked" class="help-block">Please enter a valid event assisting instructor(s).</p>
+              <div class="multi-upload__container instructors-list__container" ng-show="$ctrl.event.selectedAssistingInstructors.length > 0">
+                <div class="multi-upload__selected">
+                  <ul>
+                    <li ng-repeat="instructor in $ctrl.event.selectedAssistingInstructors">
+                      <span>{{instructor.readableName}}</span>
+                      <span class="glyphicon glyphicon-remove multi-upload__remove" aria-hidden="true" ng-click="$ctrl.onRemoveInstructor(instructor.id)"></span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 form-field-group" ng-class="{ 'has-error' : $ctrl.validateURL && $ctrl.submitBtnClicked }">
+              <label>External URL </label>
+              <input type="url" name="url" placeholder="Please enter a valid URL with http:// or https://" class="form-control" ng-model="$ctrl.event.url" ng-pattern="/(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/" ng-model-options="{updateOn: 'blur'}">
+              <!--<input type="url" name="url" placeholder="Enter URL with http:// or https://" class="form-control event-create-url-input-sm" ng-model="$ctrl.event.url" ng-pattern="/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/" ng-model-options="{updateOn: 'blur'}">-->
+              <p ng-show="$ctrl.validateURL && $ctrl.submitBtnClicked" class="help-block">Please enter a valid URL with http:// or https://</p>
+            </div>
+          </div>
+
+          <div class="form-part-line prl-linebreak"></div>
+
+          <div id="pricegroup" class="row">
+            <div class="pricegroup-set" ng-repeat="field in $ctrl.priceBox">
+              <div id="priceD" class="form-group col-sm-7 col-md-7 form-field-group" ng-class="{ 'has-error' : $ctrl.createNewEvent.priceDetails[$index].$invalid && $ctrl.submitBtnClicked }">
+                <label>Price Details </label>
+                <input type="text" name="priceDetails[$index]" class="form-control" placeholder="E.g., Member Pricing, Early-Bird Rate, etc." ng-model="$ctrl.event.priceBox[$index].priceDetails"
+                  ng-maxlength="100">
+                <!-- <p ng-show="$ctrl.createNewEvent.priceDetails1.$invalid && $ctrl.submitBtnClicked" class="help-block">Please enter a valid price details.</p> -->
+              </div>
+              <div id="priceV" class="form-group col-sm-5 col-md-5 form-field-group" ng-class="{ 'has-error' : $ctrl.createNewEvent.priceValue[$index].$invalid && $ctrl.submitBtnClicked }">
+                <label>Price </label><div class="prl-remove-price grey_bg" ng-click="$ctrl.onRemoveOneClicked($index)">X</div>
+                <input type="text" name="priceValue[$index]" placeholder="E.g., $100, £75, €50, etc." class="form-control" ng-model="$ctrl.event.priceBox[$index].priceValue">
+                <!-- <p ng-show="$ctrl.createNewEvent.priceValue1.$invalid && $ctrl.submitBtnClicked" class="help-block">Please enter a valid price value.</p> -->
+              </div>
+
+              <!-- <p ng-show="$ctrl.createNewEvent.priceDetails[$index].$invalid && $ctrl.submitBtnClicked" class="help-block">Please enter a valid price details.</p> -->
+
+            </div>
+          </div>
+
+          <div class="row add-more-btn">
+            <span ng-click="$ctrl.onAddMoreClicked()">+</span>
+            <label ng-click="$ctrl.onAddMoreClicked()">Add More</label>
+
+            <!-- <button ng-click="$ctrl.onRemoveOneClicked()">X</button> -->
+            <!-- <label ng-click="$ctrl.onRemoveOneClicked()">Remove One</label> -->
+          </div>
+
+
+        </form>
+      </div>
+
+      <div class="">
+        <div class="btn-list form-field-group">
+          <button ng-disabled="$ctrl.isNewEventProcessing" type="submit" class="btn btn-yellow btn-submit" ng-click="$ctrl.onNewEventClicked()">
+            <!-- <div class="bs-process-bar uil-ring-css yellow"></div> -->
+            <span>CREATE EVENT</span> <!-- class="bs-login-text" -->
+          </button>
+          <button data-toggle="modal" data-target="#createEvent" ng-disabled="$ctrl.isNewEventProcessing" type="submit" class="btn btn-black btn-cancel"
+            ng-click="$ctrl.onCancelClicked()">
+            <span>CANCEL</span> <!-- class="bs-login-text" -->
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,136 @@
+.prl-connections {
+  .allgroups-header {
+    margin: 0 0 40px 0;
+  }
+  .hold-title {
+    &:after {
+      @include bp(xxs) {
+        left: 50%;
+        // transform: translateX(-50%);
+      }
+    }
+  }
+  .browse-box {
+    padding-bottom: 40px;
+    .allgroups-header {
+      padding: 8px 15px;
+    }
+  }
+  // .pl-error__container {
+  //   padding: 0 30px;
+  // }
+  &__viewmore {
+    margin-top: 40px;
+  }
+  &__make-hold {
+    margin-bottom: 0;
+  }
+}
+
+.user-connect {
+  margin-bottom: 0;
+  margin-left: -8px;
+  margin-right: -8px;
+  padding: 0;
+  li {
+    padding: 8px;
+  }
+  &__item {
+    background-color: $white;
+    padding: 16px;
+    position: relative;
+  }
+  &__img {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 3px solid $grey1;
+    height: 85px;
+    // position: absolute;
+    left: 0;
+    width: 85px;
+    @include bp(xxs) {
+      margin: 0 auto 10px;
+    }
+  }
+  &__btncontainer {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    @include bp(xxs) {
+      position: static;
+      text-align: center;
+      transform: none;
+    }
+  }
+  &__name {
+    font-weight: 600;
+    left: 121px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    @include bp(xxs) {
+      display: block;
+      position: static;
+      text-align: center;
+      transform: none;
+    }
+  }
+  // Two items in a row
+  &.half {
+    li {
+      float: left;
+      width: 50%;
+      @include bp(xs) {
+        float: none;
+        width: 100%;
+      }
+    }
+  }
+}
+
+.browse-box__container {
+  padding: 0 35px;
+  .block-ui-container {
+    background-color: $grey1;
+  }
+}
+
+.hold-form,
+.hold-title {
+  @include bp(xxs) {
+    float: none !important;
+  }
+}
+
+.user-connect__item .user-connect__btncontainer {
+  button {
+    border-radius: 0;
+    font-weight: 300;
+  }
+}
+
+.connections-filterby-text {
+  @include bp(xxs) {
+    display: block;
+    padding-bottom: 5px;
+  }
+}
+
+.connection-label {
+  border: 0;
+  font-weight: 600 !important;
+}
+
+.prl-connections {
+  .hold-form a {
+    margin: 0;
+    @include bp(xxs) {
+      margin: 0 0 20px 0;
+    }
+  }
+  .user-connect__btncontainer button:first-child {
+    margin-left: 0;
+  }
+}

@@ -1,0 +1,63 @@
+<form name="regForm" id="signup-form" ng-submit="onSubmit()" novalidate>
+  <div id="step2" class="tab-pane">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="po-s2-form-heading">User Information</h2>
+        <div class="po-s2-form-container">
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : regForm.fname.$invalid && !regForm.fname.$pristine }">
+              <input type="text" name="fname" placeholder="First Name*" class="form-control" ng-model="formData.user.fname" ng-pattern="/^[\D]*$/"
+                ng-model-options="{updateOn: 'blur'}" required>
+                <p ng-show="regForm.fname.$invalid && !regForm.fname.$pristine" class="help-block">Please enter your first name.</p>
+            </div>
+            <div class="form-group col-sm-6 col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : regForm.lname.$invalid && !regForm.lname.$pristine}">
+              <input type="text" name="lname" placeholder="Last Name*" class="form-control" ng-model="formData.user.lname" ng-pattern="/^[\D]*$/"
+                ng-model-options="{updateOn: 'blur'}" required>
+                <p ng-show="regForm.lname.$invalid && !regForm.lname.$pristine" class="help-block">Please enter your last name.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : regForm.email.$invalid && !regForm.email.$pristine || $ctrl.emailExists}">
+              <input type="email" name="email" placeholder="Email*" class="form-control" ng-blur="$ctrl.onEmailValidateCheck()" ng-model="formData.user.email"
+                ng-model-options="{debounce: 100}" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" required>
+                <small id="emailHelp" class="form-text text-muted text-hint">(This will be your username)</small>
+                <p ng-show="regForm.email.$invalid && !regForm.email.$pristine" class="help-block">Please enter a valid email.</p>
+                <p ng-show="$ctrl.emailExists && !regForm.email.$invalid" class="help-block">Email address already taken, please login.</p>
+            </div>
+            <div class="form-group col-sm-6 col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : regForm.phone.$invalid && !regForm.phone.$pristine }">
+              <input type="text" name="phone" placeholder="Phone*" class="form-control" ng-model="formData.user.phone" ng-model-options="{updateOn: 'blur'}" ng-pattern="/^[0-9\s\+\(\)\-]*$/" required>
+                <p ng-show="regForm.phone.$invalid && !regForm.phone.$pristine" class="help-block">Please enter a valid phone number.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6 col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : regForm.password.$invalid && !regForm.password.$pristine }">
+              <input type="password" name="password" placeholder="Password*" class="form-control" ng-model="formData.user.password" ng-minlength="6"
+                ng-model-options="{updateOn: 'blur'}" required>
+                <small id="telHelp" class="form-text text-muted text-hint">(Must be at least 6 characters)</small>
+                <p ng-show="regForm.password.$error.minlength && !regForm.password.$pristine" class="help-block">Your password is too short (minimum is 6 characters).</p>
+            </div>
+            <div class="form-group col-sm-6 col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : formData.user.confirmPassword !== formData.user.password && !regForm.confirmPassword.$pristine }">
+              <input type="password" name="confirmPassword" placeholder="Confirm Password*" class="form-control" ng-model="formData.user.confirmPassword"
+                ng-model-options="{updateOn: 'blur'}" required>
+                <p ng-show="formData.user.confirmPassword !== formData.user.password && !regForm.confirmPassword.$pristine" class="help-block">Your passwords don't appear to match, please try again.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- po-footer -->
+    <div class="row po-footer">
+      <div class="col-md-6">
+        <div class="po-navigations">
+          <input ui-sref="membertype" type="button" id="po-back" class="btn btn-black pull-left" value="{{'back' | uppercase}}">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="po-navigations clearfix">
+          <input ui-sref="registration.billing" ng-disabled="regForm.$invalid || $ctrl.emailExists || formData.user.confirmPassword !== formData.user.password"
+            ng-click="$ctrl.onNextClicked()" type="button" id="po-next" class="btn btn-yellow pull-right" value="NEXT">
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

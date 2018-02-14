@@ -1,0 +1,77 @@
+.share-playlist {
+  padding-bottom: 10px;
+  button {
+    font-size: 0.9em;
+    margin: 0 !important;
+    min-height: 0;
+  }
+  button,
+  ul.dropdown-menu {
+    min-width: 140px;
+  }
+  .dropdown {
+    float: right;
+  }
+}
+
+.searchedResults {
+  margin-top: 20px;
+  .block-ui-container {
+    // min-height: 190px;
+    background-color: $grey1;
+  }
+  &__container {
+    max-height: 200px;
+    overflow: hidden;
+    position: relative;
+    .ps-scrollbar-y-rail {
+      background-color: $grey1;
+      border-radius: 0px;
+      right: 0 !important;
+      width: 10px;
+      .ps-scrollbar-y {
+        background-color: $grey3;
+        border-radius: 0px;
+        width: 10px;
+      }
+    }
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    li {
+      cursor: pointer;
+      &:hover {
+        background-color: $yellow;
+      }
+    }
+  }
+}
+
+.selected-user {
+  background-color: $white;
+  margin-bottom: 8px;
+  padding: 8px 32px 8px 8px;
+  position: relative;
+  span.pro-pic {
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    display: block;
+    float: left;
+    height: 40px;
+    margin-right: 14px;
+    width: 40px;
+  }
+  span.user-name {
+    line-height: 2.5em;
+    vertical-align: middle;
+  }
+  span.remove-selected {
+    color: $red;
+    cursor: pointer;
+    position: absolute;
+    right: 8px;
+    top: 20px;
+  }
+}

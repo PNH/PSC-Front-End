@@ -1,0 +1,61 @@
+<div id="main" class="prl-blog blog-detail-content" ng-class="{'guest-user': !$ctrl.userId}">
+  <dashboard-header title="Blog"></dashboard-header>
+  <div id="content" class="clearfix" block-ui="blogPostLoading">
+    <div class="content-holder forum-content">
+      <div class="block-holder forum-item">
+      <breadcrumb ng-if="$ctrl.post.title" home="false" items="$ctrl.breadcrumbItems" current="$ctrl.post.title"></breadcrumb>
+
+        <!-- <div class="btn-box">
+          <button class="btn btn-grey btn-sm">Delete</button>
+          <button class="btn btn-grey btn-sm">Edit</button>
+        </div> -->
+
+        <div class="topic-box blog-post">
+          <div class="hold-img" style="background-image: url('{{$ctrl.post.author.profileImage}}')"></div>
+          <div class="hold-title line-l blog-details-title">
+            <strong>{{$ctrl.post.title}}</strong>
+            <!--<span class="date">1:51pm,  January 23, 2016</span>-->
+          </div>
+          <div class="blog-post-banner" style="background-image: url('{{$ctrl.post.banner}}');"></div>
+          <div class="blog-post-details">
+            <div class="blog-post-category" ng-if="$ctrl.post.blog_categories.length > 0"><strong>Category | </strong><span ng-repeat="category in $ctrl.post.blog_categories track by $index">{{category.name}}<span ng-hide="$last">, </span></span></div>
+            <div class="blog-post-tags" ng-if="$ctrl.post.tags.length > 0"><strong>Tags | </strong><span ng-repeat="tag in $ctrl.post.tags track by $index">{{tag.name}}<span ng-hide="$last">, </span></span></div>
+          </div>
+          <div ng-bind-html="$ctrl.post.content | trusthtml" class="content-block answer-box__content"></div>
+          <span class="post-author"><strong>Author | </strong> {{$ctrl.post.author.firstName + ' ' + $ctrl.post.author.lastName}}</span>
+          <div class="hold-title blog-details-leave-comment">Leave a Comment</div>
+          <div ng-if="!$ctrl.userId">
+            <guest-user-form button-text="SAVE" post="$ctrl.createMainComment" text-area="true"></guest-user-form>
+          </div>
+          <div ng-if="$ctrl.userId">
+            <simple-reply button-text="SAVE" post="$ctrl.createMainComment" text-area="true" config="$ctrl.summernoteOptions"></simple-reply>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content-holder forum-content">
+      <div class="block-holder forum-item">
+        <div class="topic-box comments-box clearfix">
+          <div class="hold-title line-l">
+            <strong>Comments</strong>
+          </div>
+          <div class="pl-error__container" ng-if="!$ctrl.comments.length > 0">
+            <div class="pl-error">
+              <span class="pl-error__message">Be the first to start a conversation in this blog!</span>
+            </div>
+          </div>
+          <!--<prl-comment ng-repeat="comment in $ctrl.comments" comment="comment" edit="$ctrl.editComment" delete-comment="$ctrl.deleteComment" text-area="true"></prl-comment>-->
+          <div class="forums-posts">
+            <blog-post ng-repeat="comment in $ctrl.comments | orderBy: '-created_at' track by comment.id" comment="comment" reply="$ctrl.createSubComment" delete-reply="$ctrl.deleteSubComment" get-replies="$ctrl.getSubComments" edit-comment="$ctrl.editMainComment" edit-reply="$ctrl.editSubComment" delete-comment="$ctrl.deleteMainComment" root-access="$ctrl.rootAccess"></blog-post>
+          </div>
+          <button type="submit" class="btn btn-yellow btn-submit pull-right" ng-disabled="$ctrl.isLoadingMainComments || $ctrl.mainCommentHasReachedEnd" ng-click="$ctrl.loadMainComments()" ng-class="{'processing': $ctrl.isLoadingMainComments}" ng-if="$ctrl.comments.length > 0">
+            <div class="bs-process-bar uil-ring-css yellow">
+              <div></div>
+            </div>
+            <span class="bs-login-text">VIEW MORE</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

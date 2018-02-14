@@ -1,0 +1,131 @@
+<form name="horseForm">
+  <div class="row formRow bgColor">
+    <div class="col-md-12">
+      <div class="po-s2-form-container">
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : horseForm.name.$invalid && !horseForm.name.$pristine }">
+            <profile-image ng-if="$ctrl.horse" file="$ctrl.horse.file" image="$ctrl.horse.profilePic"></profile-image>
+            <!-- <div class="dpHolder">
+              <label id="profilePhotoHolder">
+                <input type="file" style="display: none;"> </label>
+              <label>Add Profile Image</label>
+            </div> -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group">
+            <div class="form-part-line"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : horseForm.name.$invalid && !horseForm.name.$pristine }">
+            <label>Name* </label>
+            <input type="text" name="name" placeholder="" class="form-control" ng-model="$ctrl.horse.name" ng-minlength="1" ng-maxlength="100"
+              ng-model-options="{updateOn: 'blur'}" ng-pattern="/^[\D]*$/" required>
+            <p ng-show="horseForm.name.$invalid && !horseForm.name.$pristine" class="help-block">Please enter a valid name.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : horseForm.horsenality.$invalid && !horseForm.horsenality.$pristine }">
+            <label>Horsenality </label>
+            <select ng-if="$ctrl.horsenalities" name="horsenality" ng-model="$ctrl.horse.horsenality" convert-to-number>
+                <!-- <option value="-1" selected> Relationship </option> -->
+                <option ng-repeat="(horsenality_index, horsenality) in $ctrl.horsenalities" value="{{horsenality}}">{{horsenality_index}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : horseForm.name.$invalid && !horseForm.name.$pristine }">
+            <label>Parelli Level </label>
+            <select name="level" ng-model="$ctrl.horse.level" convert-to-number>
+              <!-- <option value="-1" selected> Level</option> -->
+              <option value="1">Level 1</option>
+              <option value="2">Level 2</option>
+              <option value="3">Level 3</option>
+              <option value="4">Level 4</option>
+            </select>
+          </div>
+        </div>
+       <!--  <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : horseForm.birthday.$invalid && !horseForm.birthday.$pristine }">
+            <label>Birthday</label>
+            <input name="birthday" type="text" placeholder="" class="form-control" moment-picker="$ctrl.horse.birthday" ng-model="$ctrl.horse.birthday | date : 'M/dd/yyyy'"
+              format="M/D/YYYY" max-view="day" min-date="'12/30/1990'" max-date="'12/30/2017'" autoclose="true" ng-paste="$event.preventDefault();"
+            />
+            <p ng-show="horseForm.birthday.$invalid && !horseForm.birthday.$pristine" class="help-block">Please select date of birth.</p>
+          </div>
+        </div> -->
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : horseForm.birthday.$invalid && !horseForm.birthday.$pristine }">
+            <label>Birthday</label>
+            <input name="birthday" type="text" placeholder="" class="form-control" moment-picker ng-model="$ctrl.horse.birthday" format="M/D/YYYY" max-view="day" min-date="'12/30/1990'" max-date="$ctrl.todayDate" autoclose="true" ng-paste="$event.preventDefault();"/>
+            <p ng-show="horseForm.birthday.$invalid && !horseForm.birthday.$pristine" class="help-block">Please select date of birth.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : horseForm.sex.$invalid && !horseForm.sex.$pristine }">
+            <label>Sex </label>
+            <select ng-if="$ctrl.genders" name="sex" ng-model="$ctrl.horse.sex" convert-to-number>
+                <!-- <option value="-1" selected> Relationship </option> -->
+                <option ng-repeat="(gender_index, gender) in $ctrl.genders" value="{{gender}}">{{gender_index | humanize}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : horseForm.breed.$invalid && !horseForm.breed.$pristine }">
+            <label>Breed</label>
+            <input type="text" name="breed" placeholder="" class="form-control" ng-model="$ctrl.horse.breed" ng-minlength="1" ng-maxlength="100"
+              ng-model-options="{updateOn: 'blur'}">
+            <p ng-show="horseForm.breed.$invalid && !horseForm.breed.$pristine" class="help-block">Please enter a valid breed.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : horseForm.color.$invalid && !horseForm.color.$pristine }">
+            <label>Color</label>
+            <input type="text" name="color" placeholder="" class="form-control" ng-model="$ctrl.horse.color" ng-minlength="1" ng-maxlength="100"
+              ng-pattern="/^[a-zA-Z\s]*$/">
+            <p ng-show="horseForm.color.$invalid && !horseForm.color.$pristine" class="help-block">Please enter a valid color.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : horseForm.height.$invalid && !horseForm.height.$pristine }">
+            <label>Height</label>
+            <input type="text" name="height" placeholder="" class="form-control" ng-model="$ctrl.horse.height">
+            <p ng-show="horseForm.height.$invalid && !horseForm.height.$pristine" class="help-block">Please enter a valid height.</p>
+            <p class="help-block"><small>Height in hands (HH) or meters (M) E.g. 16.2HH or 1.5M</small></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : horseForm.weight.$invalid && !horseForm.weight.$pristine }">
+            <label>Weight</label>
+            <input type="text" name="weight" placeholder="" class="form-control" ng-model="$ctrl.horse.weight">
+            <p ng-show="horseForm.weight.$invalid && !horseForm.weight.$pristine" class="help-block">Please enter a valid weight.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : horseForm.bio.$invalid && !horseForm.bio.$pristine }">
+            <label>Bio </label>
+            <textarea type="text" name="bio" rows="10" placeholder="" ng-model="$ctrl.horse.bio" ng-maxlength="2000"></textarea>
+            <p ng-show="horseForm.bio.$invalid && !horseForm.bio.$pristine" class="help-block">Please enter a valid bio.</p>
+          </div>
+        </div>
+      </div>
+      <!--</div>-->
+      <div ng-include src="'app/horseprofile/template/_solutionmap.html'"> </div>
+
+      <div class="save-btn">
+        <!--<input ng-disabled="horseForm.$invalid || $ctrl.isProcessing" ng-click="$ctrl.onUpdateProfileClicked()" type="button" id="po-next" class="btn btn-yellow pull-right" value="{{$ctrl.isProcessing ? 'SAVING...' : 'SAVE PROFILE'}}" />-->
+        <button ng-disabled="horseForm.$invalid || $ctrl.isProcessing" ng-click="$ctrl.onUpdateProfileClicked()" class="btn btn-yellow pull-right btn-submit"
+          type="submit" ng-class="{'processing': $ctrl.isProcessing}" id="po-next">
+          <div class="bs-process-bar uil-ring-css yellow">
+            <div></div>
+          </div>
+          <span class="bs-login-text">
+            SAVE PROFILE
+          </span>
+        </button>
+        <input ng-click="$ctrl.onDeleteProfileClicked()" type="button" class="btn pull-right delete-btn" value="DELETE">
+      </div>
+    </div>
+  </div>
+</form>

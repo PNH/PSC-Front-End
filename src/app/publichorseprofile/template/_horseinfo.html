@@ -1,0 +1,94 @@
+<form name="horseForm" class="public-profile__container">
+  <div class="row formRow bgColor">
+    <div class="col-md-12">
+      <div class="po-s2-form-container">
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-show="$ctrl.horse.profilePic">
+            <div class="profile-image__container">
+              <div class="profile-image" style="background-image: url('{{$ctrl.horse.profilePic}}')"></div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group">
+            <div class="form-part-line"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-show="$ctrl.horse.name">
+            <label>Name </label>
+            <input type="text" name="name" placeholder="" class="form-control" ng-model="$ctrl.horse.name" ng-minlength="3" ng-maxlength="100"
+              ng-model-options="{updateOn: 'blur'}" ng-disabled="true">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-show="$ctrl.horse.horsenality">
+            <label>Horsenality </label>
+            <select ng-if="$ctrl.horsenalities" name="horsenality" ng-model="$ctrl.horse.horsenality" convert-to-number ng-disabled="true">
+                <option ng-repeat="(horsenality_index, horsenality) in $ctrl.horsenalities" value="{{horsenality}}">{{horsenality_index}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-show="$ctrl.horse.level">
+            <label>Parelli Level </label>
+            <select name="level" ng-model="$ctrl.horse.level" convert-to-number ng-disabled="true">
+              <option value="1">Level 1</option>
+              <option value="2">Level 2</option>
+              <option value="3">Level 3</option>
+              <option value="4">Level 4</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-show="$ctrl.horse.birthday">
+            <label>Birthday</label>
+            <input name="birthday" type="text" placeholder="" class="form-control" moment-picker ng-model="$ctrl.horse.birthday" format="M/D/YYYY" max-view="day" min-date="'12/30/1990'" max-date="$ctrl.todayDate" autoclose="true" ng-paste="$event.preventDefault();" ng-disabled="true"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-show="$ctrl.horse.sex">
+            <label>Sex </label>
+            <select ng-if="$ctrl.genders" name="sex" ng-model="$ctrl.horse.sex" convert-to-number ng-disabled="true">
+                <option ng-repeat="(gender_index, gender) in $ctrl.genders" value="{{gender}}">{{gender_index | humanize}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-show="$ctrl.horse.breed">
+            <label>Breed</label>
+            <input type="text" name="breed" placeholder="" class="form-control" ng-model="$ctrl.horse.breed" ng-minlength="3" ng-maxlength="100"
+              ng-model-options="{updateOn: 'blur'}" ng-disabled="true">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-show="$ctrl.horse.color">
+            <label>Color</label>
+            <input type="text" name="color" placeholder="" class="form-control" ng-model="$ctrl.horse.color" ng-minlength="1" ng-maxlength="100"
+              ng-pattern="/^[a-zA-Z\s]*$/" ng-disabled="true">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-show="$ctrl.horse.height">
+            <label>Height</label>
+            <input type="text" name="height" placeholder="" class="form-control" ng-model="$ctrl.horse.height" ng-disabled="true">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-show="$ctrl.horse.weight">
+            <label>Weight</label>
+            <input type="text" name="weight" placeholder="" class="form-control" ng-model="$ctrl.horse.weight" ng-disabled="true">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-show="$ctrl.horse.bio">
+            <label>Bio </label>
+            <textarea type="text" name="bio" rows="10" ng-model="$ctrl.horse.bio" ng-minlength="3"
+              ng-maxlength="2000" ng-disabled="true"></textarea>
+          </div>
+        </div>
+      </div>
+      <!--<div ng-include src="'app/horseprofile/template/_solutionmap.html'"> </div>-->
+    </div>
+  </div>
+</form>

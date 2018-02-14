@@ -1,0 +1,80 @@
+
+.touchstones-detail {
+  .block {
+    &.open {
+      .box {
+        background-color: $tsd-db-header-bg !important;
+        .dd_title {
+          color: $white;
+        }
+      }
+
+      .dropdown-box {
+        max-height: 10000px;
+      }
+    }
+    .box {
+      background-color: $white !important;
+    }
+  }
+  .content-holder {
+    .prl-banner {
+      margin: 0;
+    }
+  }
+  .content-holder-small {
+    padding-left: 175px;
+    padding-right: 175px;
+    @include bp(md) {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+  }
+  .touchstone-document {
+    li {
+      float: none;
+      width: 100%;
+      text-align: left;
+    }
+    .ll-detail-document__content {
+      background-color: $grey1;
+    }
+  }
+  .hold-carousel {
+    min-height: 0;
+  }
+
+  .touchstones-description {
+    color: $grey3;
+    margin-top: 30px;
+    text-align: justify;
+  }
+
+  .touchstones-action-plan {
+    margin-top: 20px;
+    text-align: center;
+
+    a {
+      margin: 10px 10px;
+      padding: 7px 50px;
+
+      @include bp(xxs) {
+        padding: 7px 20px;
+        white-space: normal;
+      }
+    }
+  }
+}
+
+.savvy-essentials-imgpopup {
+  div {
+    display: flex;
+    justify-content: center;
+  }
+
+  img {
+    display: block;
+    height: 300px;
+    width: auto;
+  }
+}

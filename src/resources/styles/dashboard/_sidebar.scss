@@ -1,0 +1,170 @@
+.side-info-box {
+  padding: 21px 20px;
+  margin-bottom: 20px;
+  h3 {
+    padding-left: 12px;
+  }
+  &.first {
+    padding: 48px 15px 20px 22px;
+  }
+  &.white-bg {
+    background-color: #fff;
+  }
+  .coming-soon__notice {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .badges-box {
+    border: none;
+    .badge-item {
+      width: 50%;
+      padding-bottom: 16px;
+    }
+  }
+  .view-all {
+    float: right;
+  }
+  .hold-btn {
+    margin-bottom: 10px !important;
+  }
+  .hold-img {
+    width: 100%;
+    margin-bottom: 30px;
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+  p {
+    margin-bottom: 15px;
+  }
+  .btn-expand {
+    cursor: pointer;
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    span {
+      color: $sb-expand;
+      font-size: 1.5em;
+    }
+  }
+  &.sb-testimonial {
+    p {
+      color: $sb-text-color;
+      line-height: 1.5em;
+      padding-left: 12px;
+      padding-right: 12px;
+      text-align: justify;
+    }
+  }
+  .tools-list {
+    padding-left: 12px;
+    padding-right: 12px;
+    li {
+      background: $sb-tools-bg url('../resources/images/icon-tools.png') 20px center no-repeat;
+      color: $sb-tools-text;
+      display: block;
+      margin-bottom: 6px;
+      padding: 22px 20px 22px 65px;
+    }
+  }
+  .sb-support-article-list {
+    li {
+      padding: 0;
+    }
+    a {
+      background: url('../resources/images/icon-pdf.png') 20px center no-repeat;
+      color: $sb-sa-text;
+      display: block;
+      padding: 22px 26px 22px 60px;
+      position: relative;
+      &:after {
+        content: "\e258";
+        position: absolute;
+        right: 6px;
+        top: 24px;
+        font-family: 'Glyphicons Halflings';
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+      }
+    }
+  }
+  .sb-link-box {
+    background-color: $grey3;
+    margin: 20px 12px 40px;
+    position: relative;
+    img {
+      opacity: 0.4;
+      width: 100%;
+    }
+    a {
+      display: block;
+      color: $white;
+      background-color: rgba(0,0,0,0.4);
+      font-size: 1.5em;
+      font-weight: 300;
+      left: 0;
+      padding: 18px 10px;
+      position: absolute;
+      right: 0;
+      width: 100%;
+      text-align: center;
+      top: 50%;
+      transform: translateY(-50%);
+      span {
+        font-weight: 300;
+        vertical-align: middle;
+      }
+    }
+  }
+  .sb-lesson-controls {
+    padding-left: 12px;
+    padding-right: 12px;
+
+    .completed {
+      margin-bottom: 15px;
+    }
+
+    label {
+      color: $sb-completed-text;
+    }
+
+    .btn {
+      float: none !important;
+      margin-bottom: 15px !important;
+      max-width: auto !important;
+      width: 100% !important;
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+  }
+
+  .savvy-essentials-banner {
+    height: 130px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
+.side-info-box.savvy-essentials-dashboard {
+  >p {
+    margin-top: 20px;
+    text-align: justify;
+  }
+}
+
+.side-info-box.first.dashboard {
+  min-height: 397px;
+}
+
+.dashboard-event-item {
+  cursor: pointer;
+}
+
+.dashboard-sidebar-se {
+  font-size: 15px;
+}

@@ -1,0 +1,98 @@
+<div id="main">
+  <dashboard-header title="Savvy Essentials"></dashboard-header>
+  <div id="content" class="touchstones-detail dashboard" block-ui="savvyEssentialsLoading">
+    <div class="content-holder">
+      <div class="prl-banner" style="background-image: url('{{$ctrl.savvyEssentials.resource.banner}}')">
+        <div class="prl-banner__content">
+          <h2 class="prl-banner__title">{{$ctrl.savvyEssentials.title}}</h2>
+          <h4 class="prl-banner__subtitle">{{$ctrl.savvyEssentials.publicationDate}}</h4>
+        </div>
+      </div>
+    </div>
+    <div class="content-holder content-holder-small">
+      <!-- <div class="block big open" dropdown-box ng-if="$ctrl.introduction">
+        <div class="box light_bg">
+          <span class="dd-toggle"></span>
+          <div class="dd_title">
+            Introduction
+          </div>
+        </div>
+        <div class="dropdown-box">
+          <div class="hold-carousel">
+            <div id="touchstoneIntroduction" class="carousel slide resource-carousel" data-ride="carousel">
+              <div class="carousel-inner" role="listbox">
+                <div class="item" ng-class="{'active': index === 0}" ng-repeat="(index, item) in $ctrl.introduction">
+                  <div class="prl-player-thumb__container" style="background-image: url('{{item.thumbnail}}');">
+                    <div class="prl-player-thumb__play small" data-toggle="modal" data-target="#mediaModal" ng-click="$ctrl.onMediaItemClicked(index)">
+                      <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                    </div>
+                    <div class="prl-player-thumb__details">
+                      <span class="title">{{item.name}}</span>
+                      <span class="duration">{{item.duration | duration}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="left carousel-control" data-target="#touchstoneIntroduction" role="button" data-slide="prev"></div>
+              <div class="right carousel-control" data-target="#touchstoneIntroduction" role="button" data-slide="next"></div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      <div class="block big" dropdown-box ng-repeat="pSection in $ctrl.savvyEssentials.publicationSections track by $index" ng-class="{'open': $first}">
+        <div class="box light_bg">
+          <span class="dd-toggle"></span>
+          <div class="dd_title">
+            {{pSection.title}}
+          </div>
+        </div>
+        <div class="dropdown-box">
+          <div class="db-container">
+            <div class="content-block" ng-bind-html="pSection.description | trusthtml"></div>
+            <ul class="ll-detail-document__container touchstone-document">
+                <!-- <div class="answer-box__attachments" >
+                  <span class="answer-box__attachments__title">Images:</span>
+                  <ul>
+                    <li ng-repeat="imageItem in $ctrl.filteredImages = (pSection.attachments | filter: {type: 'image'})">
+                      <a ng-href="{{imageItem.path}}" target="_blank"><img ng-href="{{imageItem.path}}" class="post-imageItem-img" src="{{imageItem.thumbnail}}"></a>
+                      <a class="post-imageItem-name" ng-href="{{imageItem.path}}" target="_blank">{{imageItem.name | truncate : 18}}</a>
+                    </li>
+                  </ul>
+                </div> -->
+
+              <li ng-repeat="attachment in pSection.attachments"> <!-- | filter: {type: '!image'} -->
+                <!-- Add class for following file types. Leave empty for unknown file types -->
+                <!-- Text file: 'txt', Word Doc: 'doc', Powerpoint Presentation: 'ppt', PDF: 'pdf' -->
+                <a href="" ng-click="attachment.type == 'pdf' ? $ctrl.onDocumentItemClicked(attachment) : attachment.type == 'image' ? $ctrl.onImageItemClicked(attachment) :  $ctrl.onMediaItemClicked(attachment)">
+                  <div class="ll-detail-document__content file-type-icon" ng-class="{'pdf': attachment.type == 'pdf', 'vid': attachment.type == 'video', 'aud': attachment.type == 'audio', 'img': attachment.type == 'image'}">
+                    {{attachment.name}}
+                    <!-- <a href="http:{{document.path}}" target="_blank" class="ll-detail-docu=ment__download"><i class="fa fa-arrow-down" aria-hidden="true"></i></a> -->
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <br/>
+      <div class="touchstones-description">
+        <div class="content-block">{{$ctrl.savvyEssentials.description}}</div>
+      </div>
+
+      <div class="touchstones-action-plan">
+        <a type="button" class="btn btn-yellow" ng-if="$ctrl.savvyEssentials.additionals.printable_action_plan" ng-href="{{$ctrl.savvyEssentials.additionals.printable_action_plan}}" download>
+          <span class="bs-login-text">DOWNLOAD ACTION PLAN</span>
+        </a>
+        <!-- <br/> -->
+        <a type="button" class="btn btn-yellow" ng-if="$ctrl.savvyEssentials.additionals.additional_content" ng-href="{{$ctrl.savvyEssentials.additionals.additional_content}}" target="_blank">
+          <span class="bs-login-text">VIEW ALL SAVVY ESSENTIALS</span>
+        </a>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+<div ng-include="'app/savvyessentials/template/_popups.html'"></div>

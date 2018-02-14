@@ -1,0 +1,15 @@
+<!--<div class="multi-upload__container">
+  <div class="multi-upload__selected">
+    <ul>
+      <li ng-repeat="item in multiUploadCtrl.attachedFiles track by $index">
+        {{item.name}}
+        <span class="glyphicon glyphicon-remove multi-upload__remove" aria-hidden="true" ng-click="multiUploadCtrl.removeItem($index)"></span>
+      </li>
+    </ul>
+  </div>
+  <div class="multi-upload__button">
+    <input id="multiUploadButton" type="file" fileread read-method="multiUploadCtrl.onInputFileChange" accept="image/*" multiple>
+    <label for="multiUploadButton" class="btn btn-grey btn-sm pull-right">Add Media</label>
+  </div>
+</div>-->
+<input id="multiUploadButton" type="file" fileread read-method="multiUploadCtrl.onInputFileChange" accept="image/*" style="display: none;" multiple>

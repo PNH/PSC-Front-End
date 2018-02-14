@@ -1,0 +1,99 @@
+@import 'tab';
+@import 'form';
+.bgColor {
+  background-color: white;
+  padding-bottom: 20px;
+}
+
+.profile-preview {
+  display: block;
+  width: 160px;
+  label {
+    float: left;
+    width: 100%;
+  }
+  small {
+    font-size: 10px;
+    color: $grey5;
+  }
+  .profile-frame {
+    border: 1px solid $grey4;
+    border-radius: 5px;
+    float: left;
+    padding: 4px;
+    position: relative;
+    overflow: hidden;
+    width: 180px;
+    height: 180px;
+    i {
+      color: $grey3;
+      font-size: 3em;
+      height: auto;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      opacity: 0.7;
+    }
+    img {
+      opacity: 0.9;
+      cursor: pointer;
+    }
+    .profiel-image-preview {
+      background-color: $grey3;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      display: block;
+      height: 100%;
+      overflow: hidden;
+      width: 100%;
+    }
+  }
+}
+
+.profile-pages {
+  @include bp(md) {
+    margin-top: 130px !important;
+  }
+  @include bp(xxs) {
+    margin-top: $mainTopMargin !important;
+  }
+}
+
+.equestrian-interest {
+  &__container {
+  margin: 0;
+  padding: 0;
+    li {
+      float: left;
+      padding: 6px 22px 6px 0;
+      text-transform: capitalize;
+    }
+  }
+}
+
+.instructors-list {
+  &__container {
+    margin-top: 10px;
+
+    li {
+      border-color: $grey7 !important;
+      color: $grey7;
+      span:first-child {
+        cursor: pointer;
+      }
+      span {
+        color: $grey7;
+      }
+    }
+  }
+}
+
+.croppie-container {
+  padding: 10px 0;
+  .block-ui-container {
+    background-color: $grey6;
+  }
+}

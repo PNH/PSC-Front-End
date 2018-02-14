@@ -1,0 +1,45 @@
+<div id="editTopic" class="modal fade login-popup edit-topic-popup" tabindex="100" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="onCloseClicked()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Edit Topic</h4>
+      </div>
+      <div class="modal-body">
+        <div class="login-error" ng-if="error">
+          <div class="row">
+            <div class="col-xs-12 login-error__container">
+              <div class="login-error__message">
+                {{error.message}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <form name="editTopic">
+          <div class="row">
+            <div class="col-xs-12 form-field-group" ng-class="{ 'has-error' : editTopic.groupName.$invalid && !editTopic.groupName.$pristine }">
+              <input type="text" name="title" ng-model="$ctrl.editTopic.title" placeholder="Topic name" class="form-control" ng-disabled="$ctrl.topicEditIsProcessing" required>
+            </div>
+            <div class="col-xs-12 form-field-group " ng-class="{ 'has-error' : editTopic.description.$invalid && !editTopic.description.$pristine }">
+              <!--<textarea type="text" name="description" ng-model="$ctrl.editTopic.description" placeholder="Topic description"
+                rows="5" required ng-disabled="$ctrl.topicEditIsProcessing"></textarea>-->
+              <!-- <text-angular ng-model="$ctrl.editTopic.description" data-ng-required="true" ta-disabled="$ctrl.topicEditIsProcessing"></text-angular> -->
+              <summernote class="wallpost-create-form" ng-model="$ctrl.editTopic.description" config="$ctrl.summernoteOptions" ng-disabled="$ctrl.topicEditIsProcessing"></summernote>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 form-field-group">
+              <button ng-disabled="!$ctrl.editTopic.description || editTopic.$invalid || $ctrl.topicEditIsProcessing" type="submit" class="btn btn-yellow btn-submit" ng-click="$ctrl.onEditTopicClicked($ctrl.subForumId, $ctrl.topicId, $ctrl.editTopic)"
+                ng-class="{'processing': $ctrl.topicEditIsProcessing}">
+                <div class="bs-process-bar uil-ring-css yellow">
+                  <div></div>
+                </div>
+                <span class="bs-login-text">SAVE</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

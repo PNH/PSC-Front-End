@@ -1,0 +1,120 @@
+@import 'member-type';
+
+.pr-form-heading {
+	text-align: center;
+	font-weight: 300;
+	margin-bottom: 30px;
+}
+
+.pr-form-review {
+	h3 {
+		margin-left: 25px;
+		margin-bottom: 20px;
+		margin-top: 6px;
+		color: $pr-text-heading;
+	}
+
+	.panel-body {
+		padding: 25px;
+		min-height: 240px;
+		word-wrap: break-word;
+
+		p {
+			color: $pr-text;
+			font-size: 1.125em;
+			margin-bottom: 15px;
+
+			strong {
+				color: $pr-text-heading;
+			}
+		}
+
+		a {
+			color: $pr-text-heading;
+
+		}
+	}
+
+	label {
+		color: $pr-text;
+		font-size: 0.875em;
+	}
+}
+
+.membership-bar {
+	background-color: $pr-memberbar-bg;
+	padding: 15px 30px;
+	position: relative;
+	margin-bottom: 20px;
+
+	@include bp(xxs) {
+		padding: 15px;
+	}
+
+	span {
+		&.member-type {
+			color: $pr-memberbar-text;
+			font-size: 1.750em;
+			font-weight: 300;
+
+			span {
+				display: none;
+				font-size: 0.8em;
+
+				@include bp(xxs) {
+					display: inline;
+				}
+			}
+		}
+		&.member-sub {
+			color: $pr-memberbar-text-dark;
+			margin-right: 25px;
+
+			@include bp(xxs) {
+				display: none;
+			}
+		}
+		&.member-price {
+			color: $pr-memberbar-text-yellow;
+			font-size: 1.250em;
+		}
+		&.member-tick {
+			color: $pr-memberbar-text;
+			background-color: $pr-memberbar-tick-bg;
+			width: 18px;
+		    height: 18px;
+		    text-align: center;
+		    display: block;
+		    float: left;
+		    margin-right: 10px;
+		    border-radius: 3px;
+		}
+	}
+
+	.arrow-down {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		border-top-color: $pr-memberbar-bg;
+		bottom: -12px;
+	}
+}
+
+.has-errors-big {
+
+	.help-block {
+		color: $red !important;
+		text-align: right;
+
+		i {
+		}
+	}
+}
+
+.prl-onboarding {
+	.btn-purchase-membership-full-width {
+		@include bp(xxs) {
+			width: 100% !important;
+		}
+	}
+}

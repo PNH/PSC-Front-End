@@ -1,0 +1,41 @@
+.view-more {
+	// opacity: 0;
+	overflow: hidden;
+	// padding-bottom: 70px;
+	position: relative;
+	transition: height 300ms ease-in-out;
+
+	&__toggle {
+		background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 70%); 
+		bottom: 0;
+		height: 70px;
+		left: 0;
+		position: absolute;
+		right: 0;
+		// width: 100%;
+		text-align: center;
+
+		span.glyphicon {
+			bottom: 0;
+			color: $grey34;
+			cursor: pointer;
+			font-size: 1.5em;
+			left: 50%;
+			position: absolute;
+			top: auto !important;
+			transform: translateX(-50%);
+			transition: transform 300ms ease-in-out;
+			&.active {
+				transform: translateX(-50%) rotate(180deg);
+			}
+		}
+	}
+	&.grey {
+		.view-more__toggle {
+			background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(243,245,246,1) 70%);
+		}
+	}
+	&__content {
+		// padding-bottom: 40px;
+	}
+}

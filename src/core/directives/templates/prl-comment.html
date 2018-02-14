@@ -1,0 +1,17 @@
+<div class="answer-box clearfix prl-comment">
+  <figure class="hold-img" style="background-image: url('{{commentCtrl.comment.user.profileImage}}');" go-to-wall wall-id="commentCtrl.comment.user.id" is-member="blogPostCtrl.comment.user.ismember" ng-class="{'clickable': commentCtrl.comment.user.id > 0}"></figure>
+  <div class="hold-title line-l">
+    <div class="hold-date">
+      <strong go-to-wall wall-id="commentCtrl.comment.user.id" is-member="blogPostCtrl.comment.user.ismember" ng-class="{'clickable': commentCtrl.comment.user.id > 0}">{{commentCtrl.comment.user.firstName + ' ' + commentCtrl.comment.user.lastName}}</strong>
+      <span class="date">{{commentCtrl.comment.created_at | formatdate: 1}}</span>
+    </div>
+    <div class="btn-box">
+      <button class="btn btn-grey btn-sm" ng-click="commentCtrl.onDeleteClicked(commentCtrl.comment.id)" ng-if="commentCtrl.deleteComment && (commentCtrl.comment.isowner || commentCtrl.rootAccess || (commentCtrl.comment.user_id === commentCtrl.ownerId && commentCtrl.comment.user_id && commentCtrl.ownerId))" ng-disabled="commentCtrl.isDeleteProcessing">Delete</button>
+      <button class="btn btn-grey btn-sm" ng-click="commentCtrl.toggleEditBox = !commentCtrl.toggleEditBox" ng-if="commentCtrl.edit && (commentCtrl.comment.isowner || commentCtrl.rootAccess)">Edit</button>
+    </div>
+  </div>
+  <span class="no" ng-if="commentCtrl.id">#{{commentCtrl.id}}</span>
+  <div ng-hide="commentCtrl.toggleEditBox" class="content-block answer-box__content" ng-bind-html="commentCtrl.comment.comment | trusthtml">
+  </div>
+  <simple-reply button-text="SAVE" ng-if="commentCtrl.toggleEditBox" post="commentCtrl.onEditClicked" content="commentCtrl.comment.comment"></simple-reply>
+</div>

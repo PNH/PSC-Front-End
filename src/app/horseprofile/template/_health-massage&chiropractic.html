@@ -1,0 +1,103 @@
+<form name="horseMassageForm">
+  <div class="row formRow bgColor">
+    <div class="col-md-12">
+      <div class="po-s2-form-container">
+        <div class="row">
+          <div class="col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : regForm.name.$invalid && !regForm.name.$pristine }">
+            <label>Therapist Name*</label>
+            <input type="text" name="name" placeholder="" class="form-control" ng-model="formData.user.name" ng-minlength="3" ng-maxlength="100" ng-pattern="/^[a-zA-Z\s]*$/">
+            <p ng-show="regForm.name.$invalid && !regForm.name.$pristine" class="help-block">Please enter a valid name.</p>
+          </div>
+          <div class="col-md-6 po-s2-form-field-group calender" ng-class="{ 'has-error' : regForm.name.$invalid && !regForm.name.$pristine }">
+            <label>Visit Date*</label>
+            <input type="text" name="name" placeholder="" class="form-control" ng-model="formData.user.name" ng-minlength="3" ng-maxlength="100" ng-pattern="/^[a-zA-Z\s]*$/">
+            <p ng-show="regForm.name.$invalid && !regForm.name.$pristine" class="help-block">Please enter a valid name.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 po-s2-form-field-group calender" ng-class="{ 'has-error' : regForm.name.$invalid && !regForm.name.$pristine }">
+            <label>Next Visit Date</label>
+            <input type="text" name="name" placeholder="" class="form-control" ng-model="formData.user.name" ng-minlength="3" ng-maxlength="100" ng-pattern="/^[a-zA-Z\s]*$/">
+            <p ng-show="regForm.name.$invalid && !regForm.name.$pristine" class="help-block">Please enter a valid name.</p>
+          </div>
+          <div class="col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : regForm.name.$invalid && !regForm.name.$pristine }">
+            <label>Visit Type*</label>
+            <select>
+              <option></option>
+              <option>Level 1</option>
+              <option>Level 2</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : regForm.name.$invalid && !regForm.name.$pristine }">
+            <label>Reason for Visit* </label>
+            <textarea type="text" name="name" rows="8" placeholder="" class="form-control" ng-model="formData.user.name" ng-minlength="3" ng-maxlength="100" ng-pattern="/^[a-zA-Z\s]*$/"></textarea>
+            <p ng-show="regForm.name.$invalid && !regForm.name.$pristine" class="help-block">Please enter a valid name.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : regForm.name.$invalid && !regForm.name.$pristine }">
+            <label>Assessment </label>
+            <textarea type="text" name="name" rows="8" placeholder="" class="form-control" ng-model="formData.user.name" ng-minlength="3" ng-maxlength="100" ng-pattern="/^[a-zA-Z\s]*$/"></textarea>
+            <p ng-show="regForm.name.$invalid && !regForm.name.$pristine" class="help-block">Please enter a valid name.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : regForm.name.$invalid && !regForm.name.$pristine }">
+            <label>Treatment Outcome </label>
+            <textarea type="text" name="name" rows="8" placeholder="" class="form-control" ng-model="formData.user.name" ng-minlength="3" ng-maxlength="100" ng-pattern="/^[a-zA-Z\s]*$/"></textarea>
+            <p ng-show="regForm.name.$invalid && !regForm.name.$pristine" class="help-block">Please enter a valid name.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : regForm.name.$invalid && !regForm.name.$pristine }">
+            <label>Recommendations</label>
+            <textarea type="text" name="name" rows="8" placeholder="" class="form-control" ng-model="formData.user.name" ng-minlength="3" ng-maxlength="100" ng-pattern="/^[a-zA-Z\s]*$/"></textarea>
+            <p ng-show="regForm.name.$invalid && !regForm.name.$pristine" class="help-block">Please enter a valid name.</p>
+          </div>
+        </div>
+      </div>
+      <div class="post-option-btns">
+        <label class="btn btn-default btn-file"><span class="glyphicon glyphicon-paperclip"></span> Add Media
+          <input type="file" style="display: none;"> </label>
+        <button type="button" class="btn btn-default visibility-opt"><span class="glyphicon glyphicon-globe"></span>Who can see this post?</button>
+      </div>
+      <div class="progress-save-btn">
+        <input ng-disabled="regForm.$invalid || $ctrl.emailExists" ng-click="" type="button" id="po-next" class="btn btn-yellow pull-right" value="POST" href="" disabled="disabled">
+      </div>
+      <div class="row online-container-row">
+        <div class="online-container">
+          <div class="po-s2-form-container ">
+            <div class="row ">
+              <div class="col-md-6 col-sm-6 po-s2-form-field-group ">
+                <div class="pc-holder">
+                  <div id="line-level-dp-box"></div>
+                  <label><b> Susan Smith | </b> <small>1:51pm, January 23, 2016 </small> </label>
+                  <div class="yellow-border"></div>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-6 ">
+                <div class="edit-btn">
+                  <button type="button" class="btn btn-default pull-right" value=""> Edit</button>
+                </div>
+              </div>
+            </div>
+            <div class="row ">
+              <div class="col-md-10 col-sm-12 col-xs-12 po-s2-form-field-group info-container">
+                <div class="info">
+                  <span> On Line Level 1 </span>
+                  <span> 30 Minutes </span>
+                </div>
+                <div id="pro-content" class="po-s2-form-field-group pro-content">
+                  <p>Content goes here </p>
+                </div>
+                <dropinfo></dropinfo>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

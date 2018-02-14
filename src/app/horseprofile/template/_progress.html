@@ -1,0 +1,136 @@
+  <div class="row formRow bgColor">
+    <div class="col-md-12">
+      <form name="$ctrl.progressForm">
+
+        <div class="po-s2-form-container">
+        <!-- <div class="row">
+          <div class="col-md-12 po-s2-form-field-group calender" ng-class="{ 'has-error' : $ctrl.progressForm.name.$invalid && !$ctrl.progressForm.name.$pristine }">
+            <label>Date</label>
+            <input type="text" name="name" placeholder="" class="form-control" ng-model="formData.user.name" ng-minlength="3" ng-maxlength="100" ng-pattern="/^[a-zA-Z\s]*$/">
+            <p ng-show="$ctrl.progressForm.name.$invalid && !$ctrl.progressForm.name.$pristine" class="help-block">Please enter a valid name.</p>
+          </div>
+        </div> -->
+
+        <div class="row prl-horse-progress-form-row">
+          <div class="col-md-8 col-xs-12 po-s2-form-field-group">
+            <label>On Line</label>
+            <select name="onlineLevel" ng-model="$ctrl.progresslog.onlineLevel">
+              <option value="9999">None</option>
+              <option ng-repeat="level in $ctrl.levelItems.online.levels" value="{{level}}">{{level.name}}</option>
+            </select>
+          </div>
+          <div class="col-md-4 col-xs-12 po-s2-form-field-group" ng-class="{ 'has-error' : $ctrl.progressForm.onlineTime.$invalid && $ctrl.submitBtnClickedProgress }">
+            <label>Time (Minutes)</label>
+            <input type="number" name="onlineTime" ng-model="$ctrl.progresslog.onlineTime" ng-disabled="$ctrl.progresslog.onlineLevel == '9999'" value="" placeholder="E.G. 20" ng-pattern="/^-?[0-9][^\.]*$/" min="0" ng-required="$ctrl.progresslog.onlineLevel != '9999'">
+            <p ng-show="$ctrl.progressForm.onlineTime.$invalid && $ctrl.submitBtnClickedProgress" class="help-block">Please enter a whole value.</p>
+          </div>
+        </div>
+
+        <div class="row prl-horse-progress-form-row">
+          <div class="col-md-8 col-xs-12 po-s2-form-field-group">
+            <label>Liberty</label>
+            <select name="libertyLevel" ng-model="$ctrl.progresslog.libertyLevel">
+              <option value="9999">None</option>
+              <option ng-repeat="level in $ctrl.levelItems.liberty.levels" value="{{level}}">{{level.name}}</option>
+            </select>
+          </div>
+          <div class="col-md-4 col-xs-12 po-s2-form-field-group" ng-class="{ 'has-error' : $ctrl.progressForm.libertyTime.$invalid && $ctrl.submitBtnClickedProgress }">
+            <label>Time (Minutes)</label>
+            <input type="number" name="libertyTime" ng-model="$ctrl.progresslog.libertyTime" ng-disabled="$ctrl.progresslog.libertyLevel == '9999'" value="" placeholder="E.G. 20" ng-pattern="/^-?[0-9][^\.]*$/" min="0" ng-required="$ctrl.progresslog.libertyLevel != '9999'">
+            <p ng-show="$ctrl.progressForm.libertyTime.$invalid && $ctrl.submitBtnClickedProgress" class="help-block">Please enter a whole value.</p>
+          </div>
+        </div>
+
+        <div class="row prl-horse-progress-form-row">
+          <div class="col-md-8 col-xs-12 po-s2-form-field-group">
+            <label>Freestyle</label>
+            <select name="freestyleLevel" ng-model="$ctrl.progresslog.freestyleLevel">
+              <option value="9999">None</option>
+              <option ng-repeat="level in $ctrl.levelItems.freestyle.levels" value="{{level}}">{{level.name}}</option>
+            </select>
+          </div>
+          <div class="col-md-4 col-xs-12 po-s2-form-field-group" ng-class="{ 'has-error' : $ctrl.progressForm.freestyleTime.$invalid && $ctrl.submitBtnClickedProgress }">
+            <label>Time (Minutes)</label>
+            <input type="number" name="freestyleTime" ng-model="$ctrl.progresslog.freestyleTime" ng-disabled="$ctrl.progresslog.freestyleLevel == '9999'" value="" placeholder="E.G. 20" ng-pattern="/^-?[0-9][^\.]*$/" min="0" ng-required="$ctrl.progresslog.freestyleLevel != '9999'">
+            <p ng-show="$ctrl.progressForm.freestyleTime.$invalid && $ctrl.submitBtnClickedProgress" class="help-block">Please enter a whole value.</p>
+          </div>
+        </div>
+
+        <div class="row prl-horse-progress-form-row">
+          <div class="col-md-8 col-xs-12 po-s2-form-field-group">
+            <label>Finesse</label>
+            <select name="finesseLevel" ng-model="$ctrl.progresslog.finesseLevel">
+              <option value="9999">None</option>
+              <option ng-repeat="level in $ctrl.levelItems.finesse.levels" value="{{level}}">{{level.name}}</option>
+            </select>
+          </div>
+          <div class="col-md-4 col-xs-12 po-s2-form-field-group" ng-class="{ 'has-error' : $ctrl.progressForm.finesseTime.$invalid && $ctrl.submitBtnClickedProgress }">
+            <label>Time (Minutes)</label>
+            <input type="number" name="finesseTime" ng-model="$ctrl.progresslog.finesseTime" ng-disabled="$ctrl.progresslog.finesseLevel == '9999'" value="" placeholder="E.G. 20" ng-pattern="/^-?[0-9][^\.]*$/" min="0" ng-required="$ctrl.progresslog.finesseLevel != '9999'">
+            <p ng-show="$ctrl.progressForm.finesseTime.$invalid && $ctrl.submitBtnClickedProgress" class="help-block">Please enter a whole value.</p>
+          </div>
+        </div>
+
+        <div class="row prl-horse-progress-form-row">
+          <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : $ctrl.progressForm.notes.$invalid && $ctrl.submitBtnClickedProgress }">
+            <label>Notes</label>
+            <textarea type="text" name="notes" rows="5" placeholder="" class="form-control" ng-model="$ctrl.progresslog.notes"></textarea>
+            <p ng-show="$ctrl.progressForm.notes.$invalid && $ctrl.submitBtnClickedProgress" class="help-block">Please enter a valid note.</p>
+          </div>
+        </div>
+
+        <div class="row prl-horse-progress-form-row">
+          <div class="multi-upload__container">
+            <div class="multi-upload__selected">
+              <ul>
+                <li ng-repeat="item in $ctrl.attachedFiles track by $index">
+                  {{item.name}}
+                  <span class="glyphicon glyphicon-remove multi-upload__remove" aria-hidden="true" ng-click="$ctrl.removeAttachedFileClicked($index)"></span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="post-option-btns">
+      <button type="button" class="btn btn-reply-options" ng-click="$ctrl.attachClicked()"><span class="glyphicon glyphicon-paperclip"></span>Add Media</button>
+
+      <ol class="nya-bs-select privacy-selector" ng-model="$ctrl.selectedProgressPostPrivacy">
+        <li class="nya-bs-option disabled" data-value="9999">
+          <a>
+            <span><span class="glyphicon"></span>Who can see this post?</span>
+          </a>
+        </li>
+        <li class="nya-bs-option" data-value="0">
+          <a>
+            <span><span class="glyphicon glyphicon-eye-close"></span>Private</span>
+          </a>
+        </li>
+        <li class="nya-bs-option" data-value="1">
+          <a>
+            <span><span class="glyphicon glyphicon-globe"></span>Public</span>
+          </a>
+        </li>
+        <li class="nya-bs-option" data-value="2">
+          <a>
+            <span><span class="glyphicon glyphicon-user"></span>Connections Only</span>
+          </a>
+        </li>
+      </ol>
+    </div>
+
+
+    <div class="progress-save-btn">
+      <input ng-disabled="$ctrl.isNewProgressLogProcessing" ng-click="$ctrl.onProgressPostSubmit()" type="button" id="po-next" class="btn btn-yellow pull-right" value="POST" href="" disabled="disabled">
+    </div>
+
+
+
+    <div ng-include src="'app/horseprofile/template/_progress-posts.html'"> </div>
+
+
+    <!-- main col ends here -->
+  </div>
+</div>

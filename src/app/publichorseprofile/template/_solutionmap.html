@@ -1,0 +1,127 @@
+<div class="po-s2-form-container solution-map__container">
+  <div class="row">
+    <div class="col-md-12" block-ui="solutionMapLoading">
+      <h2>Solution Map</h2>
+      <!-- pathway -->
+      <div html2image class="po-s4-pathway small bottom-buffer-40" controls="$ctrl.html2imgControls">
+        <div class="po-s4-pathway__container">
+          <div ng-if="$ctrl.levels" class="row">
+            <div ng-repeat="(level_index, level) in $ctrl.levels | limitTo: 4 | orderBy : 'id'" class="col-sm-6 col-md-3">
+              <div class="po-s4-pathway__item">
+                <div class="po-s4-pathway__item__heading" style="background-color:{{level.color}}">
+                  {{level.title}}
+                </div>
+                <ul ng-if="$ctrl.issues" class="po-s4-pathway__item__savvys">
+                  <li ng-repeat="(issue_index, issue) in $ctrl.issues | onbaordlevel : level_index+1 | orderBy : 'title' | orderBy : 'savvy.id' ">
+                    <div class="solution-map__savvy-icon solution-map__savvy-icon--sm" ng-class="issue.savvy.title"></div>
+                    <div class="po-s4-pathway__item__savvys__label">
+                      {{issue.title}}
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- pathway-footer -->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="po-s4-pathway__footer">
+              <ul class="clearfix">
+                <li class="savvys">
+                  Savvy
+                  <span id="hint" class="glyphicon glyphicon-info-sign" aria-hidden="true" data-target="#savvyModal" data-toggle="modal" data-trigger="click"></span>
+                </li>
+                <li>
+                  <div class="solution-map__savvy-icon"></div> On Line
+                </li>
+                <li>
+                  <div class="solution-map__savvy-icon Liberty"></div> Liberty
+                </li>
+                <li>
+                  <div class="solution-map__savvy-icon FreeStyle"></div> FreeStyle
+                </li>
+                <li>
+                  <div class="solution-map__savvy-icon Finesse"></div> Finesse
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- /pathway-footer -->
+      </div>
+      <!--<img ng-src="{{$ctrl.genImage}}" alt="">-->
+      <ul class="solution-map__buttons">
+        <li><button class="btn btn-yellow" ng-click="$ctrl.goToUpdateOnboard()">Update Map</button></li>
+        <li>
+          <!--<button ng-click="$ctrl.downloadImage()">gen</button>-->
+          <button ng-disabled="$ctrl.isImageGenerating" ng-click="$ctrl.downloadImage()" class="btn btn-grey pull-right btn-submit"
+          type="button" ng-class="{'processing': $ctrl.isImageGenerating}">
+            <div class="bs-process-bar uil-ring-css grey">
+              <div></div>
+            </div>
+            <span class="bs-login-text">
+              Download Map
+            </span>
+          </button>
+        </li>
+        <li>
+          <button ng-disabled="$ctrl.sharingToWall" ng-click="$ctrl.postToWall($ctrl.horseId)" class="btn btn-grey pull-right btn-submit"
+          type="button" ng-class="{'processing': $ctrl.sharingToWall}" id="po-next">
+            <div class="bs-process-bar uil-ring-css grey">
+              <div></div>
+            </div>
+            <span class="bs-login-text">
+              Post To My Wall
+            </span>
+          </button>
+        </li>
+      </ul>
+      <!-- /pathway -->
+    </div>
+  </div>
+</div>
+
+<!-- Savvy Popup -->
+<div id="savvyModal" class="modal fade login-popup search-popup savvy-popup" tabindex="100" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$ctrl.stopPlayer()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Savvy</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+          Pat Parelli has identified four ways of playing with horses, four areas in which a horse and human can learn from one another. He dubbed these areas "the Four Savvys." Together they form the blueprint for you as a horseman, and for the Parelli Program as a whole. 
+        </p>
+        <ul class="savvies">
+          <li>
+            <span class="title">
+              On Line
+            </span>
+            (playing on the ground with ropes of varying lengths) has proven to be the most successful entry point into the Savvys.
+          </li>
+          <li>
+            <span class="title">
+              Liberty
+            </span>
+            is all about, developing a true partnership with your horse on the ground, with no strings (or lead ropes) attached. 
+          </li>
+          <li>
+            <span class="title">
+              FreeStyle
+            </span>
+            (riding on a loose rein) introduces the fundamentals of riding and sets the stage for everything from trail riding to performance sports and beyond.
+          </li>
+          <li>
+            <span class="title">
+              Finesse
+            </span>
+            is about riding with contact, precision, and vertical flexion. With Finesse, you learn how to truly become excellent as a rider. The skills you develop with Finesse directly translate to any advanced riding you do beyond the Parelli Program.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

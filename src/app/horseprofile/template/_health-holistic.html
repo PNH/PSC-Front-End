@@ -1,0 +1,44 @@
+  <div class="row formRow bgColor">
+    <div class="col-md-12">
+
+      <form name="$ctrl.horseHealthForm" novalidate="">
+        <div ng-include src="'app/horseprofile/template/_health-form.html'"> </div>
+      </form>
+
+      <div class="post-option-btns">
+        <button type="button" class="btn btn-reply-options" ng-click="$ctrl.attachClicked()"><span class="glyphicon glyphicon-paperclip"></span>Add Media</button>
+        <ol class="nya-bs-select privacy-selector" ng-model="$ctrl.selectedHealthPostPrivacy">
+          <li class="nya-bs-option disabled" data-value="9999">
+            <a>
+              <span><span class="glyphicon"></span>Who can see this post?</span>
+            </a>
+          </li>
+          <li class="nya-bs-option" data-value="0">
+            <a>
+              <span><span class="glyphicon glyphicon-eye-close"></span>Private</span>
+            </a>
+          </li>
+          <li class="nya-bs-option" data-value="1">
+            <a>
+              <span><span class="glyphicon glyphicon-globe"></span>Public</span>
+            </a>
+          </li>
+          <li class="nya-bs-option" data-value="2">
+          <a>
+            <span><span class="glyphicon glyphicon-user"></span>Connections Only</span>
+          </a>
+        </li>
+        </ol>
+      </div>
+
+      <div class="progress-save-btn">
+        <input ng-disabled="$ctrl.isNewHealthLogProcessing" ng-class="{'processing': $ctrl.isNewHealthLogProcessing}" ng-click="$ctrl.onHealthPostSubmit()" type="button" id="po-next" class="btn btn-yellow pull-right" value="POST" href="" disabled="disabled">
+      </div>
+
+      <div ng-include src="'app/horseprofile/template/_health-posts.html'"> </div>
+
+    </div>
+  </div>
+
+
+

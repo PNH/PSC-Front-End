@@ -1,0 +1,286 @@
+.prl-wall {
+  .hold-title {
+    h1 {
+      margin-top: 20px;
+    }
+  }
+  &__container {
+    margin-bottom: 10px !important;
+  }
+  @include bp(md) {
+    margin-top: 130px !important;
+  }
+  @include bp(xsml) {
+    margin-top: 110px !important;
+  }
+  @include bp(xxs) {
+    margin-top: 85px !important;
+  }
+  .nav-tabs li {
+    @include bp(xxs) {
+      margin-top: 0px !important;
+    }
+  }
+  &__wrapper {
+    background-color: $grey1 !important;
+    .nav-tabs {
+      li {
+        width: 50% !important;
+      }
+    }
+  }
+  &__content {
+    float: left;
+    width: 71.5%;
+    @include bp(md) {
+      float: none;
+      width: 100%;
+    }
+  }
+  &__sidebar {
+    float: right; // padding-left: 20px;
+    width: 28.5%;
+    @include bp(md) {
+      float: none;
+      padding-left: 0;
+      width: 100%;
+    }
+    #sidebar {
+      width: 100% !important;
+      @include bp(md) {
+        padding: 0 20px !important;
+      }
+    }
+    .badges-info-box {
+      min-height: 297px;
+      padding-top: 40px;
+    }
+  }
+}
+
+.generic-info-box {
+  img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+  }
+}
+
+.horse-bottom-margin {
+  margin-bottom: 20px !important;
+}
+
+.prl-horse-update-box {
+  padding: 30px;
+  background-color: $grey1;
+  .answer-box__attachments {
+    margin-top: 25px;
+    border-color: #dedede;
+  }
+  .prl-horse-box-content {
+    display: flex;
+    @include bp(xxs) {
+      display: block;
+      text-align: center;
+    }
+    .prl-hb-line {
+      border-left: 1px solid #dedede;
+      margin: 5px 25px 5px 35px;
+      @include bp(xxs) {
+        border-left: none;
+        border-top: 1px solid #dedede;
+        margin: 20px 30px !important;
+      }
+    }
+
+    .prl-hb-img {
+      &__thumb {
+        background-repeat: no-repeat;
+      }
+      &__progress {
+        background-image: url('../resources/images/horse/progress.png');
+        border-radius: 100%;
+        height: 120px;
+        width: 120px;
+        @include bp(xxs) {
+          margin: 0 auto;
+        }
+        &.Liberty {
+          background-position-x: -116px;
+        }
+        &.FreeStyle {
+          background-position-x: -232px;
+        }
+        &.Finesse {
+          background-position-x: -348px;
+        }
+      }
+      &__health {
+        background-image: url('../resources/images/horse/health.png');
+        height: 112px;
+        width: 120px;
+        @include bp(xxs) {
+          margin: 0 auto;
+        }
+        &.veterinary {
+          background-position-x: -240px;
+        }
+        &.holistic {
+          background-position-x: -120px;
+        }
+      }
+    }
+    .progress-level-1 {
+      background-color: #e4535a;
+    }
+    .progress-level-2 {
+      background-color: #3080a5;
+    }
+    .progress-level-3 {
+      background-color: #398f62;
+    }
+    .progress-level-4 {
+      background-color: #000000;
+    }
+    .progress-level-5 {
+      background-color: #999999;
+    }
+    .prl-hb-header {
+      margin: auto 0;
+      line-height: 23px;
+    }
+    .prl-hb-progress-header {
+      color: red;
+    }
+    .prl-hb-title {
+      color: $grey3;
+    }
+    .prl-hb-subtitle {
+      font-size: 14px !important;
+      color: $grey53;
+      text-transform: capitalize;
+    }
+  }
+  .prl-horse-box-more {
+    padding: 50px 0 0 0;
+    @include bp(xxs) {
+      padding: 30px 0 0 0;
+    }
+    .prl-hbm-item {
+      font-size: 15px !important;
+      margin: 15px 0;
+      display: flex;
+      @include bp(xxs) {
+        display: block;
+        text-align: center;
+      }
+    }
+    .prl-hbm-title {
+      font-weight: 600;
+      width: 30%;
+      color: $grey3;
+      text-align: right;
+      padding-right: 20px;
+      @include bp(xxs) {
+        width: 100% !important;
+        text-align: center;
+        padding-right: 0px;
+      }
+      @include bp(xxsml) {
+        width: 35% !important;
+        padding-right: 15px;
+      }
+    }
+    .prl-hbm-text {
+      width: 70%;
+      @include bp(xxs) {
+        width: 100% !important;
+      }
+    }
+  }
+}
+
+.prl-hb-line-progress-single {
+  margin: 0 25px 0 20px !important;
+}
+
+.prl-horse-update-box-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include bp(xxs) {
+    justify-content: flex-start;
+  }
+  &__container {
+    max-width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  .prl-hb-line {
+    border-left: 1px solid #dedede;
+    height: 150px;
+    margin: 0 20px;
+  }
+  .prl-horse-box-content-progress {
+    display: inline-block;
+    margin: 0 5px;
+    text-align: center;
+    .prl-hb-progress-header {
+      margin-top: 10px;
+    }
+  }
+}
+
+.prl-hbm-item-progress {
+  .prl-hbm-title {
+    width: 20% !important;
+  }
+  .prl-hbm-text {
+    width: 80% !important;
+  }
+}
+
+.prl-horse-box-viewmore {
+  font-weight: 300;
+  margin: 0 0 0px 0;
+  display: block;
+  border-radius: 0;
+}
+
+.privacy-selector {
+  @include bp(xxs) {
+    padding-left: 20px !important;
+  }
+}
+
+.horse-edit-popup-privacy {
+  float: left;
+  @include bp(sm) {
+    float: none;
+  }
+}
+
+.post-option-btns-wall {
+  display: inline-block;
+  margin-top: 0;
+  margin-left: 0 !important;
+  @include bp(xxs) {
+    display: block;
+  }
+  .filter-option {
+    @include bp(xxs) {
+      // margin-left: 10px;
+    }
+  }
+}
+
+.solutionmap__container {
+  img {
+    width: 100%;
+  }
+}
+
+.wallpost-title {
+  font-size: 1.5em;
+  margin-top: 0;
+}

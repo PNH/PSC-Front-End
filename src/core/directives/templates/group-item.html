@@ -1,0 +1,84 @@
+<div class="groups-item">
+  <div class="groups-item__container">
+    <ul class="groups-item__actions">
+      <li>
+        <button data-toggle="modal" data-target="{{'#updateGroup' + groupItemCtrl.modelId}}" class="groups-item__remove" ng-if="groupItemCtrl.details.ismoderator"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+      </li>
+      <li>
+        <button class="groups-item__remove" ng-click="groupItemCtrl.onLeaveGroupClicked(groupItemCtrl.details.id, groupItemCtrl.details.ismoderator)"
+          ng-show="groupItemCtrl.details.ismember" ng-disabled="groupItemCtrl.isDeleteProcessing"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+      </li>
+    </ul>
+    <div class="groups-item__background" style="background-image: url('{{groupItemCtrl.details.image}}');"></div>
+    <div class="groups-item__content">
+      <h2 class="groups-item__title">{{groupItemCtrl.details.title | htmlToPlaintext}}</h2>
+      <p class="groups-item__description">{{groupItemCtrl.details.description | htmlToPlaintext}}</p>
+    </div>
+    <div class="groups-item__footer">
+      <span class="groups-item__membercount">{{groupItemCtrl.details.membercount}} {{groupItemCtrl.details.membercount > 1 ? 'Members' : 'Member'}}</span>
+      <button ng-disabled="groupItemCtrl.isProcessing" type="submit" class="btn btn-yellow btn-submit" ng-click="groupItemCtrl.onJoinGroupClicked(groupItemCtrl.details.id)"
+        ng-class="{'processing': groupItemCtrl.isProcessing}" ng-hide="groupItemCtrl.details.ismember">
+        <div class="bs-process-bar uil-ring-css yellow">
+          <div></div>
+        </div>
+        <span class="bs-login-text">+ JOIN</span>
+      </button>
+      <a ui-sref="groupsdetail({groupid: groupItemCtrl.details.id})" class="btn btn-yellow" ng-show="groupItemCtrl.details.ismember">ENTER GROUP</a>
+    </div>
+  </div>
+</div>
+<div id="{{'updateGroup' + groupItemCtrl.modelId}}" class="modal fade login-popup" tabindex="100" role="dialog" ng-if="groupItemCtrl.details.ismoderator">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="onCloseClicked()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Create Group</h4>
+      </div>
+      <div class="modal-body">
+        <div class="login-error" ng-if="groupItemCtrl.groupUpdateError">
+          <div class="row">
+            <div class="col-xs-12 login-error__container">
+              <div class="login-error__message">
+                {{groupItemCtrl.groupUpdateError}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <form name="groupModel" novalidate>
+          <div class="row">
+            <div class="col-xs-12 form-field-group" ng-class="{ 'has-error' : groupModel.title.$invalid && groupItemCtrl.hasSubmitted }">
+              <input type="text" name="title" ng-model="groupItemCtrl.groupModel.title" placeholder="Group name" class="form-control" ng-minlength="5"
+                ng-maxlength="50" required>
+              <p ng-show="groupModel.title.$error.maxlength && groupItemCtrl.hasSubmitted" class="help-block">Title is too long (maximum is 50 characters)</p>
+              <p ng-show="groupModel.title.$error.minlength && groupItemCtrl.hasSubmitted" class="help-block">Title is too short (minimum is 5 characters)</p>
+              <p ng-show="groupModel.title.$error.required && groupItemCtrl.hasSubmitted" class="help-block">Title is required</p>
+            </div>
+            <div class="col-xs-12 form-field-group" ng-class="{ 'has-error' : groupModel.description.$invalid && groupItemCtrl.hasSubmitted }">
+              <textarea type="text" name="description" ng-model="groupItemCtrl.groupModel.description" placeholder="Group description" rows="5"
+                ng-minlength="5" ng-maxlength="100" required></textarea>
+              <p ng-show="groupModel.description.$error.maxlength && groupItemCtrl.hasSubmitted" class="help-block">Description is too long (maximum is 100 characters)</p>
+              <p ng-show="groupModel.description.$error.minlength && groupItemCtrl.hasSubmitted" class="help-block">Description is too short (minimum is 5 characters)</p>
+              <p ng-show="groupModel.description.$error.required && groupItemCtrl.hasSubmitted" class="help-block">Description is required</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : profForm.profImage.$invalid && !profForm.profImage.$pristine }">
+              <profile-image file="groupItemCtrl.groupModel.image" title="Group Image" image="groupItemCtrl.details.image" dimensions="Size 570 x 230 pixels" controls="groupItemCtrl.profileImageCtrl"></profile-image>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 form-field-group">
+              <button ng-disabled="groupItemCtrl.updateProcessing" type="submit" class="btn btn-yellow btn-submit" ng-click="groupItemCtrl.editGroup(groupItemCtrl.details.id, groupItemCtrl.groupModel, groupModel.$valid)"
+                ng-class="{'processing': groupItemCtrl.updateProcessing}">
+                <div class="bs-process-bar uil-ring-css yellow">
+                  <div></div>
+                </div>
+                <span class="bs-login-text">SAVE</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

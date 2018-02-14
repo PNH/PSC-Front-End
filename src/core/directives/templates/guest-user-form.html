@@ -1,0 +1,30 @@
+<form name="guestUserFormCtrl.blogGuestCommentForm" novalidate>
+  <div class="guest-form">
+    <div class="row">
+      <div class="col-md-6" ng-class="{ 'has-error' : guestUserFormCtrl.blogGuestCommentForm.guestName.$invalid && guestUserFormCtrl.onSubmitFormClicked }">
+        <label>Name*</label>
+        <input type="text" name="guestName" placeholder="" class="form-control" ng-model="guestUserFormCtrl.guestFrom.guestName" required>
+        <p ng-show="guestUserFormCtrl.blogGuestCommentForm.guestName.$invalid && guestUserFormCtrl.onSubmitFormClicked" class="help-block">Please enter a valid name.</p>
+      </div>
+      <div class="col-md-6" ng-class="{ 'has-error' : guestUserFormCtrl.blogGuestCommentForm.guestEmail.$invalid && guestUserFormCtrl.onSubmitFormClicked }">
+        <label>Email*</label>
+        <input type="email" name="guestEmail" class="form-control" ng-model="guestUserFormCtrl.guestFrom.guestEmail" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" required>
+        <p ng-show="guestUserFormCtrl.blogGuestCommentForm.guestEmail.$invalid && guestUserFormCtrl.onSubmitFormClicked" class="help-block">Please enter a valid email.</p>
+      </div>
+    </div>
+  </div>
+</form>
+<!-- <simple-reply button-text="SAVE" post="guestUserFormCtrl.createMainComment" text-area="true"></simple-reply> -->
+<div class="reply-box simple-reply clearfix">
+    <form name="simpleReplyForm">
+      <summernote class="wallpost-create-form" ng-model="guestUserFormCtrl.postModel.content" config="guestUserFormCtrl.summernoteOptions"></summernote>
+      <div class="recaptcha" vc-recaptcha key="guestUserFormCtrl.googleReCaptchaKey" ng-model="guestUserFormCtrl.guestFrom.reCaptcha" on-create="guestUserFormCtrl.onWidgetCreate(widgetId)"></div>
+      <button ng-disabled="guestUserFormCtrl.guestFrom.reCaptcha == null || guestUserFormCtrl.isProcessing || (!guestUserFormCtrl.saveEnabled && !guestUserFormCtrl.postModel.content)" type="submit" class="btn btn-yellow btn-submit pull-right" ng-click="guestUserFormCtrl.onCreatePostClicked(guestUserFormCtrl.postModel)" ng-class="{'processing': guestUserFormCtrl.isProcessing}">
+        <div class="bs-process-bar uil-ring-css yellow">
+          <div></div>
+        </div>
+        <span class="bs-login-text">{{guestUserFormCtrl.buttonText}}</span>
+      </button>
+    </form>
+</div>
+

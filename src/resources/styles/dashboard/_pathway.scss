@@ -1,0 +1,417 @@
+// Local variables
+$badge-r: 180px;
+$pw-desc: 300px;
+.pathway-container {
+  border: 1px solid $pw-container-border;
+  border-radius: 5px;
+  padding: 30px;
+  @include bp(xxs) {
+    padding: 20px;
+  }
+}
+
+.pw-levels {
+  text-align: center;
+  &__circle {
+    width: 120px;
+    height: 120px;
+    display: inline-block;
+    border-radius: 50%;
+    background-color: $pw-container-border;
+  }
+}
+// Lesson category item
+.pw-progress-category {
+  height: $badge-r;
+  margin-bottom: -10px;
+  position: relative;
+  width: 80%;
+  @include bp(md) {
+    width: 100%;
+  }
+  @include bp(xs) {
+    height: 260px;
+  }
+  @include bp(xxs) {
+    float: none !important;
+    height: 400px !important;
+    overflow: hidden;
+  }
+  // Category progress and description
+  .pw-desc {
+    // background-color: #FFF;
+    width: calc(100% - #{$pw-desc});
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    // z-index: 5;
+    padding: 20px 0;
+    @include bp(md) {
+      width: calc(100% - 292px);
+    }
+    @include bp(xs) {
+      // width: 42%;
+    }
+    @include bp(xxs) {
+      display: block;
+      padding: 10px 20px;
+      position: static;
+      transform: none;
+      width: 100%;
+    }
+    &__prog {
+      background-color: $pw-badge-bg;
+      font-size: 1.375em;
+      padding: 10px 2px;
+      min-width: 68px;
+      text-align: center;
+      color: $white;
+      border-radius: 6px;
+      position: absolute;
+      transform: translateY(-50%);
+      top: 50%;
+      font-weight: 300;
+      @include bp(xxs) {
+        float: none !important;
+        margin: 0 auto 15px;
+        position: relative;
+        transform: none;
+        width: 70px;
+      }
+      .arrow-rounded {
+        position: absolute;
+        top: 50%;
+        @include bp(xs) {
+          display: none;
+        }
+      }
+    }
+    &__desc {
+      width: calc(100% - 92px);
+      position: relative;
+      color: $pw-desc;
+      @include bp(xxs) {
+        float: none !important;
+        width: 100%;
+        text-align: center !important;
+      }
+    }
+  }
+  // .pw-progress {
+  //   background-color: $pw-container-border;
+  //   bottom: 0;
+  //   position: absolute;
+  //   top: 0;
+  //   width: 10px;
+  //   z-index: 3;
+  //   @include bp(md) {
+  //     left: 50% !important;
+  //     right: auto !important;
+  //     transform: translateX(-50%);
+  //   }
+  //   @include bp(xxs) {
+  //     display: none;
+  //   }
+  //   &__bar {
+  //     width: 100%;
+  //     height: 20%;
+  //   }
+  // }
+  .pw-progress {
+    position: absolute;
+    top: 0;
+    z-index: 0;
+    &__container,
+    &__progress {
+      fill: none;
+    }
+    &__container {
+      stroke: $pw-badge-bg;
+    }
+  }
+  // Odd items
+  &:nth-child(odd) {
+    float: left;
+    .pw-badge {
+      left: 0;
+      right: auto;
+      @include bp(xs) {
+        left: 46px;
+      }
+      @include bp(xxs) {
+        left: auto;
+      }
+      .arrow-down {
+        right: -25px;
+        transform: translateY(-50%) rotate(270deg);
+        @include bp(xs) {
+          left: -25px;
+          right: auto;
+          transform: translateY(-50%) rotate(90deg);
+        }
+      }
+    }
+    .pw-desc {
+      right: 0;
+      left: auto;
+      &__prog {
+        left: 0;
+        .arrow-rounded {
+          left: -17px;
+          transform: translateY(-50%) rotate(180deg);
+        }
+      }
+      &__desc {
+        float: right;
+      }
+    }
+    // .pw-progress {
+    //   right: 28%;
+    // }
+    .pw-progress {
+      left: 230px;
+      @include bp(xs) {
+        left: 0;
+      }
+    }
+  }
+  // Even items
+  &:nth-child(even) {
+    float: right;
+    .pw-badge {
+      left: auto;
+      right: 0;
+      @include bp(xs) {
+        right: 46px;
+      }
+      @include bp(xxs) {
+        right: auto;
+      }
+      .arrow-down {
+        left: -25px;
+        transform: translateY(-50%) rotate(90deg);
+        @include bp(xs) {
+          left: auto;
+          right: -25px;
+          transform: translateY(-50%) rotate(-90deg);
+        }
+      }
+    }
+    .pw-desc {
+      right: auto;
+      left: 0;
+      &__prog {
+        right: 0;
+        .arrow-rounded {
+          right: -16px;
+          transform: translateY(-50%) rotate(0deg);
+        }
+      }
+      &__desc {
+        float: left;
+        text-align: right;
+      }
+    }
+    .pw-progress {
+      right: 230px;
+      @include bp(xs) {
+        right: 0;
+      }
+    }
+  }
+}
+
+// Category badge and name
+.pw-badge {
+  width: $badge-r;
+  height: $badge-r;
+  background-color: $pw-badge-bg;
+  border-radius: 6px;
+  position: absolute;
+  color: $white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  @include bp(xs) {
+    padding: 10px;
+  }
+  @include bp(xxs) {
+    position: relative;
+    margin: 0 auto 10px;
+    transform: none;
+    top: auto;
+    margin-top: 35px;
+  }
+  &__content {
+    width: 100%;
+  }
+  .badge-icon {
+    display: block;
+    margin: 0 auto 10px;
+    @include bp(xs) {
+      transform: scale(0.75);
+      margin-bottom: 0;
+    }
+    // path {
+    //   fill: #fff;
+    //   stroke: #fff;
+    // }
+  }
+  span {
+    display: block;
+    text-align: center;
+    font-size: 0.938em;
+    word-wrap: break-word;
+    width: 100%;
+    &.savvy {
+      text-transform: uppercase;
+      color: $pw-badge-savvy;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    &.category {
+      color: $pw-badge-category;
+    }
+  }
+  .arrow-down {
+    position: absolute;
+    top: 50%;
+    border-top-color: $pw-badge-bg;
+    @include bp(xxs) {
+      // display: none;
+    }
+  }
+  // Completed category
+  &.completed {
+    span {
+      color: $white;
+    }
+  }
+}
+
+// Savvy colors
+.pw-progress-category {
+  &.blue {
+    .pw-badge.completed {
+      background-color: $pw-savvy-blue;
+      .arrow-down {
+        border-top-color: $pw-savvy-blue;
+      }
+    }
+    .pw-desc {
+      &__prog {
+        background-color: $pw-savvy-blue;
+        .arrow-rounded__inner {
+          background-color: $pw-savvy-blue;
+        }
+      }
+    }
+    .pw-progress {
+      &__progress {
+        stroke: $pw-savvy-blue;
+      }
+    }
+  }
+  &.red {
+    .pw-badge.completed {
+      background-color: $pw-savvy-red;
+      .arrow-down {
+        border-top-color: $pw-savvy-red;
+      }
+    }
+    .pw-desc {
+      &__prog {
+        background-color: $pw-savvy-red;
+        .arrow-rounded__inner {
+          background-color: $pw-savvy-red;
+        }
+      }
+    }
+    .pw-progress {
+      &__progress {
+        stroke: $pw-savvy-red;
+      }
+    }
+  }
+  &.green {
+    .pw-badge.completed {
+      background-color: $pw-savvy-green;
+      .arrow-down {
+        border-top-color: $pw-savvy-green;
+      }
+    }
+    .pw-desc {
+      &__prog {
+        background-color: $pw-savvy-green;
+        .arrow-rounded__inner {
+          background-color: $pw-savvy-green;
+        }
+      }
+    }
+    .pw-progress {
+      &__progress {
+        stroke: $pw-savvy-green;
+      }
+    }
+  }
+  &.grey {
+    .pw-badge.completed {
+      background-color: $pw-savvy-grey;
+      .arrow-down {
+        border-top-color: $pw-savvy-grey;
+      }
+    }
+    .pw-desc {
+      &__prog {
+        background-color: $pw-savvy-grey;
+        .arrow-rounded__inner {
+          background-color: $pw-savvy-grey;
+        }
+      }
+    }
+    .pw-progress {
+      &__progress {
+        stroke: $pw-savvy-grey;
+      }
+    }
+  }
+}
+.pw-progress-container {
+  position: relative;
+  padding-bottom: 120px;
+}
+.loading-indecator {
+  display: block;
+  transform: translateX(-50%);
+  background-repeat: no-repeat;
+  background-position: center;
+  float: none;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+
+  .uil-ring-css {
+    // left: 0;
+    // top: 0;
+    transform:scale(0.6)
+  }
+  .yellow > div {
+    box-shadow: 0 6px 0 0 $yellow;
+  }
+  .red > div {
+    box-shadow: 0 6px 0 0 $red;
+  }
+  .green > div {
+    box-shadow: 0 6px 0 0 $green;
+  }
+  .blue > div {
+    box-shadow: 0 6px 0 0 $blue2;
+  }
+  .black > div {
+    box-shadow: 0 6px 0 0 $black;
+  }
+}

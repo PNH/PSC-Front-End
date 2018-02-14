@@ -1,0 +1,51 @@
+.month-list {
+  margin: 0 0 20px 0;
+  padding-left: 0;
+  li {
+    border-top: 1px solid #efefef;
+    padding-left: 15px;
+    a {
+      display: block;
+      padding: 10px 15px 10px 30px;
+      color: #828282;
+      @include transition-element (color);
+      position: relative;
+      &:hover {
+        color: #ffc745;
+        &:after {
+          opacity: 1;
+        }
+        &:before {
+          opacity: 0;
+        }
+      }
+      &:before,
+      &:after {
+        content: '';
+        background: url('../resources/images/sprite.png') no-repeat -354px 0px;
+        width: 18px;
+        height: 18px;
+        position: absolute;
+        top: 11px;
+        left: 0;
+        opacity: 1;
+        @include transition-element (opacity);
+      }
+      &:after {
+        background-position: -375px 0;
+        opacity: 0;
+      }
+    }
+    &.active {
+      a {
+        color: #ffc745;
+        &:after {
+          opacity: 1;
+        }
+        &:before {
+          opacity: 0;
+        }
+      }
+    }
+  }
+}

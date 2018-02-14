@@ -1,0 +1,33 @@
+<form name="privacyForm">
+  <div class="row formRow bgColor">
+    <div class="col-md-12">
+      <div class="po-s2-form-container" block-ui="privacyLoading">
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : privacyForm.level.$invalid && !privacyForm.level.$pristine }">
+            <label>Wall Posts Visibility</label>
+            <select name="level" ng-model="$ctrl.privacy.wall" ng-options="item.label for item in $ctrl.privacySettings track by item.id">
+            </select>
+          </div>
+        </div>
+        <div class="row" ng-if="$ctrl.profileError">
+          <div class="col-sm-12 has-errors-big">
+            <p class="help-block">{{$ctrl.profileError}} </p>
+          </div>
+        </div>
+      </div>
+      <!--</div>-->
+      <div class="save-btn">
+        <!--<input ng-disabled="privacyForm.$invalid || $ctrl.isProcessing" ng-click="$ctrl.onUpdateProfileClicked()" type="button" id="po-next" class="btn btn-yellow pull-right" value="{{$ctrl.isProcessing ? 'SAVING...' : 'SAVE PROFILE'}}" />-->
+        <button ui-sref="#" ng-disabled="privacyForm.$invalid || $ctrl.privacySaving" ng-click="$ctrl.savePrivacySettings()" class="btn btn-yellow pull-right btn-submit" type="submit" ng-class="{'processing': $ctrl.privacySaving}">
+          <div class="bs-process-bar uil-ring-css yellow">
+            <div></div>
+          </div>
+          <span class="bs-login-text">
+            SAVE
+          </span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</form>

@@ -1,0 +1,20 @@
+// Mixins
+// --------------------------------------------------
+$sacramentoRegular: 'sacramentoregular', tahoma, helvetica, sans-serif;
+$OSRegular: 'open_sansregular', tahoma, helvetica, sans-serif;
+$OSLight: 'open_sanslight', tahoma, helvetica, sans-serif;
+$OS_Semibold: 'open_sanssemibold', tahoma, helvetica, sans-serif;
+$OSBold: 'open_sansbold', tahoma, helvetica, sans-serif;
+$OSItalic: 'open_sansitalic', tahoma, helvetica, sans-serif;
+
+@mixin transition-element ($property) {
+	-o-transition: $property .3s linear;
+	-moz-transition: $property .3s linear;
+    -webkit-transition: $property .3s linear;
+    transition: $property .3s linear;
+}
+
+@mixin calc($property, $expression) {
+  #{$property}: -webkit-calc(#{$expression});
+  #{$property}: calc(#{$expression});
+}

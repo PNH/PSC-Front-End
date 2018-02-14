@@ -1,0 +1,153 @@
+@import 'sub';
+@import 'detail';
+.forums-main {
+  .block {
+    &.big {
+      .box {
+        background-color: $white;
+      }
+      &.open {
+        .box {
+          background-color: $grey5;
+        }
+      }
+      .hold-count-info {
+        padding: 15px 0;
+        @include bp(xxs) {
+          padding: 5px 0;
+        }
+      }
+    }
+  }
+  .content-holder {
+    padding-left: 170px;
+    padding-right: 170px;
+    @include bp(xs) {
+      padding-left: 50px;
+      padding-right: 50px;
+    }
+    @include bp(xxs) {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+  .dd_title {
+    width: calc(100% - 150px);
+    @include bp(xxs) {
+      width: calc(100% - 110px);
+    }
+  }
+}
+
+
+/* ol lists */
+
+.discussion-list {
+  margin: 0;
+  padding: 34px 7%;
+  overflow: hidden;
+  list-style: none;
+  counter-reset: item;
+  >li {
+    position: relative;
+    margin-bottom: 12px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    a {
+      display: block;
+      color: #505151;
+      padding: 13px 45px 14px 50px;
+      background: #f1f2f6;
+      @include transition-element (background);
+      font-size: 16px;
+      line-height: 24px;
+      overflow: hidden;
+      &:before {
+        content: counters(item, ".") ".";
+        counter-increment: item;
+        float: left;
+        padding: 0 4px 0 0;
+        color: #505151;
+        text-align: right;
+        margin: 0 0 0 -16px;
+        font-size: 16px;
+        font-family: $OSRegular;
+      }
+      &:after {
+        content: '';
+        position: absolute;
+        top: 19px;
+        right: 30px;
+        width: 7px;
+        height: 15px;
+        background: url('../resources/images/sprite.png') no-repeat -54px -38px;
+        // transform: translate(0, -50%);
+      }
+      &:hover {
+        background: #ffc745;
+      }
+      .hold-count-info {
+        padding: 0 !important;
+        span {
+          color: #505151 !important;
+          font-size: 0.778em;
+          line-height: 1em;
+        }
+      }
+      .discussion-list__title {
+        display: block;
+        float: left;
+        // overflow: hidden;
+        // text-overflow: ellipsis;
+        // white-space: nowrap;
+        width: calc(100% - 160px);
+        @include bp(xs) {
+          width: calc(100% - 136px);
+        }
+        @include bp(xxs) {
+          width: calc(100% - 102px);
+        }
+      }
+    }
+    &.active {
+      a {
+        background: #ffc745;
+      }
+    }
+  }
+}
+
+.forum-content {
+  .breadcrumbs {
+    display: block;
+    float: none;
+    margin-bottom: 20px;
+    padding: 0;
+  }
+}
+
+@media (max-width: 425px) {
+  .discussion-list {
+    padding: 20px;
+    >li {
+      a {
+        font-size: 14px;
+        line-height: 20px;
+        padding: 9px 23px 10px 25px;
+        &:after {
+          right: 10px;
+        }
+      }
+    }
+  }
+}
+
+
+#editTopic {
+  .wallpost-create-form + .note-editor {
+    .btn {
+      width: auto !important;
+    }
+  }
+}

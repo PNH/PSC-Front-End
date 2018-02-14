@@ -1,0 +1,74 @@
+<div>
+  <div ng-hide="playerCtrl.doneLoading" class="uil-flickr-css" style="transform:scale(0.2);">
+    <div></div>
+    <div></div>
+  </div>
+  <div class="row prl__player bottom-buffer-30" ng-class="{'playlist': playerCtrl.template === 'playlist' || playerCtrl.video, 'loading': !playerCtrl.doneLoading}">
+    <div ng-class="(playerCtrl.video || playerCtrl.template === 'playlist'? 'col-md-12' : 'col-md-6')">
+      <div class="prl__player__player__container">
+        <!-- <jwplayer class="prl__player__player" ng-src="{{playerCtrl.path}}" player-options="playerCtrl.playerOptions" player-id="{{playerCtrl.playerId}}"> -->
+        <prl-jwplayer jw-player-id="playerCtrl.playerId" jw-player-controls="playerCtrl.jwPlayerControls"></prl-jwplayer>
+        <!-- </jwplayer> -->
+        <add-to-playlist ng-if="playerCtrl.userPlaylistPopup && playerCtrl.addtoplaylistPopupClicked" show="playerCtrl.triggerCtrl" popup-toggle="playerCtrl.addtoplaylistPopupClicked" add-to-playlist="playerCtrl.onAddToPlaylist" user-playlists="playerCtrl.userPlaylistPopup"></add-to-playlist>
+        <span ng-show="playerCtrl.video" class="prl__player__playlist__addtoplaylist prl-addtoplaylist-icon" ng-click="playerCtrl.triggerUserPlaylist(playerCtrl.video, playerCtrl.video.playlist)">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        </span>
+        <span ng-show="playerCtrl.videos" class="prl__player__playlist__addtoplaylist prl-addtoplaylist-icon" ng-click="playerCtrl.triggerUserPlaylist(playerCtrl.videos[playerCtrl.selectedVideoIndex], playerCtrl.videos[playerCtrl.selectedVideoIndex].playlist)">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        </span>
+        <div class="prl__player__bottom-bar">
+          <div class="row">
+            <div class="col-xs-10 prl__player__bottom-bar__title">
+              {{playerCtrl.playerOptions.title}}
+            </div>
+            <div class="col-xs-2 prl__player__bottom-bar__time">
+              <span class="pull-right">{{playerCtrl.playerOptions.duration | duration}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="prl__player__playlist" ng-class="(playerCtrl.template === 'playlist' ? 'col-md-12' : 'col-md-6')" ng-if="!playerCtrl.video">
+      <!-- <add-to-playlist show="playerCtrl.triggerCtrl" add-to-playlist="playerCtrl.addVideoFn" user-playlists="playerCtrl.userPlaylist"></add-to-playlist> -->
+      <perfect-scrollbar class="prl__player__playlist__container" wheel-propagation="false" wheel-speed="6" min-scrollbar-length="5" suppress-scroll-x="true">
+        <ul ng-if="playerCtrl.videos">
+          <li ng-repeat="(index, video) in playerCtrl.videos" ng-class="{ 'play-item-selected' : index === playerCtrl.selectedVideoIndex, 'error':  video.path === '#error' || video.path === '#processing'}" class="clearfix">
+            <div class="prl__player__playlist__thumb" style="background-image:url('{{video.thumbnail}}')">
+              <div class="prl__player__play-btn" ng-click="playerCtrl.playMedia(index)">
+                <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+              </div>
+              <span class="prl__player__playlist__addtoplaylist" ng-click="playerCtrl.triggerUserPlaylist(video, video.playlist)" ng-show="video.playlist">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+              </span>
+            </div>
+            <div class="prl__player__playlist__title" ng-click="playerCtrl.playMedia(index)">
+              {{video.name}}
+            </div>
+            <div class="prl__player__playlist__duration" ng-click="playerCtrl.playMedia(index)">
+              <span class="pull-right">{{video.duration | duration}}</span>
+            </div>
+            <!--  <div class="row">
+              <div class="col-xs-4 col-sm-3">
+                <div class="prl__player__playlist__thumb" style="background-image:url('{{video.thumbnail}}')">
+                  <div class="prl__player__play-btn" ng-click="playerCtrl.playVideo(index)">
+                    <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                  </div>
+                  <span class="prl__player__playlist__addtoplaylist" ng-click="playerCtrl.triggerUserPlaylist(video, video.playlist)" ng-show="video.playlist">
+                    <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                  </span>
+                </div>
+              </div>
+              <div class="col-xs-5 col-sm-6 prl__player__playlist__title" ng-click="playerCtrl.playVideo(index)">
+                {{video.name | humanize}}
+              </div>
+              <div class="col-xs-2" ng-click="playerCtrl.playVideo(index)">
+                <span class="pull-right">{{video.duration}}</span>
+              </div>
+            </div> -->
+          </li>
+        </ul>
+      </perfect-scrollbar>
+    </div>
+  </div>
+
+</div>

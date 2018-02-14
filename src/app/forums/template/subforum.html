@@ -1,0 +1,81 @@
+<div id="main">
+  <dashboard-header title="Sub Forum"></dashboard-header>
+  <div id="content" class="subforums-main dashboard">
+    <div class="forum-content topic-detail" block-ui="subForumLoading">
+      <breadcrumb></breadcrumb>
+    
+      <ul class="breadcrumbs">
+        <li>
+          <a ui-sref="forums">Forum</a>
+        </li>
+        <li class="active" ng-if="$ctrl.validSubforum">
+          {{$ctrl.subForum.title}}
+        </li>
+      </ul>
+      <div class="hold-title line-l" ng-if="$ctrl.validSubforum">
+        <h1>{{$ctrl.subForum.title}}</h1>
+        <!--<div class="btn-box">
+          <a href="#" class="btn btn-yellow">SUBSCRIBE</a>
+        </div>-->
+      </div>
+      <div ng-if="$ctrl.validSubforum" class="content-holder clearfix">
+        <div ng-show="$ctrl.topics.length > 0 || $ctrl.stickies.length > 0">
+          <div class="table-responsive">
+            <table class="prl-table style1 subforums-main__posts">
+              <tr>
+                <th>Topic Name</th>
+                <th>Author</th>
+                <th>Voices</th>
+                <th>Posts</th>
+                <th>Freshness</th>
+              </tr>
+              <tbody>
+                <tr ng-repeat="topic in $ctrl.stickies | orderBy: '-updated_at' track by topic.id" class="subforums-main__stickies">
+                  <td>
+                    <span class="label">Sticky</span>
+                    <a ui-sref="topicdetail({'subforumid': $ctrl.subForumId, 'topicid': topic.id})">{{topic.title}}</a>
+                  </td>
+                  <td>
+                    <div class="subforums-main__posts__userimg" style="background-image: url('{{topic.user.profileImage}}')" go-to-wall wall-id="topic.user.id" ng-class="{'clickable': topic.user.id > 0}"></div>
+                    <span go-to-wall wall-id="topic.user.id" ng-class="{'clickable': topic.user.id > 0}">{{topic.user.firstName + ' ' + topic.user.lastName}}</span>
+                  </td>
+                  <td>{{topic.voices}}</td>
+                  <td>{{topic.post_count}}</td>
+                  <td>{{topic.updated_at | timeago}}</td>
+                </tr>
+                <tr ng-repeat="topic in $ctrl.topics | orderBy: '-updated_at' track by topic.id">
+                  <td><a ui-sref="topicdetail({'subforumid': $ctrl.subForumId, 'topicid': topic.id})">{{topic.title}}</a></td>
+                  <td>
+                    <div class="subforums-main__posts__userimg" style="background-image: url('{{topic.user.profileImage}}')" go-to-wall wall-id="topic.user.id" ng-class="{'clickable': topic.user.id > 0}"></div>
+                    <span go-to-wall wall-id="topic.user.id" ng-class="{'clickable': topic.user.id > 0}">{{topic.user.firstName + ' ' + topic.user.lastName}}</span>
+                  </td>
+                  <td>{{topic.voices}}</td>
+                  <td>{{topic.post_count}}</td>
+                  <td>{{topic.updated_at | timeago}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <button type="submit" class="btn btn-yellow btn-submit pull-right subforums-main__loadmore" ng-disabled="$ctrl.topicLoadIsProcessing || $ctrl._topicReachedEnd"
+            ng-click="$ctrl.onLoadMoreTopicsClicked()" ng-class="{'processing': $ctrl.topicLoadIsProcessing}">
+            <div class="bs-process-bar uil-ring-css yellow">
+              <div></div>
+            </div>
+            <span class="bs-login-text">VIEW MORE</span>
+            </button>
+        </div>
+        <div class="pl-error__container" ng-hide="$ctrl.topics.length > 0 || $ctrl.stickies.length > 0">
+          <div class="pl-error">
+            <span class="pl-error__message">We're sorry, but there are no Topics available at this time. Please check back again soon.</span>
+          </div>
+        </div>
+      </div>
+      <div ng-if="$ctrl.validSubforum" class="" ng-include="'app/forums/template/_createtopic-form.html'"></div>
+      <div class="pl-error__container" ng-if="!$ctrl.validSubforum">
+        <div class="pl-error">
+          <span class="pl-error__message">{{$ctrl.validSubforumError}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,243 @@
+#level-container {
+  max-width: 1284px;
+  width: 100%;
+  margin: 179px auto 89px;
+  background: #fff;
+  padding: 50px 35px;
+  box-sizing: border-box;
+  -webkit-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+  position: relative;
+  height: auto;
+}
+
+.b-page-header {
+  text-align: center;
+  span {
+    font-size: 20px;
+    color: black;
+    display: block;
+    padding-bottom: 20px;
+  }
+  .underline {
+    display: block;
+    width: 60px;
+    margin: auto;
+    border-bottom: solid 2px #ffd471;
+  }
+}
+
+// these configurations effect for the carousel
+.badge-box {
+  // width: 1200px; 
+  text-align: center;
+  height: auto;
+  position: relative;
+  .view-port {
+    margin: 30px auto;
+    width: 1080px;
+    height: auto;
+    // box-shadow: 0 0 5px black;
+    overflow: hidden;
+    .ul-container {
+      width: 45000px;
+    }
+    @include bp(md) {
+      margin: 30px auto;
+      width: 720px;
+    }
+    @include bp(sm) {
+      margin: 30px auto;
+      width: 540px;
+    }
+    @include bp(xs) {
+      margin: 30px auto;
+      width: 540px;
+    }
+    @media (max-width: 600px) {
+      margin: 30px auto;
+      width: 280px;
+    }
+    @include bp(xxs) {
+      margin: 30px auto;
+      width: 280px;
+    }
+  }
+  ul {
+    width: 1080px;
+    height: auto;
+    padding-left: 0px;
+    float: left;
+    margin-bottom: 0px;
+    @include bp(md) {
+      width: 720px;
+    }
+    @include bp(sm) {
+      width: 540px;
+    }
+    @media (max-width: 600px) {
+      // margin: 30px auto;
+      width: 280px;
+    }
+    @include bp(xxs) {
+      width: 280px;
+    }
+  }
+  li {
+    float: left;
+    //  padding: 20px;
+    width: 180px;
+    height: auto;
+    border-bottom: solid 1px #cecece;
+    &:nth-child(7),
+    &:nth-child(8),
+    &:nth-child(9),
+    &:nth-child(10),
+    &:nth-child(11),
+    &:nth-child(12) {
+      border-bottom: none;
+    }
+    &:nth-child(6) > .datawrapper,
+    &:nth-child(12) > .datawrapper {
+      border-right: none;
+    }
+    .datawrapper {
+      height: auto;
+      width: auto;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      border-right: solid 1px #cecece;
+      padding: 0px 10px;
+    }
+    .image-holder {
+      height: auto;
+      width: auto;
+      padding: 10px;
+      background-color: #fff;
+      .badge-icon.grey {
+        display: block;
+        margin: 0px auto;
+      }
+      .title {
+        font-size: 15px;
+        line-height: 18px;
+        font-family: "open_sanssemibold", tahoma, helvetica, sans-serif;
+        display: block;
+        text-align: center;
+        padding-top: 20px;
+      }
+      p {
+        text-align: center;
+        font-size: 16px;
+        word-wrap: break-word;
+      }
+    }
+    @include bp(md) {
+      &:nth-child(5),
+      &:nth-child(6) {
+        border-bottom: none;
+      }
+      &:nth-child(4) > .datawrapper,
+      &:nth-child(8) > .datawrapper {
+        border-right: none;
+      }
+      &:nth-child(6) > .datawrapper {
+        border-right: solid 1px #cecece;
+      }
+    }
+    @include bp(sm) {
+      &:nth-child(4),
+      &:nth-child(5),
+      &:nth-child(6) {
+        border-bottom: none
+      }
+      &:nth-child(4) > .datawrapper {
+        border-right: solid 1px #cecece;
+      }
+      &:nth-child(3) > .datawrapper,
+      &:nth-child(6) > .datawrapper {
+        border-right: none;
+      }
+    }
+    @media (max-width: 600px) {
+      &:nth-child(3),
+      &:nth-child(4) {
+        border-bottom: none
+      }
+      &:nth-child(2) > .datawrapper,
+      &:nth-child(4) > .datawrapper {
+        border-right: none;
+      }
+      &:nth-child(3) > .datawrapper {
+        border-right: solid 1px #cecece;
+      }
+    }
+    @include bp(xxs) {
+      &:nth-child(3),
+      &:nth-child(4) {
+        border-bottom: none
+      }
+      &:nth-child(2) > .datawrapper,
+      &:nth-child(4) > .datawrapper {
+        border-right: none;
+      }
+      &:nth-child(3) > .datawrapper {
+        border-right: solid 1px #cecece;
+      }
+    }
+  }
+}
+
+.control-box {
+  width: 1100;
+  height: inherit;
+  button {
+    border: none;
+  }
+  .slide-right {
+    background: none;
+    width: 19px;
+    height: 73px;
+    background: url(../resources/images/sprite.png) no-repeat -191px -38px;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    right: -50px;
+    @include bp(sm) {
+      right: 20px;
+    }
+    @include bp(xs) {
+      right: -20px;
+    }
+    @include bp(xxs) {
+      right: 0px;
+    }
+    // @include bp(xsss) {
+    //   right: -25px;
+    // }
+  }
+  .slide-left {
+    background: none;
+    width: 19px;
+    height: 73px;
+    background: url(../resources/images/sprite.png) no-repeat -217px -38px;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    left: -50px;
+    @include bp(sm) {
+      left: 20px;
+    }
+    @include bp(xs) {
+      left: -20px;
+    }
+    @include bp(xxs) {
+      left: 0px;
+    }
+    // @include bp(xsss) {
+    //   left: -25px;
+    // }
+  }
+}

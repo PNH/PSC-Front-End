@@ -1,0 +1,114 @@
+.index {
+  .benefits {
+    background: #fff;
+    padding-bottom: 90px;
+    padding-top: 23px;
+    .hold-title {
+      margin-bottom: 46px !important
+    }
+  }
+  .benefit-list {
+    margin: 0 -2.5px;
+    padding: 0;
+    text-align: center;
+    overflow: hidden;
+    @include bp(xxs) {
+      padding: 0 15px;
+    }
+    li {
+      margin: .18%;
+      width: 32.85%;
+      height: 280px;
+      list-style: none;
+      position: relative;
+      float: left;
+      filter: grayscale(100%);
+      transition: filter 1000ms ease-in-out;
+      background-size: cover !important;
+      background-position: center !important;
+      background-repeat: no-repeat !important;
+      @include bp(xxs) {
+        width: 100% !important;
+        margin: 0 auto 15px;
+        float: none;
+      }
+      .title {
+        cursor: pointer;
+        position: absolute;
+        right: 18.5%;
+        left: 18.5%;
+        bottom: 25%;
+        top: 25%;
+        border: 2px solid #ababab;
+        padding: 0 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 28px;
+        line-height: 34px;
+        font-family: $OSLight;
+        color: #fff;
+        transition: all 300ms ease-in-out;
+        @include bp(xs) {
+            font-size: 22px;
+            line-height: 28px;
+        }
+      }
+      .overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: rgba(71, 71, 71, .8);
+        transition: opacity 900ms ease-in-out;
+      }
+      &.benefit1 {
+        background: url(../resources/images/img08.jpg) no-repeat 0 0;
+        background-size: cover;
+      }
+      &.benefit2 {
+        background: url(../resources/images/img09.jpg) no-repeat 0 0;
+        background-size: cover;
+      }
+      &.benefit3 {
+        background: url(../resources/images/img10.jpg) no-repeat 0 0;
+        background-size: cover;
+      }
+      &.benefit4 {
+        background: url(../resources/images/img11.jpg) no-repeat 0 0;
+        background-size: cover;
+      }
+      &.benefit5 {
+        background: url(../resources/images/img12.jpg) no-repeat 0 0;
+        background-size: cover;
+      }
+      &.big {
+        width: 49.53%;
+        .title {
+          right: 28%;
+          left: 28%;
+          bottom: 25%;
+          top: 25%;
+          @include bp(xxs) {
+            right: 18.5%;
+            left: 18.5%;
+            bottom: 25%;
+            top: 25%;
+          }
+        }
+      }
+      &:hover {
+        filter: grayscale(0%);
+        .overlay {
+          opacity: 0;
+        }
+        .title {
+          background: #ffc745;
+          color: #323232;
+          border-color: #ffc745;
+        }
+      }
+    }
+  }
+}

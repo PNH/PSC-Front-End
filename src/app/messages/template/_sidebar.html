@@ -1,0 +1,21 @@
+<aside id="sidebar" class="playlist messages">
+  <div class="sb-search-container">
+    <input type="text" placeholder="Search" ng-model="$ctrl.query" ng-model-options="{ debounce: 500 }" ng-change="$ctrl.onSearch($ctrl.query)">
+    <button type="submit"></button>
+  </div>
+  <div class="block" ng-if="$ctrl.isSearching">
+    <div class="loading">
+      <div class='uil-ring-css yellow'>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <perfect-scrollbar class="playlist__container" wheel-propagation="false" wheel-speed="6" min-scrollbar-length="5" suppress-scroll-x="true">
+    <div class="block white" ng-if="$ctrl.threads" ng-repeat="(thread_index, thread) in $ctrl.threads | filter:search" ng-class="{'active' : thread.id == $ctrl.selectedUserId}">
+      <a id="thread_{{thread.id}}" ng-click="$ctrl.onUserThreadClicked(thread.id, thread)" ng-class="{'unread': thread.unread > 0}">{{thread.username}}</a>
+    </div>
+    <div class="" ng-if="!$ctrl.threads && !$ctrl.isSearching">
+      <label> No results </label>
+    </div>
+  </perfect-scrollbar>
+</aside>

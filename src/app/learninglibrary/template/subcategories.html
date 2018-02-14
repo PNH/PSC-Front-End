@@ -1,0 +1,62 @@
+<div id="main">
+  <dashboard-header title="Learning Library"></dashboard-header>
+  <div id="content">
+    <div class="forum-content library">
+      <div class="holder">
+        <ul class="breadcrumbs">
+          <li>
+            <a ui-sref="library()">Learning Library</a>
+          </li>
+          <li class="active">
+            <a href="">{{$ctrl.subcategories.title}}</a>
+          </li>
+        </ul>
+        <div class="hold-form">
+          <form name="searchForm">
+            <fieldset>
+              <input-dropdown
+                input-name="query"
+                ng-model-options="{ debounce: 250 }"
+                filter-list-method="$ctrl.onSearch(searchForm.query.$viewValue)"
+                input-placeholder="Search Learning  Library"
+                selected-item="$ctrl.selectedDropdownItem"
+                default-dropdown-items="$ctrl.dropdownItems"
+                allow-custom-input="true"
+								id="ll-search__input">
+              </input-dropdown>
+              <button type="submit" ng-if="searchForm.query.$viewValue" ui-sref="library-search({query: searchForm.query.$viewValue})" class="search-btn"></button>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+
+      <div class="browse-box">
+        <div class="hold-browse-title">
+          <span class="title">{{$ctrl.subcategories.title}}</span>
+          <span class="items">{{$ctrl.subcategories.list.length}} items</span>
+        </div>
+        <div ng-if="$ctrl.subcategories !== null">
+          <div class="ll-subcategories__container" ng-if="$ctrl.subcategories.list.length > 0">
+            <ul class="clearfix">
+              <li class="clearfix" ng-repeat="(subcategory_index, subcategory) in $ctrl.subcategories.list">
+                <a ui-sref="library-detail({categoryid: subcategory.id, title: subcategory.title, parent: $ctrl.subcategories.id})">
+                  <div class="ll-subcategories__item">
+                    <div class="ll-subcategories__thumb" style="background-image: url('{{subcategory.thumbnail}}')"></div>
+                    <span class="ll-subcategories__title">{{subcategory.title}}</span>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="search-result-container search-result-container__error" ng-if="!$ctrl.subcategories.list.length > 0">
+            <p>There are no resources under this category.</p>
+          </div>
+        </div>
+        <div class="loading-indecator" ng-if="$ctrl.subcategories === null">
+          <div class='uil-ring-css yellow'><div></div></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

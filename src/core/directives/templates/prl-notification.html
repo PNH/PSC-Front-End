@@ -1,0 +1,15 @@
+<div ng-class="{'fresh': notificationCtrl.notification.status}" class="notifications-list__item">
+  <div class="notifications-list__content">
+    <p ng-class="{'clickable': notificationCtrl.notification.notification_type !== 'system'}" ng-click="notificationCtrl.goTo(notificationCtrl.notification.id,  notificationCtrl.notification.notification_type)">{{notificationCtrl.notification.message}}</p>
+    <span class="date">{{notificationCtrl.notification.created_at | formatdate: 1}}</span>
+  </div>
+  <div class="notifications-list__actions">
+    <button class="btn-empty red" ng-click="notificationCtrl.removeClicked(notificationCtrl.notification.id)" ng-disabled="notificationCtrl.deleteProcessing">
+      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+    </button>
+    <button class="btn-empty green" ng-click="notificationCtrl.readClicked(notificationCtrl.notification.id)" ng-disabled="notificationCtrl.readProcessing" ng-show="notificationCtrl.notification.status">
+      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+    </button>
+  </div>
+</div>
+

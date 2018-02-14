@@ -1,0 +1,34 @@
+<div block-ui="blogPostsLoading">
+  <ul class="archive-list clearfix">
+    <li ng-repeat="blog in $ctrl.blogs track by $index">
+      <a ng-click="$ctrl.goToBlogPost(blog)">
+        <h4 class="archive-list__title">{{blog.title | limitTo: $ctrl.blogTitleTruncateLimit}}<span ng-if="blog.title.length > $ctrl.blogTitleTruncateLimit">...</span></h4>
+      </a>
+      <a ng-click="$ctrl.goToBlogPost(blog)">
+        <div class="hold-img" style="background-image: url('{{blog.banner}}');">
+          <span ng-if="blog.privacy == 'members_only'" class="prl-blog-post-privateicon">
+            <span class="parelli-xs-icon"></span>
+          </span>
+        </div>
+      </a>
+      <p class="blog-posts__summary">{{blog.summary}} ...</p>
+      <ul class="sender-list">
+        <li>by {{blog.author.firstName + ' ' + blog.author.lastName}}</li>
+        <li><span class="date">{{blog.created_at | formatdate : 4}}</span></li>
+      </ul>
+    </li>
+  </ul>
+  <div class="pl-error__container" ng-show="!$ctrl.blogs.length > 0">
+    <div class="pl-error">
+      <span class="pl-error__message" ng-show="!$ctrl.searchedQuery">There are no blog posts at the moment.</span>
+      <span class="pl-error__message" ng-show="$ctrl.searchedQuery">We couldn't find blog posts for "{{$ctrl.searchedQuery}}". Try entering a different keyword.</span>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-yellow btn-submit pull-right" ng-disabled="$ctrl.isLoadingBlogs || $ctrl.hasReachedEnd"
+    ng-click="$ctrl.loadBlogPosts()" ng-class="{'processing': $ctrl.isLoadingBlogs}">
+    <div class="bs-process-bar uil-ring-css yellow">
+      <div></div>
+    </div>
+    <span class="bs-login-text">VIEW MORE</span>
+  </button>
+</div>

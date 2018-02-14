@@ -1,0 +1,188 @@
+<div class="share-playlist clearfix">
+  <div class="dropdown">
+    <button class="btn btn-grey dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+      aria-expanded="true">
+    Share Playlist
+    <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+  </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+      <li><a href="" data-toggle="modal" data-target="#shareToWall{{sharePlaylist.randId}}">Wall</a></li>
+      <li><a href="" data-toggle="modal" data-target="#shareToGroup{{sharePlaylist.randId}}">Group</a></li>
+      <li><a ng-click="sharePlaylist.savePlaylist(sharePlaylist.playlistId)">Save Playlist</a></li>
+    </ul>
+  </div>
+</div>
+
+<div id="shareToWall{{sharePlaylist.randId}}" class="modal fade login-popup" tabindex="100" role="dialog" on-close="resetWall()">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="onCloseClicked()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Share Playlist</h4>
+      </div>
+      <div class="modal-body">
+        <div class="login-error" ng-if="error">
+          <div class="row">
+            <div class="col-xs-12 login-error__container">
+              <div class="login-error__message">
+                {{error.message}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <form name="savePlaylist">
+          <div class="row">
+            <div class="col-xs-12 form-field-group">
+              <label>Share to</label>
+              <select name="level" ng-model="sharePlaylist.shareToWallType" ng-change="sharePlaylist.switchWallShareType()">
+                <option value="1">My Wall</option>
+                <option value="2">Connection's Wall</option>
+              </select>
+            </div>
+          </div>
+          <div class="row" ng-show="sharePlaylist.shareToWallType == 2">
+            <div class="col-xs-12 form-field-group" ng-class="{ 'has-error' : createPlaylist.playlistName.$invalid && !createPlaylist.playlistName.$pristine }">
+              <input type="text" name="userName" ng-hide="sharePlaylist.selectedUser" ng-model="sharePlaylist.userName" placeholder="Connection's Name" class="form-control" ng-model-options="{ debounce: 500 }"
+                ng-change="sharePlaylist.searchUsername(sharePlaylist.userName)" required>
+              <div class="selected-user" ng-show="sharePlaylist.selectedUser">
+                <span class="pro-pic" style="background-image: url('{{sharePlaylist.selectedUser.user.profileImage}}')"></span>
+                <span class="user-name">{{sharePlaylist.selectedUser.user.firstName + ' ' + sharePlaylist.selectedUser.user.lastName}}</span>
+                <span ng-click="sharePlaylist.removeSelectedItem()" class="glyphicon glyphicon-remove remove-selected" aria-hidden="true"></span>
+              </div>
+              <div class="searchedResults" ng-hide="sharePlaylist.selectedUser" block-ui="searchedUsernamesLoading">
+                <perfect-scrollbar class="searchedResults__container" wheel-propagation="false" wheel-speed="2" min-scrollbar-length="5"
+                  suppress-scroll-x="true">
+                  <ul ng-hide="(savePlaylist.userName.$valid && !sharePlaylist.isSearchConnectionProcessing && !sharePlaylist.searchedUsers.length)">
+                    <li ng-repeat="user in sharePlaylist.searchedUsers track by user.user.id" class="selected-user clearfix" ng-click="sharePlaylist.selectAUser(user)">
+                      <span class="pro-pic" style="background-image: url('{{user.user.profileImage}}')"></span>
+                      <span class="user-name">{{user.user.firstName + ' ' + user.user.lastName}}</span>
+                    </li>
+                  </ul>
+                </perfect-scrollbar>
+                <div class="pl-error__container" ng-show="(savePlaylist.userName.$valid && !sharePlaylist.isSearchConnectionProcessing && !sharePlaylist.searchedUsers.length)">
+                  <div class="pl-error">
+                  <span class="pl-error__message" ng-show="savePlaylist.userName.$valid && !sharePlaylist.isSearchConnectionProcessing && !sharePlaylist.searchedUsers.length">We couldn't find any user for {{sharePlaylist.userName}}.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 form-field-group">
+              <button ng-disabled="(sharePlaylist.shareToWallType === '2' && !sharePlaylist.selectedUser) || sharePlaylist.sharingToWallProcessing" type="submit" class="btn btn-yellow btn-submit"
+                ng-click="sharePlaylist.shareToWall(sharePlaylist.playlistId, sharePlaylist.selectedUser ? sharePlaylist.selectedUser.user.id : sharePlaylist.userId)" ng-class="{'processing': sharePlaylist.sharingToWallProcessing}">
+                <div class="bs-process-bar uil-ring-css yellow">
+                  <div></div>
+                </div>
+                <span class="bs-login-text">SHARE</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="shareToGroup{{sharePlaylist.randId}}" class="modal fade login-popup" tabindex="100" role="dialog" on-close="resetGroup()" on-shown="focusOnGroup()">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="onCloseClicked()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Share Playlist</h4>
+      </div>
+      <div class="modal-body">
+        <div class="login-error" ng-if="error">
+          <div class="row">
+            <div class="col-xs-12 login-error__container">
+              <div class="login-error__message">
+                {{error.message}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <form name="sharePlaylistGroupForm">
+          <div class="row">
+            <div class="col-xs-12 form-field-group">
+              <input type="text" name="groupName" id="group-name-search" ng-hide="sharePlaylist.selectedGroup" ng-model="sharePlaylist.groupName" placeholder="Group Name" class="form-control" ng-model-options="{ debounce: 500 }" ng-change="sharePlaylist.searchGroup(sharePlaylist.groupName)" required>
+              <div class="selected-user" ng-show="sharePlaylist.selectedGroup">
+                <span class="pro-pic" style="background-image: url('{{sharePlaylist.selectedGroup.image}}')"></span>
+                <span class="user-name">{{sharePlaylist.selectedGroup.title}}</span>
+                <span ng-click="sharePlaylist.removeSelectedItem()" class="glyphicon glyphicon-remove remove-selected" aria-hidden="true"></span>
+              </div>
+              <div class="searchedResults" ng-hide="sharePlaylist.selectedGroup" block-ui="searchedGroupsLoading">
+                <perfect-scrollbar class="searchedResults__container" wheel-propagation="false" wheel-speed="2" min-scrollbar-length="5"
+                  suppress-scroll-x="true">
+                  <ul ng-hide="(sharePlaylistGroupForm.groupName.$valid && !sharePlaylist.isSearchGroupProcessing && !sharePlaylist.searchedGroups.length)">
+                    <li ng-repeat="group in sharePlaylist.searchedGroups track by group.id" class="selected-user clearfix" ng-click="sharePlaylist.selectAGroup(group)">
+                      <span class="pro-pic" style="background-image: url('{{group.image}}')"></span>
+                      <span class="user-name">{{group.title}}</span>
+                    </li>
+                  </ul>
+                </perfect-scrollbar>
+                <!-- <div ng-if="sharePlaylistGroupForm.groupName.$valid && !sharePlaylist.isSearchGroupProcessing && !sharePlaylist.searchedGroups.length">We couldn't find any groups for {{sharePlaylist.groupName}}</div> -->
+                <div class="pl-error__container" ng-show="(sharePlaylistGroupForm.groupName.$valid && !sharePlaylist.isSearchGroupProcessing && !sharePlaylist.searchedGroups.length)">
+                  <div class="pl-error">
+                    <span class="pl-error__message" ng-show="sharePlaylistGroupForm.groupName.$valid && !sharePlaylist.isSearchGroupProcessing && !sharePlaylist.searchedGroups.length">We couldn't find any groups for "{{sharePlaylist.groupName}}" that you have joined. In order to share a Playlist to this group, please join the group first.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 form-field-group">
+              <button ng-disabled="!sharePlaylist.selectedGroup || sharePlaylist.sharingToWallProcessing" type="submit" class="btn btn-yellow btn-submit"
+                ng-click="sharePlaylist.shareToGroup(sharePlaylist.playlistId, sharePlaylist.selectedGroup.id)" ng-class="{'processing': sharePlaylist.sharingToWallProcessing}">
+                <div class="bs-process-bar uil-ring-css yellow">
+                  <div></div>
+                </div>
+                <span class="bs-login-text">SHARE</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<div id="savePlaylist" class="modal fade login-popup" tabindex="100" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="onCloseClicked()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Save Playlist</h4>
+      </div>
+      <div class="modal-body">
+        <div class="login-error" ng-if="error">
+          <div class="row">
+            <div class="col-xs-12 login-error__container">
+              <div class="login-error__message">
+                {{error.message}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <form name="savePlaylist">
+          <div class="row">
+            <div class="col-xs-12 form-field-group" ng-class="{ 'has-error' : createPlaylist.playlistName.$invalid && !createPlaylist.playlistName.$pristine }">
+              <input type="text" name="playlistName" ng-model="sharePlaylist.playlistName" placeholder="Playlist name" class="form-control"
+                ng-minlength="3" ng-maxlength="100" required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 form-field-group">
+              <button ng-disabled="createPlaylist.$invalid || sharePlaylist.isProcessing" type="submit" class="btn btn-yellow btn-submit"
+                ng-click="sharePlaylist.onNewPlaylistClicked()" ng-class="{'processing': sharePlaylist.isProcessing}">
+                <div class="bs-process-bar uil-ring-css yellow">
+                  <div></div>
+                </div>
+                <span class="bs-login-text">SAVE</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>-->

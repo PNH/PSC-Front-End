@@ -1,0 +1,123 @@
+<div id="main">
+  <dashboard-header></dashboard-header>
+  <div id="content">
+    <div class="dashboard badges">
+      <div class="hold-title line-c">
+        <h1>Earned Badges</h1>
+      </div>
+      <div class="block big open">
+        <div class="box light_bg">
+          <span class="dd-toggle red"></span>
+          <div class="dd_title">
+            Level 1
+          </div>
+        </div>
+        <div class="dropdown-box">
+          <div class="hold-carousel" ng-if="$ctrl.badges.level1.length > 0">
+            <badge-carousel data-badges="{{$ctrl.badges.level1}}" data-level="1"> </badge-carousel>
+            <!--<div id="badgesLvL1" class="carousel slide" data-ride="carousel" bs-carousel>
+              <div class="carousel-inner" role="listbox" ng-if="$ctrl.badges.level1">
+                <div class="item" ng-class="{'active': arry16_index === 0}" ng-repeat="(arry16_index, arry16) in $ctrl.badges.level1">
+                  <div class="badges-box" ng-repeat="(arry8_index, arry8) in arry16">
+                    <div class="badge-item" ng-repeat="(badge_index, badge) in arry8">
+                      <span class="badge-icon grey" ng-class="{'red' : badge.earned_at}"></span>
+                      <strong class="title">{{badge.savvy_title}}</strong>
+                      <span class="text">{{badge.title}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <a class="left carousel-control" role="button" data-slide="prev"></a>
+              <a class="right carousel-control" role="button" data-slide="next"></a>
+            </div>-->
+          </div>
+        </div>
+      </div>
+      <div class="block big ">
+        <div class="box light_bg">
+          <span class="dd-toggle blue"></span>
+          <div class="dd_title">
+            Level 2
+          </div>
+        </div>
+        <div class="dropdown-box">
+          <div class="hold-carousel" ng-if="$ctrl.badges.level2.length > 0">
+            <badge-carousel data-badges="{{$ctrl.badges.level2}}" data-level="2"> </badge-carousel>
+            <!-- <div id="badgesLvL2" class="carousel slide" data-ride="carousel" bs-carousel>
+              <div class="carousel-inner" role="listbox">
+                <div class="item" ng-class="{'active': arry16_index === 0}" ng-repeat="(arry16_index, arry16) in $ctrl.badges.level2">
+                  <div class="badges-box" ng-repeat="(arry8_index, arry8) in arry16">
+                    <div class="badge-item" ng-repeat="(badge_index, badge) in arry8">
+                      <span class="badge-icon grey" ng-class="{'blue' : badge.earned_at}"></span>
+                      <strong class="title">{{badge.savvy_title}}</strong>
+                      <span class="text">{{badge.title}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <a class="left carousel-control" role="button" data-slide="prev"></a>
+              <a class="right carousel-control" role="button" data-slide="next"></a>
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <div class="block big ">
+        <div class="box light_bg">
+          <span class="dd-toggle green"></span>
+          <div class="dd_title">
+            Level 3
+          </div>
+        </div>
+        <div class="dropdown-box">
+          <div class="hold-carousel" ng-if="$ctrl.badges.level3.length > 0">
+             <badge-carousel data-badges="{{$ctrl.badges.level3}}" data-level="3"> </badge-carousel> 
+            <!-- <div id="badgesLvL3" class="carousel slide" data-ride="carousel" bs-carousel>
+              <div class="carousel-inner" role="listbox">
+                <div class="item" ng-class="{'active': arry16_index === 0}" ng-repeat="(arry16_index, arry16) in $ctrl.badges.level3">
+                  <div class="badges-box" ng-repeat="(arry8_index, arry8) in arry16">
+                    <div class="badge-item" ng-repeat="(badge_index, badge) in arry8">
+                      <span class="badge-icon grey" ng-class="{'green' : badge.earned_at}"></span>
+                      <strong class="title">{{badge.savvy_title}}</strong>
+                      <span class="text">{{badge.title}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <a class="left carousel-control" role="button" data-slide="prev"></a>
+              <a class="right carousel-control" role="button" data-slide="next"></a>
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <div class="block big ">
+        <div class="box light_bg">
+          <span class="dd-toggle dark"></span>
+          <div class="dd_title">
+            Level 4
+          </div>
+        </div>
+        <div class="dropdown-box">
+          <div class="hold-carousel" ng-if="$ctrl.badges.level4.length > 0">
+             <badge-carousel data-badges="{{$ctrl.badges.level4}}" data-level="4"> </badge-carousel> 
+            <!-- <div id="badgesLvL4" class="carousel slide" data-ride="carousel" bs-carousel>
+              <div class="carousel-inner" role="listbox">
+                <div class="item" ng-class="{'active': arry16_index === 0}" ng-repeat="(arry16_index, arry16) in $ctrl.badges.level4">
+                  <div class="badges-box" ng-repeat="(arry8_index, arry8) in arry16">
+                    <div class="badge-item" ng-repeat="(badge_index, badge) in arry8">
+                      <span class="badge-icon grey" ng-class="{'black' : badge.earned_at}"></span>
+                      <strong class="title">{{badge.savvy_title}}</strong>
+                      <span class="text">{{badge.title}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <a class="left carousel-control" role="button" data-slide="prev" ng-click=""></a>
+              <a class="right carousel-control" role="button" data-slide="next"></a>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div ng-include="'app/pathway/template/popup.html'"></div>

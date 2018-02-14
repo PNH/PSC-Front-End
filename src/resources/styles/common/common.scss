@@ -1,0 +1,244 @@
+@import 'variables';
+@import 'fonts';
+@import 'mixins';
+@import 'typography';
+@import 'forms';
+@import 'buttons';
+@import 'carousel';
+@import 'header';
+@import 'footer';
+@import 'login';
+@import 'player';
+@import 'level-progress';
+@import 'loader';
+@import 'loader2';
+@import 'notification-bar';
+@import 'icons';
+@import 'view-more';
+@import 'breadcrumb';
+@import 'owl-carousel';
+@import 'addtoplaylist';
+@import 'input-dropdown';
+@import 'content';
+@import 'pdf';
+@import 'contact';
+@import 'not-found';
+@import 'prl-calendar';
+@import 'banners';
+@import 'dropdown-box';
+@import 'month-list';
+@import 'post';
+@import 'reply-box';
+@import 'tables';
+@import 'checklist';
+@import 'textangular';
+@import 'multi-upload';
+@import 'simple-search';
+@import 'notifications';
+@import 'search';
+@import 'share-playlist';
+@import 'summernote';
+@import 'archive-sidebar';
+@import 'text-editor';
+
+body {
+  background-position-y: 0;
+  background-position-x: center;
+  font-size: 16px;
+  line-height: 18px;
+  font-family: 'Open Sans', helvetica, sans-serif;
+  // min-width: 360px;
+  overflow-x: hidden;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  &.unscrollable {
+    overflow: hidden;
+  }
+}
+
+body.body {
+  background: #f1f2f6 url(../resources/images/body-bg.jpg) no-repeat center 0;
+}
+
+/**
+ * Containers
+ */
+#content {
+  max-width: 1284px;
+  width: 100%;
+  margin: 179px auto 89px;
+  background: #fff;
+  padding: 50px 35px;
+  box-sizing: border-box;
+  -webkit-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+  position: relative;
+
+  @include bp(xxs) {
+    padding: 35px 15px;
+  }
+  .forum-content {
+    .hold-title {
+      overflow: hidden;
+      padding: 0;
+      h1 {
+        float: left;
+        margin-bottom: 10px;
+      }
+    }
+    .btn-box {
+      float: right;
+      .yellow-btn {
+        float: right;
+        margin-left: 10px;
+      }
+      .back-btn {
+        float: right;
+        margin: 10px 0;
+      }
+    }
+  }
+}
+
+.index #content {
+  background: none;
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.bg__white {
+  background-color: $white;
+}
+
+// #content {
+//   padding: 0;
+//   background: none;
+// }
+
+.holder {
+  width: 100%;
+  max-width: 1284px;
+  margin: 0 auto;
+  position: relative;
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
+#wrapper {
+  overflow: hidden;
+  width: 100%;
+  min-height: 100%;
+}
+
+.w1 {
+  padding-bottom: 288px;
+}
+
+$mainTopMargin: 85px;
+#main {
+  width: 100%;
+  margin-top: 160px;
+  @include bp(xsml) {
+    margin-top: 140px;
+  }
+  @include bp(xxs) {
+    margin-top: $mainTopMargin;
+  }
+  #content {
+    margin: 0 auto 89px;
+    padding: 40px 35px;
+    @include bp(xxs) {
+      padding: 35px 15px;
+    }
+  }
+}
+
+/**
+ * Spacing
+ */
+
+.bottom-buffer-60 {
+  margin-bottom: 3.750em;
+}
+
+.bottom-buffer-30 {
+  margin-bottom: 1.875em;
+}
+
+.bottom-buffer-40 {
+  margin-bottom: 2.500em;
+}
+
+.loading {
+  display: block;
+
+  .uil-ring-css {
+    // left: 0;
+    // top: 0;
+    transform:scale(0.6) translateX(-100%);
+    left: 50%;
+  }
+  .yellow > div {
+    box-shadow: 0 6px 0 0 $yellow;
+  }
+  .red > div {
+    box-shadow: 0 6px 0 0 $red;
+  }
+  .green > div {
+    box-shadow: 0 6px 0 0 $green;
+  }
+  .blue > div {
+    box-shadow: 0 6px 0 0 $blue2;
+  }
+  .black > div {
+    box-shadow: 0 6px 0 0 $black;
+  }
+}
+
+.popmessage {
+	.loading-quote {
+		font-style: italic;
+	}
+  .modal-dialog {
+    max-width: 530px;
+  }
+	p {
+		font-weight: 300;
+		margin: 0;
+		text-align: center;
+
+		small {
+      font-style: normal;
+			font-weight: 300;
+      text-align: center;
+		}
+	}
+}
+.modal .modal-dialog {
+  @include bp(sm) {
+    margin: 0 auto;
+  }
+}
+
+.loading-dots {
+  background-image: url('../resources/images/loading_dots.gif');
+  display: block;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 40px;
+  margin: 0 auto;
+}
+
+.h40 {
+  height: 40px;
+}
+
+.clickable {
+  cursor: pointer;
+}

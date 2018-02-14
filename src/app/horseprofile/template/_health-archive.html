@@ -1,0 +1,29 @@
+<div class="row online-container-row" block-ui="existingHealthLogLoading">
+  <div class="online-container">
+    <div class="po-s2-form-container horse-health-post clearfix" ng-show="$ctrl.healthLogs.length > 0">
+      <div class="main-container prl-wall__container horse-health-post__container clearfix" block-ui="healthLogLoading">
+        <div class="content-holder forum-content">
+          <div class="block-holder forum-item prl-groups-detail__posts">
+            <div class="topic-box comments-box prl-groups-detail__postbox">
+              <wall-post ng-repeat="post in $ctrl.healthLogs | orderBy: '-created_at' track by post.id" post="post" owner-id="$ctrl.ownerId" like="$ctrl.likePost" comment="$ctrl.commentPost" get-comments="$ctrl.getComments" edit-post="$ctrl.editPost" delete-post="$ctrl.deletePost" edit-comment="$ctrl.editComment" delete-comment="$ctrl.deleteComment" has-commented="$ctrl.hasCommented" root-access="$ctrl.rootAccess"></wall-post>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div ng-include src="'app/horseprofile/template/_archive.html'"></div>
+    </div>
+    <div class="pl-error__container" ng-if="!$ctrl.healthLogs.length > 0">
+      <div class="pl-error">
+        <span class="pl-error__message">Update your horse’s health record! Use this tool to keep track of your horse's health. Select Farrier, Vet, or Holistic to add an update.</span>
+      </div>
+    </div>
+    <!--<div class="prl-viewmore-btn">
+      <button type="submit" class="btn btn-yellow btn-submit pull-right" ng-disabled="$ctrl.isHealthLogLoading || $ctrl.hasHealthLogReachedEnd" ng-click="$ctrl.viewMoreHealthLog()" ng-class="{'processing': $ctrl.isHealthLogLoading}">
+        <div class="bs-process-bar uil-ring-css yellow">
+          <div></div>
+        </div>
+        <span class="bs-login-text">VIEW MORE</span>
+      </button>
+    </div>-->
+  </div>
+</div>

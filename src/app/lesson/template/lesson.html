@@ -1,0 +1,42 @@
+<div id="main" class="lesson">
+  <dashboard-header></dashboard-header>
+  <div class="dashboard">
+    <div class="holder lessons-sidebar-padding">
+      <div class="general-box">
+        <div class="select-horse bg__white">
+          <div class="main-container">
+            <div class="sub-hold-title" ng-if="$ctrl.lessonCategory.title">
+              {{::$ctrl.lessonCategory.title}}
+            </div>
+            <div class="hold-title line-l" ng-if="$ctrl.lesson.title">
+              <h2>{{::$ctrl.lesson.title}}</h2>
+            </div>
+          </div>
+
+          <div class="holder-box bg__white lesson-video__container" ng-if="$ctrl.resources !== null && $ctrl.resources.length > 0">
+            <prl-player data-videos="$ctrl.resources" data-numberofplaylistitems="3" data-userplaylist="[]"></prl-player>
+          </div>
+          <div class="holder-box bg__white ld-overview lesson-content" ng-if="::$ctrl.lesson.description">
+            <h2>Overview &amp; Directions</h2>
+            <div class="hold-btn"></div>
+            <div view-more data-height="200">
+              <div class="view-more__content content-block" ng-bind-html="::$ctrl.lesson.description"></div>
+            </div>
+          </div>
+          <div class="holder-box prl-checklist" ng-if="::$ctrl.lesson.objective">
+            <h2>Objectives</h2>
+            <div class="hold-btn"></div>
+            <div view-more data-height="150">
+              <div class="view-more__content" ng-bind-html="::$ctrl.lesson.objective" class="ld-objectives"></div>
+            </div>
+          </div>
+        </div>
+        <!-- sidebar -->
+        <div ng-include="'app/lesson/template/sidebar.html'"></div>
+        <!-- /sidebar -->
+      </div>
+      <quick-selector ng-if="$ctrl.selector.data"></quick-selector>
+    </div>
+  </div>
+</div>
+<div ng-include="'app/lesson/template/_popup.html'"></div>

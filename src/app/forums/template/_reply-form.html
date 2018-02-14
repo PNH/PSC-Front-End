@@ -1,0 +1,38 @@
+<form class="" name="topicPostReply">
+  <fieldset>
+    <div class="reply-container">
+      <strong>Reply To: {{$ctrl.topic.title}}</strong>
+      <div class="form-block">
+        <label class="control-label">Content:</label>
+        <div class="form-element">
+          <text-editor post-model="$ctrl.postModel" config="$ctrl.summernoteOptions" is-busy="$ctrl.isUploading" post-type="3"></text-editor>
+        </div>
+      </div>
+      <div class="form-block">
+        <div class="form-element">
+          <div class="multi-upload__container">
+            <div class="multi-upload__selected">
+              <ul>
+                <li ng-repeat="item in $ctrl.attachment track by $index">
+                  {{item.name}}
+                  <span class="glyphicon glyphicon-remove multi-upload__remove" aria-hidden="true" ng-click="$ctrl.removeAttachedFileClicked($index)"></span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!--<button class="btn btn-grey btn-sm pull-right" ng-click="$ctrl.attachClicked()">Add Media</button>
+          <multi-upload files="$ctrl.attachment" controls="$ctrl.multiUploadControls"></multi-upload>-->
+        </div>
+      </div>
+    </div>
+    <div class="hold-submit">
+      <button type="submit" class="btn btn-yellow btn-submit pull-right" ng-disabled="$ctrl.postCreationProcessing || !($ctrl.postModel || $ctrl.attachment.length > 0) || $ctrl.isUploading"
+        ng-click="$ctrl.onCreateTopicPostClicked($ctrl.topic.id, $ctrl.postModel)" ng-class="{'processing': $ctrl.postCreationProcessing}">
+      <div class="bs-process-bar uil-ring-css yellow">
+        <div></div>
+      </div>
+      <span class="bs-login-text">REPLY</span>
+    </button>
+    </div>
+  </fieldset>
+</form>

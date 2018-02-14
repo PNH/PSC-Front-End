@@ -1,0 +1,16 @@
+.savvytimes-detail {
+  &__container {
+    padding: 0 15%;
+    img {
+      display: block;
+      height: auto;
+      width: 100%;
+    }
+    .hold-title {
+      padding: 0;
+    }
+    .lesson-content {
+      margin-top: 40px;
+    }
+  }
+}

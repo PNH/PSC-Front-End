@@ -1,0 +1,35 @@
+<div id="main">
+	<dashboard-header title="Playlist"></dashboard-header>
+	<div class="holder">
+	  <div class="general-box">
+	    <div class="main-container" ng-if="$ctrl.playlists !== null">
+	      <div class="pl-header clearfix" ng-if="$ctrl.selectedPlaylist !== null">
+	      	<div class="hold-title line-l">
+	      	  <h2>{{$ctrl.selectedPlaylist.title}}</h2>
+	      	  <!-- <span class="date">Created by Jerome. 12 videos, 23 sec</span> -->
+						<span class="date">{{$ctrl.playlistResources.length}} {{$ctrl.playlistResources.length === 1 ? 'item' : 'items'}} in playlist</span>
+	      	</div>
+	      	<div class="pl-controllers">
+	      		<button class="btn btn-black btn-sm" ng-click="$ctrl.onDeletePlaylistClicked()">DELETE</button>
+	      		<button class="btn btn-black btn-sm" data-toggle="modal" data-target="#editPlaylist">EDIT</button>
+	      	</div>
+	      </div>
+	      <div class="pl-error__container" ng-if="$ctrl.playlistResources.length === 0 || $ctrl.selectedPlaylist === null">
+	      	<div class="pl-error">
+	      		<!--<span class="pl-error__name">{{$ctrl.selectedPlaylist.title}}</span>
+	      		<span class="pl-error__author">Created by Jerome. 0 videos, 0 sec</span>-->
+	      		<span class="pl-error__message" ng-if="$ctrl.playlistResources.length === 0">Your playlist is currently empty. Please go to the <a ui-sref="library">Learning Library</a> to add videos and audio.</span>
+						<span class="pl-error__message" ng-if="$ctrl.selectedPlaylist === null">It looks like you don't have any playlists yet. <a data-toggle="modal" data-target="#createPlaylist">Create one now.</a></span>
+	      	</div>
+	      </div>
+	      <div class="full-video playlist-player__container" ng-if="$ctrl.playlistResources.length > 0">
+					<share-playlist ng-if="$ctrl.playlistId" playlist-id="$ctrl.playlistId"></share-playlist>
+	        <div>
+						<prl-player videos="$ctrl.playlistResources" numberofplaylistitems="3" add-video-fn="$ctrl.onAddToPlaylist" user-playlist="$ctrl.playlists" data-template="playlist"></prl-player>
+	        </div>
+	      </div>
+	    </div>
+	  	<div ng-include="'app/playlist/template/_sidebar.html'"></div>
+	  </div>
+	</div>
+</div>

@@ -1,0 +1,41 @@
+.contact-item {
+	padding-bottom: 20px;
+	padding-top: 20px;
+	width: 68%;
+	@include bp(xs) {
+		width: 100%;
+	}
+	.country,
+	.address {
+		display: block;
+		margin-bottom: 15px;
+	}
+	.country {
+		display: block;
+		font-size: 1.500em;
+		font-weight: 600;
+	}
+	.address {
+		line-height: 22px;
+	}
+}
+.contact-info {
+	margin: 0;
+	padding: 0;
+	li {
+		margin-bottom: 6px;
+		display: flex;
+		.title {
+			display: inline-block;
+			font-weight: 600;
+			width: 80px;
+		}
+	}
+	.title-last-time {
+		width: 75%;
+	}
+}
+.contact-info-container {
+	display: flex;
+	justify-content: center;
+}

@@ -1,0 +1,91 @@
+<div id="step4" class="tab-pane">
+  <!-- po-heading block -->
+  <div class="row po-heading bottom-buffer-60">
+    <div class="col-md-12">
+      <h1>See how the Parelli Levels Program relates to overcoming horsemanship challenges and reaching your goals!</h1>
+      <div class="tiny-border"></div>
+    </div>
+    <div class="col-md-12">
+      <h3 class="step4__description">For optimal results, we suggest starting in Level 1 and working through the program. In less severe cases, the problem
+        may be resolved or you may reach your goal sooner than described here. More severe problems may require more skills
+        and knowledge and such challenges may require you to progress further in the program to resolve them. This is a progressive
+        and comprehensive program as each Level and Savvy build onto the next. If your horse’s behavior is especially dangerous,
+        we strongly suggest contacting a Parelli Professional for help. If you have more than one horse, we suggest starting
+        the program with the easiest, so that you can build your own skills to better serve your more difficult horse.
+      </h3>
+    </div>
+  </div>
+  <!-- /po-heading -->
+
+  <!-- pathway -->
+  <div class="po-s4-pathway bottom-buffer-40">
+    <div class="po-s4-pathway__container">
+      <div ng-if="$ctrl.levels" class="row">
+        <div ng-repeat="(level_index, level) in $ctrl.levels | limitTo: 4 | orderBy : 'id'" class="col-sm-6 col-md-3">
+          <div class="po-s4-pathway__item">
+            <div class="po-s4-pathway__item__heading" style="background-color:{{level.color}}">
+              {{level.title}}
+            </div>
+            <ul ng-if="$ctrl.allissues" class="po-s4-pathway__item__savvys">
+              <li ng-repeat="(issue_index, issue) in $ctrl.allissues | onbaordlevel : level_index+1 | orderBy : 'title' | orderBy : 'savvy.id' ">
+                <img ng-src="{{issue.savvy.logo}}" alt="">
+                <div class="po-s4-pathway__item__savvys__label">
+                  {{issue.title}}
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- pathway-footer -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="po-s4-pathway__footer">
+          <ul>
+            <li class="savvys">
+              Savvy
+              <span id="hint" class="glyphicon glyphicon-info-sign" aria-hidden="true" data-target="#savvyModal" data-toggle="modal" data-trigger="click"></span>
+            </li>
+            <li>
+              <div class="solution-map__savvy-icon"></div> On Line
+            </li>
+            <li>
+              <div class="solution-map__savvy-icon Liberty"></div> Liberty
+            </li>
+            <li>
+              <div class="solution-map__savvy-icon FreeStyle"></div> FreeStyle
+            </li>
+            <li>
+              <div class="solution-map__savvy-icon Finesse"></div> Finesse
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- /pathway-footer -->
+  </div>
+  <!-- /pathway -->
+
+  <!-- po-footer -->
+  <div class="row po-footer">
+    <div class="col-md-6">
+      <div class="po-navigations">
+        <input ui-sref="onboard.comissues" type="button" id="po-back" class="btn btn-black pull-left" value="BACK">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="po-navigations clearfix">
+        <input ui-sref="onboard.samplemodule" type="button" id="po-next" class="btn btn-yellow pull-right" value="NEXT">
+      </div>
+      <button ng-if="!$ctrl.loggedIn" class="po-submitlinks pull-right underline-text" ng-click="$ctrl.onSubmitFormClicked($event)"
+        ng-disabled="$ctrl.isProcessing">I like what I see, sign me up!</button>
+      <button ng-if="$ctrl.loggedIn" class="po-submitlinks pull-right underline-text" ng-click="$ctrl.onSubmitFormClicked($event)"
+        ng-disabled="$ctrl.isProcessing">I like what I see, take me to dashboard!</button>
+    </div>
+  </div>
+  <!-- /po-footer -->
+</div>
+
+<div ng-include="'app/onboard/template/_popup.html'"></div>

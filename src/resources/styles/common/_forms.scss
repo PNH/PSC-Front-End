@@ -1,0 +1,191 @@
+// Common input styles
+input[type='email'],
+input[type='number'],
+input[type='password'],
+input[type='tel'],
+input[type='text'],
+input[type='url'],
+select,
+textarea {
+  background-color: $white;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  color: $form-text-color;
+  font-size: 1em;
+  font-weight: 400;
+  height: 45px;
+  line-height: 1.5em;
+  padding: 10px 25px;
+  width: 100%;
+}
+
+textarea {
+  height: auto;
+}
+
+select {
+  padding-right: 56px;
+  appearance: none;
+  background-image: url('../resources/images/select-field-arrow.png');
+  background-repeat: no-repeat;
+  background-position: right 20px top 50%;
+  position: relative;
+  &:before {
+    content: "\e260";
+    font-family: 'Glyphicons Halflings';
+    font-smoothing: antialiased;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    position: absolute;
+  }
+}
+
+input[disabled],
+textarea[disabled],
+select[disabled] {
+  background-color: #eeeeee;
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: $yellow !important;
+  outline: 0 !important;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 199, 69, 0.50) !important;
+}
+
+label {
+  font-weight: 400;
+  font-size: 1em;
+}
+
+// Change the placeholder text color
+::-webkit-input-placeholder {
+  color: $form-placeholder-color !important;
+}
+
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: $form-placeholder-color !important;
+  opacity: 1 !important;
+}
+
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: $form-placeholder-color !important;
+  opacity: 1 !important;
+}
+
+:-ms-input-placeholder {
+  color: $form-placeholder-color !important;
+}
+
+// Disable Number input spinners
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  appearance: textfield;
+}
+
+// Checkbox styles
+input[type="checkbox"]:checked,
+input[type="checkbox"]:not(:checked) {
+  position: absolute;
+  left: -9999px;
+}
+
+input[type="checkbox"]:checked+label,
+input[type="checkbox"]:not(:checked)+label {
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+input[type="checkbox"]:checked+label:before,
+input[type="checkbox"]:not(:checked)+label:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 17px;
+  height: 17px;
+  background: $forms-checkbox-bg;
+  border-radius: 3px;
+}
+
+input[type="checkbox"]:checked+label:after,
+input[type="checkbox"]:not(:checked)+label:after {
+  content: '✓';
+  position: absolute;
+  top: 4px;
+  left: 2px;
+  font-size: 1em !important;
+  line-height: 0.8;
+  color: $form-checkbox-tic;
+  transition: all 0.2s;
+}
+
+input[type="checkbox"].dark:checked+label:before,
+input[type="checkbox"].dark:not(:checked)+label:before {
+  background: $forms-checkbox-dark-bg;
+}
+
+input[type="checkbox"].dark:checked+label:after,
+input[type="checkbox"].dark:not(:checked)+label:after {
+  color: $form-checkbox-dark-tic;
+}
+
+input[type="checkbox"]:not(:checked)+label:after {
+  opacity: 0;
+  transform: scale(0);
+}
+
+input[type="checkbox"]:checked+label:after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+input[type="checkbox"]:disabled:checked+label:before,
+input[type="checkbox"]:disabled:not(:checked)+label:before {
+  box-shadow: none;
+  border-color: #bbb;
+  background-color: #ddd;
+}
+
+input[type="checkbox"]:disabled:checked+label:after {
+  color: #999;
+}
+
+input[type="checkbox"]:disabled+label {
+  color: #aaa;
+}
+
+.text-hint {
+  padding-top: 10px;
+  padding-left: 25px;
+  display: block;
+}
+
+.help-block {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  margin-top: 10px !important;
+  color: #737373;
+  font-size: 1em !important;
+}
+
+.privacy-selector {
+  button {
+    border: none;
+  }
+}

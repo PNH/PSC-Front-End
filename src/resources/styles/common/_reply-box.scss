@@ -1,0 +1,87 @@
+.reply-form {
+  button {
+    border: none;
+    float: right;
+    width: 195px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+}
+
+.reply-container {
+  background: #f1f2f6;
+  padding: 35px 5%;
+  margin-bottom: 20px;
+  strong {
+    font-size: 21px;
+    line-height: 23px;
+    font-family: $OSLight;
+    display: block;
+    margin-bottom: 30px;
+  }
+  .form-block {
+    overflow: hidden;
+    width: 100%;
+    margin-bottom: 12px;
+    .grey-btn {
+      float: right;
+      padding: 6px 10px;
+      margin-bottom: 5px;
+    }
+    .control-label {
+      float: left;
+      width: 10%;
+      text-align: left;
+      font-size: 16px;
+      line-height: 19px;
+      font-family: $OSRegular;
+      color: #7c7c7c;
+      padding-top: 0;
+      font-weight: 400;
+    }
+    .form-element {
+      float: right;
+      width: 90%;
+    }
+    input,
+    textarea {
+      border: none;
+      border-radius: 0;
+    }
+    textarea {
+      // max-width: 954px !important;
+      width: 100%;
+      min-height: 100px;
+    }
+  }
+  .form-control:focus {
+    box-shadow: none;
+  }
+  text-angular {
+    .ta-editor {
+      background-color: $white;
+    }
+  }
+}
+
+@media (max-width: 920px) {
+  .reply-container .form-block .control-label {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .reply-container .form-block .form-element {
+    width: 100%;
+  }
+}
+
+@media (max-width: 425px) {
+  .reply-container strong {
+    text-align: center;
+  }
+}
+
+@media (max-width: 400px) {
+  .reply-container {
+    padding: 28px 5% 15px;
+  }
+}

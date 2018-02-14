@@ -1,0 +1,22 @@
+<div id="main">
+  <dashboard-header title="Checklist"></dashboard-header>
+  <div id="content" class="touchstones-detail checklist dashboard">
+    <div class="content-holder clearfix">
+      <div class="clearfix"><button class="btn btn-yellow pull-right download-checklist">Download</button></div>
+      <div class="block big open" dropdown-box>
+        <div class="box light_bg">
+          <span class="dd-toggle"></span>
+          <div class="dd_title">
+            Introduction
+          </div>
+        </div>
+        <div class="dropdown-box">
+          <div class="db-container">
+            <div class="prl-checklist" ng-bind-html="::$ctrl.checklist"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div ng-include="'app/touchstones/template/_popups.html'"></div>

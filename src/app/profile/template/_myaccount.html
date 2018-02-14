@@ -1,0 +1,178 @@
+<form name="profForm">
+  <div class="row formRow bgColor">
+    <div class="col-md-12" block-ui="userProfileLoading">
+      <div class="po-s2-form-container">
+        <div class="login-error" ng-show="$ctrl.user.homeAddress.xCoordinate === '0.0' || $ctrl.user.homeAddress.yCoordinate === '0.0'">
+          <div class="row">
+            <div class="col-xs-12 login-error__container">
+              <div class="login-error__message">
+                It seems like there is a problem retrieving your location. Please re-enter your location details and save.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : profForm.profImage.$invalid && !profForm.profImage.$pristine }">
+            <croppie-profile-image ng-if="$ctrl.user" file="$ctrl.user.profile_picture" image="$ctrl.user.profilePic" title="Profile Image" dimensions="Size 200 x 200 pixels"></croppie-profile-image>
+          </div>
+        </div>
+        <div class="form-part-line"></div>
+        <div class="row">
+          <div class="col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : profForm.fname.$invalid && !profForm.fname.$pristine }">
+            <label>First Name* </label>
+            <input type="text" name="fname" placeholder="" class="form-control" ng-model="$ctrl.user.firstName" ng-minlength="3" ng-maxlength="100"
+              ng-model-options="{updateOn: 'blur'}" ng-pattern="/^[\D]*$/" required>
+            <p ng-show="profForm.fname.$invalid && !profForm.fname.$pristine" class="help-block">Please enter a valid name.</p>
+          </div>
+          <div class="col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : profForm.lname.$invalid && !profForm.lname.$pristine }">
+            <label>Last Name* </label>
+            <input type="text" name="lname" placeholder="" class="form-control" ng-model="$ctrl.user.lastName" ng-minlength="3" ng-maxlength="100"
+              ng-model-options="{updateOn: 'blur'}" ng-pattern="/^[\D]*$/" required>
+            <p ng-show="profForm.lname.$invalid && !profForm.lname.$pristine" class="help-block">Please enter a valid name.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : profForm.birthday.$invalid && !profForm.birthday.$pristine }">
+            <label>Birthday </label>
+            <input name="birthday" type="text" placeholder="" class="form-control" moment-picker ng-model="$ctrl.birthdayLocal" format="M/D/YYYY" max-view="day" max-date="$ctrl.maxDate" autoclose="true" ng-paste="$event.preventDefault();"/>
+            <p ng-show="profForm.birthday.$invalid && !profForm.birthday.$pristine" class="help-block">Please select your date of birth.</p>
+          </div>
+          <div class="col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : profForm.gender.$invalid && !profForm.gender.$pristine }">
+            <label>Gender </label>
+            <select ng-if="$ctrl.genders" name="relationship" ng-model="$ctrl.user.gender" convert-to-number>
+                <option ng-repeat="(gender, gender_index) in $ctrl.genders" value="{{gender_index}}">{{gender | humanize}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : profForm.name.$invalid && !profForm.name.$pristine }">
+            <label>Humanality </label>
+            <select ng-if="$ctrl.humananalities" name="relationship" ng-model="$ctrl.user.humanity" convert-to-number>
+                <option ng-repeat="(human, human_index) in $ctrl.humananalities" value="{{human_index}}">{{human}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : profForm.equestrainInterest && !profForm.equestrainInterest }">
+            <label>Equestrian Interests</label>
+            <ul class="equestrian-interest__container clearfix">
+              <li ng-repeat="(equestrain, equestrain_index) in $ctrl.equestrain">
+                <input type="checkbox" id="equestrain{{equestrain_index}}" ng-model="$ctrl.user.equestrainInterestLocal[equestrain_index]"
+                  ng-change="$ctrl.onEqChange($ctrl.user.equestrainInterest)">
+                <label for="equestrain{{equestrain_index}}">{{equestrain | humanize}}</label>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-12 po-s2-form-field-group" ng-class="{ 'has-error' : profForm.address1.$invalid && !profForm.address1.$pristine }">
+            <label>My Instructors</label>
+            <input-dropdown allow-custom-input="false" input-name="instructorSearch" input-placeholder="Search Instructor" ng-model-options="{ debounce: 250 }"
+              selected-item="$ctrl.selectedInstructor" filter-list-method="$ctrl.searchInstructor(userInput)" input-required="false"
+              item-selected-method="$ctrl.addInstructor(item)" default-dropdown-items="$ctrl.defaultInstructors"></input-dropdown>
+            <div class="multi-upload__container instructors-list__container" ng-show="$ctrl.user.instructorsLocal.length > 0">
+              <div class="multi-upload__selected">
+                <ul>
+                  <li ng-repeat="instructor in $ctrl.user.instructorsLocal track by instructor.id">
+                    <span ui-sref="wall({userid: instructor.id})">{{instructor.firstName + ' ' + instructor.lastName}}</span>
+                    <span class="glyphicon glyphicon-remove multi-upload__remove" aria-hidden="true" ng-click="$ctrl.removeInstructor(instructor.id)"></span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-12 po-s2-form-field-group" ng-class="{ 'has-error' : profForm.address1.$invalid && !profForm.address1.$pristine }">
+            <label>Street Address* </label>
+            <input type="text" name="address1" class="form-control" ng-model="$ctrl.user.homeAddress.street" ng-change="$ctrl.onAddressInputComplted()"
+              ng-model-options="{debounce: 500}" ng-minlength="3" ng-maxlength="100" required>
+            <p ng-show="profForm.address1.$invalid && !profForm.address1.$pristine" class="help-block">Please enter a valid address.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-6 col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : profForm.country.$invalid && !profForm.country.$pristine || $ctrl.user.homeAddress.country === '-1'}">
+            <label>Country* </label>
+            <select ng-if="$ctrl.countries" name="country" ng-model="$ctrl.user.homeAddress.country" ng-change="$ctrl.onCountrySelected($ctrl.user.homeAddress.country)"
+              ng-pattern="/^[a-zA-Z\s]*$/" ng-change="$ctrl.onAddressInputComplted()" required>
+              <option ng-repeat="(country_index, country) in $ctrl.countries" value="{{country.code}}">{{country.name}}</option>
+            </select>
+            <p ng-show="profForm.country.$invalid || $ctrl.user.homeAddress.country === '-1' && !profForm.country.$pristine" class="help-block">Please select country.</p>
+          </div>
+
+          <div ng-if="!$ctrl.states" class="form-group col-sm-6 col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : profForm.province.$invalid && !profForm.province.$pristine }">
+            <label>State/Province* </label>
+            <input type="text" name="province" class="form-control" ng-model="$ctrl.user.homeAddress.state" ng-maxlength="100" ng-pattern="/^[a-zA-Z\s_.-]*$/"
+              required>
+            <p ng-show="profForm.province.$invalid && !profForm.province.$pristine" class="help-block">Please enter a valid State/Province.</p>
+          </div>
+          <div ng-if="$ctrl.states" class="form-group col-sm-6 col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : profForm.province.$invalid && !profForm.province.$pristine }">
+            <label>State/Province* </label>
+            <select ng-if="$ctrl.states" name="province" ng-model="$ctrl.user.homeAddress.state" required>
+              <option ng-repeat="(state_index, state) in $ctrl.states" value="{{state.code}}">{{state.name}}</option>
+            </select>
+            <p ng-show="profForm.province.$invalid && !profForm.province.$pristine" class="help-block">Please enter a valid State/Province.</p>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-6 col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : profForm.city.$invalid && !profForm.city.$pristine }">
+            <label>City* </label>
+            <input type="text" name="city" class="form-control" ng-model="$ctrl.user.homeAddress.city" ng-maxlength="100" ng-pattern="/^[a-zA-Z\s_.-]*$/"
+              ng-change="$ctrl.onAddressInputComplted()" required>
+            <p ng-show="profForm.city.$invalid && !profForm.city.$pristine" class="help-block">Please enter a valid city.</p>
+          </div>
+          <div class="form-group col-sm-6 col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : profForm.zip.$invalid && !profForm.zip.$pristine }">
+            <label>Zip/Post Code* </label>
+            <input type="text" name="zip" class="form-control" ng-minlength="3" ng-model="$ctrl.user.homeAddress.zipcode" ng-change="$ctrl.onAddressInputComplted()"
+              required>
+            <p ng-show="profForm.zip.$invalid && !profForm.zip.$pristine" class="help-block">Please enter a valid Zip/Post code.</p>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group">
+            <div map-lazy-load="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkLJt6qh1IocAzXwg9zCrAtE8rZYB43YY">
+              <ng-map center="{{$ctrl.pointMarker.lat}}, {{$ctrl.pointMarker.lng}}" zoom="15">
+                <marker ng-if="$ctrl.pointMarker" position="[{{$ctrl.pointMarker.lat}}, {{$ctrl.pointMarker.lng}}]" draggable="true" on-dragend="$ctrl.onMapMarkerDrag($event)"
+                  title="your location"></marker>
+              </ng-map>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : profForm.website.$invalid && !profForm.website.$pristine }">
+            <label>Website </label>
+            <input type="text" name="website" placeholder="" class="form-control" ng-model="$ctrl.user.website" ng-minlength="3" ng-maxlength="100"
+              ng-model-options="{updateOn: 'blur'}" ng-pattern="/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/">
+            <p ng-show="profForm.website.$invalid && !profForm.website.$pristine" class="help-block">Please enter a valid link.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : profForm.bio.$invalid && !profForm.bio.$pristine }">
+            <label>Bio </label>
+            <textarea type="text" name="bio" rows="10" placeholder="" ng-model="$ctrl.user.bio" ng-maxlength="2000" ng-model-options="{updateOn: 'blur'}"></textarea>
+            <p ng-show="profForm.bio.$invalid && !profForm.bio.$pristine" class="help-block">Please enter a valid bio.</p>
+            <p class="help-block"><small>Maximum character limit 2000</small></p>
+          </div>
+        </div>
+        <div class="row" ng-if="$ctrl.profileError">
+          <div class="col-sm-12 has-errors-big">
+            <p class="help-block">{{$ctrl.profileError}} </p>
+          </div>
+        </div>
+      </div>
+      <div class="save-btn">
+        <button ui-sref="#" ng-disabled="profForm.$invalid || $ctrl.isProcessing" ng-click="$ctrl.onUpdateProfileClicked($ctrl.user)"
+          class="btn btn-yellow pull-right btn-submit" type="submit" ng-class="{'processing': $ctrl.isProcessing}">
+          <div class="bs-process-bar uil-ring-css yellow">
+            <div></div>
+          </div>
+          <span class="bs-login-text">
+            SAVE PROFILE
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

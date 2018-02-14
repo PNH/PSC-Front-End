@@ -1,0 +1,71 @@
+<div id="main" class="prl-myevents">
+  <dashboard-header title="My Events"></dashboard-header>
+  <div id="content" class="clearfix" block-ui="existingMyEventsLoading">
+    <div class="forum-content library" >
+      <div class="holder">
+        <div class="hold-title line-l prl-content-title">
+          <h2>My Events</h2>
+        </div>
+        <div class="hold-form">
+          <div class="allgroups-header prl-dropdown">
+            Sort By:
+            <select ng-model="$ctrl.selectedMyEventType" ng-change="$ctrl.onChangeMyEventType($ctrl.selectedMyEventType)">
+              <!-- <option value="1" ng-selected="true">Organizer</option> -->
+              <!-- <option value="2">Instructor</option> -->
+              <!-- <option value="3">Participant</option> -->
+              <option ng-repeat="sortOption in $ctrl.sortOptionsMyEvents" value="{{sortOption.id}}">{{sortOption.name}}</option>
+            </select>
+          </div>
+          <a data-toggle="modal" data-target="#createEvent" class="btn btn-yellow pull-right prl-create-btn" ng-click="$ctrl.onPopupClicked()">+ CREATE EVENT</a>
+        </div>
+      </div>
+
+      <div class="prl-myevents-all" >
+
+        <div class="prl-myevent-day" ng-repeat="eventDay in $ctrl.dateSortedMyEvents" ng-if="$ctrl.dateSortedMyEvents.length !== 0">
+          <div class="allgroups-header">{{eventDay.date}}
+            <div class="arrow-down" ></div>
+          </div>
+          <div class="block-holder forum-item clearfix col-lg-12">
+            <div ng-repeat="event in eventDay.content">
+              <div class="topic-box prl-event-item" ng-click="$ctrl.onEventItemClicked(event.id, event.statusLabel)" > <!-- ui-sref="eventdetails({'eventid': event.id})" -->
+                <figure class="hold-img" style="background-image: url('{{event.organizer.profileImage}}');"></figure>
+                <div class="hold-title line-l prl-subtitle">
+                  <strong>{{event.title}}</strong>
+                </div>
+                <span class="prl-date">{{event.startDate | formatdate:4}}{{event.startDate != event.endDate ?  ' — ' + (event.endDate | formatdate:4) : ""}}  |  {{event.location.address}}</span>
+                <!-- <span class="prl-date">{{event.startDate | formatdate:4}} —  {{event.endDate | formatdate:4}}  |  {{event.location.street ? event.location.street + ', ' : ''}}{{event.location.zipcode ? event.location.zipcode + ', ' : '' }}{{event.location.city ? event.location.city + ', ' : '' }}{{event.location.country}}</span> -->
+              </div>
+              <div ng-if="!$last" class="form-part-line prl-linebreak"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="pl-error__container" ng-if="$ctrl.dateSortedMyEvents.length == 0">
+        <div class="pl-error myevent-empty-label">
+          <span class="pl-error__message" ng-if="$ctrl.selectedMyEventType == 0">It looks like you don't have any events yet.</span>
+          <span class="pl-error__message" ng-if="$ctrl.selectedMyEventType == 1">It looks like you don't have any events yet.<strong data-toggle="modal" data-target="#createEvent" ng-click="$ctrl.onPopupClicked()">Create one</strong> now.</span>
+          <span class="pl-error__message" ng-if="$ctrl.selectedMyEventType == 2">It looks like you don't have any events yet.</span>
+          <span class="pl-error__message" ng-if="$ctrl.selectedMyEventType == 3">It looks like you don't have any events yet. <strong ui-sref="eventcalendar">Join One</strong> now.</span>
+        </div>
+      </div>
+
+      <!-- <button class="btn-viewmore btn-empty" ng-click="$ctrl.viewMoreMyEvents()" ng-disabled="$ctrl.isMyEventLoading" ng-hide="$ctrl.hasMyEventsReachedEnd"><span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span> View More</button> -->
+
+    </div>
+
+    <button type="submit" class="btn btn-yellow btn-submit pull-right" ng-disabled="$ctrl.isMyEventLoading || $ctrl.hasMyEventsReachedEnd"
+    ng-click="$ctrl.viewMoreMyEvents()" ng-class="{'processing': $ctrl.isMyEventLoading}">
+    <div class="bs-process-bar uil-ring-css yellow">
+      <div></div>
+    </div>
+    <span class="bs-login-text">VIEW MORE</span>
+  </button>
+
+  </div>
+
+  <div ng-include="'app/events/template/_create.html'"></div>
+
+</div>

@@ -1,0 +1,94 @@
+<form name="regForm" novalidate>
+  <div id="step2" class="tab-pane">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="pr-form-heading">Review</h2>
+        <div class="po-s2-form-container pr-form-review">
+          <div class="row">
+            <div class="col-sm-6">
+              <h3>User Information</h3>
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <p>{{formData.user.fname}} {{formData.user.lname}}</p>
+                  <p>{{formData.user.email}}</p>
+                  <p>{{formData.user.phone}}</p>
+                  <a ui-sref="registration.userinfo({type: $ctrl.memtype})" class="underline-text" ng-click="$ctrl.isEditig = true">Edit</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <h3>Billing Information</h3>
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <p>{{formData.billing.address1}}</p>
+                  <p>{{formData.billing.address2}}</p>
+                  <p>{{formData.billing.city}}</p>
+                  <p>{{formData.billing.zip}}</p>
+                  <p>{{formData.billing.country}}</p>
+                  <a ui-sref="registration.billing" class="underline-text" ng-click="$ctrl.isEditig = true">Edit</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <h3>Credit Card Information</h3>
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <p>{{formData.ccard.cardname}}</p>
+                  <p>{{formData.ccard.cardnumber | hidecardnumber}}</p>
+                  <p>{{formData.ccard.cardmonth | formatdate: 7}}/{{formData.ccard.cardyear | formatdate: 8}}</p>
+                  <p>{{formData.ccard.cardcode | hidecardcode}}</p>
+                  <a ui-sref="registration.creditcard" class="underline-text" ng-click="$ctrl.isEditig = true">Edit</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <h3>Total</h3>
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <div ng-if="$ctrl.membership">
+                    <p>Membership: {{$ctrl.membership.level | humanize}} {{$ctrl.membership.billing_frequency | humanize}}</p>
+                    <p><strong><span class="price" ng-repeat="(currency_index, currency) in $ctrl.membership.costs | filter : {'currencyId': $ctrl.currencyType} | limitTo : 1">Cost: {{currency.cost | currency : currency.symbol}}</span></strong></p>
+                    <!-- <p>Tax: {{$ctrl.membership.tax | currency}}</p> -->
+                    <!-- <p><<strong>>Total: {{$ctrl.membership.total | currency}}</strong></p> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <input type="checkbox" name="checkagree" ng-model="formData.input" id="ci-check" required="" class="dark" />
+            <label for="ci-check">I understand that the Parelli Savvy Club is a recurring subscription-based membership, and that my credit card will be charged automatically every month for Monthly Membership and automatically every year for Annual Membership. There is no contracted period for my subscription, and I may change or cancel my membership at any time.</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row po-footer">
+      <div class="col-md-6">
+        <div class="po-navigations">
+          <input ui-sref="registration.creditcard" type="button" id="po-back" class="btn btn-black pull-left" value="BACK">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="po-navigations clearfix">
+          <!--<input ui-sref="#" ng-disabled="!formData.input || !$ctrl.membership.id || $ctrl.isProcessing" ng-click="$ctrl.onPurchaseMembershipClicked()" type="button" id="po-next" class="btn btn-yellow pull-right " value="{{$ctrl.isProcessing ? 'REGISTERING...' : 'PURCHASE MEMBERSHIP'}}" value="{{'purchase membership' | uppercase}}">-->
+          <button ui-sref="#" ng-disabled="!formData.input || !$ctrl.membership.id || $ctrl.isProcessing" ng-click="$ctrl.onPurchaseMembershipClicked()" class="btn btn-yellow pull-right btn-submit btn-purchase-membership-full-width" type="submit" ng-class="{'processing': $ctrl.isProcessing}">
+            <div class="bs-process-bar uil-ring-css yellow">
+              <div></div>
+            </div>
+            <span class="bs-login-text">
+              PURCHASE MEMBERSHIP
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="row" ng-if="$ctrl.error">
+      <div class="col-sm-12 has-errors-big">
+        <p class="help-block" ng-repeat="error in $ctrl.error.message">{{error.errorMessage}} <i class="fa fa-exclamation" aria-hidden="true"></i></p>
+      </div>
+    </div>
+    <!-- /po-footer -->
+  </div>
+</form>

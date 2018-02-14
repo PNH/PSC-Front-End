@@ -1,0 +1,25 @@
+<aside id="sidebar" class="playlist">
+  <div class="block">
+    <div class="box grey_bg pl-add" data-toggle="modal" data-target="#createPlaylist">
+      <a href="">
+        <span class="glyphicon glyphicon-plus pull-right" aria-hidden="true"></span>
+      </a>
+      <div class="title">
+        Playlist
+      </div>
+    </div>
+  </div>
+  <div class="block" ng-if="!$ctrl.playlists">
+    <div class="loading">
+      <div class='uil-ring-css yellow'>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <perfect-scrollbar class="playlist__container" wheel-propagation="false" wheel-speed="6" min-scrollbar-length="5" suppress-scroll-x="true">
+    <div class="block white" ng-if="$ctrl.playlists" ng-repeat="(playlist_index, playlist) in $ctrl.playlists | orderBy : 'id' : true" ng-class="{'active' : playlist.id === $ctrl.selectedPlaylist.id}">
+      <a ui-sref="playlist({id: playlist.id})">{{playlist.title}}</a>
+    </div>
+  </perfect-scrollbar>
+</aside>
+<div ng-include="'app/playlist/template/_popup.html'"></div>

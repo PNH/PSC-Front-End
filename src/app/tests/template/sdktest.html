@@ -1,0 +1,31 @@
+
+<div id="main">
+  <dashboard-header></dashboard-header>
+  <div id="content">
+    <!-- <prl-jwplayer
+    jw-player-id="jwplayer"
+    jw-player-controls="playerControlls"></prl-jwplayer> -->
+
+    <prl-calendar selected="day" prl-calendar-controls="controllers" style="width: 25%"></prl-calendar>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <button type="button" ng-click="$ctrl.onPlayItemClicked('http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4')">play item</button>
+    <button type="button" ng-click="$ctrl.onPlayItemsClicked('http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4')">playlist</button>
+    <button type="button" ng-click="$ctrl.onPlaylistItemAtIndex(3)">jump index</button>
+    <button type="button" ng-click="playerControlls.pause()">pause</button>
+    <button type="button" ng-click="playerControlls.stop()">stop</button>
+    <button type="button" ng-click="playerControlls.remove()">remove</button>
+  </div>
+</div>

@@ -1,0 +1,180 @@
+// Sidebar
+#sidebar.messages {
+  float: left;
+  @include bp(xs) {
+    float: none;
+  }
+  .sb-search-container {
+    margin-bottom: 10px;
+    position: relative;
+    input {
+      padding-right: 40px;
+    }
+    button {
+      background: url('../resources/images/sprite.png') no-repeat -313px 2px;
+      border: none;
+      height: 32px;
+      opacity: 0.6;
+      outline: 0;
+      padding: 0;
+      position: absolute;
+      right: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 32px;
+    }
+  }
+  .block {
+    a {
+      &.unread {
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+// Main Container
+.prl-messages .main-container {
+  float: right;
+  min-height: 300px;
+  padding-left: 70px;
+  padding-right: 70px;
+  @include bp(xs) {
+    float: none;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+.messages-box {
+  padding-left: 0;
+  &__previous {
+    margin-bottom: 20px;
+  }
+  &__user-img {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 3px solid #f1f2f6;
+    height: 75px;
+    position: absolute;
+    left: 0;
+    width: 75px;
+  }
+  &__item {
+    min-height: 90px;
+    margin-bottom: 20px;
+    padding: 0 115px 20px 115px;
+    position: relative;
+    @include bp(xs) {
+      padding-left: 90px;
+      padding-right: 0;
+    }
+    &:after {
+      background-color: $grey1;
+      bottom: 0;
+      content: '';
+      height: 1px;
+      left: 115px;
+      position: absolute;
+      right: 115px;
+      @include bp(xs) {
+        left: 0;
+        right: 0;
+      }
+    }
+    p {
+      color: $grey9;
+      margin-bottom: 0;
+      white-space: pre-wrap;
+    }
+    .hold-date {
+      strong,
+      span {
+        display: inline !important;
+        float: none !important;
+      }
+      span {
+        // border-left: 1px solid $grey3;
+        font-size: 0.938em;
+        line-height: 1.5em;
+        margin-left: 10px;
+        padding-left: 10px;
+        position: relative;
+        @include bp(xxs) {
+          border: none !important;
+          display: block !important;
+          margin-left: 0;
+          padding: 0;
+        }
+        &:first-child {
+          margin-left: 0;
+          padding-left: 0;
+        }
+        &:nth-child(2) {
+          &:before {
+            background-color: $grey3;
+            content: '';
+            height: 14px;
+            left: 0;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 2px;
+          }
+        }
+      }
+    }
+    &.right {
+      @include bp(xs) {
+        padding-left: 0;
+        padding-right: 90px;
+      }
+      p {
+        text-align: right;
+      }
+      .hold-date {
+        text-align: right;
+      }
+      .messages-box__user-img {
+        left: auto;
+        right: 0;
+      }
+    }
+  }
+  .hold-title {
+    margin-bottom: 0;
+    &:after {
+      content: none;
+    }
+  }
+}
+
+.messages-reply-box {
+  padding: 0 115px;
+  position: relative;
+  @include bp(xs) {
+    padding: 0;
+  }
+  .messages-box__user-img {
+    left: auto;
+    right: 0;
+    @include bp(xxs) {
+      display: none;
+    }
+  }
+  textarea {
+    background-color: $grey1;
+    border-radius: 0;
+    margin-bottom: 5px;
+    resize: vertical !important;
+  }
+}
+
+.messages-box {
+  .status-label {
+    color: $grey7;
+    text-align: center;
+    padding: 10px;
+  }
+}

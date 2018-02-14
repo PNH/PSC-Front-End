@@ -1,0 +1,56 @@
+<div id="main">
+  <dashboard-header title="Forums"></dashboard-header>
+  <div id="content" class="forums-main dashboard">
+    <div class="content-holder" block-ui="forumsLoading">
+      <div class="block big" dropdown-box ng-repeat="forum in $ctrl.forums | orderBy: '-created_at' track by forum.id" ng-class="{'open': $first}">
+        <div class="box light_bg">
+          <span class="dd-toggle"></span>
+          <div class="dd_title volatile">
+            {{forum.title}}
+          </div>
+          <div class="hold-count-info">
+            <div class="item">
+              <span>{{forum.post_count}}</span>
+              <span>Posts</span>
+            </div>
+            <div class="item">
+              <span>{{forum.topic_count}}</span>
+              <span>Topics</span>
+            </div>
+          </div>
+        </div>
+        <div class="dropdown-box">
+          <ol class="discussion-list" ng-if="forum.sub_forums.length > 0">
+            <li ng-repeat="subforum in forum.sub_forums | orderBy: '-created_at' track by subforum.id">
+              <a ui-sref="subforums({'subforumid': subforum.id})" class="clearfix">
+                <span class="discussion-list__title">
+                  {{subforum.title}}
+                </span>
+                <div class="hold-count-info clearfix">
+                  <div class="item">
+                    <span>{{subforum.post_count}}</span>
+                    <span>Posts</span>
+                  </div>
+                  <div class="item">
+                    <span>{{subforum.topic_count}}</span>
+                    <span>Topics</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ol>
+          <div class="pl-error__container" ng-if="!forum.sub_forums.length > 0">
+            <div class="pl-error">
+              <span class="pl-error__message">We're sorry, but there are no Sub-Forums available at this time. Please check back again soon.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pl-error__container" ng-if="!$ctrl.forums || !$ctrl.forums.length > 0">
+        <div class="pl-error">
+          <span class="pl-error__message">We're sorry, but there are no Forums available at this time. Please check back again soon.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

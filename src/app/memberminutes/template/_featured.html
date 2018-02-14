@@ -1,0 +1,35 @@
+<div class="prl-banner">
+  <div class="savvytimes-main__featured__featuredbg" style="background-image: url({{$ctrl.featured.banner}})"></div>
+  <div class="prl-banner__content">
+    <div class="heading-underline tiny">
+      <h2 class="prl-banner__title">{{$ctrl.featured.title}}</h2>
+    </div>
+    <h4 class="prl-banner__subtitle"></h4>
+    <div class="prl-banner__buttons">
+      <a class="btn btn-yellow" ng-href="{{$ctrl.featured.pdf_remote_url}}" target="_blank">READ DIGITAL VERSION</a>
+      <a class="btn btn-yellow" ng-href="{{$ctrl.featured.pdf}}" download>DOWNLOAD PDF</a>
+    </div>
+  </div>
+</div>
+<div class="savvytimes-main__featured__list__container clearfix">
+  <div class="savvytimes-main__featured__list__column" ng-show="$ctrl.featured.issue.length > 0">
+    <div class="savvytimes-main__featured__list__item">
+      <div class="content-list style1">
+        <h2 class="style1__title">{{$ctrl.featured.issue_title}}</h2>
+        <ul class="style1__list">
+          <li ng-repeat="issue in $ctrl.featured.issue">{{issue.title}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="savvytimes-main__featured__list__column" ng-show="$ctrl.featured.member_minute_sections.length > 0">
+    <div class="savvytimes-main__featured__list__item">
+      <div class="content-list style1">
+        <h2 class="style1__title">{{$ctrl.featured.memberminute_title}}</h2>
+        <ul class="style1__list">
+          <li ng-repeat="mm in $ctrl.featured.member_minute_sections"><a ui-sref="memberminutesdetail({id: mm.id})">{{mm.title}}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

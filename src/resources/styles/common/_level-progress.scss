@@ -1,0 +1,116 @@
+.level-progress {
+  text-align: center;
+  &__container {
+    display: inline-block;
+    font-size: 16px;
+    margin-bottom: 25px;
+    margin-left: 4px;
+    margin-right: 4px;
+    width: 180px;
+    svg {
+      cursor: pointer;
+      margin-bottom: 20px;
+      text {
+        font-family: 'Open Sans', sans-serif;
+        text-anchor: middle;
+        // alignment-baseline: central;
+        // dominant-baseline: central;
+        &.circle-label {
+          fill: #7c7c7c;
+          font-size: 80%;
+          font-weight: 100;
+        }
+        &.arc-label {
+          fill: #ffffff;
+          font-size: 48%;
+          font-weight: 600;
+          // letter-spacing: 1px;
+          text-transform: uppercase;
+          textpath {
+            // alignment-baseline: central;
+            // dominant-baseline: central;
+          }
+        }
+      }
+    }
+  }
+  &__progress {
+    border-radius: 5px;
+    color: $white;
+    cursor: pointer;
+    font-size: 1.250em;
+    margin: 0 auto;
+    padding: 8px 20px 8px 8px;
+    position: relative;
+    text-align: center;
+    width: 95px;
+    span.glyphicon {
+      font-size: 0.667em;
+      position: absolute;
+      right: 5px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+.pathway-container {
+  .level-progress {
+    height: 400px;
+    margin: 0 auto -38px;
+    position: relative;
+    width: 496px;
+    z-index: 1;
+    @include bp(xxs) {
+      height: 390px;
+      margin: 0 auto -12px;
+      // transform: translateX(-42%);
+      width: auto;
+    }
+    &__container {
+      height: auto;
+      margin: 0 !important;
+      position: absolute;
+      @include bp(xxs) {
+        height: 150px;
+        width: 150px;
+        // transform: scale(0.6);
+      }
+      &:nth-child(1) {
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      &:nth-child(2) {
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      &:nth-child(3) {
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      &:nth-child(4) {
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      svg {
+        margin-bottom: 20px;
+        text {
+          &.circle-label {
+            @include bp(xxs) {
+              font-size: 60%;
+            }
+          }
+          &.arc-label {
+            @include bp(xxs) {
+              font-size: 35%;
+            }
+          }
+        }
+      }
+    }
+  }
+}

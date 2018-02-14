@@ -1,0 +1,54 @@
+<div class="general-box prl-events">
+  <div class="main-container" block-ui="existingEventCalendarLoading">
+    <div class="pl-header clearfix">
+      <div class="hold-title prl-content-title">
+        <h2>{{$ctrl.contentTitle}}</h2>
+      </div>
+      <div class="prl-dropdown-list">
+        <div class="allgroups-header prl-dropdown">
+          <!-- Filter By: -->
+          Sort By:
+          <select ng-model="$ctrl.selectedMainCategory" ng-change="$ctrl.changeEventType('mainCat', $ctrl.selectedMainCategory); $ctrl.onEventCalendarMainCategorySelected($ctrl.selectedMainCategory)">
+            <option value='99999' ng-selected="true">All</option>
+            <option ng-repeat="mainCat in $ctrl.eventCalMainCategories" value="{{mainCat.id}}">{{mainCat.title}}</option>
+          </select>
+        </div>
+        <div class="allgroups-header prl-dropdown">
+          Sub Sort By:
+          <select ng-model="$ctrl.selectedSubCategory" ng-change="$ctrl.changeEventType('subCat', $ctrl.selectedSubCategory)">
+            <option value='99999' ng-selected="true">All</option>
+            <option ng-repeat="subCat in $ctrl.eventCalSubCategories" value="{{subCat.id}}">{{subCat.title}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="block-holder event-list clearfix" block-ui="existingEventCalendarLoading">
+      <div ng-repeat="eventDay in $ctrl.sortedEventCalendar" ng-if="$ctrl.sortedEventCalendar.length !== 0">
+        <div class="topic-box prl-event-item" ng-click="$ctrl.onEventItemClicked(eventDay.id, eventDay.statusLabel)">
+          <figure class="hold-img" style="background-image: url('{{eventDay.organizer.profileImage}}');"></figure>
+          <div class="hold-title line-l prl-subtitle">
+            <strong>{{eventDay.title}}</strong>
+          </div>
+          <span class="prl-date">{{eventDay.startDate | formatdate:4}}{{eventDay.startDate != eventDay.endDate ?  ' — ' + (eventDay.endDate | formatdate:4) : ""}} </span>
+          <div class="content-block answer-box__content prl-date event-address">{{eventDay.location.address}}</div>
+        </div>
+        <div ng-if="!$last" class="form-part-line prl-linebreak"></div>
+      </div>
+
+      <div class="pl-error__container" ng-if="$ctrl.sortedEventCalendar.length === 0">
+        <div class="pl-error">
+          <span class="pl-error__message" ng-if="$ctrl.sortedEventCalendar.length === 0">No events were found. Please try broadening your search.</span>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-yellow btn-submit pull-right" ng-disabled="$ctrl.isEventCalendarLoading || $ctrl.hasEventCalendarReachedEnd"
+      ng-click="$ctrl.viewMoreEventCalendar()" ng-class="{'processing': $ctrl.isEventCalendarLoading}">
+    <div class="bs-process-bar uil-ring-css yellow">
+      <div></div>
+    </div>
+    <span class="bs-login-text">VIEW MORE</span>
+  </button>
+  </div>
+  <div ng-if="!$ctrl.isCountryLoading" ng-include src="'app/events/template/_sidebar.html'"></div>
+</div>

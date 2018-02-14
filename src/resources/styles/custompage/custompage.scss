@@ -1,0 +1,17 @@
+.prl-custom-page-attachments-content {
+  background-color: $content-holder-bg;
+  float: left;
+  // min-height: 150px;
+  padding: 40px;
+  margin-top: 20px;
+  width: 100%;
+
+  .style1__list {
+    display: inline-block;
+    width: 100%;
+  }
+  li {
+    width: 50%;
+    float: left;
+  }
+}

@@ -1,0 +1,13 @@
+<div class="user-connect__item">
+  <div class="user-connect__img" style="background-image: url('{{connectionCtrl.user.profileImage}}')" ng-click="connectionCtrl.goToWall(connectionCtrl.user.id)" ng-class="{'clickable': connectionCtrl.user.id > 0}"></div>
+  <span class="user-connect__name" ng-click="connectionCtrl.goToWall(connectionCtrl.user.id)" ng-class="{'clickable': connectionCtrl.user.id > 0}">{{connectionCtrl.user.firstName + ' ' + connectionCtrl.user.lastName}}</span>
+  <div class="user-connect__btncontainer">
+    <button class="btn btn-sm btn-notclickable connection-label" disabled="true" ng-if="!connectionCtrl.action && connectionCtrl.user.connectionStatus.status === 1">Pending</button>
+    <button class="btn btn-sm btn-yellow btn-notclickable" disabled="true" ng-if="!connectionCtrl.disconnect && connectionCtrl.user.connectionStatus.status === 2">Connected</button>
+    <button class="btn btn-sm btn-grey btn-busy" ng-click="connectionCtrl.deleteInvitation(connectionCtrl.id)" ng-disabled="connectionCtrl.isDeletionProcessing" ng-if="connectionCtrl.delete && connectionCtrl.user.connectionStatus.status === 1">Delete Invitation</button>
+    <button class="btn btn-sm btn-grey btn-busy" ng-click="connectionCtrl.invitationAction(connectionCtrl.id, 2)" ng-disabled="connectionCtrl.isAcceptProcessing" ng-if="connectionCtrl.action && connectionCtrl.user.connectionStatus.status === 1">Connect</button>
+    <button class="btn btn-sm btn-grey btn-busy" ng-click="connectionCtrl.invitationAction(connectionCtrl.id, 3)" ng-disabled="connectionCtrl.isDeclineProcessing" ng-if="connectionCtrl.action && connectionCtrl.user.connectionStatus.status === 1">Delete</button>
+    <button class="btn btn-sm btn-grey btn-busy" ng-click="connectionCtrl.disconnectConnection(connectionCtrl.id)" ng-disabled="connectionCtrl.isDisconnectProcessing" ng-if="connectionCtrl.disconnect && connectionCtrl.user.connectionStatus.status === 2">Disconnect</button>
+    <button class="btn btn-sm btn-grey btn-busy" ng-click="connectionCtrl.connectionConnection(connectionCtrl.id)" ng-disabled="connectionCtrl.isConnectProcessing" ng-if="connectionCtrl.connect && connectionCtrl.user.connectionStatus.status === 0">Connect</button>
+  </div>
+</div>

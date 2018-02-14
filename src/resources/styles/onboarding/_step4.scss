@@ -1,0 +1,202 @@
+#step4 {
+  position: relative;
+}
+
+.po-s4-pathway {
+  background-image: url('../resources/images/pathway-bg.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; // Pathway overview container
+  &__container {
+    padding: 60px 50px;
+  } // Pathway item
+  &__item {
+    margin-left: -10px;
+    margin-right: -10px; // Item heading
+    &__heading {
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      margin-bottom: 10px;
+      font-size: 1.563em;
+      color: $white;
+      text-align: center;
+      line-height: 1.42857143;
+      &.red {
+        background-color: $po-s4-pathway-heading-red;
+      }
+      &.blue {
+        background-color: $po-s4-pathway-heading-blue;
+      }
+      &.green {
+        background-color: $po-s4-pathway-heading-green;
+      }
+      &.grey {
+        background-color: $po-s4-pathway-heading-grey;
+      }
+    } // Item label
+    &__savvys {
+      margin: 0;
+      padding: 0;
+      li {
+        background-color: transparentize($white, 0.6);
+        padding: 5px 15px; // display: flex;
+        // align-items: center;
+        margin-bottom: 10px;
+      }
+      img {
+        margin-right: 15px;
+        width: 58px !important;
+        height: 58px !important;
+      }
+      &__label {
+        background-color: $po-s4-pathway-item-label-bg;
+        color: $po-s4-pathway-item-label-text;
+        position: relative;
+        font-size: 0.938em;
+        border-radius: 5px; // padding: 3px 34px 3px 15px;
+        padding: 3px 15px;
+        width: calc(100% - 74px);
+        margin-top: 17px;
+        float: right;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        span {
+          position: absolute;
+          right: 10px;
+          top: 50%;
+          transform: translateY(-50%);
+          color: $po-s4-pathway-item-label-text;
+          font-size: 0.750em;
+          display: none;
+        }
+      }
+    }
+  } // Pathway footer
+  &__footer {
+    border-top: 1px solid transparentize($white, 0.8);
+    padding: 10px;
+    ul {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @include bp(sm) {
+        display: block;
+      }
+      li {
+        padding: 20px;
+        list-style: none;
+        color: $po-s4-pathway-footer-text;
+        font-size: 1.250em;
+        position: relative;
+        @include bp(xxs) {
+          font-size: 0.875em;
+          padding: 5px;
+        }
+        img {
+          @include bp(sm) {
+            display: block;
+            margin: 0 auto;
+          }
+          @include bp(xxs) {
+            display: block;
+            margin: 0 auto;
+            width: 45px;
+          }
+        }
+        @include bp(sm) {
+          width: 25%;
+          text-align: center;
+          float: left;
+          margin-bottom: 5px;
+        }
+        &:first-child {
+          @include bp(sm) {
+            display: block;
+            width: 100%;
+            float: none;
+            text-align: center;
+            padding-bottom: 5px;
+          }
+          &::before {
+            top: 10px;
+            @include bp(sm) {
+              background-color: transparent;
+            }
+          }
+        }
+        &::before {
+          content: '';
+          position: absolute;
+          right: 0;
+          height: 40px;
+          width: 1px;
+          top: 30px;
+          // transform: translateY(-50%);
+          background-color: transparentize($white, 0.6);
+        }
+        &.savvys {
+          font-size: 1.375em;
+          color: $yellow;
+          font-weight: 600;
+          span.glyphicon {
+            color: transparentize($white, 0.5);
+            cursor: pointer;
+            font-size: 0.875em;
+            position: relative;
+            top: -8px;
+          }
+        }
+        &:last-child::before {
+          width: 0;
+        }
+      }
+    }
+  }
+}
+
+.savvy-popup {
+  ul.savvies {
+    list-style: initial;
+    margin-top: 15px;
+    li {
+      margin-bottom: 10px;
+      span.title {
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.step4__description {
+  line-height: 1.35em;
+  margin-top: 40px !important;
+  text-align: justify;
+}
+
+.po-s4-pathway.small {
+  &__footer {
+    ul {
+      display: block;
+      li {
+        width: 25%;
+        text-align: center;
+        float: left;
+        margin-bottom: 5px;
+        &:first-child {
+          display: block;
+          width: 100%;
+          float: none;
+          text-align: center;
+          padding-bottom: 5px;
+        }
+        img {
+          display: block;
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+}

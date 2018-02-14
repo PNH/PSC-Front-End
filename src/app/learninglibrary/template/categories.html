@@ -1,0 +1,74 @@
+<div id="main">
+  <dashboard-header title="Learning Library"></dashboard-header>
+  <div id="content">
+    <div class="forum-content library">
+      <div class="holder">
+        <div class="hold-title line-l">
+          <h2>Featured Resources</h2>
+        </div>
+        <div class="hold-form">
+          <form name="searchForm">
+            <fieldset>
+              <input-dropdown
+              input-name="query"
+              ng-model-options="{ debounce: 250 }"
+              filter-list-method="$ctrl.onSearch(searchForm.query.$viewValue)"
+              input-placeholder="Search Learning Library"
+              selected-item="$ctrl.selectedDropdownItem"
+              default-dropdown-items="$ctrl.dropdownItems"
+              allow-custom-input="true"
+              id="ll-search__input" required>
+              </input-dropdown>
+              <!-- <input type="text" placeholder="Search Learning  Library" ng-model="query"> -->
+              <button type="submit" ng-if="searchForm.query.$viewValue" ui-sref="library-search({query: searchForm.query.$viewValue})" class="search-btn"></button>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+      <div class="block-holder" ng-if="$ctrl.featured !== null">
+        <div class="video-container" block-ui="featuredLoading" ng-if="$ctrl.featured.length > 0">
+          <ul class="libary-video-list" block-ui="featuredloading">
+            <li ng-repeat="(feature_index, feature) in $ctrl.featured">
+              <div class="prl-player-thumb__container" style="background-image: url('{{feature.thumbnail}}');">
+                <add-to-playlist ng-if="$ctrl.userPlaylist && $ctrl.addtoplaylistPopupClicked" show="$ctrl.triggerCtrl" popup-toggle="$ctrl.addtoplaylistPopupClicked" add-to-playlist="$ctrl.onAddToPlaylist" user-playlists="$ctrl.userPlaylist"></add-to-playlist>
+                <span class="prl__player__playlist__addtoplaylist prl-addtoplaylist-icon" ng-click="$ctrl.triggerUserPlaylist(feature, feature.playlist)">
+                  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </span>
+
+                <!--<div class="prl-player-thumb__overlay"></div>-->
+                <div class="prl-player-thumb__play small" data-toggle="modal" data-target="#videoModal" ng-click="$ctrl.onVideoItemClicked(feature_index)">
+                  <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                </div>
+                <div class="prl-player-thumb__details">
+                  <span class="title">{{feature.name}}</span>
+                  <span class="duration">{{feature.duration | duration}}</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="search-result-container search-result-container__error" ng-if="!$ctrl.featured.length > 0">
+          <p>There are no featured resources.</p>
+        </div>
+      </div>
+      <div class="browse-box" ng-repeat="(category_index, category) in $ctrl.categories">
+        <div class="hold-browse-title">
+          <span class="title">Browse by <span style="text-transform: capitalize;">{{category_index | humanize}}</span></span>
+          <span class="items">{{category.list.length}} items</span>
+        </div>
+        <div class="owl-carousel" ng-if="category" owl-carousel-wrap>
+          <div class="item" ng-repeat="(subcategory_index, subcategory) in category.list" ng-click="$ctrl.onCategoryClicked(category_index, subcategory_index)">
+            <div class="hold-img" style="background-image: url('{{subcategory.thumbnail}}')"></div>
+            <span class="title">{{subcategory.title}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="loading" ng-if="$ctrl.categories === null">
+        <div class='uil-ring-css yellow'>
+          <div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div ng-include="'app/learninglibrary/template/_popups.html'"></div>

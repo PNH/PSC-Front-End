@@ -1,0 +1,111 @@
+.bgColor {
+  background-color: white;
+  padding-bottom: 20px;
+}
+
+.hold-program {
+  background: none;
+  overflow: hidden;
+  padding-top: 0;
+  .horse-profile-tabs {
+    // border-bottom: 2px solid #fff;
+    li {
+      width: 33.33%;
+      background: #555454;
+      border-radius: 0 !important;
+      width: 33.33333333333%;
+      a {
+        font-size: 25px;
+        line-height: 30px;
+        font-family: $OSLight;
+        color: #e4e5e6;
+        text-align: center;
+        border-right: 1px solid #5f5f5f !important;
+        border-radius: 0 !important;
+        padding: 9px 15px;
+        margin: 0;
+        &:hover {
+          background: #555454;
+          // border: none;
+        }
+        @include bp(xs) {
+          font-size: 15px;
+        }
+      }
+      &:last-child {
+        a {
+          border: none !important;
+        }
+      }
+      &.active {
+        background: #ffc745;
+        a {
+          color: #614a14;
+          background: #ffc745;
+        }
+      }
+    }
+  }
+  .horse-profile-content {
+    .tab-pane {
+      background-size: cover;
+      padding: 0;
+    }
+  }
+  &.blog {
+    padding-bottom: 50px;
+    .profile-content .tab-pane {
+      background: none;
+      padding: 0;
+    }
+  }
+}
+
+.hold-program .horse-profile-content .tab-pane {
+  padding-bottom: 0;
+}
+
+.horse-profile-content {
+  .tab-pane {
+    background-size: cover;
+    // padding: 75px 0 0;
+  }
+  &.blog {
+    padding-bottom: 50px;
+    .horse-profile-content .tab-pane {
+      background: none;
+      padding: 0;
+    }
+  }
+}
+
+.hold-program .tab-content .tab-pane {
+  padding-bottom: 0;
+}
+
+#main {
+  .holder {
+    .hold-program {
+      .horse-profile-content {
+        .tab-pane {
+          background-color: #f1f2f6;
+          background-image: none;
+          padding-bottom: 30px;
+          max-height: none;
+          width: 100%;
+          &:after {
+            content: '';
+            display: block;
+            clear: both;
+          }
+        }
+      }
+    }
+  }
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+  border: none;
+}

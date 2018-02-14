@@ -1,0 +1,33 @@
+<div id="main" class="prl-groups-detail">
+  <dashboard-header title="Groups"></dashboard-header>
+  <div block-ui="groupsPostsLoading">
+    <div class="forum-content main-container prl-groups-detail__replycontainer" ng-include="'app/groups/template/_creategrouppost.html'" ng-if="$ctrl.isMember"></div>
+  <div class="main-container clearfix">
+    <div class="content-holder forum-content" ng-if="$ctrl.isMember">
+      <div class="block-holder forum-item prl-groups-detail__posts">
+        <div class="topic-box comments-box prl-groups-detail__postbox" block-ui="postLoading">
+          <group-post ng-repeat="post in $ctrl.posts | orderBy: '-created_at' track by post.id" post="post" like="$ctrl.likePost" comment="$ctrl.commentPost"
+            get-comments="$ctrl.getComments" edit-post="$ctrl.editPost" delete-post="$ctrl.deletePost"  edit-comment="$ctrl.editComment" has-commented="$ctrl.hasCommented" delete-comment="$ctrl.deleteComment" root-access="$ctrl.rootAccess"
+            share-playlist-callback="$ctrl.playlistShared"></group-post>
+        </div>
+      </div>
+    </div>
+    <div class="pl-error__container" ng-if="!$ctrl.posts.length > 0 && $ctrl.isMember">
+      <div class="pl-error">
+        <span class="pl-error__message">Be the first to start a conversation in your group!</span>
+      </div>
+    </div>
+    <div class="pl-error__container" ng-if="!$ctrl.isMember">
+      <div class="pl-error">
+        <span class="pl-error__message">Seems like you are not a member in this group. <a ng-click="$ctrl.joinNow($ctrl.groupId)">Join now.</a></span>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-yellow btn-submit pull-right" ng-disabled="$ctrl.postLoadIsProcessing || $ctrl._postReachedEnd" ng-click="$ctrl.onLoadMorePostsClicked()" ng-class="{'processing': $ctrl.postLoadIsProcessing}" ng-if="$ctrl.isMember">
+      <div class="bs-process-bar uil-ring-css yellow">
+        <div></div>
+      </div>
+      <span class="bs-login-text">VIEW MORE</span>
+    </button>
+  </div>
+  </div>
+</div>

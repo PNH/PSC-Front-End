@@ -1,0 +1,28 @@
+<div class="modal fade pathway-popup" tabindex="-1" role="dialog" id="myModal">
+  <div class="modal-dialog clearfix" role="document">
+    <div class="modal-content clearfix">
+      <div class="pathway-popup__badge-container">
+        <div class="pw-badge" ng-class="{'blue': $ctrl.level.color == '#3080a5', 'red': $ctrl.level.color == '#e4535a', 'green': $ctrl.level.color == '#398f62', 'grey': $ctrl.level.color == '#000000', 'completed': $ctrl.lessonCategory.percentageComplete === 100}">
+          <div class="pw-badge__content">
+            <div class="badge-icon grey" ng-class="{'white': $ctrl.lessonCategory.percentageComplete === 100}"></div>
+            <span class="savvy">{{$ctrl.lessonCategory.savvy.title}}</span>
+            <span class="category">{{$ctrl.lessonCategory.title}}</span>
+          </div>
+          <div class="arrow-down"></div>
+        </div>
+      </div>
+      <div class="pathway-popup__lesson-container" block-ui="lessonsLoading">
+        <a href="" ng-repeat="(lesson_index, lesson) in $ctrl.lessons | filter : 'fast_track' | limitTo : 1" ng-click="$ctrl.onLessonClicked(lesson.id)" class="button">{{lesson.title}}<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
+        <ul class="pathway-popup__lessons" ng-if="$ctrl.lessons">
+          <li ng-repeat="(lesson_index, lesson) in $ctrl.lessons | filter : 'default'">
+            <a href="" ng-click="$ctrl.onLessonClicked(lesson.id)">{{lesson.title}}<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
+          </li>
+        </ul>
+      </div>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

@@ -1,0 +1,38 @@
+<div class="profile-preview">
+  <label>{{::title}} </label>
+  <div class="profile-frame">
+    <img id="profilePreview" for="profielpic" src="{{image}}" alt="Profile Picture" class="img-rounded profiel-image-preview"
+    />
+    <input id="profileSelector" type="file" accept="image/*" image="image" style="display:none;" />
+  </div>
+  <small>{{::dimensions}}</small>
+</div>
+<div id="updateProfilePicture" class="modal fade login-popup" tabindex="100" role="dialog" on-close="">
+  <div class="modal-dialog login" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="croppie-container">
+          <ng-croppie src="inputImg" ng-model="outputImg" boundry="{w: 300, h: 300}" viewport="{w: 200, h: 200}" orientation="false"></ng-croppie>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <button ng-disabled="!outputImg || savingProcessing" ng-click="updateProfilePic(outputImg)" class="btn btn-yellow pull-right btn-submit"
+              type="button" ng-class="{'processing': savingProcessing}">
+              <div class="bs-process-bar uil-ring-css yellow">
+                <div></div>
+              </div>
+              <span class="bs-login-text">
+                SAVE
+              </span>
+            </button>
+          </div>
+          <div class="col-md-6">
+            <button ng-click="closePopup()" class="btn btn-grey pull-right btn-submit" type="button">
+              CANCEL
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

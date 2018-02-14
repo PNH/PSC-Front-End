@@ -1,0 +1,28 @@
+<div id="main" class="profile-pages" block-ui="userLoading">
+  <dashboard-header title="Horse Profile" external-user="$ctrl.externalUser" ng-if="$ctrl.hasUserLoaded" connect="$ctrl.connect" disconnect="$ctrl.disconnect" on-horse-toggle="$ctrl.changeHorse"></dashboard-header>
+  <div class="holder ">
+    <div class="hold-program blog">
+      <ul class="nav nav-tabs horse-profile-tabs" role="tablist" multiple="">
+        <li role="presentation" ui-sref="horseprofile({userid: $ctrl.userId, horseid: $ctrl.horse.id, type: '0'})"  ng-class="{'active': $ctrl.horseTabType === '0'}"><a href="" data-target="#tab1" aria-controls="latest" role="tab" data-toggle="tab">Profile</a></li>
+        <li role="presentation" ui-sref="horseprofile({userid: $ctrl.userId, horseid: $ctrl.horse.id, type: '1'})" ng-class="{'active': $ctrl.horseTabType === '1'}"><a href="" data-target="#tab2" aria-controls="popular" role="tab" data-toggle="tab">Progress</a></li>
+        <li role="presentation" ui-sref="horseprofile({userid: $ctrl.userId, horseid: $ctrl.horse.id, type: '2'})"  ng-class="{'active': $ctrl.horseTabType === '2'}"><a href="" data-target="#tab3" aria-controls="" role="tab" data-toggle="tab">Health</a></li>
+      </ul>
+      <div class="tab-content horse-profile-content">
+        <div role="tabpanel" class="tab-pane " ng-class="{'active': $ctrl.horseTabType === '0'}" id="tab1">
+          <div ng-include src="'app/publichorseprofile/template/_horseinfo.html'"> </div>
+          <!-- tab pane 1 ends -->
+        </div>
+        <div role="tabpanel" class="tab-pane  " ng-class="{'active': $ctrl.horseTabType === '1'}" id="tab2">
+          <div ng-include src="'app/publichorseprofile/template/_progress.html'"> </div>
+          <!-- tab pane 2 ends -->
+        </div>
+        <div role="tabpanel" class="tab-pane  " ng-class="{'active': $ctrl.horseTabType === '2'}" id="tab3">
+          <div ng-include src="'app/publichorseprofile/template/_health.html'"> </div>
+          <!-- tab pane 3 ends -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <multi-upload files="$ctrl.attachedFiles" controls="$ctrl.uploadCtrl"></multi-upload>

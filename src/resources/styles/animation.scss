@@ -1,0 +1,82 @@
+/* slide out to the left */
+
+@keyframes slideOutLeft {
+  to {
+    transform: translateX(-200%);
+  }
+}
+
+@-moz-keyframes slideOutLeft {
+  to {
+    -moz-transform: translateX(-200%);
+  }
+}
+
+@-webkit-keyframes slideOutLeft {
+  to {
+    -webkit-transform: translateX(-200%);
+  }
+}
+
+
+/* slide in from the right */
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(200%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@-moz-keyframes slideInRight {
+  from {
+    -moz-transform: translateX(200%);
+  }
+  to {
+    -moz-transform: translateX(0);
+  }
+}
+
+@-webkit-keyframes slideInRight {
+  from {
+    -webkit-transform: translateX(200%);
+  }
+  to {
+    -webkit-transform: translateX(0);
+  }
+}
+
+#form-views.ng-enter,
+#form-views.ng-leave {
+  // position: absolute;
+  // left: 30px;
+  // right: 30px;
+  opacity: 0;
+  transition: all 300ms ease-in-out;
+}
+
+/* enter animation */
+#form-views.ng-enter {
+  // -webkit-animation: slideInRight 0.5s both ease;
+  // -moz-animation: slideInRight 0.5s both ease;
+  // animation: slideInRight 0.5s both ease;
+  opacity: 1;
+}
+
+/* leave animation */
+#form-views.ng-leave {
+  // -webkit-animation: slideOutLeft 0.5s both ease;
+  // -moz-animation: slideOutLeft 0.5s both ease;
+  // animation: slideOutLeft 0.5s both ease;
+  position: absolute;
+  opacity: 0;
+}
+
+#signup-form {
+  position: relative;
+  min-height: 300px;
+  /*overflow:hidden;*/
+  /*padding:30px;*/
+}

@@ -1,0 +1,73 @@
+.subtab-container {
+  padding: 30px 30px;
+  padding-bottom: 0px !important;
+  background-color: white;
+  text-align: center;
+  .nav-tabs {
+    width: 80%;
+    border-bottom: none;
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+    li {
+      // width: calc((100%/4) - 3%);
+      width: calc(24%);
+      background: #e4e5e6;
+      display: inline-block;
+      border-radius: 0 !important;
+      margin-bottom: 0;
+      text-align: center;
+      &:first-child {
+        border-radius: 4px 0 0 4px !important;
+        @include bp(xxs) {
+          border-radius: 4px 4px 0 0 !important;
+        }
+      }
+      &:last-child {
+        border-radius: 0 4px 4px 0 !important;
+        @include bp(xxs) {
+          border-radius: 0 0 4px 4px !important;
+        }
+      }
+      &:not(:first-child) {
+        // margin-left: 4%;
+        margin-left: 2px;
+        @include bp(xxs) {
+          margin-left: 0;
+        }
+      }
+      a {
+        font-size: 15px;
+        line-height: 30px;
+        font-family: $OSLight;
+        color: black;
+        text-align: center;
+        border: none;
+        padding: 4px 8px;
+        border-radius: 0;
+        &:hover {
+          background: #e4e5e6;
+          margin: 0 20px;
+          margin-left: 18px;
+          text-align: center;
+          border: none;
+        }
+      }
+      &.active {
+        background: #ffc745;
+        a {
+          color: #614a14;
+          background: #ffc745;
+        }
+      }
+      @include bp(sm) {
+        float: none;
+        min-width: 100%;
+      }
+      @include bp(xs) {
+        float: none;
+        min-width: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+<div class="my-groups" block-ui="myGroupsLoading">
+  <div class="groups-banner" ng-if="!$ctrl.myGroups.length > 0">
+    <div class="groups-banner__text">
+      <h2>Are you ready to join a group of like-minded horse lovers?</h2>
+      <p>Could you benefit from talking with someone who has been in your shoes? Maybe you'd like to share stories and catch up with other members who have the same interests as you! Find existing groups by using the search bar above. If you don't find the group around the topic you are looking for, create the group and share it with the community. Whatever your passion, the Savvy Club has room for your group here! We have listed some of the most active groups to get you started.</p>
+      <div class="groups-banner__underline"></div>
+    </div>
+  </div>
+  <div class="tab-pane__container" ng-if="$ctrl.myGroups.length > 0">
+    <div class="groups clearfix">
+      <group-item ng-repeat="group in $ctrl.myGroups | orderBy: '-updated_at' track by group.id" details="group" join="$ctrl.joinGroup" leave="$ctrl.leaveGroup" delete="$ctrl.deleteGroup" edit="$ctrl.updateGroup"></group-item>
+    </div>
+  </div>
+  <div block-ui="allGroupsLoading">
+    <div class="tab-pane__container" ng-if="!$ctrl.myGroups.length > 0 && $ctrl.allGroups.length > 0">
+      <div class="groups clearfix">
+        <group-item ng-repeat="group in $ctrl.allGroups | orderBy: '-updated_at' | limitTo: 8 track by group.id" details="group" join="$ctrl.joinGroup" leave="$ctrl.leaveGroup" delete="$ctrl.deleteGroup" edit="$ctrl.updateGroup"></group-item>
+      </div>
+    </div>
+  </div>
+  <div class="pl-error__container" ng-if="!$ctrl.myGroups.length > 0 && !$ctrl.allGroups.length > 0">
+    <div class="pl-error">
+      <span class="pl-error__message">Looks like there are no groups. <a data-toggle="modal" data-target="#createGroup">Create one now!</a></span>
+    </div>
+  </div>
+</div>
+<button type="submit" class="btn btn-yellow btn-submit pull-right" ng-disabled="$ctrl.myIsProcessing || $ctrl._myReachedEnd" ng-click="$ctrl.onLoadMyGroupsClicked()" ng-class="{'processing': $ctrl.myIsProcessing}" ng-show="$ctrl.myGroups.length > 0">
+  <div class="bs-process-bar uil-ring-css yellow">
+    <div></div>
+  </div>
+  <span class="bs-login-text">VIEW MORE</span>
+</button>

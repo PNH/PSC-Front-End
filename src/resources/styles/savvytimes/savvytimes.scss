@@ -1,0 +1,175 @@
+@import 'detail';
+.savvytimes-main {
+  // Featured section
+  &__featured {
+    background-color: $white;
+    // padding-left: 0;
+    // padding-right: 0;
+    &__list {
+      &__container {
+        display: flex;
+        margin-left: -12px;
+        margin-right: -12px;
+        @include bp(xxs) {
+          display: block;
+        }
+      }
+      &__column {
+        align-items: stretch;
+        float: left;
+        padding: 0 12px;
+        width: 50%;
+        @include bp(xxs) {
+          float: none;
+          margin-bottom: 20px;
+          width: 100%;
+        }
+      }
+      &__item {
+        background-color: $content-holder-bg;
+        height: 100%;
+        min-height: 195px;
+        padding: 40px;
+      }
+    }
+    .prl-banner {
+      background: none;
+    }
+    &__featuredbg {
+      background-color: #f1f2f6;
+      background-image: url(../resources/images/body-bg.jpg);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      bottom: 0;
+      filter: brightness(50%) contrast(60%);
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+  // Main content
+  &__content {
+    &__left,
+    &__right {
+      float: left;
+      position: relative;
+      @include bp(xs) {
+        float: none;
+      }
+    }
+    &__left {
+      padding-right: 40px;
+      width: 75%;
+      @include bp(xs) {
+        margin-bottom: 30px;
+        padding-right: 0;
+        width: 100%;
+      }
+    }
+    &__right {
+      width: 25%;
+      @include bp(xs) {
+        width: 100%;
+      }
+      .dropdown-box {
+        padding: 0 40px;
+      }
+      h2 {
+        margin-top: 0;
+      }
+    }
+  }
+  &__savvy {
+    background-color: $white;
+    margin-bottom: 15px;
+    padding-left: 250px;
+    position: relative;
+    width: 100%;
+    @include bp(xs) {
+      padding-left: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+    &__thumb {
+      height: 100%;
+      left: 0;
+      position: absolute;
+      @include bp(xs) {
+        position: relative;
+        width: 100%;
+      }
+      .prl-banner {
+        align-items: center;
+        background: none;
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        margin-bottom: 0;
+        padding: 30px 15px;
+        width: 250px;
+        @include bp(xs) {
+          width: 100%;
+        }
+        &__title {
+          font-weight: 300;
+        }
+        .btn {
+          margin: 5px 5px 0 5px;
+          min-width: 90px;
+        }
+        &__bg {
+          background-color: #f1f2f6;
+          background-image: url(../resources/images/body-bg.jpg);
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+          // bottom: 0;
+          filter: grayscale(100%) brightness(25%);
+          left: 0;
+          position: absolute;
+          right: 0;
+          height: 195px;
+          top: 50%;
+          transform: translateY(-50%);
+          @include bp(xs) {
+            height: 100%;
+          }
+        }
+      }
+    }
+    &__content {
+      float: left;
+      min-height: 195px;
+      padding: 10px;
+      width: 100%;
+      @include bp(xxs) {
+        min-height: 0px;
+      }
+      &__col {
+        float: left;
+        padding: 10px;
+        width: 50%;
+        @include bp(xxs) {
+          float: none;
+          padding: 10px;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.savvytimes-pages-top {
+  @include bp(xs) {
+    margin-top: 130px !important;
+  }
+  @include bp(xsml) {
+    margin-top: $mainTopMargin !important;
+  }
+  @include bp(xxs) {
+    margin-top: $mainTopMargin + -20px !important;
+  }
+}

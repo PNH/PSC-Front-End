@@ -1,0 +1,23 @@
+<div id="main" class="prl-groups-detail prl-wall" block-ui="userLoading">
+  <dashboard-header title="{{$ctrl.externalUser.first_name ? $ctrl.externalUser.first_name + '\'s Wall' : 'Wall'}}" external-user="$ctrl.externalUser" ng-if="$ctrl.hasUserLoaded" connect="$ctrl.connect" disconnect="$ctrl.disconnect"></dashboard-header>
+  <div class="holder">
+    <div class="hold-program blog prl-wall__wrapper">
+      <div class="prl-wall__content">
+        <ul class="nav nav-tabs profile-tabs" role="tablist">
+          <li role="presentation" ng-class="{'active': $ctrl.wallType === 'my'}"><a href="" data-target="#tab1" aria-controls="latest" role="tab" data-toggle="tab" ng-click="$ctrl.loadPersonalWall()">{{$ctrl.externalUser.first_name ? $ctrl.externalUser.first_name + "'s Wall" : 'My Wall'}}</a></li>
+          <li role="presentation" ng-class="{'active': $ctrl.wallType === 'parelli'}"><a href="" data-target="#tab2" aria-controls="latest" role="tab" data-toggle="tab" ng-click="$ctrl.loadPublicWall()">Live Wall</a></li>
+        </ul>
+        <div class="tab-content profile-content">
+          <div class="main-container prl-groups-detail__replycontainer" ng-include="'app/wall/template/_createwallpost.html'"></div>
+          <div role="tabpanel" class="tab-pane" ng-class="{'active': $ctrl.wallType === 'my'}" id="tab1">
+            <div ng-include src="'app/wall/template/_posts.html'"></div>
+          </div>
+          <div role="tabpanel" class="tab-pane" ng-class="{'active': $ctrl.wallType === 'parelli'}" id="tab2">
+            <div ng-include src="'app/wall/template/_parelliwall.html'"></div>
+          </div>
+        </div>
+      </div>
+      <aside class="prl-wall__sidebar" ng-include src="'app/wall/template/_sidebar.html'"></aside>
+    </div>
+  </div>
+</div>

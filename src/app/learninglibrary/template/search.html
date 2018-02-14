@@ -1,0 +1,109 @@
+<div id="main">
+  <dashboard-header title="Learning Library"></dashboard-header>
+  <div id="content">
+    <div class="forum-content library search">
+      <div class="holder">
+        <div class="hold-title line-l">
+          <h2>Search Results</h2>
+        </div>
+        <div class="hold-form">
+          <form name="searchForm">
+            <fieldset>
+              <input-dropdown input-name="query" ng-model-options="{ debounce: 250 }" filter-list-method="$ctrl.onSearch(searchForm.query.$viewValue)"
+                input-placeholder="Search Learning  Library" selected-item="$ctrl.selectedDropdownItem" default-dropdown-items="$ctrl.dropdownItems"
+                allow-custom-input="true"
+                id="ll-search__input">
+              </input-dropdown>
+              <button type="submit" ng-if="searchForm.query.$viewValue" ui-sref="library-search({query: searchForm.query.$viewValue})" class="search-btn"></button>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+
+      <div class="search-result__container" ng-if="($ctrl.results.videos.length > 0 || $ctrl.results.audios.length > 0 || $ctrl.results.documents.length > 0) && $ctrl.results !== null ">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" ng-class="{active: $ctrl.category === 'MP4'}"><a data-target="#videos" aria-controls="videos" role="tab" data-toggle="tab">Videos <span class="search-result__count" ng-show="$ctrl.results.videos.length > 0">{{$ctrl.results.videos.length}}</span></a></li>
+          <li role="presentation" ng-class="{active: $ctrl.category === 'MP3'}"><a data-target="#audios" aria-controls="audios" role="tab" data-toggle="tab">Audio <span class="search-result__count" ng-show="$ctrl.results.audios.length > 0">{{$ctrl.results.audios.length}}</span></a></li>
+          <li role="presentation" ng-class="{active: $ctrl.category === 'DOC'}"><a data-target="#documents" aria-controls="documents" role="tab" data-toggle="tab">Documents <span class="search-result__count" ng-show="$ctrl.results.documents.length > 0">{{$ctrl.results.documents.length}}</span></a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane fade in" ng-class="{'in active': $ctrl.category === 'MP4'}" id="videos">
+            <div class="block-holder">
+              <div class="search-result-container">
+                <ul class="ll-detail-document__container clearfix" ng-if="$ctrl.results.videos.length > 0">
+                  <li ng-repeat="(video_index, video) in $ctrl.results.videos" ng-class="{'error':  video.path === '#error' || video.path === '#processing'}">
+                    <a href="" ng-click="$ctrl.onVideoItemClicked(video_index)">
+                      <div class="ll-detail-document__content file-type-icon vid">
+                        {{video.name}}
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+                <div class="search-result-container search-result-container__error" ng-if="!$ctrl.results.videos.length > 0">
+                  <p>There are no videos for "{{$ctrl.query}}" criteria.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div role="tabpanel" class="tab-pane fade" ng-class="{'in active': $ctrl.category === 'MP3'}" id="audios">
+            <div class="block-holder">
+              <div class="search-result-container">
+                <ul class="ll-detail-document__container clearfix" ng-if="$ctrl.results.audios.length > 0">
+                  <li ng-repeat="(audio_index, audio) in $ctrl.results.audios" ng-class="{'error':  audio.path === '#error' || audio.path === '#processing'}">
+                    <a href="" ng-click="$ctrl.onAudioItemClicked(audio_index)">
+                      <div class="ll-detail-document__content file-type-icon aud">
+                        {{audio.name}}
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+                <div class="search-result-container search-result-container__error" ng-if="!$ctrl.results.audios.length > 0">
+                  <p>There are no audio for "{{$ctrl.query}}" criteria.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div role="tabpanel" class="tab-pane fade" ng-class="{'in active': $ctrl.category === 'DOC'}" id="documents">
+            <div class="block-holder">
+              <div class="search-result-container">
+                <ul class="ll-detail-document__container clearfix" ng-if="$ctrl.results.documents.length > 0">
+                  <li ng-repeat="(document_index, document) in $ctrl.results.documents">
+                    <a href="" data-toggle="modal" data-target="#documentModal" ng-click="$ctrl.onDocumentItemClicked(document_index)">
+                      <div class="ll-detail-document__content file-type-icon {{document.type | lowercase}}">
+                        {{document.name}}
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+                <div class="search-result-container search-result-container__error" ng-if="!$ctrl.results.documents.length > 0">
+                  <p>There are no documents for "{{$ctrl.query}}" criteria.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div ng-if="!$ctrl.results.videos.length > 0 && !$ctrl.results.audios.length > 0 && !$ctrl.results.documents.length > 0 && $ctrl.results !== null">
+        <div class="block-holder">
+          <div class="search-result-container search-result-container__error">
+            <p>"{{$ctrl.query}}" search did not match any resources.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="loading-indecator" ng-if="$ctrl.results === null">
+        <div class='uil-ring-css yellow'>
+          <div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div ng-include="'app/learninglibrary/template/_popups.html'"></div>

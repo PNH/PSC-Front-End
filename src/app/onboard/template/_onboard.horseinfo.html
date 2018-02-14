@@ -1,0 +1,92 @@
+<form name="regForm" id="signup-form" novalidate>
+  <div id="step2" class="tab-pane">
+    <!-- po-heading block -->
+    <div class="row po-heading bottom-buffer-60">
+        <div class="col-md-12">
+            <h1>Give us a few more details.</h1>
+            <div class="tiny-border"></div>
+        </div>
+    </div>
+    <!-- /po-heading -->
+
+    <form name="regForm">
+        <div class="row" ng-if="!$ctrl.loggedIn">
+            <div class="col-md-12">
+                <h2 class="po-s2-form-heading">User Details</h2>
+                <div class="po-s2-form-container">
+                    <div class="row">
+                      <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : regForm.name.$invalid && !regForm.name.$pristine }">
+                        <input type="text" name="name" placeholder="Name" class="form-control" ng-model="formData.user.name" ng-minlength="3" ng-maxlength="100" ng-model-options="{updateOn: 'blur'}" ng-pattern="/^[\D]*$/">
+                        <p ng-show="regForm.name.$invalid && !regForm.name.$pristine" class="help-block">Please enter a valid name.</p>
+                      </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-6 col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : regForm.email.$invalid && !regForm.email.$pristine || $ctrl.emailExists}">
+                          <input type="email" name="email" placeholder="Email*" class="form-control" ng-blur="$ctrl.onEmailValidateCheck()" ng-model="formData.user.email" ng-model-options="{debounce: 100}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                          <small id="emailHelp" class="form-text text-muted text-hint">(This will be your username)</small>
+                          <p ng-show="regForm.email.$invalid && !regForm.email.$pristine" class="help-block">Please enter a valid email.</p>
+                          <p ng-show="$ctrl.emailExists && !regForm.email.$invalid" class="help-block">Email address already taken, please login.</p>
+                        </div>
+                        <div class="col-sm-6 col-md-6 po-s2-form-field-group">
+                            <select ng-if="$ctrl.rideStyles" ng-model="formData.user.ridestyle">
+                                <option value="-1" selected>Riding Style</option>
+                                <option ng-repeat="(style_index, style) in $ctrl.rideStyles" value="{{style}}">{{style_index | humanize}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="arrow-down po-s2-arrow"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="po-s2-form-heading">Horse Details</h2>
+                <div class="po-s2-form-container">
+                    <div class="row">
+                      <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : regForm.hname.$invalid && !regForm.hname.$pristine }">
+                        <input type="text" name="hname" placeholder="Your Horse's Name*" class="form-control" ng-model="formData.horse.name" ng-minlength="1" ng-maxlength="100" ng-model-options="{updateOn: 'blur'}" required>
+                        <p ng-show="regForm.hname.$invalid && !regForm.hname.$pristine" class="help-block">Please enter a valid name.</p>
+                      </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 col-md-4 po-s2-form-field-group" ng-class="{ 'has-error' : regForm.breed.$invalid && !regForm.breed.$pristine }">
+                          <input type="text" name="breed" placeholder="Breed" class="form-control" ng-model="formData.horse.breed" ng-minlength="3" ng-maxlength="100" ng-model-options="{updateOn: 'blur'}" >
+                          <p ng-show="regForm.breed.$invalid && !regForm.breed.$pristine" class="help-block">Please enter a valid breed.</p>
+                        </div>
+                        <div class="col-sm-4 col-md-4 po-s2-form-field-group" ng-class="{ 'has-error' : formData.horse.age < 1 && !regForm.age.$pristine || regForm.age.$invalid && !regForm.age.$pristine }">
+                          <!-- <input type="number" name="age" placeholder="Age" class="form-control" ng-model="formData.horse.age" ng-min="1" ng-max="30" ng-minlength="1" ng-maxlength="2" ng-pattern="/^[0-9]$/">
+                          <p ng-show="regForm.age.$invalid && !regForm.age.$pristine " class="help-block">Please enter a valid age</p> -->
+                          <select ng-model="formData.horse.age">
+                              <option value="-1" selected>Age</option>
+                              <option ng-repeat="i in [35] | toRange" value="{{i+1}}">{{i+1}}</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-4 col-md-4 po-s2-form-field-group">
+                            <select ng-model="formData.horse.gender">
+                                <option value="-1" selected>Sex</option>
+                                <option value="0" >Mare</option>
+                                <option value="1" >Gelding</option>
+                                <option value="2" >Stallion</option>
+                                <!-- <option value="3" >Filly</option>
+                                <option value="4" >Colt</option> -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- po-footer -->
+    <div class="row po-footer">
+      <div class="col-sm-12">
+  			<div class="po-navigations">
+  				<input ui-sref="onboard.goals" type="button" id="po-back" class="btn btn-black pull-left" value="BACK">
+          <input ui-sref="onboard.comissues" ng-disabled="regForm.$invalid || $ctrl.emailExists || $ctrl.emailChecking" ng-click="$ctrl.onNextClicked()" type="button" id="po-next" class="btn btn-yellow pull-right" value="NEXT">
+          <input ng-if="!$ctrl.loggedIn" ui-sref="onboard.comissues" type="button" id="po-skip" class="btn pull-right" value="SKIP">
+  			</div>
+  		</div>
+    </div>
+  </div>
+</form>

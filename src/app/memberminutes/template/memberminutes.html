@@ -1,0 +1,17 @@
+<div id="main" class="savvytimes-pages-top">
+  <dashboard-header title="Savvy Times &amp; Member Minutes"></dashboard-header>
+  <div id="content" class="savvytimes-main" block-ui="memberMinutesLoading">
+    <div class="content-holder savvytimes-main__featured" ng-if="$ctrl.featured">
+      <div ng-include="'app/memberminutes/template/_featured.html'"></div>
+    </div>
+    <div class="content-holder savvytimes-main__content clearfix">
+      <div class="savvytimes-main__content__left">
+        <div ng-include="'app/memberminutes/template/_savvies.html'"></div>
+      </div>
+      <div class="savvytimes-main__content__right" ng-show="$ctrl.archives.length > 0">
+        <div ng-include="'app/memberminutes/template/_archive.html'"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div ng-include="'app/learninglibrary/template/_popups.html'"></div>

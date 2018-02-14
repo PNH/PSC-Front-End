@@ -1,0 +1,217 @@
+<form name="memForm">
+  <div class="row formRow bgColor">
+    <div class="col-md-12">
+      <div class="po-s2-form-container">
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group form-header ">
+            <label>Membership Information</label>
+            <div class="form-part-line"> </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : memForm.membertype.$invalid && !memForm.membertype.$pristine }">
+            <label>Membership*</label>
+            <select ng-if="$ctrl.memberTypes" name="membertype" ng-model="$ctrl.membership.membershipTypeId" ng-change="$ctrl.onMembershipTypeChange()" convert-to-number>
+                <option value=""> Membership Type </option>
+                <option ng-repeat="(type_index, type) in $ctrl.memberTypes" value="{{type.id}}">{{type.level | humanize}} - {{type.billing_frequency | humanize}}</option>
+            </select>
+          </div>
+          <div class="col-md-6 po-s2-form-field-group">
+            <label>Cost*</label>
+            <!-- <span class="member-price pull-right" ng-repeat="(currency_index, currency) in $ctrl.membership.costs | filter : {'currencyId': $ctrl.user.currencyId} | limitTo : 1">{{currency.cost | currency : currency.symbol}}</span> -->
+            <input type="text" name="cost" ng-init="cost='0.00'" placeholder="" class="form-control" ng-repeat="(currency_index, currency) in $ctrl.currentMemebershipType.costs | filter : {'currencyId': $ctrl.user.currencyId} | limitTo : 1" value="{{currency.cost | currency : currency.symbol}}"
+              disabled>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : memForm.name.$invalid && !memForm.name.$pristine }">
+            <label>Membership Status</label>
+            <input type="text" name="status" placeholder="" value="{{$ctrl.membership.status ? 'Active': 'Inactive'}}" class="form-control" ng-minlength="3" ng-maxlength="100" disabled>
+            <p ng-show="memForm.status.$invalid && !memForm.status.$pristine" class="help-block">Please enter a valid name.</p>
+          </div>
+          <div class="col-md-6 po-s2-form-field-group">
+            <label>Joined Date</label>
+            <input type="text" name="joineddate" placeholder="" class="form-control" ng-model="::$ctrl.membership.joined_date" disabled>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : memForm.name.$invalid && !memForm.name.$pristine }">
+            <label>Membership Number</label>
+            <input type="text" name="joineddate" placeholder="" class="form-control" ng-model="$ctrl.membership.membership_number" disabled>
+          </div>
+          <!-- <div class="col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : memForm.billingAddress.$invalid && !memForm.billingAddress.$pristine }">
+            <label>Billing Address</label>
+            <input type="text" name="billingAddress" placeholder="" class="form-control" ng-model="$ctrl.membership.billingaddress" ng-minlength="3">
+            <p ng-show="memForm.billingAddress.$invalid && !memForm.billingAddress.$pristine" class="help-block">Please enter a valid name.</p>
+          </div> -->
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group form-header ">
+            <label>Billing Address</label>
+            <div class="form-part-line"> </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-12 po-s2-form-field-group" ng-class="{ 'has-error' : memForm.address1.$invalid && !memForm.address1.$pristine }">
+            <label>Street Address* </label>
+            <input type="text" name="address1" class="form-control" ng-model="$ctrl.user.billingAddress.street" ng-blur="$ctrl.onAddressInputComplted()" ng-minlength="3" ng-maxlength="100" ng-model-options="{updateOn: 'blur'}" required>
+            <p ng-show="memForm.address1.$invalid && !memForm.address1.$pristine" class="help-block">Please enter a valid address.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-6 col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : memForm.country.$invalid && !memForm.country.$pristine || $ctrl.user.billingAddress.country === '-1'}">
+            <label>Country* </label>
+            <select ng-if="$ctrl.countries" name="country" ng-model="$ctrl.user.billingAddress.country" ng-change="$ctrl.onCountrySelectedBilling($ctrl.user.billingAddress.country)" autocomplete="false" ng-pattern="/^[a-zA-Z\s]*$/" required>
+              <option ng-repeat="(country_index, country) in $ctrl.countries" value="{{country.code}}">{{country.name}}</option>
+            </select>
+            <p ng-show="memForm.country.$invalid || $ctrl.user.billingAddress.country === '-1' && !memForm.country.$pristine" class="help-block">Please select country.</p>
+          </div>
+
+          <div ng-if="!$ctrl.statesBilling" class="form-group col-sm-6 col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : memForm.province.$invalid && !memForm.province.$pristine }">
+            <label>Province* </label>
+            <input type="text" name="province" class="form-control" ng-model="$ctrl.user.billingAddress.state" ng-blur="$ctrl.onAddressInputComplted()" ng-maxlength="100" ng-model-options="{updateOn: 'blur'}" ng-pattern="/^[a-zA-Z\s_.-]*$/" required>
+            <p ng-show="memForm.province.$invalid && !memForm.province.$pristine" class="help-block">Please enter a valid State/Province.</p>
+          </div>
+          <div ng-if="$ctrl.statesBilling" class="form-group col-sm-6 col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : memForm.province.$invalid && !memForm.province.$pristine }">
+            <label>Province* </label>
+            <select ng-if="$ctrl.statesBilling" name="province" ng-model="$ctrl.user.billingAddress.state" ng-change="$ctrl.onAddressInputComplted()" required>
+              <option ng-repeat="(state_index, state) in $ctrl.statesBilling" value="{{state.code}}">{{state.name}}</option>
+            </select>
+            <p ng-show="memForm.province.$invalid && !memForm.province.$pristine" class="help-block">Please enter a valid State/Province.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-6 col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : memForm.city.$invalid && !memForm.city.$pristine }">
+            <label>City* </label>
+            <input type="text" name="city" class="form-control" ng-model="$ctrl.user.billingAddress.city" ng-blur="$ctrl.onAddressInputComplted()" ng-maxlength="100" ng-model-options="{updateOn: 'blur'}" ng-pattern="/^[a-zA-Z\s_.-]*$/" required>
+            <p ng-show="memForm.city.$invalid && !memForm.city.$pristine" class="help-block">Please enter a valid city.</p>
+          </div>
+          <div class="form-group col-sm-6 col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : memForm.zip.$invalid && !memForm.zip.$pristine }">
+            <label>Zip/Post Code* </label>
+            <input type="text" name="zip" class="form-control" ng-minlength="3" ng-model="$ctrl.user.billingAddress.zipcode" ng-blur="$ctrl.onAddressInputComplted()" ng-model-options="{updateOn: 'blur'}" required>
+            <p ng-show="memForm.zip.$invalid && !memForm.zip.$pristine" class="help-block">Please enter a valid Zip/Post code.</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group form-header ">
+            <label>Credit Card Information</label>
+            <div class="form-part-line"> </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 po-s2-form-field-group" ng-class="{ 'has-error' : memForm.name.$invalid && !memForm.name.$pristine }">
+            <label>Full Name on Card*</label>
+            <input type="text" name="name" placeholder="" class="form-control" ng-model="$ctrl.ccard.name" ng-minlength="3" ng-maxlength="100" ng-model-options="{updateOn: 'blur'}" ng-pattern="/^[a-zA-Z\s]*$/">
+            <p ng-show="memForm.name.$invalid && !memForm.name.$pristine" class="help-block">Please enter a valid name.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-6 col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : memForm.cardnumber.$invalid && !memForm.cardnumber.$pristine }">
+            <label>Credit Card Number*</label>
+            <input type="number" name="cardnumber" class="form-control" placeholder="{{$ctrl.ccard.number}}" ng-model="$ctrl.ccard.number" ng-minlength="8" ng-maxlength="16" ng-model-options="{updateOn: 'blur'}" ng-pattern="/^[0-9]+$/" required>
+            <small id="cardHelp" class="form-text text-muted text-hint">MasterCard, VISA, Discover, American Express (USA Only)</small>
+            <p ng-show="memForm.cardnumber.$invalid && !memForm.cardnumber.$pristine" class="help-block">Please enter a valid card number.</p>
+          </div>
+          <div class="form-group col-sm-6 col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : memForm.cardcode.$invalid && !memForm.cardcode.$pristine }">
+            <label>Security Code*</label>
+            <input type="number" name="cardcode" class="form-control" ng-model="$ctrl.ccard.cvs_code" ng-minlength="3" ng-maxlength="4" ng-model-options="{updateOn: 'blur'}" ng-pattern="/^[0-9]+$/" required>
+            <p ng-show="memForm.cardcode.$invalid && !memForm.cardcode.$pristine" class="help-block">Please enter a valid security code.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-6 col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : memForm.cardmonth.$invalid && !memForm.cardmonth.$pristine || !$ctrl.monthValid}">
+            <label>Card Month*</label>
+            <input name="cardmonth" type="text" class="form-control" moment-picker ng-model="$ctrl.ccard.expiry_month" ng-blur="$ctrl.isExpireyValid()" format="M" max-view="month" autoclose="true" today="true" ng-paste="$event.preventDefault();" ng-max="12" ng-min="1" ng-pattern="/^(0?[1-9]|1[012])$/" required/>
+            <p ng-show="memForm.cardmonth.$invalid && !memForm.cardmonth.$pristine || memForm.cardmonth > 10" class="help-block">Please select your card expiry month.</p>
+            <p ng-show="!$ctrl.monthValid" class="help-block">Your card has been expired, please enter a valid card.</p>
+          </div>
+          <div class="form-group col-sm-6 col-md-6 po-s2-form-field-group" ng-class="{ 'has-error' : memForm.cardyear.$invalid && !memForm.cardyear.$pristine}">
+            <label>Card Year*</label>
+            <input name="country" type="text" class="form-control" moment-picker ng-model="$ctrl.ccard.expiry_year" ng-blur="$ctrl.isExpireyValid()" format="YYYY" max-view="year" autoclose="true" min-date="'2016'" today="true" ng-paste="$event.preventDefault();" ng-pattern="/^[0-9]{4}$/" required/>
+            <p ng-show="memForm.cardyear.$invalid && !memForm.cardyear.$pristine" class="help-block">Please select your card expiry year.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <a data-toggle="modal" data-target="#deleteMembership" class="btn-link">Cancel Membership</a>
+          </div>
+        </div>
+        <div class="row" ng-if="$ctrl.membershipError">
+          <div class="col-sm-12 has-errors-big">
+            <p class="help-block">{{$ctrl.membershipError}} </p>
+          </div>
+        </div>
+      </div>
+      <div class="save-btn">
+        <button ng-disabled="memForm.$invalid || $ctrl.emailExists || $ctrl.isProcessing || !$ctrl.membership.membershipTypeId" ng-click="$ctrl.onUpdateMembershipClicked()" class="btn btn-yellow pull-right btn-submit" type="submit" ng-class="{'processing': $ctrl.isProcessing}">
+          <div class="bs-process-bar uil-ring-css yellow">
+            <div></div>
+          </div>
+          <span class="bs-login-text">
+            UPDATE
+          </span>
+        </button>
+      </div>
+      <!--<div class="membership-message">
+        <h4>This feature is coming soon, please do not enter payment information.</h4>
+      </div>-->
+    </div>
+  </div>
+</form>
+
+<div id="deleteMembership" class="modal fade login-popup" tabindex="100" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="onCloseClicked()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Membership Cancellation</h4>
+      </div>
+      <div class="modal-body" block-ui="cancellationReasonsLoading">
+        <div class="login-error" ng-if="groupItemCtrl.groupUpdateError">
+          <div class="row">
+            <div class="col-xs-12 login-error__container">
+              <div class="login-error__message">
+                {{groupItemCtrl.groupUpdateError}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <form name="groupModel" novalidate>
+          <div class="row">
+            <div class="col-xs-12 form-field-group" ng-class="{ 'has-error' : groupModel.title.$invalid && groupItemCtrl.hasSubmitted }">
+              <label>Reason*</label>
+              <select ng-model="$ctrl.cancelMembership.reason" ng-options="value as key for (key , value) in $ctrl.cancellationReasons"></select>
+              <!--<p ng-show="groupModel.title.$error.maxlength && groupItemCtrl.hasSubmitted" class="help-block">Title is too long (maximum is 50 characters)</p>
+              <p ng-show="groupModel.title.$error.minlength && groupItemCtrl.hasSubmitted" class="help-block">Title is too short (minimum is 5 characters)</p>
+              <p ng-show="groupModel.title.$error.required && groupItemCtrl.hasSubmitted" class="help-block">Title is required</p>-->
+            </div>
+            <div class="col-xs-12 form-field-group" ng-class="{ 'has-error' : groupModel.description.$invalid && groupItemCtrl.hasSubmitted }">
+              <label>Explain further</label>
+              <textarea type="text" name="description" ng-model="$ctrl.cancelMembership.explaination" rows="5" ng-minlength="5" ng-maxlength="100" required></textarea>
+              <!--<p ng-show="groupModel.description.$error.maxlength && groupItemCtrl.hasSubmitted" class="help-block">Description is too long (maximum is 100 characters)</p>
+              <p ng-show="groupModel.description.$error.minlength && groupItemCtrl.hasSubmitted" class="help-block">Description is too short (minimum is 5 characters)</p>
+              <p ng-show="groupModel.description.$error.required && groupItemCtrl.hasSubmitted" class="help-block">Description is required</p>-->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <label>Are you sure? We designed the Savvy Club to help you solve your problems and achieve your goals. We hope you're not giving up on your dream or selling yourself short of what you could achieve with the Parelli Program and community of like-minded people to support you along the way. If you're having difficulty with our program or need extra support, please give us a call at 1-855-PARELLI so we can personally help you. We understand things change, but if you really must go, we'll miss you & hope you are helping make the world a better place for horses and humans who love them.</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 form-field-group">
+              <button ng-disabled="$ctrl.cancellingMembership || !$ctrl.cancelMembership.reason" type="submit" class="btn btn-red btn-submit" ng-click="$ctrl.cancelMemberhip($ctrl.cancelMembership.reason, $ctrl.cancelMembership.explaination)" ng-class="{'processing': $ctrl.cancellingMembership}">
+                <div class="bs-process-bar uil-ring-css red">
+                  <div></div>
+                </div>
+                <span class="bs-login-text">CONFIRM MEMBERSHIP CANCELLATION</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

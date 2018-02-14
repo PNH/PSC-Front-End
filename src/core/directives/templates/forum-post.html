@@ -1,0 +1,52 @@
+<div class="answer-box prl-groups-detail__answerbox">
+  <figure class="hold-img" style="background-image: url('{{forumPostCtrl.post.user.profileImage}}');" go-to-wall wall-id="forumPostCtrl.post.user.id" ng-class="{'clickable': forumPostCtrl.post.user.id > 0}"></figure>
+  <div class="hold-title line-l">
+    <div class="hold-date">
+      <strong go-to-wall wall-id="forumPostCtrl.post.user.id" ng-class="{'clickable': forumPostCtrl.post.user.id > 0}">{{forumPostCtrl.post.user.firstName + ' ' + forumPostCtrl.post.user.lastName}}</strong>
+      <span class="date">{{forumPostCtrl.post.created_at | formatdate: 1}}</span>
+    </div>
+    <div class="btn-box">
+      <button class="btn btn-grey btn-sm" ng-click="forumPostCtrl.toggleCommentBox = !forumPostCtrl.toggleCommentBox">Reply</button>
+      <button class="btn btn-grey btn-sm" ng-click="forumPostCtrl.deletePostClicked(forumPostCtrl.post.id)" ng-if="forumPostCtrl.deletePost && (forumPostCtrl.post.isowner || forumPostCtrl.rootAccess)" ng-disabled="forumPostCtrl.isDeleteProcessing">Delete</button>
+      <button class="btn btn-grey btn-sm" ng-click="forumPostCtrl.toggleEditBox = !forumPostCtrl.toggleEditBox" ng-if="forumPostCtrl.editPost && (forumPostCtrl.post.isowner || forumPostCtrl.rootAccess)">Edit</button>
+      <!--<button class="btn btn-black btn-sm" ng-click="forumPostCtrl.replyClicked(forumPostCtrl.comment.id)" ng-if="post.like">Reply</button>-->
+    </div>
+  </div>
+  <span class="no">#{{forumPostCtrl.post.id}}</span>
+  <div ng-hide="forumPostCtrl.toggleEditBox" ng-bind-html="forumPostCtrl.post.content | trusthtml" class="content-block answer-box__content"></div>
+  <div class="answer-box__attachments" ng-if="forumPostCtrl.post.forum_post_attachment.length > 0">
+    <span class="answer-box__attachments__title">Attachments:</span>
+    <ul>
+      <!--<li ng-repeat="(attachmentIndex, attachment) in forumPostCtrl.post.forum_post_attachment" data-toggle="modal" data-target="#imageModal" ng-click="forumPostCtrl.onImageAttachmentClicked(attachmentIndex)"><a>Sample attachment {{attachment.id}}</a></li>-->
+      <li ng-repeat="(attachmentIndex, attachment) in forumPostCtrl.post.forum_post_attachment">
+        <a ng-href="{{attachment.resourceUrl}}" target="_blank"><img ng-href="{{attachment.resourceUrl}}" class="post-attachment-img" src="{{attachment.resourceUrl}}"></a>
+        <a class="post-attachment-name" ng-href="{{attachment.resourceUrl}}" target="_blank">{{attachment.title | truncate : 18}}</a>
+      </li>
+    </ul>
+  </div>
+  <simple-reply button-text="SAVE" ng-if="forumPostCtrl.toggleEditBox" post="forumPostCtrl.editPostClicked" content="forumPostCtrl.post.content"></simple-reply>
+  <simple-reply class="comment-box" button-text="REPLY" ng-if="forumPostCtrl.toggleCommentBox" post="forumPostCtrl.createPostComment"></simple-reply>
+  <div class="comments-container">
+    <div class="comments-container__content" block-ui="commentsLoading" ng-if="forumPostCtrl.comments.length > 0">
+      <prl-comment ng-repeat="comment in forumPostCtrl.comments | orderBy: 'created_at' track by comment.id" id="comment.id" comment="comment" edit="forumPostCtrl.editCommentClicked" delete-comment="forumPostCtrl.deleteCommentClicked" root-access="forumPostCtrl.rootAccess"></prl-comment>
+    </div>
+    <!--<button class="comments-container__toggle btn-empty" ng-click="forumPostCtrl.loadComments(forumPostCtrl.post.id)" ng-hide="forumPostCtrl._commentReachedEnd || !forumPostCtrl.post.commentcount > 0 || forumPostCtrl.post.commentcount < forumPostCtrl._paginationLimit"><span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span> Load replies</button>-->
+    <load-more-btn label="Load replies" load="forumPostCtrl.loadComments" id="forumPostCtrl.post.id" ng-hide="forumPostCtrl._commentReachedEnd || !forumPostCtrl.post.commentcount > 0 || forumPostCtrl.post.commentcount < forumPostCtrl._paginationLimit"></load-more-btn>
+  </div>
+</div>
+<!-- Image Popup -->
+<div id="imageModal" class="modal fade login-popup search-popup" tabindex="100" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true" on-close="forumPostCtrl.unloadPopups()">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4></h4>
+      </div>
+      <div class="modal-body">
+        {{forumPostCtrl.imagePopup}}5656
+        <img ng-src="{{forumPostCtrl.imagePopup}}" alt="">
+      </div>
+    </div>
+  </div>
+  </div>

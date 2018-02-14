@@ -1,0 +1,31 @@
+.not-found {
+	background-color: $body-background;
+	padding: 80px 30px;
+	text-align: center;
+	&__container {
+		min-height: auto !important;
+		padding: 30px !important;
+		position: relative;
+	}
+	span {
+		display: block;
+		line-height: normal;
+	}
+	&__title {
+		font-size: 5em;
+		font-weight: 600;
+	}
+	&__subtitle {
+		color: $nf-sub;
+		font-size: 1.5em;
+		font-weight: 300;
+	}
+	button {
+		margin: 60px auto 0 !important;
+	}
+	&__message {
+		img {
+			max-width: 100%;
+		}
+	}
+}

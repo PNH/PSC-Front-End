@@ -1,0 +1,27 @@
+<form class="" name="topicModel">
+  <fieldset>
+    <div class="reply-container">
+      <strong>Create New Topic in "{{$ctrl.subForum.title}}"</strong>
+      <div class="form-block">
+        <label class="control-label">Topic Title:</label>
+        <div class="form-element">
+          <input type="text" class="form-control" ng-disabled="$ctrl.createTopicProcessing" ng-model="$ctrl.topicModel.title" required>
+        </div>
+      </div>
+      <div class="form-block">
+        <label class="control-label">Content:</label>
+        <div class="form-element">
+          <text-editor post-model="$ctrl.topicModel.description" config="$ctrl.summernoteOptions" is-busy="$ctrl.isUploading" post-type="3"></text-editor>
+        </div>
+      </div>
+    </div>
+    <div class="hold-submit">
+      <button ng-disabled="!$ctrl.topicModel.description || $ctrl.createTopicProcessing || $ctrl.isUploading" type="submit" class="btn btn-yellow btn-submit" ng-click="$ctrl.onCreateTopicClicked($ctrl.subForumId, $ctrl.topicModel)" ng-class="{'processing': $ctrl.createTopicProcessing}">
+        <div class="bs-process-bar uil-ring-css yellow">
+          <div></div>
+        </div>
+        <span class="bs-login-text">SUBMIT</span>
+      </button>
+    </div>
+  </fieldset>
+</form>

@@ -1,0 +1,51 @@
+<div id="main" class="prl-messages">
+  <dashboard-header title="Messages"></dashboard-header>
+  <div class="holder">
+    <div class="general-box">
+      <div ng-include="'app/messages/template/_sidebar.html'"></div>
+      <div class="main-container">
+        <div class="messages-box" ng-if="$ctrl.messages === null || $ctrl.isLoading">
+          <p class="status-label"> {{$ctrl.friendlyLabel}} </p>
+        </div>
+        <div class="messages-box" ng-if="$ctrl.messages !== null">
+          <div class="clearfix">
+            <button class="btn btn-sm btn-grey pull-right" ng-click="$ctrl.deleteConversation($ctrl.selectedUserId)" ng-disabled="$ctrl.deleteProcessing">Delete</button>
+          </div>
+          <div class="messages-box__previous" ng-if="$ctrl.isMoreMessagesAvailable">
+            <!--<button class="action-link" ng-click="$ctrl.onLoadMoreClicked()"> previous </button>-->
+            <load-more-btn class="action-link messages-box__previous-btn" label="Load previous messages" load="$ctrl.onLoadMoreClicked"
+              direction="up"></load-more-btn>
+          </div>
+          <div class="messages-box__item" ng-repeat="message in $ctrl.messages | orderBy:'created_at'" ng-class="{'right': message.sender.id === $ctrl.me.id}">
+            <div ng-if="message.sender.id === $ctrl.me.id" class="messages-box__user-img" style="background-image: url('http://{{$ctrl.me.profilePic}}')" ng-click="$ctrl.goToWall(message.sender.id)" ng-class="{'clickable': message.sender.id > 0}"></div>
+            <div ng-if="message.sender.id !== $ctrl.me.id" class="messages-box__user-img" style="background-image: url('http://{{message.sender.profileImage}}')" ng-click="$ctrl.goToWall(message.sender.id)" ng-class="{'clickable': message.sender.id > 0}"></div>
+            <div class="hold-title line-l">
+              <div class="hold-date">
+                <span ng-if="message.sender.id === $ctrl.me.id">
+                  <!-- <strong>{{message.sender.firstName}} {{message.sender.lastName}}</strong> -->
+                  <strong ng-click="$ctrl.goToWall(message.sender.id)" ng-class="{'clickable': message.sender.id > 0}">Me</strong>
+                </span>
+                <span ng-if="message.sender.id !== $ctrl.me.id">
+                  <!-- <strong>{{message.recipients[0].firstName}} {{message.recipients[0].lastName}}</strong> -->
+                  <strong ng-click="$ctrl.goToWall(message.sender.id)" ng-class="{'clickable': message.sender.id > 0}">{{message.sender.firstName}} {{message.sender.lastName}}</strong>
+                </span>
+                <span class="date">{{message.created_at | formatdate: 1}}</span>
+              </div>
+            </div>
+            <p>{{message.content}}</p>
+          </div>
+        </div>
+
+        <div class="messages-reply-box clearfix" ng-if="$ctrl.selectedUserId">
+          <div class="messages-box__user-img" style="background-image: url('http://{{$ctrl.me.profilePic}}')"></div>
+          <form name="replyForm">
+            <textarea name="message" ng-model="$ctrl.message" rows="5" placeholder="Type a message" ng-minlength="1"></textarea>
+            <p ng-show="replyForm.message.$invalid && !replyForm.message.$pristine" class="help-block">Please type in your message.</p>
+            <button type="submit" value="REPLY" class="btn btn-grey btn-md pull-right" ng-click="$ctrl.onReplyClicked($ctrl.message)"
+              ng-disabled="$ctrl.isProcessing">SEND</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,118 @@
+.content {
+  max-width: 1284px;
+  width: 100%;
+  margin: 179px auto 89px;
+  background: #fff;
+  transition: all .3s ease-in-out;
+  position: relative;
+  min-height: 410px;
+  padding-left: 80px !important;
+  padding-right: 80px !important;
+  @include bp(xxs) {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+  .hold-title {
+    padding-top: 0;
+    text-align: center;
+    h1 {
+      margin-top: 0;
+    }
+  }
+  p {
+    line-height: 1.5em !important;
+    margin-bottom: 20px;
+  }
+}
+
+.content-block {
+  line-height: 1.5em;
+  word-break: break-word;
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+  ul {
+    list-style: disc;
+  }
+  p,
+  li,
+  span,
+  div {
+    color: $content-text;
+    font-size: 1em !important;
+  }
+  p {
+    line-height: 1.5em !important;
+    margin-bottom: 20px; // text-align: center;
+  }
+  a {
+    color: #626890 !important;
+    text-decoration: underline;
+  }
+  img,
+  iframe {
+    max-width: 100%;
+  }
+}
+
+.content-holder {
+  background-color: $content-holder-bg;
+  padding: 35px; // text-align: center;
+}
+
+.content-list {
+  &.style1 {
+    .style1__title {
+      border-bottom: 1px solid $content-list-border;
+      color: $content-title;
+      font-size: 1.36em;
+      margin-bottom: 15px;
+      margin-top: 0;
+      padding-bottom: 10px;
+    }
+    .style1__description {
+      color: $grey44 !important;
+    }
+    ul {
+      margin: 0;
+      padding: 0;
+      li {
+        color: $grey44 !important;
+        font-size: 0.938em;
+        line-height: 1.4em;
+        margin-bottom: 8px;
+        padding-left: 20px;
+        position: relative;
+        &:last-child {
+          margin-bottom: 0;
+        }
+        &:after {
+          color: $grey44 !important;
+          content: "\e258";
+          font-family: 'Glyphicons Halflings';
+          font-smoothing: antialiased;
+          font-size: 0.750em;
+          font-style: normal;
+          font-weight: 400;
+          left: 0;
+          line-height: 1;
+          position: absolute;
+          top: 4px;
+        }
+        a {
+          color: $grey44 !important;
+          text-decoration: underline;
+          transition: 200ms color ease-in-out;
+          &:hover {
+            color: $yellow !important;
+          }
+        }
+      }
+    }
+  }
+}

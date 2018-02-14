@@ -1,0 +1,57 @@
+@font-face {
+  font-family: 'sacramentoregular';
+  src: url('../resources/fonts/sacramento-regular-webfont.eot');
+  src: url('../resources/fonts/sacramento-regular-webfont.eot?#iefix') format('embedded-opentype'), url('../resources/fonts/sacramento-regular-webfont.woff2') format('woff2'), url('../resources/fonts/sacramento-regular-webfont.woff') format('woff'), url('../resources/fonts/sacramento-regular-webfont.ttf') format('truetype'), url('../resources/fonts/sacramento-regular-webfont.svg#sacramentoregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'open_sansregular';
+  src: url('../resources/fonts/opensans-webfont-webfont.eot');
+  src: url('../resources/fonts/opensans-webfont-webfont.eot?#iefix') format('embedded-opentype'), url('../resources/fonts/opensans-webfont-webfont.woff2') format('woff2'), url('../resources/fonts/opensans-webfont-webfont.woff') format('woff'), url('../resources/fonts/opensans-webfont-webfont.ttf') format('truetype'), url('../resources/fonts/opensans-webfont-webfont.svg#open_sansregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'open_sanslight';
+  src: url('../resources/fonts/opensans-light-webfont.eot');
+  src: url('../resources/fonts/opensans-light-webfont.eot?#iefix') format('embedded-opentype'), url('../resources/fonts/opensans-light-webfont.woff2') format('woff2'), url('../resources/fonts/opensans-light-webfont.woff') format('woff'), url('../resources/fonts/opensans-light-webfont.ttf') format('truetype'), url('../resources/fonts/opensans-light-webfont.svg#open_sanslight') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'open_sanssemibold';
+  src: url('../resources/fonts/opensans-semibold-webfont.eot');
+  src: url('../resources/fonts/opensans-semibold-webfont.eot?#iefix') format('embedded-opentype'), url('../resources/fonts/opensans-semibold-webfont.woff2') format('woff2'), url('../resources/fonts/opensans-semibold-webfont.woff') format('woff'), url('../resources/fonts/opensans-semibold-webfont.ttf') format('truetype'), url('../resources/fonts/opensans-semibold-webfont.svg#open_sanssemibold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'open_sansbold';
+  src: url('../resources/fonts/opensans-bold-webfont.eot');
+  src: url('../resources/fonts/opensans-bold-webfont.eot?#iefix') format('embedded-opentype'), url('../resources/fonts/opensans-bold-webfont.woff2') format('woff2'), url('../resources/fonts/opensans-bold-webfont.woff') format('woff'), url('../resources/fonts/opensans-bold-webfont.ttf') format('truetype'), url('../resources/fonts/opensans-bold-webfont.svg#open_sansbold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'open_sansitalic';
+  src: url('../resources/fonts/opensans-italic-webfont.eot');
+  src: url('../resources/fonts/opensans-italic-webfont.eot?#iefix') format('embedded-opentype'), url('../resources/fonts/opensans-italic-webfont.woff2') format('woff2'), url('../resources/fonts/opensans-italic-webfont.woff') format('woff'), url('../resources/fonts/opensans-italic-webfont.ttf') format('truetype'), url('../resources/fonts/opensans-italic-webfont.svg#open_sansitalic') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'summernoteFix';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../resources/fonts/summernote/summernote.eot');
+  src: url('../resources/fonts/summernote/summernote.eot?#iefix') format('embedded-opentype'), url('../resources/fonts/summernote/summernote.woff') format('woff'), url('../resources/fonts/summernote/summernote.ttf') format('truetype')
+}
+
+@import 'font-awesome/font-awesome';

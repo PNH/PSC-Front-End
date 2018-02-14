@@ -1,0 +1,22 @@
+<div class="subtab-container">
+  <ul class="nav nav-tabs  " role="tablist" multiple="">
+    <li role="presentation" class="active"><a href="" ng-click="$ctrl.onHealthTypeChange(-1)" data-target="#tab4" role="tab" data-toggle="tab">All</a></li>
+    <li role="presentation"><a href="" ng-click="$ctrl.onHealthTypeChange($ctrl.healthLogTypes.farrier.id)" data-target="#tab5" role="tab" data-toggle="tab">Farrier</a></li>
+    <li role="presentation"><a href="" ng-click="$ctrl.onHealthTypeChange($ctrl.healthLogTypes.veterinary.id)" data-target="#tab7" role="tab" data-toggle="tab">Vet</a></li>
+    <li role="presentation"><a href="" ng-click="$ctrl.onHealthTypeChange($ctrl.healthLogTypes.holistic.id)" data-target="#tab8" role="tab" data-toggle="tab">Holistic</a></li>
+  </ul>
+</div>
+<div class="tab-content sub-tab-content-container">
+  <div role="tabpanel" class="tab-pane active" id="tab4">
+    <div ng-include src="'app/publichorseprofile/template/_health-all.html'"> </div>
+  </div>
+  <div role="tabpanel" class="tab-pane" id="tab5">
+    <div ng-include src="'app/publichorseprofile/template/_health-farriervisit.html'"> </div>
+  </div>
+  <div role="tabpanel" class="tab-pane" id="tab7">
+    <div ng-include src="'app/publichorseprofile/template/_health-vetvisit.html'"> </div>
+  </div>
+  <div role="tabpanel" class="tab-pane" id="tab8">
+    <div ng-include src="'app/publichorseprofile/template/_health-holistic.html'"> </div>
+  </div>
+</div>

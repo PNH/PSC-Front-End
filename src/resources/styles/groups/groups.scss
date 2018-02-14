@@ -1,0 +1,82 @@
+@import 'item';
+@import 'allgroups';
+@import 'detail';
+
+.prl-groups {
+  .nav-tabs {
+    li {
+      width: 50% !important;
+    }
+  }
+}
+
+.groups-content {
+  background: $white !important;
+  margin-bottom: 90px;
+  padding: 30px;
+  .tab-pane {
+    background: none !important;
+    padding: 0 !important;
+    &__container {
+      background: $grey1 !important;
+      padding: 30px !important;
+    }
+  }
+
+  .allgroups-header {
+    padding: 8px 15px;
+  }
+}
+
+.groups-banner {
+  background-color: $white;
+  padding: 0 30px 40px;
+  text-align: center;
+  &__text {
+    padding: 0 80px;
+    @include bp(xs) {
+      padding: 0 40px;
+    }
+    @include bp(xxs) {
+      padding: 0;
+    }
+    h2 {
+      font-weight: 500;
+      margin-bottom: 25px;
+    }
+    p {
+      font-size: 1.125em;
+      line-height: 1.3em;
+      margin-bottom: 20px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+  &__underline {
+    position: relative;
+    width: 100%;
+    &:before {
+      content: '';
+      background-color: $yellow;
+      bottom: -5px;
+      left: 50%;
+      height: 2px;
+      max-width: 65px;
+      position: absolute;
+      transform: translateX(-50%);
+      width: 100%;
+    }
+  }
+}
+
+.create-group {
+  background-color: $white;
+  padding: 30px 30px 0;
+}
+
+.group-post {
+  &__btn {
+    margin-bottom: 0 !important;
+  }
+}

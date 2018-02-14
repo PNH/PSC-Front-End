@@ -1,0 +1,99 @@
+<form name="profForm" class="public-profile__container" block-ui="userProfileLoading">
+  <div class="row formRow bgColor">
+    <div class="col-md-12">
+      <div class="po-s2-form-container">
+        <div ng-show="$ctrl.user">
+          <div class="row" ng-show="$ctrl.user.profilePic">
+            <div class="col-md-12 po-s2-form-field-group">
+              <div class="profile-image__container">
+                <div class="profile-image" style="background-image: url('{{$ctrl.user.profilePic}}')"></div>
+              </div>
+            </div>
+          </div>
+          <div class="form-part-line" ng-show="$ctrl.user.profilePic"></div>
+          <div class="row" ng-show="$ctrl.user.firstName || $ctrl.user.lastName">
+            <div class="col-md-6 po-s2-form-field-group" ng-show="$ctrl.user.firstName">
+              <label>First Name</label>
+              <input type="text" name="fname" class="form-control" ng-model="$ctrl.user.firstName" ng-disabled="true">
+            </div>
+            <div class="col-md-6 po-s2-form-field-group" ng-show="$ctrl.user.lastName">
+              <label>Last Name</label>
+              <input type="text" name="lname" class="form-control" ng-model="$ctrl.user.lastName" ng-disabled="true">
+            </div>
+          </div>
+          <div class="row" ng-show="$ctrl.user.birthday || $ctrl.user.level">
+            <div class="col-md-6 po-s2-form-field-group" ng-show="$ctrl.user.birthday">
+              <label>Birthday</label>
+              <input name="birthday" type="text" class="form-control" ng-model="$ctrl.user.birthday" ng-disabled="true">
+            </div>
+            <div class="col-md-6 po-s2-form-field-group" ng-show="$ctrl.user.level">
+              <label>Parelli Level</label>
+              <select name="level" ng-model="$ctrl.user.level" convert-to-number ng-disabled="true">
+              <!-- <option value="-1" selected> Level</option> -->
+              <option value="1">Level 1</option>
+              <option value="2">Level 2</option>
+              <option value="3">Level 3</option>
+              <option value="4">Level 4</option>
+            </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 po-s2-form-field-group" ng-show="$ctrl.user.relationship">
+              <label>Relationship </label>
+              <select ng-if="$ctrl.relationships" name="relationship" ng-model="$ctrl.user.relationship" convert-to-number ng-disabled="true">
+                <!-- <option value="-1" selected> Relationship </option> -->
+                <option ng-repeat="(relationship_index, relationships) in $ctrl.relationships" value="{{relationships}}">{{relationship_index | humanize}}</option>
+            </select>
+            </div>
+          </div>
+          <div class="row" ng-show="$ctrl.user.equestrainInterest && $ctrl.equestrain">
+            <div class="col-md-12 po-s2-form-field-group">
+              <label>Equestrian Interests</label>
+              <select name="equestrainInterest" ng-model="$ctrl.user.equestrainInterest" convert-to-number ng-disabled="true">
+                <!-- <option value="-1" selected> Equestrain Interests </option> -->
+                <option ng-repeat="(equestrain_index, equestrain) in $ctrl.equestrain" value="{{equestrain}}">{{equestrain_index | humanize}}</option>
+            </select>
+            </div>
+          </div>
+          <div class="row" ng-show="$ctrl.countries && $ctrl.user.homeAddress.country">
+            <div class="form-group col-sm-12 col-md-12 po-s2-form-field-group">
+              <label>Country</label>
+              <select name="country" ng-model="$ctrl.user.homeAddress.country" ng-disabled="true">
+              <option ng-repeat="(country_index, country) in $ctrl.countries" value="{{country.code}}">{{country.name}}</option>
+            </select>
+            </div>
+          </div>
+          <div class="row" ng-show="$ctrl.user.music">
+            <div class="col-md-12 po-s2-form-field-group">
+              <label>Music</label>
+              <input type="text" name="music" class="form-control" ng-model="$ctrl.user.music" ng-disabled="true">
+            </div>
+          </div>
+          <div class="row" ng-show="$ctrl.user.books">
+            <div class="col-md-12 po-s2-form-field-group">
+              <label>Books </label>
+              <input type="text" name="books" class="form-control" ng-model="$ctrl.user.books" ng-disabled="true">
+            </div>
+          </div>
+          <div class="row" ng-show="$ctrl.user.website">
+            <div class="col-md-12 po-s2-form-field-group">
+              <label>Website </label>
+              <input type="text" name="website" class="form-control" ng-model="$ctrl.user.website" ng-disabled="true">
+            </div>
+          </div>
+          <div class="row" ng-show="$ctrl.user.bio">
+            <div class="col-md-12 po-s2-form-field-group">
+              <label>Bio </label>
+              <textarea type="text" name="bio" class="form-control" ng-model="$ctrl.user.bio" ng-disabled="true"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="pl-error__container" ng-hide="$ctrl.user">
+          <div class="pl-error">
+            <span class="pl-error__message">Invalid user</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

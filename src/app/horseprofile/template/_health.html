@@ -1,0 +1,31 @@
+<div class="subtab-container">
+  <ul class="nav nav-tabs  " role="tablist" multiple="">
+    <li role="presentation" class="active"><a href="" ng-click="$ctrl.onHealthTypeChange(-1)" data-target="#tab4" role="tab" data-toggle="tab">All</a></li>
+    <li role="presentation"><a href="" ng-click="$ctrl.onHealthTypeChange($ctrl.healthLogTypes.farrier.id)" data-target="#tab5" role="tab" data-toggle="tab">Farrier</a></li>
+    <!-- <li role="presentation"><a href="" data-target="#tab6" role="tab" data-toggle="tab">Massage & Chiropractic</a></li> -->
+    <li role="presentation"><a href="" ng-click="$ctrl.onHealthTypeChange($ctrl.healthLogTypes.veterinary.id)" data-target="#tab7" role="tab" data-toggle="tab">Vet</a></li>
+    <li role="presentation"><a href="" ng-click="$ctrl.onHealthTypeChange($ctrl.healthLogTypes.holistic.id)" data-target="#tab8" role="tab" data-toggle="tab">Holistic</a></li>
+  </ul>
+</div>
+<div class="tab-content sub-tab-content-container">
+  <div role="tabpanel" class="tab-pane active" id="tab4">
+    <div ng-include src="'app/horseprofile/template/_health-all.html'"> </div>
+    <!-- tab pane 1 ends -->
+  </div>
+  <div role="tabpanel" class="tab-pane" id="tab5">
+    <div ng-include src="'app/horseprofile/template/_health-farriervisit.html'"> </div>
+    <!-- tab pane 2 ends -->
+  </div>
+  <!-- <div role="tabpanel" class="tab-pane" id="tab6"> -->
+    <!-- <div ng-include src="'app/horseprofile/template/_health-massage&chiropractic.html'"> </div> -->
+    <!-- tab pane 3 ends -->
+  <!-- </div> -->
+  <div role="tabpanel" class="tab-pane" id="tab7">
+    <div ng-include src="'app/horseprofile/template/_health-vetvisit.html'"> </div>
+    <!-- tab pane 4 ends -->
+  </div>
+  <div role="tabpanel" class="tab-pane" id="tab8">
+    <div ng-include src="'app/horseprofile/template/_health-holistic.html'"> </div>
+    <!-- tab pane 5 ends -->
+  </div>
+</div>

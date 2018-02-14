@@ -1,0 +1,151 @@
+.po__s3__commonIssues {
+	padding-left: 10px;
+	padding-right: 10px;
+
+	&__container {
+		display: flex;
+		flex-wrap: wrap;
+		position: relative;
+		margin: 0;
+		padding: 0;
+
+		&::after {
+			content: '';
+			background-color: $white;
+			position: absolute;
+			right: -1px;
+			top: 0;
+			bottom: 0;
+			width: 3px;
+		}
+
+		&::before {
+			content: '';
+			background-color: $white;
+			position: absolute;
+			left: -2px;
+			top: 0;
+			bottom: 0;
+			width: 3px;
+		}
+
+		& > li {
+			flex: 1 1 180px;
+			// flex-basis: 100px;
+			border: 1px solid $po-s3-commonIssues-border;
+			padding: 20px 10px;
+			margin-left: -1px;
+			margin-top: -1px;
+			display: flex;
+			align-items: center;
+			font-size: 1em;
+			color: $po-s3-commonIssues-text;
+		}
+	}
+}
+
+.po-s3-arrow {
+	border-top-color: $white;
+	left: 50%;
+	transform: translateX(-50%);
+	top: 0;
+	position: absolute;
+}
+
+.po__s3__moreIssues {
+	margin-left: -35px;
+	margin-right: -35px;
+	margin-bottom: -50px;
+	background-color: $body-background;
+	position: relative;
+
+	&__container {
+		padding: 50px 25px;
+
+		h3 {
+			margin-left: 20px;
+		}
+	}
+	// More issues tabs
+	ul.nav {
+
+		@include bp(gtxs) {
+			margin-right: -15px;
+		}
+
+		li {
+			width: 100%;
+			margin-bottom: 0;
+			border-bottom: 1px $white solid;
+
+			&:last-child {
+				border-bottom: none;
+			}
+
+			&.active {
+				a {
+					background-color: $white;
+				}
+			}
+
+			a {
+				display: flex;
+				align-items: center;
+				background-color: $po-s3-moreIssues-tab-bg;
+				width: 100%;
+				min-height: 76px;
+				border: none !important;
+				border-radius: 0 !important;
+				color: $po-s3-moreIssues-tab-text !important;
+				font-size: 0.938em;
+				padding: 10px 40px;
+				text-decoration: none;
+			}
+		}
+	}
+
+	.tab-content {
+
+		@include bp(gtxs) {
+			margin-left: -15px;
+		}
+
+		.tab-pane {
+			background-color: $white;
+			width: 100%;
+			padding: 10px 30px;
+			min-height: 300px;
+		}
+	}
+
+	&__list {
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-wrap: wrap;
+		position: relative;
+
+		&::after {
+			content: '';
+			background-color: $white;
+			position: absolute;
+			right: 0;
+			left: 0;
+			bottom: 0;
+			height: 2px;
+		}
+
+		li {
+			list-style: none;
+			border-bottom: 1px solid $po-s3-moreIssues-check-border;
+			padding: 20px;
+			flex-grow: 1;
+			color: $po-s3-commonIssues-text;
+		}
+	}
+
+	// Footer buttons
+	.po-footer {
+		margin-top: 30px;
+	}
+}

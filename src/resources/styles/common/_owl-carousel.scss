@@ -1,0 +1,35 @@
+.owl-carousel {
+  padding: 0 77px;
+  .owl-prev,
+  .owl-next {
+    background: url(../resources/images/sprite.png) no-repeat -464px -47px;
+    position: absolute;
+    top: 40%;
+    width: 14px;
+    height: 66px;
+    transform: translate(0, -50%);
+    font-size: 0;
+    right: 3%;
+    left: auto;
+    &.disabled {
+    	display: none;
+    }
+  }
+  .owl-prev {
+    background-position-x: -481px;
+    left: 3%;
+    right: 0;
+  }
+  .item {
+    text-align: center;
+    img {
+      display: block;
+      width: 100%;
+      -webkit-transform-style: preserve-3d;
+    }
+    .title {
+      font-size: 16px;
+      line-height: 20px;
+    }
+  }
+}

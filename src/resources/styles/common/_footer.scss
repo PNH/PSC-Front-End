@@ -1,0 +1,312 @@
+#footer {
+  overflow: hidden;
+  width: 100%;
+  padding: 0;
+  position: relative;
+  height: 288px;
+  margin-top: -288px;
+  @include bp(sm) {
+    height: auto!important;
+    background-color: #333;
+  }
+  .holder {
+    max-width: 1314px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  &:before,
+  &:after {
+    content: '';
+    width: 50%;
+    height: 288px;
+    position: absolute;
+    top: 0;
+    @include bp(sm) {
+      height: 144px;
+      width: 100% !important;
+    }
+    @include bp(xs) {
+      height: 205px !important;
+    }
+  }
+  &:before {
+    content: '';
+    background: #333333;
+    width: 50%;
+    height: 288px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  &:after {
+    content: '';
+    background: #3e3e3e;
+    width: 50%;
+    height: 288px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    @include bp(xs) {
+      top: auto;
+      bottom: 0;
+    }
+  }
+  p {
+    margin: 0 0 25px;
+    font-size: 24px;
+    line-height: 26px;
+    font-family: $OSLight;
+    color: $white;
+    @include bp(md) {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+    @include bp(xs) {
+      margin-bottom: 10px;
+    }
+  }
+  .left-side {
+    position: relative;
+    z-index: 1;
+    float: left;
+    width: 50%;
+    padding: 50px 0;
+    @include bp(md) {
+      padding: 10px 0;
+    }
+    @include bp(xs) {
+      float: none;
+      width: 100%;
+      padding: 16px 0;
+      margin-bottom: 5px;
+    }
+    .location-box {
+      overflow: hidden;
+      font-size: 15px;
+    }
+    .item {
+      float: left;
+      width: 57%;
+      padding: 0 0 0 16%;
+      margin-right: 2%;
+      margin-bottom: 14px;
+      @include bp(md) {
+        float: left;
+        padding: 0;
+        width: 50%;
+        margin: 0 0 10px;
+      }
+      @include bp(xs) {
+        width: 25%;
+      }
+      @include bp(xxs) {
+        width: 50%;
+        margin: 0 0 5px;
+      }
+      .country {
+        float: left;
+        margin-left: -102px;
+        font-size: 16px;
+        line-height: 20px;
+        text-transform: uppercase;
+        font-family: $OSBold;
+        color: #d0d0d0;
+        @include bp(md) {
+          margin: 0 0 6px 0 !important;
+          float: none;
+          text-align: center;
+          display: block;
+        }
+        @include bp(sm) {
+          margin-bottom: 6px!important;
+        }
+        @include bp(xs) {
+          font-size: 14px;
+        }
+        @include bp(xxs) {
+          font-size: 12px;
+        }
+      }
+      .phone,
+      .mail {
+        color: #d0d0d0;
+        float: left;
+        margin-bottom: 8px;
+        @include bp(md) {
+          float: none;
+          text-align: center;
+          display: block;
+          margin-bottom: 0!important;
+        }
+        @include bp(sm) {
+          margin-bottom: 0!important;
+        }
+        @include bp(xs) {
+          font-size: 14px;
+          margin-bottom: 5px;
+        }
+        @include bp(xxs) {
+          font-size: 12px;
+        }
+        >span {
+          font-family: $OS_Semibold;
+          @include bp(md) {
+            display: none;
+          }
+        }
+      }
+      &.item_sm {
+        width: 38%;
+        padding: 0 0 0 6%;
+        @include bp(md) {
+          padding: 0;
+          width: 50%;
+          margin: 0;
+        }
+        @include bp(xs) {
+          width: 25%;
+          font-size: 14px;
+        }
+        @include bp(xxs) {
+          width: 50%;
+        }
+        .country {
+          margin-left: -40px;
+        }
+      }
+    }
+  }
+  .right-side {
+    position: relative;
+    z-index: 1;
+    float: left;
+    width: 50%;
+    padding: 102px 0 60px 6%;
+    @include bp(md) {
+      padding: 60px 10px 0;
+    }
+    @include bp(xs) {
+      padding: 0;
+      float: none;
+      width: 100%;
+    }
+    .copy-box,
+    .social-box {
+      .title {
+        @include bp(md) {
+          text-align: center;
+        }
+      }
+      @include bp(md) {
+        float: none;
+        width: 100%;
+      }
+      @include bp(xs) {
+        float: none;
+        width: 100%;
+      }
+    }
+    .social-box {
+      float: left;
+      margin: 0 9% 0 0;
+      @include bp(xs) {
+        padding: 0;
+        float: none;
+        width: 100%;
+      }
+      p {
+        margin: 0 0 18px;
+      }
+    }
+    .social-list {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      @include bp(md) {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+      @include bp(xs) {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+      li {
+        float: left;
+        margin: 0 22px 0 0;
+        @include bp(md) {
+          float: none;
+          display: inline-block;
+          vertical-align: top;
+          margin: 0 11px;
+        }
+        @include bp(xs) {
+          float: none;
+          display: inline-block;
+          vertical-align: top;
+          margin: 0 11px;
+        }
+        a {
+          display: block;
+          overflow: hidden;
+          // text-indent: -9999px;
+          width: 32px;
+          height: 32px;
+          border: 2px solid $icon-color;
+          border-radius: 50%;
+          opacity: 1;
+          color: $icon-color;
+          font-size: 1.115em;
+          padding: 4px;
+          text-align: center;
+          @include transition-element (opacity);
+          /* &.icon {
+            background: url(../resources/images/sprite.png) no-repeat 0 0;
+            &.twitter {
+              background-position: -82px 0;
+            }
+            &.facebook {
+              background-position: -120px 0;
+            }
+            &.google {
+              background-position: -157px 0;
+            }
+            &.linkedin {
+              background-position: -195px 0;
+            }
+          } */
+          &:hover {
+            opacity: .7;
+          }
+        }
+      }
+    }
+    .copy-box {
+      float: left;
+      padding: 10px 0;
+      @include bp(gtmd) {
+        margin-top: -20px;
+      }
+      @include bp(xs) {
+        padding: 0;
+        float: none;
+        width: 100%;
+      }
+      .title {
+        font-size: 46px;
+        line-height: 46px;
+        font-family: $sacramentoRegular;
+        color: #fff;
+        font-weight: 400;
+        display: block;
+        >span {
+          color: $yellow;
+        }
+      }
+      p {
+        font-size: 16px;
+        color: #d2d2d2;
+        margin: 0 0 10px;
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+<div class="reply-box simple-reply group-post clearfix">
+  <form name="wallPostForm" class="wallpost-create-form">
+    <text-editor post-model="$ctrl.postModel" config="$ctrl.summernoteOptions" is-busy="$ctrl.isUploading" post-type="0"></text-editor>
+    <div class="post-option-btns post-option-btns-wall">
+      <!--<button type="button" class="btn btn-reply-options" ng-click="$ctrl.attachClicked()"><span class="glyphicon glyphicon-paperclip"></span>Add Media</button>
+      <multi-upload files="$ctrl.attachedFiles" controls="$ctrl.uploadCtrl"></multi-upload>-->
+      <ol class="nya-bs-select privacy-selector add-media-privacy no-margin-left" ng-model="$ctrl.selectedWallPostPrivacy">
+        <li class="nya-bs-option disabled" data-value="9999">
+          <a>
+            <span><span class="glyphicon"></span>Who can see this post?</span>
+          </a>
+        </li>
+        <li class="nya-bs-option" data-value="0">
+          <a>
+            <span><span class="glyphicon glyphicon-eye-close"></span>Private</span>
+          </a>
+        </li>
+        <li class="nya-bs-option" data-value="1">
+          <a>
+            <span><span class="glyphicon glyphicon-globe"></span>Public</span>
+          </a>
+        </li>
+        <li class="nya-bs-option" data-value="2">
+          <a>
+            <span><span class="glyphicon glyphicon-user"></span>Connections Only</span>
+          </a>
+        </li>
+      </ol>
+    </div>
+    <button ng-disabled="$ctrl.createProcessing || !($ctrl.postModel || $ctrl.attachedFiles.length > 0) || $ctrl.isUploading" type="submit" class="btn btn-yellow btn-submit pull-right group-post__btn" ng-click="$ctrl.createPost($ctrl.wallId, $ctrl.postModel)" ng-class="{'processing': $ctrl.createProcessing}">
+      <div class="bs-process-bar uil-ring-css yellow">
+        <div></div>
+      </div>
+      <span class="bs-login-text">POST</span>
+    </button>
+    <div class="multi-upload__container">
+      <div class="multi-upload__selected">
+        <ul>
+          <li ng-repeat="item in $ctrl.attachedFiles track by $index">
+            {{item.name}}
+            <span class="glyphicon glyphicon-remove multi-upload__remove" aria-hidden="true" ng-click="$ctrl.removeAttachedFileClicked($index)"></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </form>
+</div>

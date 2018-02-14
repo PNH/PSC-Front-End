@@ -1,0 +1,28 @@
+<div id="main" class="profile-pages">
+  <dashboard-header title="My Account"></dashboard-header>
+  <div class="holder ">
+    <div class="hold-program blog">
+      <ul class="nav nav-tabs profile-tabs" role="tablist" multiple="">
+        <li role="presentation" class="active"><a href="" data-target="#tab1" aria-controls="latest" role="tab" data-toggle="tab">Profile</a></li>
+        <li role="presentation" ng-if="!$ctrl.rootAccess"><a href="" data-target="#tab2" aria-controls="popular" role="tab" data-toggle="tab">Login info</a></li>
+        <li role="presentation" ng-if="!$ctrl.rootAccess"><a href="" data-target="#tab3" aria-controls="" role="tab" data-toggle="tab">Membership</a></li>
+      </ul>
+      <div class="tab-content profile-content">
+        <div role="tabpanel" class="tab-pane  active" id="tab1">
+          <div ng-include src="'app/profile/template/_myaccount.html'"> </div>
+          <!-- tab pane 1 ends -->
+        </div>
+        <div role="tabpanel" class="tab-pane  " id="tab2">
+          <div ng-include src="'app/profile/template/_logininfo.html'"> </div>
+          <!-- tab pane 2 ends -->
+        </div>
+        <div role="tabpanel" class="tab-pane  " id="tab3">
+          <div ng-include src="'app/profile/template/_membership.html'"> </div>
+          <!-- tab pane 3 ends -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div ng-include="'app/profile/template/_popups.html'"></div>

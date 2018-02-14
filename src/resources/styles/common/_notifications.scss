@@ -1,0 +1,66 @@
+  .notifications-list {
+    padding: 0;
+    margin: 0 0 20px;
+    border-bottom: 1px solid #dedede;
+    &__item {
+      position: relative;
+      border-top: 1px solid #dedede;
+      padding: 15px 10px;
+      font-size: 15px;
+      line-height: 18px;
+      &.fresh {
+        background-color: lighten($yellow, 30%);
+      }
+      p {
+        margin-bottom: 10px;
+      }
+      .date {
+        color: #a4a4a4;
+        font-size: 14px;
+        line-height: 16px;
+      }
+      &:hover {
+        .notifications-list__actions button {
+          opacity: 0.2;
+        }
+      }
+    }
+    &__actions {
+      position: absolute;
+      right: 10px;
+      top: 15px;
+      button {
+        float: right;
+        opacity: 0;
+        transition: 100ms opacity ease-in-out;
+        span {
+          color: $black;
+        }
+        &.red {
+          &:hover {
+            opacity: 0.8;
+            span {
+              color: $red;
+            }
+          }
+        }
+        &.green {
+          &:hover {
+            opacity: 0.8;
+            span {
+              color: $green;
+            }
+          }
+        }
+      }
+    }
+    &__content {
+      width: calc(100% - 70px);
+    }
+  }
+
+.prl-notifications {
+  .notifications-list {
+    border-bottom: none;
+  }
+}

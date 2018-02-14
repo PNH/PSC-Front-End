@@ -1,0 +1,87 @@
+.arrow-down {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid $icon-bg-grey;
+}
+
+.arrow-rounded {
+	position: absolute;
+  width: 18.5px;
+  height: 37px;
+ 	overflow: hidden;
+
+  &__inner {
+		transform: rotate(45deg);
+	  background-color: $icon-bg-grey;
+	  width: 37px;
+	  height: 37px;
+	  left: -27px;
+	  position:relative;
+	  border-radius: 5px;
+  }
+}
+
+.badge-icon {
+  background-image: url('../resources/images/badges.png');
+  background-repeat: no-repeat;
+  background-size: 550px;
+  height: 72px;
+  width: 70px;
+  &.grey {
+    background-position: -12px -15px;
+  }
+  &.white {
+    background-position: -87px -15px;
+  }
+  &.red {
+    background-position: -241px -15px;
+  }
+  &.blue {
+    background-position: -316px -15px;
+  }
+  &.green {
+    background-position: -392px -15px;
+  }
+  &.black {
+    background-position: -164px -15px;
+  }
+}
+
+.file-type-icon {
+  padding-left: 56px;
+  position: relative;
+  &:before {
+    background-image: url('../resources/images/file-types.png');
+    background-repeat: no-repeat;
+    background-position-y: -10px;
+    content: '';
+    height: 34px;
+    left: 4px;
+    position: absolute;
+    top: 9px;
+    width: 48px;
+    @include bp(xxs) {
+      top: 6px;
+    }
+  }
+  &.txt:before {
+    background-position-x: -36px;
+  }
+  &.doc:before, &.docx:before {
+    background-position-x: -77px;
+  }
+  &.pdf:before {
+    background-position-x: -118px;
+  }
+  &.ppt:before {
+    background-position-x: -159px;
+  }
+  &.vid:before {
+    background-position-x: -201px;
+  }
+  &.aud:before {
+    background-position-x: -238px;
+  }
+}
